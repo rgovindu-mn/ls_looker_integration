@@ -40,16 +40,25 @@ explore: mn_pg_product_pricing_fact{
     sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
   }
 
-    join: mn_contract_owner_dim {
-      type: left_outer
-      relationship: many_to_one
-      from: mn_user_dim
-      view_label: "Contract Owner"
-      #fields: [full_name]
-      sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_contract_owner_dim.user_wid};;
-    }
+  join: mn_contract_owner_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Contract Owner"
+    #fields: [full_name]
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_contract_owner_dim.user_wid};;
+  }
 
- join: mn_contract_srep_dim {
+  join: mn_contract_author_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Contract Author"
+    #fields: [full_name]
+    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_contract_author_dim.user_wid};;
+  }
+
+  join: mn_contract_srep_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_user_dim

@@ -477,8 +477,9 @@ view: mn_contract_header_dim {
   }
 
   dimension: value {
-    type: string
+    type: number
     sql: ${TABLE}.VALUE ;;
+    value_format_name: decimal_2
   }
 
   dimension_group: ver_end {
