@@ -187,6 +187,7 @@ view: mn_contract_fact {
 
   dimension: run_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
