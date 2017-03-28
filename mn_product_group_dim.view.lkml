@@ -1,5 +1,5 @@
 view: mn_product_group_dim {
-  sql_table_name: LSETLDM.MN_PRODUCT_GROUP_DIM ;;
+  sql_table_name: MN_PRODUCT_GROUP_DIM ;;
 
   dimension: adj_type {
     type: string

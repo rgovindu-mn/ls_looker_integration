@@ -1,5 +1,5 @@
 view: mn_cmpl_bucket_fact {
-  sql_table_name: LSETLDM.MN_CMPL_BUCKET_FACT ;;
+  sql_table_name: MN_CMPL_BUCKET_FACT_VW ;;
 
   dimension: actual_amt_to_date {
     type: string

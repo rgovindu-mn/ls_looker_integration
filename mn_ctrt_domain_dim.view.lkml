@@ -1,5 +1,5 @@
 view: mn_ctrt_domain_dim {
-  sql_table_name: LSETLDM.MN_CTRT_DOMAIN_DIM ;;
+  sql_table_name: MN_CTRT_DOMAIN_DIM_VW ;;
 
   dimension_group: date_created {
     type: time

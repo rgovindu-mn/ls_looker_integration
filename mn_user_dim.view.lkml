@@ -1,5 +1,5 @@
 view: mn_user_dim {
-  sql_table_name: LSETLDM.MN_USER_DIM ;;
+  sql_table_name: MN_USER_DIM_VW ;;
 
   dimension: address_line1 {
     type: string

@@ -1,5 +1,5 @@
 view: mn_contract_header_dim {
-  sql_table_name: LSETLDM.MN_CONTRACT_HEADER_DIM ;;
+  sql_table_name: MN_CONTRACT_HEADER_DIM_VW ;;
 
   dimension: additional_delegate_wid {
     type: number
@@ -478,8 +478,8 @@ view: mn_contract_header_dim {
 
   dimension: value {
     type: number
-    sql: ${TABLE}.VALUE ;;
     value_format_name: decimal_2
+    sql: ${TABLE}.VALUE ;;
   }
 
   dimension_group: ver_end {
@@ -547,5 +547,11 @@ view: mn_contract_header_dim {
   measure: count {
     type: count
     drill_fields: [contract_name]
+  }
+
+  measure:  contract_value {
+    type:  sum
+    value_format: "[>=1000000]0,,\"M\";[>=1000]0,\"K\";0"
+    sql:  ${TABLE}.value ;;
   }
 }

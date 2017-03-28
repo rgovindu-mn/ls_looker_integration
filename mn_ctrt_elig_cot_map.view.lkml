@@ -1,5 +1,5 @@
 view: mn_ctrt_elig_cot_map {
-  sql_table_name: LSETLDM.MN_CTRT_ELIG_COT_MAP ;;
+  sql_table_name: MN_CTRT_ELIG_COT_MAP_VW ;;
 
   dimension: contract_wid {
     type: string

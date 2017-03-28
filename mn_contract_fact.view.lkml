@@ -1,5 +1,5 @@
 view: mn_contract_fact {
-  sql_table_name: LSETLDM.MN_CONTRACT_FACT ;;
+  sql_table_name: MN_CONTRACT_FACT_VW ;;
 
   dimension: base_price {
     type: string

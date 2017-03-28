@@ -1,5 +1,5 @@
 view: mn_price_list_dim {
-  sql_table_name: LSETLDM.MN_PRICE_LIST_DIM ;;
+  sql_table_name: MN_PRICE_LIST_DIM_VW ;;
 
   dimension: currency {
     type: string

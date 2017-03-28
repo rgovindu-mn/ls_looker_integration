@@ -1,5 +1,5 @@
 view: mn_customer_dim {
-  sql_table_name: LSETLDM.MN_CUSTOMER_DIM ;;
+  sql_table_name: MN_CUSTOMER_DIM_VW ;;
 
   dimension: account_size {
     type: string

@@ -1,5 +1,5 @@
 view: mn_customer_map {
-  sql_table_name: LSETLDM.MN_CUSTOMER_MAP ;;
+  sql_table_name: MN_CUSTOMER_MAP_VW ;;
 
   dimension: child_cust_wid {
     type: string

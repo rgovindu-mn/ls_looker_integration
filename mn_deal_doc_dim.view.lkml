@@ -1,5 +1,5 @@
 view: mn_deal_doc_dim {
-  sql_table_name: LSETLDM.MN_DEAL_DOC_DIM ;;
+  sql_table_name: MN_DEAL_DOC_DIM_VW ;;
 
   dimension: customer_wid {
     type: string

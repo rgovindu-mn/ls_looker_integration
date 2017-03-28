@@ -1,5 +1,5 @@
 view: mn_ctrt_status_dim {
-  sql_table_name: LSETLDM.MN_CTRT_STATUS_DIM ;;
+  sql_table_name: MN_CTRT_STATUS_DIM_VW ;;
 
   dimension_group: date_created {
     hidden: yes

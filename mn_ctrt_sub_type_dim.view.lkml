@@ -1,5 +1,5 @@
 view: mn_ctrt_sub_type_dim {
-  sql_table_name: LSETLDM.MN_CTRT_SUB_TYPE_DIM ;;
+  sql_table_name: MN_CTRT_SUB_TYPE_DIM_VW ;;
 
   dimension: ctrt_sub_type_desc {
     type: string

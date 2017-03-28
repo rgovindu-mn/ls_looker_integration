@@ -1,5 +1,5 @@
 view: mn_prc_method_dim {
-  sql_table_name: LSETLDM.MN_PRC_METHOD_DIM ;;
+  sql_table_name: MN_PRC_METHOD_DIM_VW ;;
 
   dimension_group: date_created {
     type: time

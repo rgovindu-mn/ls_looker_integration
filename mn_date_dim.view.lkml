@@ -1,5 +1,5 @@
 view: mn_date_dim {
-  sql_table_name: LSETLDM.MN_DATE_DIM ;;
+  sql_table_name: MN_DATE_DIM_VW ;;
 
   dimension: alt_calendar_type {
     type: string
@@ -82,6 +82,11 @@ view: mn_date_dim {
   dimension: date_num {
     type: string
     sql: ${TABLE}.DATE_NUM ;;
+  }
+
+  dimension: rolling_12_months {
+    type: yesno
+    sql: ADD_MONTHS(${TABLE}.DATE_SQL, 12) > SYSDATE;;
   }
 
   dimension_group: date_sql {

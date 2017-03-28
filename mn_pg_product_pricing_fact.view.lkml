@@ -1,5 +1,5 @@
 view: mn_pg_product_pricing_fact {
-  sql_table_name: LSETLDM.MN_PG_PRODUCT_PRICING_FACT ;;
+  sql_table_name: MN_PG_PRODUCT_PRICING_FACT_VW ;;
 
   dimension: adj_high {
     type: string
@@ -27,7 +27,8 @@ view: mn_pg_product_pricing_fact {
   }
 
   dimension: base_price {
-    type: string
+    type: number
+    value_format_name: decimal_2
     sql: ${TABLE}.BASE_PRICE ;;
   }
 
@@ -159,7 +160,8 @@ view: mn_pg_product_pricing_fact {
   }
 
   dimension: prc_high {
-    type: string
+    type: number
+    value_format_name: decimal_2
     sql: ${TABLE}.PRC_HIGH ;;
   }
 
@@ -241,5 +243,10 @@ view: mn_pg_product_pricing_fact {
   measure: count {
     type: count
     drill_fields: []
+  }
+
+  measure:  count_contracts {
+    type:  count_distinct
+    sql: ${mn_contract_header_dim.src_sys_contract_id} ;;
   }
 }

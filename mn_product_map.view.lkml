@@ -1,5 +1,5 @@
 view: mn_product_map {
-  sql_table_name: LSETLDM.MN_PRODUCT_MAP ;;
+  sql_table_name: MN_PRODUCT_MAP_VW ;;
 
   dimension: child_prod_wid {
     type: string

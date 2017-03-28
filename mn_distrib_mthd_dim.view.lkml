@@ -1,5 +1,5 @@
 view: mn_distrib_mthd_dim {
-  sql_table_name: LSETLDM.MN_DISTRIB_MTHD_DIM ;;
+  sql_table_name: MN_DISTRIB_MTHD_DIM_VW ;;
 
   dimension_group: date_created {
     type: time

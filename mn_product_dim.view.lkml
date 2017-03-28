@@ -1,5 +1,5 @@
 view: mn_product_dim {
-  sql_table_name: LSETLDM.MN_PRODUCT_DIM ;;
+  sql_table_name: MN_PRODUCT_DIM_VW ;;
 
   dimension_group: acquisition {
     type: time

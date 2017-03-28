@@ -1,5 +1,5 @@
 view: mn_dir_sale_fact {
-  sql_table_name: LSETLDM.MN_DIR_SALE_FACT ;;
+  sql_table_name: MN_DIR_SALE_FACT_VW ;;
 
   dimension: adm_fee_amt {
     type: string

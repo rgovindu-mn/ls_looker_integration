@@ -1,5 +1,5 @@
 view: mn_ctrt_inc_cust_map {
-  sql_table_name: LSETLDM.MN_CTRT_INC_CUST_MAP ;;
+  sql_table_name: MN_CTRT_INC_CUST_MAP_VW ;;
 
   dimension: contract_wid {
     type: string

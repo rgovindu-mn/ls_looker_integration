@@ -1,5 +1,5 @@
 view: mn_program_type_dim {
-  sql_table_name: LSETLDM.MN_PROGRAM_TYPE_DIM ;;
+  sql_table_name: MN_PROGRAM_TYPE_DIM_VW ;;
 
   dimension_group: date_created {
     type: time

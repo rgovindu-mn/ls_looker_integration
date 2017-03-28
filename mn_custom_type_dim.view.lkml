@@ -1,5 +1,5 @@
 view: mn_custom_type_dim {
-  sql_table_name: LSETLDM.MN_CUSTOM_TYPE_DIM ;;
+  sql_table_name: MN_CUSTOM_TYPE_DIM_VW ;;
 
   dimension: custom_type_code {
     type: string
