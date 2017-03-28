@@ -591,7 +591,7 @@ view: mn_combined_sale_fact {
     type: sum
     sql: ${total_rebate} ;;
     label: "Rebates"
-    value_format_name: decimal_0
+    value_format: "[>=10000000]0,,\"M\";[>=10000]0,\"K\";0"
     drill_fields: [detail*]
   }
 
@@ -599,7 +599,7 @@ view: mn_combined_sale_fact {
     type: sum
     sql: ${inv_qty} ;;
     label: "Volume"
-    value_format_name: decimal_0
+    value_format: "[>=10000000]0,,\"M\";[>=10000]0,\"K\";0"
     drill_fields: [detail*]
   }
 
@@ -607,7 +607,7 @@ view: mn_combined_sale_fact {
     type: sum
     sql: ${inv_revenue} ;;
     label: "Revenue"
-    value_format_name: decimal_0
+    value_format: "[>=10000000]0,,\"M\";[>=10000]0,\"K\";0"
     drill_fields: [detail*]
   }
 

@@ -19,6 +19,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_customer_dim.customer_name
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, contract_name]
 
    - name: contract_name
      title: 'Contract Name'
@@ -27,6 +28,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_header_dim.contract_name
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, customer_name]
 
    - name: contract_number
      title: 'Contract Number'
@@ -35,6 +37,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_header_dim.contract_number
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name]
 
    - name: days_to_expire
      title: 'Days To Expire'
@@ -52,6 +55,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_srep_dim.full_name
+     listens_to_filters: [product_name, product_group_name, contract_number, contract_name, customer_name]
 
    - name: product_group_name
      title: 'Price Program'
@@ -60,6 +64,7 @@
      explore: mn_pg_product_pricing_fact
      default_value:
      field: mn_product_group_dim.pg_name
+     listens_to_filters: [product_name, srep_full_name, contract_number, contract_name, customer_name]
 
    - name: product_name
      title: 'Product Name'
@@ -68,7 +73,7 @@
      explore: mn_pg_product_pricing_fact
      default_value:
      field: mn_product_dim.product_name
-
+     listens_to_filters: [ product_group_name, srep_full_name, contract_number, contract_name, customer_name]
 
   elements:
     - name: contracts_expire_30_days
