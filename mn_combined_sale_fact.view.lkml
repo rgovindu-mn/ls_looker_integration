@@ -29,7 +29,7 @@ view: mn_combined_sale_fact {
             GPO_WID,
             IDN_WID,
             INTERNAL_LINE_ID,
-            INV_AMT,
+            INV_AMT AS INV_AMT,
             INV_DATE_WID,
             INV_QTY,
             INV_UOM,
@@ -99,7 +99,7 @@ view: mn_combined_sale_fact {
             INTERNAL_LINE_ID,
             INV_AMT,
             INV_DATE_WID,
-            INV_QTY,
+            INV_QTY ,
             INV_UOM,
             IR_RBT_AMT,
             LIFECYCLE_STATUS,
@@ -634,6 +634,69 @@ view: mn_combined_sale_fact {
     label: "Average Price"
     value_format_name: decimal_2
     drill_fields: [detail*]
+  }
+
+  measure: inv_qty_year1 {
+    type: sum
+    label: "Invoice Quantity Prior Year"
+    sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-12),'YYYY'), ${TABLE}.INV_QTY, 0) ;;
+  }
+
+  measure: inv_revenue_year1 {
+    type: sum
+    label: "Invoice Revenue Prior Year"
+    sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-12),'YYYY'),${inv_qty} * ${inv_amt}, 0) ;;
+  }
+
+  measure: inv_qty_year2 {
+    type: sum
+    label: "Invoice Quantity Prior Year 2"
+    sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-24),'YYYY'), ${TABLE}.INV_QTY, 0) ;;
+  }
+
+  measure: inv_revenue_year3 {
+    type: sum
+    label: "Invoice Revenue Prior Year 2"
+    sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-36),'YYYY'),${inv_qty} * ${inv_amt}, 0) ;;
+  }
+
+  measure: inv_qty_year3 {
+    type: sum
+    label: "Invoice Quantity Prior Year 2"
+    sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-36),'YYYY'), ${TABLE}.INV_QTY, 0) ;;
+  }
+
+  measure: inv_revenue_year2 {
+    type: sum
+    label: "Invoice Revenue Prior Year 2"
+    sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-24),'YYYY'),${inv_qty} * ${inv_amt}, 0) ;;
+  }
+
+
+  measure: inv_qty_ytd_year {
+    type: sum
+    label: "Invoice Quantity YTD"
+    sql: CASE WHEN TO_DATE(${inv_date_wid},'YYYYMMDD') >= TRUNC(SYSDATE,'YYYY') THEN ${TABLE}.INV_QTY ELSE  0 END ;;
+  }
+
+  measure: inv_revenue_ytd_year {
+    type: sum
+    label: "Invoice Revenue YTD"
+    sql:  CASE WHEN TO_DATE(${inv_date_wid},'YYYYMMDD') >= TRUNC(SYSDATE,'YYYY') THEN ${inv_qty} * ${inv_amt} ELSE  0 END ;;
+  }
+
+  measure: inv_qty_prior_ytd_year {
+    type: sum
+    label: "Invoice Quantity Prior YTD"
+    sql: CASE WHEN TO_DATE(${inv_date_wid},'YYYYMMDD') >= ADD_MONTHS(SYSDATE,-12)
+      AND TO_DATE(${inv_date_wid},'YYYYMMDD') < TRUNC(SYSDATE,'YYYY') THEN ${TABLE}.INV_QTY ELSE  0 END ;;
+  }
+
+  measure: inv_revenue_prior_ytd_year {
+    type: sum
+    label: "Invoice Revenue Prior YTD"
+    sql:  CASE WHEN TO_DATE(${inv_date_wid},'YYYYMMDD') >= ADD_MONTHS(SYSDATE,-12)
+      AND TO_DATE(${inv_date_wid},'YYYYMMDD') < TRUNC(SYSDATE,'YYYY') THEN ${inv_qty} * ${inv_amt} ELSE  0 END ;;
   }
 
   # ----- Sets of fields for drilling ------

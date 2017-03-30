@@ -63,7 +63,7 @@ explore: mn_combined_sale_fact {
     from: mn_product_map
     view_label: ""
     fields: []
-    sql_on: ${mn_combined_sale_fact.product_wid} = ${mn_product_map.child_prod_wid} AND ${mn_product_map.depth_from_parent} = 1;;
+    sql_on: ${mn_product_dim.product_wid} = ${mn_product_map.child_prod_wid} AND ${mn_product_map.depth_from_parent} = 1;;
   }
 
   join: mn_category_dim {
