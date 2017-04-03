@@ -2,7 +2,7 @@
   title: Sales Performance
   layout: grid
   rows:
-  - elements: [header_text1, header_text2]
+  - elements: [label1, label2, label3, label4, label5, label6]
     height: 50
   - elements: [ sales_perf_volume_kpi1, sales_perf_volume_kpi2,sales_perf_volume_kpi3,sales_perf_revenue_kpi1, sales_perf_revenue_kpi2,sales_perf_revenue_kpi3]
     height: 100
@@ -10,6 +10,8 @@
     height: 400
   - elements: [sales_perf_table]
     height: 400
+  - elements: [header_text1, header_text2]
+    height: 1
   show_applied_filters: true
   auto_run:  true
 
@@ -327,7 +329,7 @@
     series_types: {}
     hidden_series: []
     hidden_fields: [mn_combined_sale_fact.inv_revenue_ytd_year, mn_combined_sale_fact.inv_revenue_prior_ytd_year]
-    single_value_title: Current vs Prior Year YTD Growth
+    single_value_title: Revenue Growth
 
   - name: sales_perf_volume_kpi1
     title: Untitled Visualization
@@ -378,7 +380,7 @@
     series_types: {}
     hidden_series: []
     hidden_fields: [mn_combined_sale_fact.inv_qty_ytd_year, mn_combined_sale_fact.inv_qty_prior_ytd_year]
-    single_value_title: Current vs Prior Year YTD Growth
+    single_value_title: Volume Growth
 
 
 
@@ -432,7 +434,7 @@
     series_types: {}
     hidden_series: []
     hidden_fields: [mn_combined_sale_fact.inv_qty_year1, mn_combined_sale_fact.inv_qty_year2]
-    single_value_title: Prior Year Growth
+    single_value_title: Volume Growth
 
 
 
@@ -486,7 +488,7 @@
     series_types: {}
     hidden_series: []
     hidden_fields: [mn_combined_sale_fact.inv_revenue_year1, mn_combined_sale_fact.inv_revenue_year2]
-    single_value_title: Prior Year Growth
+    single_value_title: Revenue Growth
 
 
 
@@ -541,7 +543,7 @@
     series_types: {}
     hidden_series: []
     hidden_fields: [mn_combined_sale_fact.inv_qty_year2, mn_combined_sale_fact.inv_qty_year3]
-    single_value_title: Prior Year Growth
+    single_value_title: Volume Growth
 
 
 
@@ -595,5 +597,203 @@
     series_types: {}
     hidden_series: []
     hidden_fields: [mn_combined_sale_fact.inv_revenue_year2, mn_combined_sale_fact.inv_revenue_year3]
-    single_value_title: Prior Year Growth
+    single_value_title: Revenue Growth
 
+
+  - name: label1
+    title: Untitled Visualization
+    type: single_value
+    model: price_program_and_products
+    explore: mn_date_labels
+    dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+    dynamic_fields:
+    - table_calculation: label_1
+      label: Label 1
+      expression: concat(${mn_date_labels.current_year}, " YTD vs ", ${mn_date_labels.prior_year}," YTD")
+    sorts: [mn_date_labels.current_year]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: transparent
+    limit_displayed_rows: false
+    series_types: {}
+    hidden_fields: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+
+  - name: label2
+    title: Untitled Visualization
+    type: single_value
+    model: price_program_and_products
+    explore: mn_date_labels
+    dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+    dynamic_fields:
+    - table_calculation: label_2
+      label: Label 2
+      expression: concat("YoY ", ${mn_date_labels.prior_year}, " vs ", ${mn_date_labels.prior_year2})
+    sorts: [mn_date_labels.current_year]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: transparent
+    limit_displayed_rows: false
+    series_types: {}
+    hidden_fields: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+
+  - name: label3
+    title: Untitled Visualization
+    type: single_value
+    model: price_program_and_products
+    explore: mn_date_labels
+    dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+    dynamic_fields:
+    - table_calculation: label_3
+      label: Label 3
+      expression: concat("YoY ", ${mn_date_labels.prior_year2}, " vs ", ${mn_date_labels.prior_year3})
+    sorts: [mn_date_labels.current_year]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: transparent
+    limit_displayed_rows: false
+    series_types: {}
+    hidden_fields: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+
+  - name: label4
+    title: Untitled Visualization
+    type: single_value
+    model: price_program_and_products
+    explore: mn_date_labels
+    dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+    dynamic_fields:
+    - table_calculation: label_1
+      label: Label 1
+      expression: concat(${mn_date_labels.current_year}, " YTD vs ", ${mn_date_labels.prior_year}," YTD")
+    sorts: [mn_date_labels.current_year]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: transparent
+    limit_displayed_rows: false
+    series_types: {}
+    hidden_fields: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+
+  - name: label5
+    title: Untitled Visualization
+    type: single_value
+    model: price_program_and_products
+    explore: mn_date_labels
+    dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+    dynamic_fields:
+    - table_calculation: label_2
+      label: Label 2
+      expression: concat("YoY ", ${mn_date_labels.prior_year}, " vs ", ${mn_date_labels.prior_year2})
+    sorts: [mn_date_labels.current_year]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: transparent
+    limit_displayed_rows: false
+    series_types: {}
+    hidden_fields: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+
+  - name: label6
+    title: Untitled Visualization
+    type: single_value
+    model: price_program_and_products
+    explore: mn_date_labels
+    dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]
+    dynamic_fields:
+    - table_calculation: label_3
+      label: Label 3
+      expression: concat("YoY ", ${mn_date_labels.prior_year2}, " vs ", ${mn_date_labels.prior_year3})
+    sorts: [mn_date_labels.current_year]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: false
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: transparent
+    limit_displayed_rows: false
+    series_types: {}
+    hidden_fields: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
+      mn_date_labels.prior_year3]

@@ -1,18 +1,18 @@
 view: mn_cmpl_period_fact {
-  sql_table_name: LSETLDM.MN_CMPL_PERIOD_FACT ;;
+  sql_table_name: MN_CMPL_PERIOD_FACT_VW ;;
 
   dimension: actual_amt_to_date {
-    type: string
+    type: number
     sql: ${TABLE}.ACTUAL_AMT_TO_DATE ;;
   }
 
   dimension: actual_amt_to_date_base {
-    type: string
+    type: number
     sql: ${TABLE}.ACTUAL_AMT_TO_DATE_BASE ;;
   }
 
   dimension: attained_tier {
-    type: string
+    type: number
     sql: ${TABLE}.ATTAINED_TIER ;;
   }
 
@@ -22,17 +22,18 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: commit_tier {
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_TIER ;;
   }
 
   dimension: commit_ver_num {
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_VER_NUM ;;
   }
 
   dimension: contract_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
@@ -42,7 +43,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: customer_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -75,7 +77,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: date_retired_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.DATE_RETIRED_WID ;;
   }
 
@@ -94,37 +97,38 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: definition_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.DEFINITION_WID ;;
   }
 
   dimension: equiv_rev_value {
-    type: string
+    type: number
     sql: ${TABLE}.EQUIV_REV_VALUE ;;
   }
 
   dimension: equiv_rev_value_base {
-    type: string
+    type: number
     sql: ${TABLE}.EQUIV_REV_VALUE_BASE ;;
   }
 
   dimension: equiv_value {
-    type: string
+    type: number
     sql: ${TABLE}.EQUIV_VALUE ;;
   }
 
   dimension: exchange_rate {
-    type: string
+    type: number
     sql: ${TABLE}.EXCHANGE_RATE ;;
   }
 
   dimension: expected_amt_to_date {
-    type: string
+    type: number
     sql: ${TABLE}.EXPECTED_AMT_TO_DATE ;;
   }
 
   dimension: expected_amt_to_date_base {
-    type: string
+    type: number
     sql: ${TABLE}.EXPECTED_AMT_TO_DATE_BASE ;;
   }
 
@@ -134,7 +138,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: org_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.ORG_WID ;;
   }
 
@@ -153,12 +158,12 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: pct_rev_cmpl {
-    type: string
+    type: number
     sql: ${TABLE}.PCT_REV_CMPL ;;
   }
 
   dimension: pct_vol_cmpl {
-    type: string
+    type: number
     sql: ${TABLE}.PCT_VOL_CMPL ;;
   }
 
@@ -177,7 +182,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: period_end_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PERIOD_END_DATE_WID ;;
   }
 
@@ -187,7 +193,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: period_pkg_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PERIOD_PKG_WID ;;
   }
 
@@ -206,7 +213,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: period_start_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PERIOD_START_DATE_WID ;;
   }
 
@@ -216,12 +224,13 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: period_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PERIOD_WID ;;
   }
 
   dimension: pg_wid {
-    type: string
+    type: number
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -231,7 +240,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_created_by_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PRD_CMTMNT_CREATED_BY_WID ;;
   }
 
@@ -264,22 +274,24 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_dt_created_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_DT_CREATED_WID ;;
   }
 
   dimension: prd_cmtmnt_dt_updated_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_DT_UPDATED_WID ;;
   }
 
   dimension: prd_cmtmnt_revenue {
-    type: string
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_REVENUE ;;
   }
 
   dimension: prd_cmtmnt_revenue_base {
-    type: string
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_REVENUE_BASE ;;
   }
 
@@ -294,27 +306,31 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_tier_attained {
-    type: string
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_TIER_ATTAINED ;;
   }
 
   dimension: prd_cmtmnt_updated_by_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.PRD_CMTMNT_UPDATED_BY_ID ;;
   }
 
   dimension: prd_cmtmnt_updated_by_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PRD_CMTMNT_UPDATED_BY_WID ;;
   }
 
   dimension: prior_period_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PRIOR_PERIOD_WID ;;
   }
 
   dimension: product_cat_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PRODUCT_CAT_WID ;;
   }
 
@@ -324,17 +340,17 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: proj_rev_at_risk {
-    type: string
+    type: number
     sql: ${TABLE}.PROJ_REV_AT_RISK ;;
   }
 
   dimension: proj_rev_at_risk_base {
-    type: string
+    type: number
     sql: ${TABLE}.PROJ_REV_AT_RISK_BASE ;;
   }
 
   dimension: projected_tier {
-    type: string
+    type: number
     sql: ${TABLE}.PROJECTED_TIER ;;
   }
 
@@ -344,7 +360,8 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -369,20 +386,24 @@ view: mn_cmpl_period_fact {
 
   dimension: src_sys_commit_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
   dimension: src_sys_mgr_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 
   dimension: src_sys_period_cmtmnt_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_PERIOD_CMTMNT_ID ;;
   }
 
   dimension: src_sys_period_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SRC_SYS_PERIOD_ID ;;
   }
@@ -429,5 +450,16 @@ view: mn_cmpl_period_fact {
   measure: count {
     type: count
     drill_fields: []
+  }
+
+  measure: actual_sales {
+  type: sum
+  value_format_name: decimal_0
+  sql: ${actual_amt_to_date} ;;
+  }
+  measure: expected_sales {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${expected_amt_to_date} ;;
   }
 }
