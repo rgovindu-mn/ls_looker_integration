@@ -11,13 +11,22 @@ view: mn_cmpl_period_fact_dated {
     END ;;
   }
 
+  dimension: date_period_days_remaning {
+    sql:
+    CASE
+      WHEN {% condition date_frame_selection %} 'Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate) THEN
+         ROUND( TRUNC(ADD_MONTHS(SYSDATE,12),'YYYY') - SYSDATE)
+      WHEN {% condition date_frame_selection %} 'Quarter' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate)  THEN
+          ROUND( TRUNC(ADD_MONTHS(SYSDATE,3),'Q') - SYSDATE)
+      WHEN {% condition date_frame_selection %} 'Month' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate ) THEN
+         ROUND( TRUNC(ADD_MONTHS(SYSDATE,1),'MM') - SYSDATE)
+      ELSE 0
+    END ;;
+  }
+
   dimension: rolling_12_months {
     type: yesno
     sql: ADD_MONTHS(${mn_date_dim.start_date_sql_raw}, 12) > SYSDATE;;
-  }
-
-  dimension: total_days_in_period {
-    sql:  ROUND(TRUNC(LEAST(CAST(${period_end_raw} AS DATE), SYSDATE),'DD') - TRUNC(LEAST(CAST(${period_start_raw} AS DATE), SYSDATE),'DD') +1) ;;
   }
 
   dimension: days_in_current_period {
@@ -28,13 +37,37 @@ view: mn_cmpl_period_fact_dated {
   measure: period_actual_sales {
     type: sum
     value_format_name: decimal_0
-    sql: ${TABLE}.ACTUAL_AMT_TO_DATE  * ${days_in_current_period} /  ${total_days_in_period};;
+    sql: ${actual_amt_to_date}  * ${days_in_current_period} /  ${total_days_in_period};;
   }
   measure: period_expected_sales {
     type: sum
     value_format_name: decimal_0
-    sql: ${TABLE}.EXPECTED_AMT_TO_DATE * ${days_in_current_period} /  ${total_days_in_period}  ;;
+    sql: ${expected_amt_to_date} * ${days_in_current_period} /  ${total_days_in_period}  ;;
   }
+
+  measure: period_daily_revenue_gap {
+    type: sum
+    value_format_name: decimal_0
+    sql: CASE WHEN (${expected_amt_to_date} - ${actual_amt_to_date}) > 0 AND
+          ${mn_date_dim.end_date_sql_raw} > SYSTIMESTAMP THEN
+         (${expected_amt_to_date} - ${actual_amt_to_date})/${total_days_in_period}
+    ELSE 0 END;;
+  }
+
+  measure: period_total_revenue_gap {
+    type: number
+    value_format_name: decimal_0
+    sql: ${period_revenue_gap} + ${period_daily_revenue_gap} * ${date_period_days_remaning};;
+  }
+
+  measure: period_revenue_gap {
+    type: number
+    value_format_name: decimal_0
+    sql: CASE WHEN (${period_expected_sales} - ${period_actual_sales}) > 0 THEN
+         ${period_expected_sales} - ${period_actual_sales}
+    ELSE 0 END;;
+  }
+
 
   measure: compliance_percent {
     type: number

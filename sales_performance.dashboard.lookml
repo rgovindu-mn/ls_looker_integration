@@ -71,7 +71,7 @@
     listens_to_filters: [contract_name, contract_number, sale_type, product_cat_name, sku,account, channel, invoice_year]
 
   - name: channel
-    title: 'channel'
+    title: 'Channel'
     type: field_filter
     model: price_program_and_products
     explore: mn_combined_sale_fact

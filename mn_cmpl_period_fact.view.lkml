@@ -3,7 +3,7 @@ view: mn_cmpl_period_fact {
 
   dimension: actual_amt_to_date {
     type: number
-    sql: ${TABLE}.ACTUAL_AMT_TO_DATE ;;
+    sql: NVL(${TABLE}.ACTUAL_AMT_TO_DATE,0) ;;
   }
 
   dimension: actual_amt_to_date_base {
@@ -124,7 +124,7 @@ view: mn_cmpl_period_fact {
 
   dimension: expected_amt_to_date {
     type: number
-    sql: ${TABLE}.EXPECTED_AMT_TO_DATE ;;
+    sql: NVL(${TABLE}.EXPECTED_AMT_TO_DATE,0) ;;
   }
 
   dimension: expected_amt_to_date_base {
@@ -445,6 +445,10 @@ view: mn_cmpl_period_fact {
   dimension: tier_reason_code {
     type: string
     sql: ${TABLE}.TIER_REASON_CODE ;;
+  }
+
+  dimension: total_days_in_period {
+    sql:  ROUND(TRUNC(LEAST(CAST(${period_end_raw} AS DATE), SYSDATE),'DD') - TRUNC(LEAST(CAST(${period_start_raw} AS DATE), SYSDATE),'DD') +1) ;;
   }
 
   measure: count {
