@@ -89,7 +89,7 @@
     model: price_program_and_products
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_cmpl_period_fact.date_period]
-    measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales]
+    measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_total_revenue_gap]
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
@@ -151,7 +151,7 @@
       mn_product_group_dim.pg_name, mn_date_dim.year, mn_date_dim.month_name, mn_cmpl_period_fact.commit_tier,
       mn_cmpl_period_fact.attained_tier, mn_cmpl_period_fact.date_period]
     measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales,
-      mn_cmpl_period_fact.compliance_percent]
+      mn_cmpl_period_fact.compliance_percent, mn_cmpl_period_fact.period_total_revenue_gap]
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
@@ -250,15 +250,8 @@
     type: single_value
     model: price_program_and_products
     explore: mn_cmpl_period_fact_dated
-    measures: [mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_expected_sales]
+    measures: [mn_cmpl_period_fact.period_total_revenue_gap]
     dynamic_fields:
-    - table_calculation: revenue_gap
-      label: Revenue Gap
-      expression: |-
-        if ((${mn_cmpl_period_fact.period_expected_sales} - ${mn_cmpl_period_fact.period_actual_sales}) >0,  ${mn_cmpl_period_fact.period_expected_sales} - ${mn_cmpl_period_fact.period_actual_sales},
-        0)
-      value_format:
-      value_format_name: decimal_0
     filters:
     listen:
       customer_name: mn_customer_dim.customer_name

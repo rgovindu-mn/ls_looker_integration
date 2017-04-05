@@ -3,6 +3,7 @@ view: mn_cmpl_period_fact_dated {
   extends: [mn_cmpl_period_fact]
 
    dimension: date_period {
+    type:  string
     sql:
     CASE
       WHEN {% condition date_frame_selection %} 'Year' {% endcondition %}THEN TO_CHAR(${mn_date_dim.year})
@@ -12,6 +13,7 @@ view: mn_cmpl_period_fact_dated {
   }
 
   dimension: date_period_days_remaning {
+    type:  string
     sql:
     CASE
       WHEN {% condition date_frame_selection %} 'Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate) THEN
@@ -30,6 +32,7 @@ view: mn_cmpl_period_fact_dated {
   }
 
   dimension: days_in_current_period {
+    type:  string
     sql:  ROUND(TRUNC(LEAST(LEAST(CAST(${mn_date_dim.end_date_sql_raw} AS DATE), ${period_end_raw}), SYSDATE) ,'DD')
       - TRUNC(LEAST(GREATEST(CAST(${mn_date_dim.start_date_sql_raw} AS DATE), ${period_start_raw}), SYSDATE),'DD') +1 ) ;;
   }
@@ -45,19 +48,21 @@ view: mn_cmpl_period_fact_dated {
     sql: ${expected_amt_to_date} * ${days_in_current_period} /  ${total_days_in_period}  ;;
   }
 
-  measure: period_daily_revenue_gap {
-    type: sum
-    value_format_name: decimal_0
-    sql: CASE WHEN (${expected_amt_to_date} - ${actual_amt_to_date}) > 0 AND
-          ${mn_date_dim.end_date_sql_raw} > SYSTIMESTAMP THEN
-         (${expected_amt_to_date} - ${actual_amt_to_date})/${total_days_in_period}
-    ELSE 0 END;;
-  }
+  # CASE WHEN (${expected_amt_to_date} - ${actual_amt_to_date}) > 0 AND
+  #      ${mn_date_dim.end_date_sql_raw} > SYSTIMESTAMP THEN
+  #      (${expected_amt_to_date} - ${actual_amt_to_date})/${total_days_in_period}
+  # ELSE 0 END;;
 
   measure: period_total_revenue_gap {
-    type: number
+    type: sum
+    label: "Total Revenue Gap"
     value_format_name: decimal_0
-    sql: ${period_revenue_gap} + ${period_daily_revenue_gap} * ${date_period_days_remaning};;
+    sql: CASE WHEN ( ${expected_amt_to_date} -  ${actual_amt_to_date}) > 0 THEN
+         (${days_in_current_period} +  ${date_period_days_remaning}) * (${expected_amt_to_date} -  ${actual_amt_to_date})
+        /  ${total_days_in_period}
+        ELSE 0
+        END;;
+
   }
 
   measure: period_revenue_gap {

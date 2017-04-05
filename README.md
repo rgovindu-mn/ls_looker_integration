@@ -3,7 +3,7 @@
 Filed Intelligence Application is designed to help Field Sales Reps to make better decisions during the sales process to the end customers.
 
 ### Contracts and Products
-This dashboard provides insignts into the overall contact and price program pipeline. It contains the KPIs reflecting the number of contracts, expiring within the next 30 days and their cumulative value. Also, a Sales Rep can see the Price Program Product, tiers and pricing for a specific contract.
+This dashboard provides insigts into the overall contact and price program pipeline. It contains the KPIs reflecting the number of contracts, expiring within the next 30 days and their cumulative value. Also, a Sales Rep can see the Price Program Product, tiers and pricing for a specific contract.
 
 [Contracts and Products Dashboards](/dashboards/price_program_and_products::contract_and_products?days_to_expire=NOT%20NULL)
 
