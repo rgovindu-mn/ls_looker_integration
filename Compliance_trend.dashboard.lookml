@@ -1,4 +1,5 @@
 - dashboard: compliance
+  show_applied_filters: false
   title: Compliance
   layout: grid
   rows:
