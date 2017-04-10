@@ -325,6 +325,12 @@ view: mn_combined_sale_fact {
     sql: ${inv_qty} * ${inv_amt} ;;
   }
 
+  dimension: line_list_revenue {
+    type: number
+    label: "Invoice Revenue"
+    sql: ${inv_qty} *NVL( ${list_price}, ${inv_amt}) ;;
+  }
+
   dimension: inv_uom {
     type: string
     label: "Invoice UOM"
@@ -603,7 +609,16 @@ view: mn_combined_sale_fact {
     drill_fields: [detail*]
   }
 
-  measure: revenue {
+  measure: list_revenue {
+    type: sum
+    sql: ${line_list_revenue} ;;
+    label: "List Price Revenue"
+    value_format: "[>=10000000]0,,\"M\";[>=10000]0,\"K\";0"
+    drill_fields: [detail*]
+  }
+
+
+   measure: revenue {
     type: sum
     sql: ${inv_revenue} ;;
     label: "Revenue"
@@ -611,11 +626,37 @@ view: mn_combined_sale_fact {
     drill_fields: [detail*]
   }
 
+
   measure: unit_rebate {
     sql: ${rebate}/NULLIF(${volume},0) ;;
     label: "Rebate per Unit"
     type:  number
     value_format_name: decimal_2
+    drill_fields: [detail*]
+  }
+
+
+  measure: oninvoice_rebate_percent {
+    sql:  (${list_revenue} - ${revenue} )/NULLIF(${list_revenue},0) ;;
+    type:  number
+    label: "OnInvoice Discount Percent"
+    value_format_name: percent_0
+    drill_fields: [detail*]
+  }
+
+  measure: net_rebate_percent {
+    sql:   1 - (${list_revenue} - ${rebate})/NULLIF(${list_revenue},0) ;;
+    type:  number
+    label: "Net Discount Percent"
+    value_format_name: percent_0
+    drill_fields: [detail*]
+  }
+
+  measure: total_rebate_percent {
+    sql:   (${list_revenue} - ${revenue} + ${rebate})/NULLIF(${list_revenue},0) ;;
+    type:  number
+    label: "Total Discount Percent"
+    value_format_name: percent_0
     drill_fields: [detail*]
   }
 

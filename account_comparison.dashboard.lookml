@@ -2,8 +2,6 @@
   title: Account Comparison
   layout: grid
   rows:
-  - elements: [ account_comp_kpi1 , account_comp_kpi2, account_comp_kpi3, account_comp_kpi4] #, sales_perf_volume_kpi2,sales_perf_volume_kpi3,sales_perf_revenue_kpi1, sales_perf_revenue_kpi2,sales_perf_revenue_kpi3]
-    height: 100
   - elements: [account_price_chart, account_price_scatter]
     height: 400
   - elements: [product_chart]
@@ -17,7 +15,7 @@
     type: field_filter
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    default_value:
+    default_value: Bryn Mawr Clinic,Paoli Clinic,Paoli Dialysis Center,Pilgrim Group
     field: mn_customer_dim.customer_name
     listens_to_filters: [product, product_cat_name, invoice_year, invoice_month. sale_type]
 
@@ -26,7 +24,7 @@
     type: field_filter
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    default_value:
+    default_value: Apollo
     field: mn_category_dim.product_name
     listens_to_filters: [account, product, invoice_year, invoice_month. sale_type]
 
@@ -35,7 +33,7 @@
     type: field_filter
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    default_value: Apollo 500 DR, NNI Prod A
+    default_value:
     field: mn_product_dim.product_name
     listens_to_filters: [account,  product_cat_name,invoice_year, invoice_month. sale_type]
 
@@ -62,7 +60,7 @@
     type: field_filter
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    default_value: 'Yes'
+    default_value:
     field: mn_combined_sale_fact.rolling_12_months
 
   - name: sale_type
@@ -81,10 +79,11 @@
     model: price_program_and_products
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name]
-    measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.price, mn_combined_sale_fact.net_price]
+    measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.revenue, mn_combined_sale_fact.oninvoice_rebate_percent,
+      mn_combined_sale_fact.net_rebate_percent, mn_combined_sale_fact.total_rebate_percent , mn_combined_sale_fact.price, mn_combined_sale_fact.net_price]
     filters:
     listen:
-      #account: mn_customer_dim.customer_name
+      account: mn_customer_dim.customer_name
       invoice_month: mn_combined_sale_fact.invoice_month
       invoice_year: mn_combined_sale_fact.invoice_year
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
@@ -111,296 +110,28 @@
 
 
 
-  - name: account_comp_kpi1
-    title: Average Price
-    type: single_value
-    model: price_program_and_products
-    explore: mn_combined_sale_fact
-    measures: [mn_combined_sale_fact.price]
-    filters:
-    listen:
-      account: mn_customer_dim.customer_name
-      invoice_month: mn_combined_sale_fact.invoice_month
-      invoice_year: mn_combined_sale_fact.invoice_year
-      rolling_12_months: mn_combined_sale_fact.rolling_12_months
-      sale_type: mn_combined_sale_fact.sale_type
-      product_cat_name: mn_category_dim.product_name
-      product: mn_product_dim.product_name
-    limit: '500'
-    column_limit: '50'
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_series: []
-    single_value_title: Average Price
-
-  - name: account_comp_kpi2
-    title: Average Price
-    type: single_value
-    model: price_program_and_products
-    explore: mn_combined_sale_fact
-    measures: [mn_combined_sale_fact.net_price]
-    filters:
-    listen:
-      account: mn_customer_dim.customer_name
-      invoice_month: mn_combined_sale_fact.invoice_month
-      invoice_year: mn_combined_sale_fact.invoice_year
-      rolling_12_months: mn_combined_sale_fact.rolling_12_months
-      sale_type: mn_combined_sale_fact.sale_type
-      product_cat_name: mn_category_dim.product_name
-      product: mn_product_dim.product_name
-    limit: '500'
-    column_limit: '50'
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_series: []
-    single_value_title:  Average Price Net of Rebates
-
-  - name: account_comp_kpi3
-    title: Average Price
-    type: single_value
-    model: price_program_and_products
-    explore: mn_combined_sale_fact
-    measures: [mn_combined_sale_fact.price]
-    filters:
-      mn_combined_sale_fact.rolling_12_months : Yes
-    listen:
-      account: mn_customer_dim.customer_name
-      sale_type: mn_combined_sale_fact.sale_type
-      product_cat_name: mn_category_dim.product_name
-      product: mn_product_dim.product_name
-    limit: '500'
-    column_limit: '50'
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_series: []
-    single_value_title: Average YTD Price
-
-  - name: account_comp_kpi4
-    title: Average Price
-    type: single_value
-    model: price_program_and_products
-    explore: mn_combined_sale_fact
-    measures: [mn_combined_sale_fact.price]
-    filters:
-      mn_combined_sale_fact.rolling_12_months : Yes
-    listen:
-      account: mn_customer_dim.customer_name
-      sale_type: mn_combined_sale_fact.sale_type
-      product_cat_name: mn_category_dim.product_name
-      product: mn_product_dim.product_name
-    limit: '500'
-    column_limit: '50'
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: true
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_series: []
-    single_value_title: Average YTD Price Net of Rebates
-
-
   - name: account_price_scatter
-    title: Account Price Comparison
-    type: looker_scatter
-    model: price_program_and_products
-    explore: mn_combined_sale_fact
-    dimensions: [mn_customer_dim.customer_name]
-    measures: [mn_combined_sale_fact.net_price, mn_combined_sale_fact.volume]
-    dynamic_fields:
-    - table_calculation: customer_name
-      label: Customer Name
-      expression: concat(${mn_customer_dim.customer_name} , ":" , ${mn_combined_sale_fact.net_price})
-    filters:
-    listen:
-      #account: mn_customer_dim.customer_name
-      invoice_month: mn_combined_sale_fact.invoice_month
-      invoice_year: mn_combined_sale_fact.invoice_year
-      rolling_12_months: mn_combined_sale_fact.rolling_12_months
-      sale_type: mn_combined_sale_fact.sale_type
-      product_cat_name: mn_category_dim.product_name
-      product: mn_product_dim.product_name
-    sorts: [mn_combined_sale_fact.volume desc]
-    limit: '500'
-    column_limit: '50'
-    query_timezone: America/Los_Angeles
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    show_null_points: false
-    point_style: circle
-    show_row_numbers: true
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: editable
-    series_labels:
-      mn_product_dim.product_name: Product
-      mn_combined_sale_fact.invoice_year: Year
-      mn_combined_sale_fact.invoice_month: Year Month
-      mn_category_dim.product_name: Category
-      mn_customer_dim.customer_name: Account
-      mn_billto_customer_dim.customer_name: Bill To Customer
-      mn_1shipto_customer_dim.customer_name: Ship To Customer
-      mn_channel_customer_dim.customer_name: Channel
-    series_types: {}
-    swap_axes: false
-    hidden_fields: [mn_customer_dim.customer_name]
-    hide_legend: false
-    y_axis_unpin: true
-
-
-  - name: account_price_chart
-    title: Account Price Comparison
+    title: Account Rebate Comparison
     type: looker_column
     model: price_program_and_products
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name]
-    measures: [mn_combined_sale_fact.net_price, mn_combined_sale_fact.volume]
-    dynamic_fields:
-    - table_calculation: customer_name
-      label: Customer Name
-      expression: concat(round(${mn_combined_sale_fact.net_price},2) , " :" ,${mn_customer_dim.customer_name} )
+    measures: [mn_combined_sale_fact.revenue, mn_combined_sale_fact.oninvoice_rebate_percent,
+      mn_combined_sale_fact.net_rebate_percent]
     filters:
     listen:
-      #account: mn_customer_dim.customer_name
+      account: mn_customer_dim.customer_name
       invoice_month: mn_combined_sale_fact.invoice_month
       invoice_year: mn_combined_sale_fact.invoice_year
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
       sale_type: mn_combined_sale_fact.sale_type
       product_cat_name: mn_category_dim.product_name
       product: mn_product_dim.product_name
-    sorts: [mn_combined_sale_fact.net_price]
+    sorts: [mn_customer_dim.customer_name]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
-    stacking: ''
+    stacking: normal
     show_value_labels: true
     label_density: 25
     legend_position: center
@@ -410,16 +141,16 @@
     limit_displayed_rows: false
     y_axis_combined: false
     show_y_axis_labels: true
-    show_y_axis_ticks: false
+    show_y_axis_ticks: true
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
     show_x_axis_label: false
     show_x_axis_ticks: true
-    x_axis_scale: auto
+    x_axis_scale: ordinal
     y_axis_scale_mode: linear
     ordering: none
-    show_null_labels: false
-    show_totals_labels: false
+    show_null_labels: true
+    show_totals_labels: true
     show_silhouette: false
     totals_color: "#808080"
     show_null_points: false
@@ -459,18 +190,110 @@
     hide_row_totals: false
     table_theme: editable
     series_labels:
-      mn_product_dim.product_name: Product
-      mn_combined_sale_fact.invoice_year: Year
-      mn_combined_sale_fact.invoice_month: Year Month
-      mn_category_dim.product_name: Category
-      mn_customer_dim.customer_name: Account
-      mn_billto_customer_dim.customer_name: Bill To Customer
-      mn_1shipto_customer_dim.customer_name: Ship To Customer
-      mn_channel_customer_dim.customer_name: Channel
+    mn_product_dim.product_name: Product
+    mn_combined_sale_fact.invoice_year: Year
+    mn_combined_sale_fact.invoice_month: Year Month
+    mn_category_dim.product_name: Category
+    mn_customer_dim.customer_name: Account
+    mn_billto_customer_dim.customer_name: Bill To Customer
+    mn_1shipto_customer_dim.customer_name: Ship To Customer
+    mn_channel_customer_dim.customer_name: Channel
     series_types: {}
     swap_axes: false
-    hidden_fields: [customer_name]
+    hidden_fields: [mn_combined_sale_fact.revenue]
     hide_legend: false
-    y_axis_unpin: true
+    y_axis_unpin: false
     hidden_series: []
     y_axis_reversed: false
+
+
+  - name: account_price_chart
+    title: Account Revenue Comparison
+    type: looker_pie
+    model: price_program_and_products
+    explore: mn_combined_sale_fact
+    dimensions: [mn_customer_dim.customer_name]
+    measures: [mn_combined_sale_fact.revenue]
+    dynamic_fields:
+    filters:
+    listen:
+      account: mn_customer_dim.customer_name
+      invoice_month: mn_combined_sale_fact.invoice_month
+      invoice_year: mn_combined_sale_fact.invoice_year
+      rolling_12_months: mn_combined_sale_fact.rolling_12_months
+      sale_type: mn_combined_sale_fact.sale_type
+      product_cat_name: mn_category_dim.product_name
+      product: mn_product_dim.product_name
+    sorts: [mn_combined_sale_fact.revenue desc]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    value_labels: legend
+    label_type: labPer
+    stacking: normal
+    show_value_labels: true
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    limit_displayed_rows: false
+    y_axis_combined: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    x_axis_scale: ordinal
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: true
+    show_totals_labels: true
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: false
+    point_style: circle
+    font_size: '12'
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    map_plot_mode: points
+    heatmap_gridlines: false
+    heatmap_opacity: 0.5
+    show_region_field: true
+    draw_map_labels_above_data: true
+    map_tile_provider: positron
+    map_position: fit_data
+    map_scale_indicator: 'off'
+    map_pannable: true
+    map_zoomable: true
+    map_marker_type: circle
+    map_marker_icon_name: default
+    map_marker_radius_mode: proportional_value
+    map_marker_units: meters
+    map_marker_proportional_scale_type: linear
+    map_marker_color_mode: fixed
+    show_legend: true
+    quantize_map_value_colors: false
+    interpolation: linear
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: editable
+    series_types: {}
+    swap_axes: false
+    hidden_fields: []
+    hide_legend: false
+    y_axis_unpin: false
+    hidden_series: []
+    y_axis_reversed: false
+    limit_displayed_rows_values:
+    show_hide: hide
+    first_last: first
+    num_rows: 0
