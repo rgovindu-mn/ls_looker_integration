@@ -172,7 +172,7 @@
       model: price_program_and_products
       explore: mn_pg_product_pricing_fact
       dimensions: [mn_customer_dim.customer_name, mn_contract_header_dim.contract_name,
-        mn_contract_header_dim.contract_number, mn_contract_header_dim.eff_end_date, mn_contract_header_dim.eff_start_date,
+        mn_contract_header_dim.contract_number, mn_contract_header_dim.eff_start_date, mn_contract_header_dim.eff_end_date,
         mn_contract_header_dim.days_to_expire, mn_contract_author_dim.full_name, mn_contract_srep_dim.full_name,
         mn_contract_header_dim.value, mn_ctrt_type_dim.ctrt_type_name]
       filters:
@@ -200,8 +200,8 @@
         mn_customer_dim.customer_name: Account
         mn_contract_header_dim.contract_name: Contract Name
         mn_contract_header_dim.contract_number: Contract Number
-        mn_contract_header_dim.eff_end_date: Start Date
-        mn_contract_header_dim.eff_start_date: End Date
+        mn_contract_header_dim.eff_end_date: End Date
+        mn_contract_header_dim.eff_start_date: Start Date
         mn_contract_header_dim.days_to_expire: Days To Expire
         mn_contract_author_dim.full_name: Author
         mn_contract_srep_dim.full_name: Sales Rep
