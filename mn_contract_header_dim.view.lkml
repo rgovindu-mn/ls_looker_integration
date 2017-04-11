@@ -536,7 +536,7 @@ view: mn_contract_header_dim {
 
   dimension: days_to_expire {
     type: number
-    sql: CASE WHEN ${TABLE}.eff_end_date < SYSDATE THEN NULL ELSE to_date(to_char(${TABLE}.eff_end_date,'YYYYDDMM'),'YYYYDDMM')  - trunc(sysdate) END ;;
+    sql: CASE WHEN ${TABLE}.eff_end_date < SYSDATE THEN 0 ELSE to_date(to_char(${TABLE}.eff_end_date,'YYYYDDMM'),'YYYYDDMM')  - trunc(sysdate) END ;;
   }
 
   dimension: months_to_expire {
