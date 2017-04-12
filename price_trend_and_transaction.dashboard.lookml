@@ -72,6 +72,14 @@
     default_value: 'Yes'
     field: mn_combined_sale_fact.rolling_12_months
 
+  - name: date_frame_selection
+    title: "Period Timeframe Selection"
+    default_value: "Year"
+    type: field_filter
+    model: price_program_and_products
+    explore: mn_combined_sale_fact
+    field: mn_combined_sale_fact.date_frame_selection
+
   elements:
 
   - name: price_trend_table
@@ -115,8 +123,8 @@
     type: looker_line
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    dimensions: [mn_combined_sale_fact.invoice_month]
-    fill_fields: [mn_combined_sale_fact.invoice_month]
+    dimensions: [mn_combined_sale_fact.date_period]
+    fill_fields: []
     measures: [mn_combined_sale_fact.price, mn_combined_sale_fact.net_price]
     filters:
     listen:
@@ -127,7 +135,8 @@
       invoice_year: mn_combined_sale_fact.invoice_year
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
       product_name: mn_product_dim.product_name
-    sorts: [mn_combined_sale_fact.invoice_month desc]
+      date_frame_selection: mn_combined_sale_fact.date_frame_selection
+    sorts: [mn_combined_sale_fact.date_period]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
