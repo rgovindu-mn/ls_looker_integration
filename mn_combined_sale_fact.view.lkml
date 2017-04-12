@@ -588,6 +588,24 @@ view: mn_combined_sale_fact {
   }
 
 
+
+  filter: date_frame_selection {
+    label: "Period Timeframe Selection"
+    default_value: "Quarter"
+    suggestions: ["Month", "Quarter", "Year"]
+  }
+
+  dimension: date_period {
+    type:  string
+    sql:
+    CASE
+      WHEN {% condition date_frame_selection %} 'Year' {% endcondition %} THEN TO_CHAR(TO_DATE(${inv_date_wid},'YYYYMMDD'),'YYYY')
+      WHEN {% condition date_frame_selection %} 'Quarter' {% endcondition %} THEN TO_CHAR(TO_DATE(${inv_date_wid},'YYYYMMDD'),'YYYY')||'-Q'||TO_CHAR(TO_DATE(${inv_date_wid},'YYYYMMDD'),'Q')
+      ELSE TO_CHAR(TO_DATE(${inv_date_wid},'YYYYMMDD'),'YYYY-MM')
+    END ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [detail*]

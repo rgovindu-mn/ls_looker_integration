@@ -245,7 +245,12 @@ view: mn_pg_product_pricing_fact {
     drill_fields: []
   }
 
-  measure:  count_contracts {
+  measure:  product_price {
+    type:  average
+    sql: ${prc_high} ;;
+  }
+
+measure:  count_contracts {
     type:  count_distinct
     sql: ${mn_contract_header_dim.src_sys_contract_id} ;;
   }

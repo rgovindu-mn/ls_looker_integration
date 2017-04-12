@@ -93,9 +93,17 @@
     type: field_filter
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    default_value:
+    default_value: after 2014/01/01
     field: mn_combined_sale_fact.invoice_year
     listens_to_filters: [customer, contract_name, contract_number, sale_type, product_cat_name, sku,account, channel]
+
+  - name: date_frame_selection
+    title: "Period Timeframe Selection"
+    default_value: "Year"
+    type: field_filter
+    model: price_program_and_products
+    explore: mn_combined_sale_fact
+    field: mn_combined_sale_fact.date_frame_selection
 
   elements:
   - name: header_text1
@@ -111,8 +119,8 @@
     type: looker_column
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    dimensions: [mn_combined_sale_fact.invoice_year]
-    fill_fields: [mn_combined_sale_fact.invoice_year]
+    dimensions: [mn_combined_sale_fact.date_period]
+    fill_fields: []
     measures: [mn_combined_sale_fact.volume]
     filters:
     listen:
@@ -125,7 +133,8 @@
       account: mn_1shipto_customer_dim.customer_name
       channel: mn_channel_customer_dim.customer_name
       invoice_year: mn_combined_sale_fact.invoice_year
-    sorts: [mn_combined_sale_fact.invoice_year desc]
+      date_frame_selection: mn_combined_sale_fact.date_frame_selection
+    sorts: [mn_combined_sale_fact.date_period desc]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
@@ -158,14 +167,7 @@
     hide_row_totals: false
     table_theme: editable
     series_labels:
-      mn_product_dim.product_name: SKU
-      mn_combined_sale_fact.invoice_year: Year
-      mn_combined_sale_fact.invoice_month: Year Month
-      mn_category_dim.product_name: Category
-      mn_customer_dim.customer_name: Contracted Customer
-      mn_billto_customer_dim.customer_name: Bill To Customer
-      mn_1shipto_customer_dim.customer_name: Ship To Customer
-      mn_channel_customer_dim.customer_name: Channel
+      mn_combined_sale_fact.date_period: Date Period
     series_types: {}
     hidden_series: []
     y_axis_unpin: false
@@ -177,8 +179,8 @@
     type: looker_column
     model: price_program_and_products
     explore: mn_combined_sale_fact
-    dimensions: [mn_combined_sale_fact.invoice_year]
-    fill_fields: [mn_combined_sale_fact.invoice_year]
+    dimensions: [mn_combined_sale_fact.date_period]
+    fill_fields: []
     measures: [mn_combined_sale_fact.revenue]
     filters:
     listen:
@@ -191,7 +193,8 @@
       account: mn_1shipto_customer_dim.customer_name
       channel: mn_channel_customer_dim.customer_name
       invoice_year: mn_combined_sale_fact.invoice_year
-    sorts: [mn_combined_sale_fact.invoice_year desc]
+      date_frame_selection: mn_combined_sale_fact.date_frame_selection
+    sorts: [mn_combined_sale_fact.date_period desc]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
@@ -224,14 +227,7 @@
     hide_row_totals: false
     table_theme: editable
     series_labels:
-      mn_product_dim.product_name: SKU
-      mn_combined_sale_fact.invoice_year: Year
-      mn_combined_sale_fact.invoice_month: Year Month
-      mn_category_dim.product_name: Category
-      mn_customer_dim.customer_name: Contracted Customer
-      mn_billto_customer_dim.customer_name: Bill To Customer
-      mn_1shipto_customer_dim.customer_name: Ship To Customer
-      mn_channel_customer_dim.customer_name: Channel
+      mn_combined_sale_fact.date_period: Date Period
     series_types: {}
     hidden_series: []
     y_axis_unpin: false
@@ -244,7 +240,7 @@
     explore: mn_combined_sale_fact
     dimensions: [mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name,
       mn_billto_customer_dim.customer_name, mn_1shipto_customer_dim.customer_name, mn_contract_header_dim.contract_name,
-      mn_channel_customer_dim.customer_name, mn_combined_sale_fact.invoice_year, mn_combined_sale_fact.sale_type]
+      mn_channel_customer_dim.customer_name, mn_combined_sale_fact.date_period, mn_combined_sale_fact.sale_type]
     measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.revenue]
     filters:
     listen:
@@ -257,7 +253,8 @@
       account: mn_1shipto_customer_dim.customer_name
       channel: mn_channel_customer_dim.customer_name
       invoice_year: mn_combined_sale_fact.invoice_year
-    sorts: [mn_combined_sale_fact.revenue desc]
+      date_frame_selection: mn_combined_sale_fact.date_frame_selection
+    sorts: [mn_combined_sale_fact.date_period, mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
@@ -270,7 +267,7 @@
     limit_displayed_rows: false
     series_labels:
       mn_product_dim.product_name: SKU
-      mn_combined_sale_fact.invoice_year: Year
+      mn_combined_sale_fact.date_frame_selection: Date Period
       mn_combined_sale_fact.invoice_month: Year Month
       mn_category_dim.product_name: Category
       mn_customer_dim.customer_name: Contracted Customer
