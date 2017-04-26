@@ -60,6 +60,7 @@ view: mn_ctrt_status_dim {
 
   dimension: status_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.STATUS_WID ;;
   }

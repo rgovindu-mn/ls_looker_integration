@@ -2,12 +2,14 @@ view: mn_product_map {
   sql_table_name: MN_PRODUCT_MAP_VW ;;
 
   dimension: child_prod_wid {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.CHILD_PROD_WID ;;
   }
 
   dimension_group: date_created {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -22,6 +24,7 @@ view: mn_product_map {
 
   dimension_group: date_updated {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -35,7 +38,7 @@ view: mn_product_map {
   }
 
   dimension: depth_from_parent {
-    type: string
+    type: number
     sql: ${TABLE}.DEPTH_FROM_PARENT ;;
   }
 
@@ -59,16 +62,19 @@ view: mn_product_map {
   }
 
   dimension: parent_prod_wid {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.PARENT_PROD_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
+    hidden:  yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }

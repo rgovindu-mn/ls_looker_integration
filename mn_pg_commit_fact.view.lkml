@@ -1,13 +1,15 @@
 view: mn_pg_commit_fact {
-  sql_table_name: LSETLDM.MN_PG_COMMIT_FACT ;;
+  sql_table_name: MN_PG_COMMIT_FACT_vw ;;
 
   dimension: cmt_change_code_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.CMT_CHANGE_CODE_WID ;;
   }
 
   dimension: commit_type_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.COMMIT_TYPE_WID ;;
   }
 
@@ -17,12 +19,14 @@ view: mn_pg_commit_fact {
   }
 
   dimension: customer_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -37,6 +41,7 @@ view: mn_pg_commit_fact {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -50,12 +55,14 @@ view: mn_pg_commit_fact {
   }
 
   dimension: eff_end_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 
   dimension: eff_start_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.EFF_START_DATE_WID ;;
   }
 
@@ -80,17 +87,20 @@ view: mn_pg_commit_fact {
   }
 
   dimension: pg_commit_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_COMMIT_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
@@ -109,7 +119,8 @@ view: mn_pg_commit_fact {
   }
 
   dimension: src_sys_commit_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
@@ -119,7 +130,8 @@ view: mn_pg_commit_fact {
   }
 
   dimension: track_start_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.TRACK_START_DATE_WID ;;
   }
 

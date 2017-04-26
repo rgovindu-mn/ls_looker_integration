@@ -1,8 +1,9 @@
 view: mn_pg_commit_map {
-  sql_table_name: LSETLDM.MN_PG_COMMIT_MAP ;;
+  sql_table_name: MN_PG_COMMIT_MAP_VW ;;
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -17,6 +18,7 @@ view: mn_pg_commit_map {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -44,22 +46,26 @@ view: mn_pg_commit_map {
   }
 
   dimension: pg_commit_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_COMMIT_WID ;;
   }
 
   dimension: pg_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

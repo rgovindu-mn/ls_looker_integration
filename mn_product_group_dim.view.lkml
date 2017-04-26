@@ -1,5 +1,5 @@
 view: mn_product_group_dim {
-  sql_table_name: MN_PRODUCT_GROUP_DIM ;;
+  sql_table_name: MN_PRODUCT_GROUP_DIM_VW ;;
 
   dimension: adj_type {
     type: string
@@ -190,6 +190,7 @@ view: mn_product_group_dim {
   dimension: pg_wid {
     hidden:  yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.PG_WID ;;
   }
 

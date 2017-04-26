@@ -4,7 +4,7 @@ include: "*.view.lkml"         # include all views in this project
 include: "*.dashboard.lookml"  # include all dashboards in this project
 
 
-label: "Field Intelligence"
+label: "Sales Intelligence"
 
 explore: mn_date_dim {
   label: " Invoice Date"
@@ -12,6 +12,7 @@ explore: mn_date_dim {
 
 explore: mn_date_labels {
   label: "Year Labels"
+  hidden: yes
 }
 
 explore: mn_cmpl_period_fact {
@@ -434,18 +435,4 @@ explore: mn_contract_header_dim{
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_dim.customer_wid};;
   }
 
-
 }
-
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     sql_on: ${orders.id} = ${order_items.order_id}
-#   }
-#
-#   join: users {
-#     sql_on: ${users.id} = ${orders.user_id}
-#   }
-# }

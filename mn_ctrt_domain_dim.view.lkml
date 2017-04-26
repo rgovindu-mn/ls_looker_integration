@@ -44,6 +44,7 @@ view: mn_ctrt_domain_dim {
   dimension: domain_wid {
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.DOMAIN_WID ;;
   }
 

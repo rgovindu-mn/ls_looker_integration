@@ -44,6 +44,7 @@ view: mn_prc_method_dim {
   dimension: prc_method_wid {
     hidden:  yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.PRC_METHOD_WID ;;
   }
 

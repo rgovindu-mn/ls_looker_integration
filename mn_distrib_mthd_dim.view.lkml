@@ -40,7 +40,9 @@ view: mn_distrib_mthd_dim {
   }
 
   dimension: dist_method_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.DIST_METHOD_WID ;;
   }
 

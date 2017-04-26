@@ -2,22 +2,23 @@ view: mn_cmpl_bucket_fact {
   sql_table_name: MN_CMPL_BUCKET_FACT_VW ;;
 
   dimension: actual_amt_to_date {
-    type: string
+    type: number
     sql: ${TABLE}.ACTUAL_AMT_TO_DATE ;;
   }
 
   dimension: actual_amt_to_date_base {
-    type: string
+    type: number
     sql: ${TABLE}.ACTUAL_AMT_TO_DATE_BASE ;;
   }
 
   dimension: actual_to_date {
-    type: string
+    type: number
     sql: ${TABLE}.ACTUAL_TO_DATE ;;
   }
 
   dimension: bucket_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.BUCKET_WID ;;
   }
 
@@ -28,6 +29,7 @@ view: mn_cmpl_bucket_fact {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -42,6 +44,7 @@ view: mn_cmpl_bucket_fact {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -65,17 +68,17 @@ view: mn_cmpl_bucket_fact {
   }
 
   dimension: exchange_rate {
-    type: string
+    type: number
     sql: ${TABLE}.EXCHANGE_RATE ;;
   }
 
   dimension: expected_amt_to_date {
-    type: string
+    type: number
     sql: ${TABLE}.EXPECTED_AMT_TO_DATE ;;
   }
 
   dimension: expected_amt_to_date_base {
-    type: string
+    type: number
     sql: ${TABLE}.EXPECTED_AMT_TO_DATE_BASE ;;
   }
 
@@ -90,42 +93,49 @@ view: mn_cmpl_bucket_fact {
   }
 
   dimension: period_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PERIOD_WID ;;
   }
 
   dimension: proj_rev_at_risk {
-    type: string
+    type: number
     sql: ${TABLE}.PROJ_REV_AT_RISK ;;
   }
 
   dimension: proj_rev_at_risk_base {
-    type: string
+    type: number
     sql: ${TABLE}.PROJ_REV_AT_RISK_BASE ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_bucket_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_BUCKET_ID ;;
   }
 
   dimension: src_sys_calc_obj_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_CALC_OBJ_ID ;;
   }
 
   dimension: src_sys_tb_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_TB_ID ;;
   }
 

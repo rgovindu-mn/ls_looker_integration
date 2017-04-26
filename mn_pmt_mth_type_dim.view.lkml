@@ -3,6 +3,7 @@ view: mn_pmt_mth_type_dim {
 
   dimension_group: date_created {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -17,6 +18,7 @@ view: mn_pmt_mth_type_dim {
 
   dimension_group: date_updated {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -40,17 +42,20 @@ view: mn_pmt_mth_type_dim {
   }
 
   dimension: pmt_mth_type_wid {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.PMT_MTH_TYPE_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden:  yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

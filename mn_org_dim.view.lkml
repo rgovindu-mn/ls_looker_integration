@@ -1,5 +1,5 @@
 view: mn_org_dim {
-  sql_table_name: LSETLDM.MN_ORG_DIM ;;
+  sql_table_name: MN_ORG_DIM_VW ;;
 
   dimension: currency {
     type: string
@@ -7,6 +7,7 @@ view: mn_org_dim {
   }
 
   dimension_group: date_created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -22,6 +23,7 @@ view: mn_org_dim {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -50,22 +52,27 @@ view: mn_org_dim {
   }
 
   dimension: org_wid {
-    type: string
+    hidden: yes
+    primary_key: yes
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
   dimension: parent_org_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PARENT_ORG_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

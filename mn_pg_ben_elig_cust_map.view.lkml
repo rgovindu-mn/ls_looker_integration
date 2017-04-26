@@ -1,8 +1,9 @@
 view: mn_pg_ben_elig_cust_map {
-  sql_table_name: LSETLDM.MN_PG_BEN_ELIG_CUST_MAP ;;
+  sql_table_name: MN_PG_BEN_ELIG_CUST_MAP_VW ;;
 
   dimension: commit_customer_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.COMMIT_CUSTOMER_WID ;;
   }
 
@@ -13,6 +14,7 @@ view: mn_pg_ben_elig_cust_map {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -27,6 +29,7 @@ view: mn_pg_ben_elig_cust_map {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -40,7 +43,8 @@ view: mn_pg_ben_elig_cust_map {
   }
 
   dimension: elig_customer_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.ELIG_CUSTOMER_WID ;;
   }
 
@@ -59,7 +63,8 @@ view: mn_pg_ben_elig_cust_map {
   }
 
   dimension: elig_end_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.ELIG_END_DATE_WID ;;
   }
 
@@ -78,7 +83,8 @@ view: mn_pg_ben_elig_cust_map {
   }
 
   dimension: elig_start_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.ELIG_START_DATE_WID ;;
   }
 
@@ -93,7 +99,8 @@ view: mn_pg_ben_elig_cust_map {
   }
 
   dimension: pg_ben_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_BEN_WID ;;
   }
 
@@ -103,7 +110,8 @@ view: mn_pg_ben_elig_cust_map {
   }
 
   dimension: pg_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -128,6 +136,7 @@ view: mn_pg_ben_elig_cust_map {
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

@@ -99,6 +99,7 @@ view: mn_user_dim {
 
   dimension_group: pwd_exp {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -129,7 +130,7 @@ view: mn_user_dim {
   }
 
   dimension: src_sys_user_id {
-    type: string
+    type: number
     hidden:  yes
     sql: ${TABLE}.SRC_SYS_USER_ID ;;
   }
@@ -146,6 +147,7 @@ view: mn_user_dim {
 
   dimension: user_wid {
     hidden:  yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.USER_WID ;;
   }

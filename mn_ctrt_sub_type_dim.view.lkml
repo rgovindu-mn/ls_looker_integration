@@ -14,6 +14,7 @@ view: mn_ctrt_sub_type_dim {
   dimension: ctrt_sub_type_wid {
     hidden: yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.CTRT_SUB_TYPE_WID ;;
   }
 

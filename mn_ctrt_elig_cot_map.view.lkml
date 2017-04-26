@@ -2,12 +2,14 @@ view: mn_ctrt_elig_cot_map {
   sql_table_name: MN_CTRT_ELIG_COT_MAP_VW ;;
 
   dimension: contract_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: cot_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.COT_WID ;;
   }
 
@@ -18,6 +20,7 @@ view: mn_ctrt_elig_cot_map {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -32,6 +35,7 @@ view: mn_ctrt_elig_cot_map {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -73,22 +77,25 @@ view: mn_ctrt_elig_cot_map {
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_contract_cot_id {
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_CONTRACT_COT_ID ;;
   }
 
   dimension: src_sys_contract_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
   }
 

@@ -50,6 +50,7 @@ view: mn_cmpl_period_fact {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -84,6 +85,7 @@ view: mn_cmpl_period_fact {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -230,6 +232,7 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: pg_wid {
+    hidden: yes
     type: number
     sql: ${TABLE}.PG_WID ;;
   }
@@ -366,6 +369,7 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: source_system_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }

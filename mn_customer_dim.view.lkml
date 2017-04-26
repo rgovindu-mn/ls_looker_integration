@@ -52,8 +52,9 @@ view: mn_customer_dim {
   }
 
   dimension: customer_wid {
-    type: string
-    hidden:  yes
+    hidden: yes
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -103,7 +104,6 @@ view: mn_customer_dim {
   }
 
   dimension: org_id {
-    hidden:  yes
     type: string
     sql: ${TABLE}.ORG_ID ;;
   }

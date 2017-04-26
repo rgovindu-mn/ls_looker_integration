@@ -1,7 +1,8 @@
 view: mn_seller_hrc_dim {
-  sql_table_name: LSETLDM.MN_SELLER_HRC_DIM ;;
+  sql_table_name: MN_SELLER_HRC_DIM_VW ;;
 
   dimension_group: date_created {
+    hidden:  yes
     type: time
     timeframes: [
       raw,
@@ -16,6 +17,7 @@ view: mn_seller_hrc_dim {
   }
 
   dimension_group: date_updated {
+    hidden:  yes
     type: time
     timeframes: [
       raw,
@@ -36,6 +38,7 @@ view: mn_seller_hrc_dim {
 
   dimension: district_manager_wid {
     type: string
+    hidden:  yes
     sql: ${TABLE}.DISTRICT_MANAGER_WID ;;
   }
 
@@ -55,7 +58,8 @@ view: mn_seller_hrc_dim {
   }
 
   dimension: enterprise_manager_wid {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.ENTERPRISE_MANAGER_WID ;;
   }
 
@@ -75,7 +79,8 @@ view: mn_seller_hrc_dim {
   }
 
   dimension: region_manager_wid {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.REGION_MANAGER_WID ;;
   }
 
@@ -90,22 +95,26 @@ view: mn_seller_hrc_dim {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: seller_hrc_wid {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.SELLER_HRC_WID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden:  yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_territory_id {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.SRC_SYS_TERRITORY_ID ;;
   }
 
@@ -115,7 +124,8 @@ view: mn_seller_hrc_dim {
   }
 
   dimension: terr_manager_wid {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.TERR_MANAGER_WID ;;
   }
 

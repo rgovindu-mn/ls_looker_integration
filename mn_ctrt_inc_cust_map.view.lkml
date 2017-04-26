@@ -2,16 +2,19 @@ view: mn_ctrt_inc_cust_map {
   sql_table_name: MN_CTRT_INC_CUST_MAP_VW ;;
 
   dimension: contract_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: customer_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
   dimension_group: date_created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -26,6 +29,7 @@ view: mn_ctrt_inc_cust_map {
   }
 
   dimension_group: date_updated {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -73,11 +77,13 @@ view: mn_ctrt_inc_cust_map {
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }

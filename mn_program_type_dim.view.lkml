@@ -2,6 +2,7 @@ view: mn_program_type_dim {
   sql_table_name: MN_PROGRAM_TYPE_DIM_VW ;;
 
   dimension_group: date_created {
+    hidden:  yes
     type: time
     timeframes: [
       raw,
@@ -17,6 +18,7 @@ view: mn_program_type_dim {
 
   dimension_group: date_updated {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -40,17 +42,21 @@ view: mn_program_type_dim {
   }
 
   dimension: program_type_wid {
-    type: string
+    hidden:  yes
+    type: number
+    primary_key: yes
     sql: ${TABLE}.PROGRAM_TYPE_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden:  yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

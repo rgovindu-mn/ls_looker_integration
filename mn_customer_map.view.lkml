@@ -2,17 +2,23 @@ view: mn_customer_map {
   sql_table_name: MN_CUSTOMER_MAP_VW ;;
 
   dimension: child_cust_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CHILD_CUST_WID ;;
   }
 
   dimension: created_by_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CREATED_BY_WID ;;
   }
 
   dimension: created_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CREATED_DATE_WID ;;
   }
 
@@ -64,7 +70,9 @@ view: mn_customer_map {
   }
 
   dimension: parent_cust_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PARENT_CUST_WID ;;
   }
 
@@ -98,12 +106,16 @@ view: mn_customer_map {
   }
 
   dimension: updated_by_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.UPDATED_BY_WID ;;
   }
 
   dimension: updated_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.UPDATED_DATE_WID ;;
   }
 

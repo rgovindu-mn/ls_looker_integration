@@ -12,7 +12,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: approved_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.APPROVED_DATE_WID ;;
   }
 

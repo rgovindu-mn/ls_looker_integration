@@ -1,12 +1,14 @@
 view: mn_pg_tb_mb_prod_map {
-  sql_table_name: LSETLDM.MN_PG_TB_MB_PROD_MAP ;;
+  sql_table_name: MN_PG_TB_MB_PROD_MAP_VW ;;
 
   dimension: basket_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.BASKET_WID ;;
   }
 
   dimension_group: date_created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -22,6 +24,7 @@ view: mn_pg_tb_mb_prod_map {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -49,7 +52,8 @@ view: mn_pg_tb_mb_prod_map {
   }
 
   dimension: eff_end_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 
@@ -97,7 +101,8 @@ view: mn_pg_tb_mb_prod_map {
   }
 
   dimension: prod_added_date_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 
@@ -107,27 +112,32 @@ view: mn_pg_tb_mb_prod_map {
   }
 
   dimension: product_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_included_li_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_INCLUDED_LI_ID ;;
   }
 
   dimension: src_sys_struct_li_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
 

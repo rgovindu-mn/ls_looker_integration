@@ -1,5 +1,5 @@
 view: mn_pg_qual_ben_sd_rpt {
-  sql_table_name: LSETLDM.MN_PG_QUAL_BEN_SD_RPT ;;
+  sql_table_name: MN_PG_QUAL_BEN_SD_RPT_VW ;;
 
   dimension: baseline_period {
     type: string
@@ -23,6 +23,7 @@ view: mn_pg_qual_ben_sd_rpt {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -37,6 +38,7 @@ view: mn_pg_qual_ben_sd_rpt {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -93,12 +95,14 @@ view: mn_pg_qual_ben_sd_rpt {
   }
 
   dimension: pg_tb_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_TB_WID ;;
   }
 
   dimension: prc_component_rpt_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PRC_COMPONENT_RPT_WID ;;
   }
 
@@ -1103,12 +1107,14 @@ view: mn_pg_qual_ben_sd_rpt {
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
@@ -1123,12 +1129,14 @@ view: mn_pg_qual_ben_sd_rpt {
   }
 
   dimension: src_sys_contract_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
   }
 
   dimension: src_sys_prc_component_rpt_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_PRC_COMPONENT_RPT_ID ;;
   }
 
@@ -1138,7 +1146,7 @@ view: mn_pg_qual_ben_sd_rpt {
   }
 
   dimension: tier_idx {
-    type: string
+    type: number
     sql: ${TABLE}.TIER_IDX ;;
   }
 

@@ -2,7 +2,9 @@ view: mn_deal_doc_dim {
   sql_table_name: MN_DEAL_DOC_DIM_VW ;;
 
   dimension: customer_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -98,7 +100,9 @@ view: mn_deal_doc_dim {
   }
 
   dimension: deal_doc_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.DEAL_DOC_WID ;;
   }
 

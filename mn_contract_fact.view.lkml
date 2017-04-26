@@ -2,32 +2,32 @@ view: mn_contract_fact {
   sql_table_name: MN_CONTRACT_FACT_VW ;;
 
   dimension: base_price {
-    type: string
+    type: number
     sql: ${TABLE}.BASE_PRICE ;;
   }
 
   dimension: base_price_base {
-    type: string
+    type: number
     sql: ${TABLE}.BASE_PRICE_BASE ;;
   }
 
   dimension: best_price {
-    type: string
+    type: number
     sql: ${TABLE}.BEST_PRICE ;;
   }
 
   dimension: best_price_base {
-    type: string
+    type: number
     sql: ${TABLE}.BEST_PRICE_BASE ;;
   }
 
   dimension: commercial_price {
-    type: string
+    type: number
     sql: ${TABLE}.COMMERCIAL_PRICE ;;
   }
 
   dimension: commercial_price_base {
-    type: string
+    type: number
     sql: ${TABLE}.COMMERCIAL_PRICE_BASE ;;
   }
 
@@ -65,22 +65,29 @@ view: mn_contract_fact {
   }
 
   dimension: contract_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: ctrt_fact_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CTRT_FACT_WID ;;
   }
 
   dimension: customer_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -95,6 +102,7 @@ view: mn_contract_fact {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -136,7 +144,7 @@ view: mn_contract_fact {
   }
 
   dimension: exchange_rate {
-    type: string
+    type: number
     sql: ${TABLE}.EXCHANGE_RATE ;;
   }
 
@@ -151,7 +159,9 @@ view: mn_contract_fact {
   }
 
   dimension: line_product_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.LINE_PRODUCT_WID ;;
   }
 
@@ -161,7 +171,9 @@ view: mn_contract_fact {
   }
 
   dimension: pg_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -171,12 +183,16 @@ view: mn_contract_fact {
   }
 
   dimension: product_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: program_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
@@ -192,12 +208,14 @@ view: mn_contract_fact {
   }
 
   dimension: source_system_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_commit_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 

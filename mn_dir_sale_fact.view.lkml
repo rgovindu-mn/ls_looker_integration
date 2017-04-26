@@ -12,7 +12,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: approved_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.APPROVED_DATE_WID ;;
   }
 
@@ -42,7 +44,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: bill_to_customer_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.BILL_TO_CUSTOMER_WID ;;
   }
 
@@ -57,7 +61,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: close_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CLOSE_DATE_WID ;;
   }
 
@@ -77,32 +83,44 @@ view: mn_dir_sale_fact {
   }
 
   dimension: contract_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: cot_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.COT_WID ;;
   }
 
   dimension: custom_type1_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CUSTOM_TYPE1_WID ;;
   }
 
   dimension: custom_type2_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CUSTOM_TYPE2_WID ;;
   }
 
   dimension: custom_type3_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CUSTOM_TYPE3_WID ;;
   }
 
   dimension: customer_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -135,7 +153,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: deal_doc_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.DEAL_DOC_WID ;;
   }
 
@@ -253,7 +273,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: extraction_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.EXTRACTION_DATE_WID ;;
   }
 
@@ -288,12 +310,16 @@ view: mn_dir_sale_fact {
   }
 
   dimension: gpo_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.GPO_WID ;;
   }
 
   dimension: idn_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.IDN_WID ;;
   }
 
@@ -313,7 +339,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: inv_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.INV_DATE_WID ;;
   }
 
@@ -387,27 +415,37 @@ view: mn_dir_sale_fact {
   }
 
   dimension: load_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.LOAD_DATE_WID ;;
   }
 
   dimension: org_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.ORG_WID ;;
   }
 
   dimension: paid_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PAID_DATE_WID ;;
   }
 
   dimension: pg_commit_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PG_COMMIT_WID ;;
   }
 
   dimension: pg_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -422,12 +460,16 @@ view: mn_dir_sale_fact {
   }
 
   dimension: process_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PROCESS_DATE_WID ;;
   }
 
   dimension: product_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -461,12 +503,16 @@ view: mn_dir_sale_fact {
   }
 
   dimension: received_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.RECEIVED_DATE_WID ;;
   }
 
   dimension: request_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.REQUEST_DATE_WID ;;
   }
 
@@ -511,12 +557,16 @@ view: mn_dir_sale_fact {
   }
 
   dimension: ship_to_customer_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.SHIP_TO_CUSTOMER_WID ;;
   }
 
   dimension: sold_to_customer_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.SOLD_TO_CUSTOMER_WID ;;
   }
 
@@ -564,7 +614,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: sub_close_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.SUB_CLOSE_DATE_WID ;;
   }
 
@@ -589,7 +641,9 @@ view: mn_dir_sale_fact {
   }
 
   dimension: transaction_date_wid {
-    type: string
+    hidden: yes
+    type: number
+
     sql: ${TABLE}.TRANSACTION_DATE_WID ;;
   }
 

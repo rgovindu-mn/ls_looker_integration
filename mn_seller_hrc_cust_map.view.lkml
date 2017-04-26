@@ -1,12 +1,14 @@
 view: mn_seller_hrc_cust_map {
-  sql_table_name: LSETLDM.MN_SELLER_HRC_CUST_MAP ;;
+  sql_table_name: MN_SELLER_HRC_CUST_MAP_VW ;;
 
   dimension: customer_wid {
-    type: string
+    type: number
+    hidden:  yes
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
   dimension_group: date_created {
+    hidden:  yes
     type: time
     timeframes: [
       raw,
@@ -22,6 +24,7 @@ view: mn_seller_hrc_cust_map {
 
   dimension_group: date_updated {
     type: time
+    hidden:  yes
     timeframes: [
       raw,
       time,
@@ -49,17 +52,20 @@ view: mn_seller_hrc_cust_map {
   }
 
   dimension: run_id {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: seller_hrc_wid {
-    type: string
+    hidden:  yes
+    type: number
     sql: ${TABLE}.SELLER_HRC_WID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden:  yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

@@ -1,5 +1,5 @@
 view: mn_pg_qual_ben_dim {
-  sql_table_name: LSETLDM.MN_PG_QUAL_BEN_DIM ;;
+  sql_table_name: MN_PG_QUAL_BEN_DIM_VW ;;
 
   dimension: basis_desc {
     type: string
@@ -37,6 +37,7 @@ view: mn_pg_qual_ben_dim {
   }
 
   dimension_group: date_created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -52,6 +53,7 @@ view: mn_pg_qual_ben_dim {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -128,17 +130,20 @@ view: mn_pg_qual_ben_dim {
   }
 
   dimension: pg_tb_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_TB_WID ;;
   }
 
   dimension: pg_wid {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.PG_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -154,11 +159,13 @@ view: mn_pg_qual_ben_dim {
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_component_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_COMPONENT_ID ;;
   }
 
@@ -177,7 +184,8 @@ view: mn_pg_qual_ben_dim {
   }
 
   dimension: src_sys_tb_id {
-    type: string
+    hidden: yes
+    type: number
     sql: ${TABLE}.SRC_SYS_TB_ID ;;
   }
 
