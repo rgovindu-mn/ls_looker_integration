@@ -47,12 +47,14 @@ view: mn_distrib_mthd_dim {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

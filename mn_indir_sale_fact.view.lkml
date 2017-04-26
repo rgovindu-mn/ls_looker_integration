@@ -48,12 +48,14 @@ view: mn_indir_sale_fact {
   }
 
   dimension: bill_to_customer_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.BILL_TO_CUSTOMER_WID ;;
   }
 
   dimension: branch_distr_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.BRANCH_DISTR_WID ;;
   }
 
@@ -78,7 +80,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: chgbk_claim_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CHGBK_CLAIM_WID ;;
   }
 
@@ -97,12 +100,14 @@ view: mn_indir_sale_fact {
   }
 
   dimension: chgbk_close_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CHGBK_CLOSE_DATE_WID ;;
   }
 
   dimension: close_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CLOSE_DATE_WID ;;
   }
 
@@ -127,32 +132,38 @@ view: mn_indir_sale_fact {
   }
 
   dimension: contract_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: cot_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.COT_WID ;;
   }
 
   dimension: custom_type1_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CUSTOM_TYPE1_WID ;;
   }
 
   dimension: custom_type2_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CUSTOM_TYPE2_WID ;;
   }
 
   dimension: custom_type3_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CUSTOM_TYPE3_WID ;;
   }
 
   dimension: customer_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -185,7 +196,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: deal_doc_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.DEAL_DOC_WID ;;
   }
 
@@ -502,7 +514,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: extraction_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.EXTRACTION_DATE_WID ;;
   }
 
@@ -522,12 +535,14 @@ view: mn_indir_sale_fact {
   }
 
   dimension: gpo_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.GPO_WID ;;
   }
 
   dimension: idn_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.IDN_WID ;;
   }
 
@@ -561,7 +576,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: inv_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.INV_DATE_WID ;;
   }
 
@@ -635,12 +651,14 @@ view: mn_indir_sale_fact {
   }
 
   dimension: load_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.LOAD_DATE_WID ;;
   }
 
   dimension: org_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.ORG_WID ;;
   }
 
@@ -675,22 +693,26 @@ view: mn_indir_sale_fact {
   }
 
   dimension: paid_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PAID_DATE_WID ;;
   }
 
   dimension: parent_distr_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PARENT_DISTR_WID ;;
   }
 
   dimension: pg_commit_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PG_COMMIT_WID ;;
   }
 
   dimension: pg_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -705,12 +727,14 @@ view: mn_indir_sale_fact {
   }
 
   dimension: process_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PROCESS_DATE_WID ;;
   }
 
   dimension: product_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -739,12 +763,14 @@ view: mn_indir_sale_fact {
   }
 
   dimension: received_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RECEIVED_DATE_WID ;;
   }
 
   dimension: request_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.REQUEST_DATE_WID ;;
   }
 
@@ -774,7 +800,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -794,17 +821,20 @@ view: mn_indir_sale_fact {
   }
 
   dimension: ship_to_customer_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SHIP_TO_CUSTOMER_WID ;;
   }
 
   dimension: sold_to_customer_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SOLD_TO_CUSTOMER_WID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
@@ -862,7 +892,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: sub_close_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SUB_CLOSE_DATE_WID ;;
   }
 
@@ -927,7 +958,8 @@ view: mn_indir_sale_fact {
   }
 
   dimension: transaction_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.TRANSACTION_DATE_WID ;;
   }
 

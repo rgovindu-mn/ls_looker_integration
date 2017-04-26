@@ -405,7 +405,6 @@ view: mn_combined_sale_fact {
     sql: TO_DATE(${TABLE}.INV_DATE_WID,'YYYYMMDD') ;;
   }
 
-
   dimension: rolling_12_months {
     type: yesno
     sql: ADD_MONTHS(TO_DATE(${TABLE}.INV_DATE_WID,'YYYYMMDD'), 12) > SYSDATE;;
@@ -587,8 +586,6 @@ view: mn_combined_sale_fact {
     sql: ${TABLE}.TOTAL_RBT_AMT ;;
   }
 
-
-
   filter: date_frame_selection {
     label: "Period Timeframe Selection"
     default_value: "Quarter"
@@ -604,7 +601,6 @@ view: mn_combined_sale_fact {
       ELSE TO_CHAR(TO_DATE(${inv_date_wid},'YYYYMMDD'),'YYYY-MM')
     END ;;
   }
-
 
   measure: count {
     type: count
@@ -635,7 +631,6 @@ view: mn_combined_sale_fact {
     drill_fields: [detail*]
   }
 
-
    measure: revenue {
     type: sum
     sql: ${inv_revenue} ;;
@@ -644,7 +639,6 @@ view: mn_combined_sale_fact {
     drill_fields: [detail*]
   }
 
-
   measure: unit_rebate {
     sql: ${rebate}/NULLIF(${volume},0) ;;
     label: "Rebate per Unit"
@@ -652,7 +646,6 @@ view: mn_combined_sale_fact {
     value_format_name: decimal_2
     drill_fields: [detail*]
   }
-
 
   measure: oninvoice_rebate_percent {
     sql:  (${list_revenue} - ${revenue} )/NULLIF(${list_revenue},0) ;;
@@ -677,7 +670,6 @@ view: mn_combined_sale_fact {
     value_format_name: percent_0
     drill_fields: [detail*]
   }
-
 
   measure: net_price {
     sql:  (${revenue} - ${rebate})/NULLIF(${volume},0) ;;
@@ -730,7 +722,6 @@ view: mn_combined_sale_fact {
     label: "Invoice Revenue Prior Year 2"
     sql: DECODE(SUBSTR(TO_CHAR(${inv_date_wid}),1,4), TO_CHAR(ADD_MONTHS(SYSDATE,-24),'YYYY'),${inv_qty} * ${inv_amt}, 0) ;;
   }
-
 
   measure: inv_qty_ytd_year {
     type: sum

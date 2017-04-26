@@ -116,7 +116,8 @@ view: mn_pg_ben_elig_cust_map {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 

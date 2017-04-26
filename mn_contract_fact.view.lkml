@@ -202,7 +202,8 @@ view: mn_contract_fact {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }

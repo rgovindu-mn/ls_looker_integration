@@ -77,7 +77,8 @@ view: mn_price_list_dim {
   }
 
   dimension: period_start_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PERIOD_START_DATE_WID ;;
   }
 

@@ -537,7 +537,8 @@ view: mn_dir_sale_fact {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -572,6 +573,7 @@ view: mn_dir_sale_fact {
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

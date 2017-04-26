@@ -26,7 +26,6 @@ view: mn_date_labels {
     sql: ${TABLE}.PRIOR_YEAR2 ;;
   }
 
-
   dimension: prior_year3 {
     type: string
     label: "Prior Year3"

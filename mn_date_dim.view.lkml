@@ -75,7 +75,8 @@ view: mn_date_dim {
   }
 
   dimension: date_dim_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.DATE_DIM_WID ;;
   }
 
@@ -273,7 +274,8 @@ view: mn_date_dim {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -289,6 +291,7 @@ view: mn_date_dim {
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

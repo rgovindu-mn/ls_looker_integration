@@ -49,8 +49,8 @@ view: mn_prc_method_dim {
   }
 
   dimension: run_id {
-    type: string
-    hidden:  yes
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 

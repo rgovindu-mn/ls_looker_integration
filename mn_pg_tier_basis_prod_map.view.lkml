@@ -103,7 +103,8 @@ view: mn_pg_tier_basis_prod_map {
   }
 
   dimension: prod_added_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 

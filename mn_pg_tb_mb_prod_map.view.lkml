@@ -72,7 +72,8 @@ view: mn_pg_tb_mb_prod_map {
   }
 
   dimension: eff_start_date_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.EFF_START_DATE_WID ;;
   }
 
@@ -82,7 +83,8 @@ view: mn_pg_tb_mb_prod_map {
   }
 
   dimension: pg_tier_basis_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.PG_TIER_BASIS_WID ;;
   }
 

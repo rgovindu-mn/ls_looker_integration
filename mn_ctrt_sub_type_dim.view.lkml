@@ -49,7 +49,8 @@ view: mn_ctrt_sub_type_dim {
   }
 
   dimension: run_id {
-    type: string
+    type: number
+    hidden: yes
     hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }

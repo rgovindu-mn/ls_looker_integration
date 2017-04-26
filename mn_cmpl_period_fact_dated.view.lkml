@@ -62,7 +62,6 @@ view: mn_cmpl_period_fact_dated {
         /  ${total_days_in_period}
         ELSE 0
         END;;
-
   }
 
   measure: period_revenue_gap {
@@ -73,13 +72,11 @@ view: mn_cmpl_period_fact_dated {
     ELSE 0 END;;
   }
 
-
   measure: compliance_percent {
     type: number
     value_format_name: percent_0
     sql: NVL(${period_actual_sales} / NULLIF( ${period_expected_sales},0) ,0) ;;
   }
-
 
    filter: date_frame_selection {
     label: "Period Timeframe Selection"
