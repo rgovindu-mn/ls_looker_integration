@@ -1,4 +1,4 @@
-- dashboard: compliance
+- dashboard: si_compliance
   show_applied_filters: false
   title: Compliance
   layout: grid
@@ -16,7 +16,7 @@
      - name: date_frame_selection
        title: 'Period Selection'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact_dated
        default_value: 'Month'
        field: mn_cmpl_period_fact.date_frame_selection
@@ -24,7 +24,7 @@
      - name: customer_name
        title: 'Account'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact
        default_value: Mercy Hospital South
        field: mn_customer_dim.customer_name
@@ -33,7 +33,7 @@
      - name: contract_name
        title: 'Contract Name'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact
        default_value: BSC - Mercy Health System
        field: mn_contract_header_dim.contract_name
@@ -42,7 +42,7 @@
      - name: contract_number
        title: 'Contract Number'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact_dated
        default_value:
        field: mn_contract_header_dim.contract_number
@@ -51,7 +51,7 @@
      - name: pg_name
        title: 'Price Program'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact
        default_value:
        field: mn_product_group_dim.pg_name
@@ -60,7 +60,7 @@
      - name: year_month
        title: 'Invoice Month'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact_dated
        default_value:
        field: mn_date_dim.year_month
@@ -69,7 +69,7 @@
      - name: year
        title: 'Invoice Year'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact_dated
        default_value:
        field: mn_date_dim.year
@@ -78,7 +78,7 @@
      - name: rolling_12_months
        title: 'Rolling 12 Months'
        type: field_filter
-       model: price_program_and_products
+       model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact_dated
        default_value:
        field: mn_cmpl_period_fact.rolling_12_months
@@ -87,7 +87,7 @@
   - name: account_compliance_chart
     title: Compliance Trend
     type: looker_column
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_cmpl_period_fact.date_period]
     measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_total_revenue_gap]
@@ -142,11 +142,10 @@
       mn_date_dim.month_name: Month
     series_types: {}
 
-
   - name: account_compliance_table
     title: Compliance Data
     type: table
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_contract_header_dim.contract_name, mn_contract_header_dim.contract_number,
       mn_product_group_dim.pg_name, mn_date_dim.year, mn_date_dim.month_name, mn_cmpl_period_fact.commit_tier,
@@ -184,11 +183,10 @@
       mn_date_dim.month_name: Month
     hidden_fields: [mn_cmpl_period_fact.date_period]
 
-
   - name: account_compliance_kpi2
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     measures: [mn_cmpl_period_fact.compliance_percent]
     dynamic_fields:
@@ -245,11 +243,10 @@
     series_types: {}
     single_value_title: Overall Compliance %
 
-
   - name: account_compliance_kpi1
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     measures: [mn_cmpl_period_fact.period_total_revenue_gap]
     dynamic_fields:

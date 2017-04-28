@@ -1,4 +1,4 @@
-include: "mn_cmpl_period_fact.view.lkml"
+include: "base_mn_cmpl_period_fact.view.lkml"
 view: mn_cmpl_period_fact_dated {
   extends: [mn_cmpl_period_fact]
 

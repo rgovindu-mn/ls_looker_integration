@@ -1,4 +1,4 @@
-- dashboard: price_trend_and_transaction
+- dashboard: si_price_trend_and_transaction
   title: Price Trend and Transactions
   layout: grid
   rows:
@@ -13,7 +13,7 @@
   - name: account
     title: 'Account'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_customer_dim.customer_name
@@ -22,7 +22,7 @@
   - name: product_name
     title: 'Product Name'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_product_dim.product_name
@@ -31,7 +31,7 @@
   - name: contract_name
     title: 'Contract Name'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: 'Adv Specialty Hosp - TB v1'
     field: mn_contract_header_dim.contract_name
@@ -40,7 +40,7 @@
   - name: contract_number
     title: 'Contract Number'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_contract_header_dim.contract_number
@@ -49,7 +49,7 @@
   - name: invoice_year
     title: 'Invoice Year'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: ''
     field: mn_combined_sale_fact.invoice_year
@@ -58,7 +58,7 @@
   - name: invoice_month
     title: 'Invoice Month'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: ''
     field: mn_combined_sale_fact.invoice_month
@@ -67,7 +67,7 @@
   - name: rolling_12_months
     title: 'Rolling 12 Months'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: 'Yes'
     field: mn_combined_sale_fact.rolling_12_months
@@ -76,7 +76,7 @@
     title: "Period Timeframe Selection"
     default_value: "Year"
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     field: mn_combined_sale_fact.date_frame_selection
 
@@ -85,7 +85,7 @@
   - name: price_trend_table
     title: Transactions
     type: table
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_product_dim.product_name, mn_contract_header_dim.contract_name,
       mn_contract_header_dim.contract_number, mn_combined_sale_fact.invoice_year, mn_combined_sale_fact.invoice_month]
@@ -116,12 +116,10 @@
       mn_combined_sale_fact.invoice_year: Year
       mn_combined_sale_fact.invoice_month: Year Month
 
-
-
   - name: price_trend_chart
     title: Price Trend
     type: looker_line
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_combined_sale_fact.date_period]
     fill_fields: []

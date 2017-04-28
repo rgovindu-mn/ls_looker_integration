@@ -1,4 +1,4 @@
-- dashboard: account_comparison
+- dashboard: si_account_comparison
   title: Account Comparison
   layout: grid
   rows:
@@ -13,7 +13,7 @@
   - name: account
     title: 'Account'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: Bryn Mawr Clinic,Paoli Clinic,Paoli Dialysis Center,Pilgrim Group
     field: mn_customer_dim.customer_name
@@ -22,7 +22,7 @@
   - name: product_cat_name
     title: 'Product Category'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: Apollo
     field: mn_category_dim.product_name
@@ -31,7 +31,7 @@
   - name: product
     title: 'Product'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_product_dim.product_name
@@ -40,7 +40,7 @@
   - name: invoice_year
     title: 'Invoice Year'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_combined_sale_fact.invoice_year
@@ -49,7 +49,7 @@
   - name: invoice_month
     title: 'Invoice Year Month'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_combined_sale_fact.invoice_month
@@ -58,7 +58,7 @@
   - name: rolling_12_months
     title: 'Rolling 12 Months'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_combined_sale_fact.rolling_12_months
@@ -66,7 +66,7 @@
   - name: sale_type
     title: 'Sale Type'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: ''
     field: mn_combined_sale_fact.sale_type
@@ -76,7 +76,7 @@
   - name: product_chart
     title: Product and Pricing Details
     type: table
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name]
     measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.revenue, mn_combined_sale_fact.oninvoice_rebate_percent,
@@ -108,12 +108,10 @@
       mn_category_dim.product_name: Category
       mn_customer_dim.customer_name: Account
 
-
-
   - name: account_price_scatter
     title: Account Rebate Comparison
     type: looker_column
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name]
     measures: [mn_combined_sale_fact.revenue, mn_combined_sale_fact.oninvoice_rebate_percent,
@@ -206,11 +204,10 @@
     hidden_series: []
     y_axis_reversed: false
 
-
   - name: account_price_chart
     title: Account Revenue Comparison
     type: looker_pie
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name]
     measures: [mn_combined_sale_fact.revenue]

@@ -1,4 +1,4 @@
-- dashboard: sales_performance
+- dashboard: si_sales_performance
   title: Sales Performance
   layout: grid
   rows:
@@ -19,7 +19,7 @@
   - name: account
     title: 'Account'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: Drug Aid Pharmacy,50 Plus Pharmacy
     field: mn_1shipto_customer_dim.customer_name
@@ -28,7 +28,7 @@
   - name: product_cat_name
     title: 'Product Category'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_category_dim.product_name
@@ -37,7 +37,7 @@
   - name: sku
     title: 'SKU'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_product_dim.product_name
@@ -46,7 +46,7 @@
   - name: contract_name
     title: 'Contract Name'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_contract_header_dim.contract_name
@@ -55,7 +55,7 @@
   - name: contract_number
     title: 'Contract Number'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_contract_header_dim.contract_number
@@ -64,7 +64,7 @@
   - name: customer
     title: 'Customer'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_customer_dim.customer_name
@@ -73,7 +73,7 @@
   - name: channel
     title: 'Channel'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
     field: mn_channel_customer_dim.customer_name
@@ -82,7 +82,7 @@
   - name: sale_type
     title: 'Sale Type'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: ''
     field: mn_combined_sale_fact.sale_type
@@ -91,7 +91,7 @@
   - name: invoice_year
     title: 'Invoice Year'
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: after 2014/01/01
     field: mn_combined_sale_fact.invoice_year
@@ -101,7 +101,7 @@
     title: "Period Timeframe Selection"
     default_value: "Year"
     type: field_filter
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     field: mn_combined_sale_fact.date_frame_selection
 
@@ -117,7 +117,7 @@
   - name: sales_perf_volume_chart
     title: Volume
     type: looker_column
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_combined_sale_fact.date_period]
     fill_fields: []
@@ -172,12 +172,10 @@
     hidden_series: []
     y_axis_unpin: false
 
-
-
   - name: sales_perf_revenue_chart
     title: Revenue
     type: looker_column
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_combined_sale_fact.date_period]
     fill_fields: []
@@ -232,11 +230,10 @@
     hidden_series: []
     y_axis_unpin: false
 
-
   - name: sales_perf_table
     title: Sales Performance Details
     type: table
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name,
       mn_billto_customer_dim.customer_name, mn_1shipto_customer_dim.customer_name, mn_contract_header_dim.contract_name,
@@ -275,11 +272,10 @@
       mn_1shipto_customer_dim.customer_name: Ship To Customer
       mn_channel_customer_dim.customer_name: Channel
 
-
   - name: sales_perf_revenue_kpi1
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     measures: [mn_combined_sale_fact.inv_revenue_ytd_year, mn_combined_sale_fact.inv_revenue_prior_ytd_year]
     dynamic_fields:
@@ -331,7 +327,7 @@
   - name: sales_perf_volume_kpi1
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     measures: [mn_combined_sale_fact.inv_qty_ytd_year, mn_combined_sale_fact.inv_qty_prior_ytd_year]
     dynamic_fields:
@@ -379,12 +375,10 @@
     hidden_fields: [mn_combined_sale_fact.inv_qty_ytd_year, mn_combined_sale_fact.inv_qty_prior_ytd_year]
     single_value_title: Volume Growth
 
-
-
   - name: sales_perf_volume_kpi2
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     measures: [mn_combined_sale_fact.inv_qty_year1, mn_combined_sale_fact.inv_qty_year2]
     dynamic_fields:
@@ -433,12 +427,10 @@
     hidden_fields: [mn_combined_sale_fact.inv_qty_year1, mn_combined_sale_fact.inv_qty_year2]
     single_value_title: Volume Growth
 
-
-
   - name: sales_perf_revenue_kpi2
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     measures: [mn_combined_sale_fact.inv_revenue_year1, mn_combined_sale_fact.inv_revenue_year2]
     dynamic_fields:
@@ -487,13 +479,10 @@
     hidden_fields: [mn_combined_sale_fact.inv_revenue_year1, mn_combined_sale_fact.inv_revenue_year2]
     single_value_title: Revenue Growth
 
-
-
-
   - name: sales_perf_volume_kpi3
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     measures: [mn_combined_sale_fact.inv_qty_year2, mn_combined_sale_fact.inv_qty_year3]
     dynamic_fields:
@@ -542,12 +531,10 @@
     hidden_fields: [mn_combined_sale_fact.inv_qty_year2, mn_combined_sale_fact.inv_qty_year3]
     single_value_title: Volume Growth
 
-
-
   - name: sales_perf_revenue_kpi3
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     measures: [mn_combined_sale_fact.inv_revenue_year2, mn_combined_sale_fact.inv_revenue_year3]
     dynamic_fields:
@@ -596,11 +583,10 @@
     hidden_fields: [mn_combined_sale_fact.inv_revenue_year2, mn_combined_sale_fact.inv_revenue_year3]
     single_value_title: Revenue Growth
 
-
   - name: label1
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_date_labels
     dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
       mn_date_labels.prior_year3]
@@ -633,7 +619,7 @@
   - name: label2
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_date_labels
     dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
       mn_date_labels.prior_year3]
@@ -666,7 +652,7 @@
   - name: label3
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_date_labels
     dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
       mn_date_labels.prior_year3]
@@ -699,7 +685,7 @@
   - name: label4
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_date_labels
     dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
       mn_date_labels.prior_year3]
@@ -732,7 +718,7 @@
   - name: label5
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_date_labels
     dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
       mn_date_labels.prior_year3]
@@ -765,7 +751,7 @@
   - name: label6
     title: Untitled Visualization
     type: single_value
-    model: price_program_and_products
+    model: base_sales_intelligence_app_model
     explore: mn_date_labels
     dimensions: [mn_date_labels.current_year, mn_date_labels.prior_year, mn_date_labels.prior_year2,
       mn_date_labels.prior_year3]

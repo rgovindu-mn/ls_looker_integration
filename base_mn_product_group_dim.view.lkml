@@ -295,7 +295,7 @@ view: mn_product_group_dim {
   dimension: src_sys_contract_id {
     hidden:  yes
     type: string
-    sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
+    sql: ${TABLE}.SRC_SYS_PK_ID ;;
   }
 
   dimension: src_sys_mgr_id {

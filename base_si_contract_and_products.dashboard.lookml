@@ -1,4 +1,4 @@
-- dashboard: contract_and_products
+- dashboard: si_contract_and_products
   title: Contract and Products
   layout: grid
   rows:
@@ -15,7 +15,7 @@
    - name: customer_name
      title: 'Account'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value:
      field: mn_customer_dim.customer_name
@@ -24,7 +24,7 @@
    - name: contract_name
      title: 'Contract Name'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_header_dim.contract_name
@@ -33,7 +33,7 @@
    - name: contract_number
      title: 'Contract Number'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_header_dim.contract_number
@@ -42,16 +42,15 @@
    - name: days_to_expire
      title: 'Days To Expire'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value: "[1,30]"
      field: mn_contract_header_dim.days_to_expire
 
-
    - name: srep_full_name
      title: 'Sales Rep'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_srep_dim.full_name
@@ -60,7 +59,7 @@
    - name: product_group_name
      title: 'Price Program'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_pg_product_pricing_fact
      default_value:
      field: mn_product_group_dim.pg_name
@@ -69,7 +68,7 @@
    - name: product_name
      title: 'Product Name'
      type: field_filter
-     model: price_program_and_products
+     model: base_sales_intelligence_app_model
      explore: mn_pg_product_pricing_fact
      default_value:
      field: mn_product_dim.product_name
@@ -79,7 +78,7 @@
     - name: contracts_expire_30_days
       title: Contracts Expiring in 30 Days
       type: single_value
-      model: price_program_and_products
+      model: base_sales_intelligence_app_model
       explore: mn_contract_header_dim
       measures: [mn_contract_header_dim.count]
       filters:
@@ -119,12 +118,10 @@
       series_types: {}
       single_value_title: Contracts Expiring in 30 Days
 
-
-
     - name: contract_revenue_at_risk
       title: Revenue at risk
       type: single_value
-      model: price_program_and_products
+      model: base_sales_intelligence_app_model
       explore: mn_contract_header_dim
       measures: [mn_contract_header_dim.contract_value]
       filters:
@@ -164,12 +161,10 @@
       series_types: {}
       single_value_title: Revenue At Risk
 
-
-
     - name: contract_header
       title: Contracts
       type: table
-      model: price_program_and_products
+      model: base_sales_intelligence_app_model
       explore: mn_pg_product_pricing_fact
       dimensions: [mn_customer_dim.customer_name, mn_contract_header_dim.contract_name,
         mn_contract_header_dim.contract_number, mn_contract_header_dim.eff_start_date, mn_contract_header_dim.eff_end_date,
@@ -208,11 +203,10 @@
         mn_ctrt_type_dim.ctrt_type_name: Type
         mn_contract_header_dim.value: Revenue at Risk
 
-
     - name: price_program_and_prices
       title: Products Sold
       type: table
-      model: price_program_and_products
+      model: base_sales_intelligence_app_model
       explore: mn_pg_product_pricing_fact
       dimensions: [mn_product_dim.product_name, mn_contract_header_dim.contract_name,
         mn_product_group_dim.pg_name, mn_pg_product_pricing_fact.start_date, mn_pg_product_pricing_fact.end_date,

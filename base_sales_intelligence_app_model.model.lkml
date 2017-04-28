@@ -10,6 +10,9 @@ explore: mn_date_dim {
   label: " Invoice Date"
 }
 
+explore: mn_cmpl_bucket_fact {
+
+}
 explore: mn_date_labels {
   label: "Year Labels"
   hidden: yes
