@@ -1,4 +1,4 @@
-- dashboard: si_contract_and_products
+- dashboard: si_app_contract_and_products
   title: Contract and Products
   layout: grid
   rows:

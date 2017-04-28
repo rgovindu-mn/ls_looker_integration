@@ -1,4 +1,4 @@
-- dashboard: si_price_trend_and_transaction
+- dashboard: si_app_price_trend_and_transaction
   title: Price Trend and Transactions
   layout: grid
   rows:

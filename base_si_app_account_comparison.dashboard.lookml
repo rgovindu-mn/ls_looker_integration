@@ -1,4 +1,4 @@
-- dashboard: si_account_comparison
+- dashboard: si_app_account_comparison
   title: Account Comparison
   layout: grid
   rows:

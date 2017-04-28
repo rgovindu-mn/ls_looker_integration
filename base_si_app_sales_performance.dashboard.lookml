@@ -1,4 +1,4 @@
-- dashboard: si_sales_performance
+- dashboard: si_app_sales_performance
   title: Sales Performance
   layout: grid
   rows:

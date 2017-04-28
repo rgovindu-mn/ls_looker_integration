@@ -1,4 +1,4 @@
-- dashboard: si_compliance
+- dashboard: si_app_compliance
   show_applied_filters: false
   title: Compliance
   layout: grid
