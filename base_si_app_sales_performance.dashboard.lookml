@@ -35,7 +35,7 @@
     listens_to_filters: [customer, contract_name, contract_number, sale_type, sku,account, channel, invoice_year]
 
   - name: sku
-    title: 'SKU'
+    title: 'Product'
     type: field_filter
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
@@ -235,8 +235,8 @@
     type: table
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    dimensions: [mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name,
-      mn_billto_customer_dim.customer_name, mn_1shipto_customer_dim.customer_name, mn_contract_header_dim.contract_name,
+    dimensions: [ mn_1shipto_customer_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name,
+      mn_billto_customer_dim.customer_name, mn_contract_header_dim.contract_name,
       mn_channel_customer_dim.customer_name, mn_combined_sale_fact.date_period, mn_combined_sale_fact.sale_type]
     measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.revenue]
     filters:
@@ -251,7 +251,7 @@
       channel: mn_channel_customer_dim.customer_name
       invoice_year: mn_combined_sale_fact.invoice_year
       date_frame_selection: mn_combined_sale_fact.date_frame_selection
-    sorts: [mn_combined_sale_fact.date_period, mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name]
+    sorts: [ mn_1shipto_customer_dim.customer_name, mn_combined_sale_fact.date_period, mn_category_dim.product_name, mn_product_dim.product_name]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
@@ -263,13 +263,13 @@
     table_theme: editable
     limit_displayed_rows: false
     series_labels:
-      mn_product_dim.product_name: SKU
+      mn_product_dim.product_name: Product
       mn_combined_sale_fact.date_frame_selection: Date Period
       mn_combined_sale_fact.invoice_month: Year Month
-      mn_category_dim.product_name: Category
+      mn_category_dim.product_name: Product Category
       mn_customer_dim.customer_name: Contracted Customer
       mn_billto_customer_dim.customer_name: Bill To Customer
-      mn_1shipto_customer_dim.customer_name: Ship To Customer
+      mn_1shipto_customer_dim.customer_name: Account
       mn_channel_customer_dim.customer_name: Channel
 
   - name: sales_perf_revenue_kpi1

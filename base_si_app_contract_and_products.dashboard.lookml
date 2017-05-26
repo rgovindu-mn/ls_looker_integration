@@ -250,7 +250,7 @@
         mn_contract_header_dim.eff_end_date: Start Date
         mn_contract_header_dim.eff_start_date: End Date
         mn_contract_header_dim.days_to_expire: Days To Expire
-        mn_category_dim.product_name: Category
+        mn_category_dim.product_name: Product Category
         mn_contract_srep_dim.full_name: Sales Rep
         mn_ctrt_type_dim.ctrt_type_name: Type
         mn_contract_header_dim.value: Revenue at Risk

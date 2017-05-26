@@ -18,7 +18,7 @@
        type: field_filter
        model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact_dated
-       default_value: 'Month'
+       default_value: 'Quarter'
        field: mn_cmpl_period_fact.date_frame_selection
 
      - name: customer_name

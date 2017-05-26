@@ -105,12 +105,12 @@
       mn_product_dim.product_name: Product
       mn_combined_sale_fact.invoice_year: Year
       mn_combined_sale_fact.invoice_month: Year Month
-      mn_category_dim.product_name: Category
+      mn_category_dim.product_name: Product Category
       mn_customer_dim.customer_name: Account
 
   - name: account_price_scatter
     title: Account Rebate Comparison
-    type: looker_column
+    type: looker_bar
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name]
@@ -188,14 +188,14 @@
     hide_row_totals: false
     table_theme: editable
     series_labels:
-    mn_product_dim.product_name: Product
-    mn_combined_sale_fact.invoice_year: Year
-    mn_combined_sale_fact.invoice_month: Year Month
-    mn_category_dim.product_name: Category
-    mn_customer_dim.customer_name: Account
-    mn_billto_customer_dim.customer_name: Bill To Customer
-    mn_1shipto_customer_dim.customer_name: Ship To Customer
-    mn_channel_customer_dim.customer_name: Channel
+      mn_product_dim.product_name: Product
+      mn_combined_sale_fact.invoice_year: Year
+      mn_combined_sale_fact.invoice_month: Year Month
+      mn_category_dim.product_name: Product Category
+      mn_customer_dim.customer_name: Account
+      mn_billto_customer_dim.customer_name: Bill To Customer
+      mn_1shipto_customer_dim.customer_name: Ship To Customer
+      mn_channel_customer_dim.customer_name: Channel
     series_types: {}
     swap_axes: false
     hidden_fields: [mn_combined_sale_fact.revenue]
@@ -206,7 +206,7 @@
 
   - name: account_price_chart
     title: Account Revenue Comparison
-    type: looker_pie
+    type: looker_bar
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     dimensions: [mn_customer_dim.customer_name]
@@ -221,13 +221,13 @@
       sale_type: mn_combined_sale_fact.sale_type
       product_cat_name: mn_category_dim.product_name
       product: mn_product_dim.product_name
-    sorts: [mn_combined_sale_fact.revenue desc]
+    sorts: [mn_customer_dim.customer_name]
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
     value_labels: legend
     label_type: labPer
-    stacking: normal
+    stacking: ''
     show_value_labels: true
     label_density: 25
     legend_position: center
@@ -242,7 +242,7 @@
     y_axis_tick_density_custom: 5
     show_x_axis_label: false
     show_x_axis_ticks: true
-    x_axis_scale: ordinal
+    x_axis_scale: auto
     y_axis_scale_mode: linear
     ordering: none
     show_null_labels: true
