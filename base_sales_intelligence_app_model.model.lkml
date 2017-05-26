@@ -255,6 +255,24 @@ explore: mn_pg_product_pricing_fact{
     sql_on: ${mn_pg_product_pricing_fact.product_wid} = ${mn_product_dim.product_wid};;
   }
 
+  join: mn_product_map {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map
+    view_label: ""
+    fields: []
+    sql_on: ${mn_pg_product_pricing_fact.product_wid} = ${mn_product_map.child_prod_wid} AND ${mn_product_map.depth_from_parent} = 1;;
+  }
+
+  join: mn_category_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product Category"
+    #fields: [channel_name]
+    sql_on: ${mn_product_map.parent_prod_wid} = ${mn_category_dim.product_wid};;
+  }
+
   join: mn_product_group_dim {
     type: left_outer
     relationship: many_to_one

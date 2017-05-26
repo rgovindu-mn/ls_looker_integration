@@ -82,6 +82,15 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.CONTRACT_NUMBER ;;
   }
 
+  dimension: contract_number_url {
+    type: string
+    label: "Contract Dashboard URL"
+    sql: ${TABLE}.CONTRACT_NUMBER ;;
+    html: <a href="/dashboards/base_sales_intelligence_app_model::si_app_contract_and_products?contract_number={{value}}&">
+      {{value}}</a>;;
+  }
+
+
   dimension: contract_status_wid {
     type: number
     hidden:  yes
@@ -535,6 +544,24 @@ view: mn_contract_header_dim {
   }
 
   dimension: days_to_expire {
+    type: number
+    sql: TO_NUMBER(to_date(to_char(${TABLE}.eff_end_date,'YYYYDDMM'),'YYYYDDMM')  - trunc(sysdate)) ;;
+  }
+
+  dimension: days_to_expire_fmt {
+    type: number
+    value_format_name: decimal_0
+    sql: ${days_to_expire} ;;
+    html:  {% if value >0 and value < 60 %}
+        <p style="color: white; background-color: red">{{ rendered_value }}</p>
+      {% else %}
+        {{ rendered_value }}
+      {% endif %}
+    ;;
+  }
+
+
+  dimension: days_to_expire_0 {
     type: number
     sql: CASE WHEN ${TABLE}.eff_end_date < SYSDATE THEN 0 ELSE to_date(to_char(${TABLE}.eff_end_date,'YYYYDDMM'),'YYYYDDMM')  - trunc(sysdate) END ;;
   }

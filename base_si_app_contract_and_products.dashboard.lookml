@@ -5,7 +5,7 @@
   - elements: [contracts_expire_30_days, contract_revenue_at_risk]
     height: 100
   - elements: [contract_header]
-    height: 400
+    height: 300
   - elements: [price_program_and_prices]
     height: 400
   show_applied_filters: true
@@ -39,12 +39,21 @@
      field: mn_contract_header_dim.contract_number
      listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name]
 
+   - name: ctrt_status
+     title: 'Contract Status'
+     type: field_filter
+     model: base_sales_intelligence_app_model
+     explore: mn_contract_header_dim
+     default_value:
+     field: mn_ctrt_status_dim.status_name
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name, contract_number]
+
    - name: days_to_expire
      title: 'Days To Expire'
      type: field_filter
      model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
-     default_value: "[1,30]"
+     default_value: ">0"
      field: mn_contract_header_dim.days_to_expire
 
    - name: srep_full_name
@@ -66,7 +75,7 @@
      listens_to_filters: [product_name, srep_full_name, contract_number, contract_name, customer_name]
 
    - name: product_name
-     title: 'Product Name'
+     title: 'Product'
      type: field_filter
      model: base_sales_intelligence_app_model
      explore: mn_pg_product_pricing_fact
@@ -83,6 +92,7 @@
       measures: [mn_contract_header_dim.count]
       filters:
         mn_contract_header_dim.days_to_expire: "[1, 30]"
+        mn_ctrt_status_dim.status_name: "Implemented"
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -167,20 +177,20 @@
       model: base_sales_intelligence_app_model
       explore: mn_pg_product_pricing_fact
       dimensions: [mn_customer_dim.customer_name, mn_contract_header_dim.contract_name,
-        mn_contract_header_dim.contract_number, mn_contract_header_dim.eff_start_date, mn_contract_header_dim.eff_end_date,
-        mn_contract_header_dim.days_to_expire, mn_contract_author_dim.full_name, mn_contract_srep_dim.full_name,
-        mn_contract_header_dim.value, mn_ctrt_type_dim.ctrt_type_name]
+        mn_contract_header_dim.contract_number, mn_contract_header_dim.contract_number_url, mn_contract_header_dim.eff_start_date, mn_contract_header_dim.eff_end_date,
+        mn_contract_header_dim.days_to_expire_fmt, mn_contract_author_dim.full_name, mn_contract_srep_dim.full_name,
+        mn_contract_header_dim.value, mn_ctrt_type_dim.ctrt_type_name, mn_ctrt_status_dim.status_name]
       filters:
       listen:
         customer_name: mn_customer_dim.customer_name
         contract_number: mn_contract_header_dim.contract_number
-        contract_name: mn_contract_header_dim.contract_number
+        contract_name: mn_contract_header_dim.contract_name
         days_to_expire: mn_contract_header_dim.days_to_expire
         srep_full_name: mn_contract_srep_dim.full_name
         product_group_name: mn_product_group_dim.pg_name
         product_name: mn_product_dim.product_name
-
-      sorts: [mn_ctrt_type_dim.ctrt_type_name desc]
+        ctrt_status: mn_ctrt_status_dim.status_name
+      sorts: [mn_contract_header_dim.days_to_expire_fmt]
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -194,32 +204,34 @@
       series_labels:
         mn_customer_dim.customer_name: Account
         mn_contract_header_dim.contract_name: Contract Name
-        mn_contract_header_dim.contract_number: Contract Number
+        mn_contract_header_dim.contract_number_url: Contract Number (Drill Down)
         mn_contract_header_dim.eff_end_date: End Date
         mn_contract_header_dim.eff_start_date: Start Date
-        mn_contract_header_dim.days_to_expire: Days To Expire
+        mn_contract_header_dim.days_to_expire_fmt: Days To Expire
         mn_contract_author_dim.full_name: Author
         mn_contract_srep_dim.full_name: Sales Rep
         mn_ctrt_type_dim.ctrt_type_name: Type
         mn_contract_header_dim.value: Revenue at Risk
+      hidden_fields: [mn_contract_header_dim.contract_number]
 
     - name: price_program_and_prices
       title: Products Sold
       type: table
       model: base_sales_intelligence_app_model
       explore: mn_pg_product_pricing_fact
-      dimensions: [mn_product_dim.product_name, mn_contract_header_dim.contract_name,
+      dimensions: [mn_category_dim.product_name, mn_product_dim.product_name, mn_contract_header_dim.contract_name,
         mn_product_group_dim.pg_name, mn_pg_product_pricing_fact.start_date, mn_pg_product_pricing_fact.end_date,
         mn_pg_product_pricing_fact.tier_idx, mn_pg_product_pricing_fact.prc_high]
       filters:
       listen:
         customer_name: mn_customer_dim.customer_name
         contract_number: mn_contract_header_dim.contract_number
-        contract_name: mn_contract_header_dim.contract_number
+        contract_name: mn_contract_header_dim.contract_name
         days_to_expire: mn_contract_header_dim.days_to_expire
         srep_full_name: mn_contract_srep_dim.full_name
         product_group_name: mn_product_group_dim.pg_name
         product_name: mn_product_dim.product_name
+        ctrt_status: mn_ctrt_status_dim.status_name
       sorts: [mn_pg_product_pricing_fact.start_date desc]
       limit: '500'
       column_limit: '50'
@@ -238,11 +250,11 @@
         mn_contract_header_dim.eff_end_date: Start Date
         mn_contract_header_dim.eff_start_date: End Date
         mn_contract_header_dim.days_to_expire: Days To Expire
-        mn_contract_owner_dim.full_name: Owner
+        mn_category_dim.product_name: Category
         mn_contract_srep_dim.full_name: Sales Rep
         mn_ctrt_type_dim.ctrt_type_name: Type
         mn_contract_header_dim.value: Revenue at Risk
-        mn_product_dim.sku: Product
+        mn_product_dim.product_name: Product
         mn_product_group_dim.pg_name: Pricing Program
         mn_pg_product_pricing_fact.start_date: Start date
         mn_pg_product_pricing_fact.end_date: End Date
