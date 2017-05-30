@@ -202,6 +202,7 @@
     hide_legend: false
     y_axis_unpin: false
     hidden_series: []
+    colors: ["#0079BC", "#33BCE7", "#FE8F60", "#9895EE", "#EF6E64", "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]
     y_axis_reversed: false
 
   - name: account_price_chart
@@ -293,4 +294,5 @@
     limit_displayed_rows_values:
     show_hide: hide
     first_last: first
+    colors: ["#33BCE7", "#FE8F60", "#9895EE", "#EF6E64", "#0079BC", "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]
     num_rows: 0

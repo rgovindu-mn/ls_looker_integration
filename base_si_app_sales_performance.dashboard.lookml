@@ -170,6 +170,7 @@
       mn_combined_sale_fact.date_period: Date Period
     series_types: {}
     hidden_series: []
+    colors: ["#33BCE7", "#FE8F60", "#9895EE", "#EF6E64", "#0079BC", "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]
     y_axis_unpin: false
 
   - name: sales_perf_revenue_chart
@@ -228,6 +229,7 @@
       mn_combined_sale_fact.date_period: Date Period
     series_types: {}
     hidden_series: []
+    colors: ["#33BCE7", "#FE8F60", "#9895EE", "#EF6E64", "#0079BC", "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]
     y_axis_unpin: false
 
   - name: sales_perf_table
