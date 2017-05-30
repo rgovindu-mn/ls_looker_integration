@@ -141,6 +141,7 @@
       mn_date_dim.year: Year
       mn_date_dim.month_name: Month
     series_types: {}
+    colors: ["#0079BC", "#33BCE7", "#FE8F60", "#9895EE", "#EF6E64",  "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]
 
   - name: account_compliance_table
     title: Compliance Data
