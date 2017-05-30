@@ -8,6 +8,7 @@ view: mn_cmpl_period_fact_dated {
     CASE
       WHEN {% condition date_frame_selection %} 'Year' {% endcondition %}THEN TO_CHAR(${mn_date_dim.year})
       WHEN {% condition date_frame_selection %} 'Quarter' {% endcondition %}THEN ${mn_date_dim.year_quarter}
+      WHEN {% condition date_frame_selection %} 'Half-Year' {% endcondition %}THEN ${mn_date_dim.year_half_year}
       ELSE ${mn_date_dim.year_month}
     END ;;
   }
@@ -20,6 +21,8 @@ view: mn_cmpl_period_fact_dated {
          ROUND( TRUNC(ADD_MONTHS(SYSDATE,12),'YYYY') - SYSDATE)
       WHEN {% condition date_frame_selection %} 'Quarter' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate)  THEN
           ROUND( TRUNC(ADD_MONTHS(SYSDATE,3),'Q') - SYSDATE)
+      WHEN {% condition date_frame_selection %} 'Half-Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate)  THEN
+          ROUND( ADD_MONTHS(TRUNC(SYSDATE,'YYYY'),6) - SYSDATE)
       WHEN {% condition date_frame_selection %} 'Month' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate ) THEN
          ROUND( TRUNC(ADD_MONTHS(SYSDATE,1),'MM') - SYSDATE)
       ELSE 0
@@ -81,7 +84,7 @@ view: mn_cmpl_period_fact_dated {
    filter: date_frame_selection {
     label: "Period Timeframe Selection"
     default_value: "Quarter"
-    suggestions: ["Month", "Quarter", "Year"]
+    suggestions: ["Month", "Quarter", "Half-Year", "Year"]
   }
 
 }
