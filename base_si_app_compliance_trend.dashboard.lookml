@@ -131,7 +131,7 @@
     y_axis_scale_mode: linear
     ordering: none
     show_null_labels: false
-    show_totals_labels: false
+    show_totals_labels: true
     show_silhouette: false
     totals_color: "#808080"
     show_row_numbers: true
@@ -152,7 +152,7 @@
     hidden_series: []
     hidden_fields: [mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_expected_sales,
       missing_sales]
-    colors: ["#9895EE", "#FE8F60", "#FFCC00"]
+    colors: ["#33BCE7", "#FE8F60", "#FFCC00"]
     series_colors: {}
 
 
