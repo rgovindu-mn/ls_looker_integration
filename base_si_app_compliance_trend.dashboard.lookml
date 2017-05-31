@@ -90,7 +90,14 @@
     model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_cmpl_period_fact.date_period]
-    measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_total_revenue_gap]
+    measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales,
+      mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_revenue_gap]
+    dynamic_fields:
+    - table_calculation: projected_gap
+      label: Projected Gap
+      expression: "${mn_cmpl_period_fact.period_total_revenue_gap} - ${mn_cmpl_period_fact.period_revenue_gap}"
+      value_format:
+      value_format_name: decimal_0
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
@@ -105,7 +112,7 @@
     limit: '500'
     column_limit: '50'
     query_timezone: America/Los_Angeles
-    stacking: ''
+    stacking: normal
     show_value_labels: false
     label_density: 25
     legend_position: center
@@ -140,8 +147,14 @@
       mn_cmpl_period_fact.commit_tier: Committed Tier
       mn_date_dim.year: Year
       mn_date_dim.month_name: Month
+      missing_sales: Gap
     series_types: {}
-    colors: ["#0079BC", "#33BCE7", "#FE8F60", "#9895EE", "#EF6E64",  "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]
+    hidden_series: []
+    hidden_fields: [mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_expected_sales,
+      missing_sales]
+    colors: ["#9895EE", "#FE8F60", "#FFCC00"]
+    series_colors: {}
+
 
   - name: account_compliance_table
     title: Compliance Data
