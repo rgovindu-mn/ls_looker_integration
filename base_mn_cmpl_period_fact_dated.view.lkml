@@ -81,7 +81,17 @@ view: mn_cmpl_period_fact_dated {
     sql: NVL(${period_actual_sales} / NULLIF( ${period_expected_sales},0) ,0) ;;
   }
 
-   filter: date_frame_selection {
+  measure: period_actual_sales_over_expected {
+    type: sum
+    value_format_name: decimal_0
+    sql: CASE WHEN (${actual_amt_to_date} > ${expected_amt_to_date}) THEN
+       ( ${actual_amt_to_date} - ${expected_amt_to_date})  * ${days_in_current_period} /  ${total_days_in_period}
+      ELSE
+        0
+      END;;
+  }
+
+ filter: date_frame_selection {
     label: "Period Timeframe Selection"
     default_value: "Quarter"
     suggestions: ["Month", "Quarter", "Half-Year", "Year"]
