@@ -12,14 +12,25 @@
   auto_run:  true
 
   filters:
-   - name: customer_name
+
+   - name: elig_customer_name
      title: 'Account'
+     type: field_filter
+     model: base_sales_intelligence_app_model
+     explore: mn_pg_product_pricing_fact
+     default_value:
+     field: mn_eligible_customer_dim.customer_name
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, contract_name, customer_name]
+
+   - name: customer_name
+     title: 'Contract Owner Customer'
      type: field_filter
      model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value:
      field: mn_customer_dim.customer_name
-     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, contract_name]
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, contract_name, elig_customer_name]
+
 
    - name: contract_name
      title: 'Contract Name'
@@ -28,7 +39,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_header_dim.contract_name
-     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, customer_name]
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, customer_name, elig_customer_name]
 
    - name: contract_number
      title: 'Contract Number'
@@ -37,7 +48,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_contract_header_dim.contract_number
-     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name]
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name, elig_customer_name]
 
    - name: ctrt_status
      title: 'Contract Status'
@@ -46,7 +57,7 @@
      explore: mn_contract_header_dim
      default_value:
      field: mn_ctrt_status_dim.status_name
-     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name, contract_number]
+     listens_to_filters: [product_name, product_group_name, srep_full_name, contract_name, customer_name, contract_number, elig_customer_name]
 
    - name: days_to_expire
      title: 'Days To Expire'
@@ -72,7 +83,7 @@
      explore: mn_pg_product_pricing_fact
      default_value:
      field: mn_product_group_dim.pg_name
-     listens_to_filters: [product_name, srep_full_name, contract_number, contract_name, customer_name]
+     listens_to_filters: [product_name, srep_full_name, contract_number, contract_name, customer_name, elig_customer_name]
 
    - name: product_name
      title: 'Product'
@@ -81,7 +92,7 @@
      explore: mn_pg_product_pricing_fact
      default_value:
      field: mn_product_dim.product_name
-     listens_to_filters: [ product_group_name, srep_full_name, contract_number, contract_name, customer_name]
+     listens_to_filters: [ product_group_name, srep_full_name, contract_number, contract_name, customer_name, elig_customer_name]
 
   elements:
     - name: contracts_expire_30_days
@@ -93,6 +104,7 @@
       filters:
         mn_contract_header_dim.days_to_expire: "[1, 30]"
         mn_ctrt_status_dim.status_name: "Implemented"
+        #elig_customer_name: mn_eligible_customer_dim.customer_name
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -136,6 +148,7 @@
       measures: [mn_contract_header_dim.contract_value]
       filters:
         mn_contract_header_dim.days_to_expire: "[1, 30]"
+#        elig_customer_name: mn_eligible_customer_dim.customer_name
       limit: '500'
       column_limit: '50'
       query_timezone: America/Los_Angeles
@@ -182,6 +195,7 @@
         mn_contract_header_dim.value, mn_ctrt_type_dim.ctrt_type_name, mn_ctrt_status_dim.status_name]
       filters:
       listen:
+        elig_customer_name: mn_eligible_customer_dim.customer_name
         customer_name: mn_customer_dim.customer_name
         contract_number: mn_contract_header_dim.contract_number
         contract_name: mn_contract_header_dim.contract_name
@@ -202,7 +216,7 @@
       table_theme: editable
       limit_displayed_rows: false
       series_labels:
-        mn_customer_dim.customer_name: Account
+        mn_customer_dim.customer_name: Contract Owner Customer
         mn_contract_header_dim.contract_name: Contract Name
         mn_contract_header_dim.contract_number_url: Contract Number (Drill Down)
         mn_contract_header_dim.eff_end_date: End Date
@@ -224,6 +238,7 @@
         mn_pg_product_pricing_fact.tier_idx, mn_pg_product_pricing_fact.prc_high]
       filters:
       listen:
+        elig_customer_name: mn_eligible_customer_dim.customer_name
         customer_name: mn_customer_dim.customer_name
         contract_number: mn_contract_header_dim.contract_number
         contract_name: mn_contract_header_dim.contract_name
