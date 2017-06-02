@@ -67,6 +67,7 @@ view: mn_combined_sale_fact {
             TOTAL_DISCREPANCY_AMT,
             TOTAL_DISTR_COST_AMT,
             TOTAL_RBT_AMT,
+            NVL(BRANCH_DISTR_WID, PARENT_DISTR_WID) AS DISTR_WID,
             'Indirect' as SALE_TYPE
          FROM MN_INDIR_SALE_FACT_VW
         UNION
@@ -135,6 +136,8 @@ view: mn_combined_sale_fact {
             NULL ,
             NULL ,
             TOTAL_RBT_AMT,
+            CONTRACT_WID AS DISTR_WID,
+            CONTRACT_WID AS PARENT_DISTR_WID,
             'Direct' as SALE_TYPE
         FROM MN_DIR_SALE_FACT_VW
        ;;
@@ -270,6 +273,12 @@ view: mn_combined_sale_fact {
     type: number
     label: "Distributor Cost"
     sql: ${TABLE}.DISTR_COST_AMT ;;
+  }
+
+  dimension: distr_wid {
+    type: number
+    hidden:  yes
+    sql: ${TABLE}.DISTR_WID ;;
   }
 
   dimension: exchange_rate {
@@ -464,7 +473,7 @@ view: mn_combined_sale_fact {
 
   dimension: product_wid {
     type: number
-    hidden:  yes
+    #hidden:  yes
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
