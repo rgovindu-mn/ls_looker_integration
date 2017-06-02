@@ -109,6 +109,30 @@ explore: mn_combined_sale_fact {
     sql_where: ${mn_ctrt_type_dim.ctrt_type_name} in ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
   }
 
+  join: mn_ctrt_status_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_ctrt_status_dim
+    view_label: "Pricing Contract Status"
+    sql_on: ${mn_contract_header_dim.contract_status_wid} = ${mn_ctrt_status_dim.status_wid};;
+  }
+
+  join: mn_ctrt_domain_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_ctrt_domain_dim
+    view_label: "Pricing Contract Domain"
+    sql_on: ${mn_contract_header_dim.contract_domain_wid} = ${mn_ctrt_domain_dim.domain_wid};;
+  }
+
+  join: mn_ctrt_sub_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_ctrt_sub_type_dim
+    view_label: "Pricing Contract Sub Type"
+    sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
+  }
+
   join: mn_product_dim {
     type: left_outer
     relationship: many_to_one
