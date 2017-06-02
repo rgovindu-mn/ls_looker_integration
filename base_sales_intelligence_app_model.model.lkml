@@ -18,6 +18,22 @@ explore: mn_date_labels {
   hidden: yes
 }
 
+explore: mn_user_access_map {
+  label: "User Customer Access"
+  hidden: yes
+
+  join: mn_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Account"
+    #fields: []
+    sql_on: ${customer_wid} = ${mn_customer_dim.customer_wid};;
+  }
+
+}
+
+
 explore: mn_cmpl_period_fact {
   label: " Compliance Data"
   from:  mn_cmpl_period_fact
@@ -114,6 +130,22 @@ explore: mn_cmpl_period_fact {
     sql_on: ${customer_wid} = ${mn_customer_dim.customer_wid};;
   }
 
+#  always_join: [mn_user_access_map]
+
+# access_filter: {
+#    field: ????.access_user_name
+#    user_attribute: access_user_name
+#  }
+
+  join: mn_user_access_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_access_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${customer_wid} = ${mn_user_access_map.customer_wid};;
+  }
+
 }
 
 explore: mn_cmpl_period_fact_dated {
@@ -138,6 +170,22 @@ explore: mn_cmpl_period_fact_dated {
 
 explore: mn_combined_sale_fact {
   label: " Sales Data"
+
+#  always_join: [mn_user_access_map]
+
+# access_filter: {
+#    field: ????.access_user_name
+#    user_attribute: access_user_name
+#  }
+
+  join: mn_user_access_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_access_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${mn_combined_sale_fact.customer_wid} = ${mn_user_access_map.customer_wid};;
+  }
 
   join: mn_customer_dim {
     type: left_outer
@@ -245,6 +293,22 @@ explore: mn_pg_product_pricing_fact{
   label: "Pricing Program and Prices"
 
   sql_always_where: ${mn_product_group_dim.latest_flag} = 'Y' and ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+
+#  always_join: [mn_user_access_map]
+
+# access_filter: {
+#    field: ????.access_user_name
+#    user_attribute: access_user_name
+#  }
+
+  join: mn_user_access_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_access_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
+  }
 
   join: mn_product_dim {
     type: left_outer
@@ -382,6 +446,21 @@ explore: mn_contract_header_dim{
 
   sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
 
+#  always_join: [mn_user_access_map]
+
+# access_filter: {
+#    field: ????.access_user_name
+#    user_attribute: access_user_name
+#  }
+
+  join: mn_user_access_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_access_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
+  }
 
   join: mn_contract_owner_dim {
     type: left_outer

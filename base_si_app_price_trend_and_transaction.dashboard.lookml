@@ -174,3 +174,4 @@
     show_null_labels: false
     label_rotation: -15
     x_axis_label: Price
+    colors: ["#33BCE7", "#FE8F60", "#9895EE", "#EF6E64", "#0079BC", "#FD90B5", "#DC37D", "#54698D", "#FFCC00"]

@@ -17,14 +17,14 @@ view: mn_cmpl_period_fact_dated {
     type:  string
     sql:
     CASE
-      WHEN {% condition date_frame_selection %} 'Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate) THEN
-         ROUND( TRUNC(ADD_MONTHS(SYSDATE,12),'YYYY') - SYSDATE)
-      WHEN {% condition date_frame_selection %} 'Quarter' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate)  THEN
-          ROUND( TRUNC(ADD_MONTHS(SYSDATE,3),'Q') - SYSDATE)
-      WHEN {% condition date_frame_selection %} 'Half-Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate)  THEN
-          ROUND( ADD_MONTHS(TRUNC(SYSDATE,'YYYY'),6) - SYSDATE)
-      WHEN {% condition date_frame_selection %} 'Month' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} > sysdate ) THEN
-         ROUND( TRUNC(ADD_MONTHS(SYSDATE,1),'MM') - SYSDATE)
+      WHEN {% condition date_frame_selection %} 'Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} >= trunc(sysdate)) THEN
+         ROUND( TRUNC(ADD_MONTHS(SYSDATE,12),'YYYY') - trunc(sysdate))
+      WHEN {% condition date_frame_selection %} 'Quarter' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} >= trunc(sysdate))  THEN
+          ROUND( TRUNC(ADD_MONTHS(SYSDATE,3),'Q') - trunc(sysdate))
+      WHEN {% condition date_frame_selection %} 'Half-Year' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} >= trunc(sysdate))  THEN
+          ROUND( ADD_MONTHS(TRUNC(SYSDATE,'YYYY'),6) - trunc(sysdate))
+      WHEN {% condition date_frame_selection %} 'Month' {% endcondition %} AND (${mn_date_dim.end_date_sql_raw} >= trunc(sysdate) ) THEN
+         ROUND( TRUNC(ADD_MONTHS(SYSDATE,1),'MM') - trunc(sysdate))
       ELSE 0
     END ;;
   }
@@ -68,10 +68,10 @@ view: mn_cmpl_period_fact_dated {
   }
 
   measure: period_revenue_gap {
-    type: number
+    type: sum
     value_format_name: decimal_0
-    sql: CASE WHEN (${period_expected_sales} - ${period_actual_sales}) > 0 THEN
-         ${period_expected_sales} - ${period_actual_sales}
+    sql: CASE WHEN (${expected_amt_to_date} - ${actual_amt_to_date}) > 0 THEN
+         (${expected_amt_to_date} -${actual_amt_to_date}) * ${days_in_current_period} /  ${total_days_in_period}
     ELSE 0 END;;
   }
 
@@ -81,7 +81,17 @@ view: mn_cmpl_period_fact_dated {
     sql: NVL(${period_actual_sales} / NULLIF( ${period_expected_sales},0) ,0) ;;
   }
 
-   filter: date_frame_selection {
+  measure: period_actual_sales_over_expected {
+    type: sum
+    value_format_name: decimal_0
+    sql: CASE WHEN (${actual_amt_to_date} > ${expected_amt_to_date}) THEN
+       ( ${actual_amt_to_date} - ${expected_amt_to_date})  * ${days_in_current_period} /  ${total_days_in_period}
+      ELSE
+        0
+      END;;
+  }
+
+ filter: date_frame_selection {
     label: "Period Timeframe Selection"
     default_value: "Quarter"
     suggestions: ["Month", "Quarter", "Half-Year", "Year"]

@@ -5,6 +5,8 @@
   rows:
   - elements: [account_compliance_kpi1, account_compliance_kpi2]
     height: 100
+  - elements: [account_compliance_chart_simple]
+    height: 400
   - elements: [account_compliance_chart]
     height: 400
   - elements: [account_compliance_table]
@@ -85,12 +87,130 @@
 
   elements:
   - name: account_compliance_chart
+    title: Compliance Trend Breakdown
+    note:
+      text: 'Simple chart with KPIs'
+      state: collapsed
+      display: hover
+    type: looker_column
+    model: base_sales_intelligence_app_model
+    explore: mn_cmpl_period_fact_dated
+    dimensions: [mn_cmpl_period_fact.date_period]
+    measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales,
+      mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_actual_sales_over_expected,
+      mn_cmpl_period_fact.period_revenue_gap]
+    dynamic_fields:
+    - table_calculation: actual_sales_to_date_committed
+      label: Actual Sales To Date - Committed
+      expression: "${mn_cmpl_period_fact.period_actual_sales} - ${mn_cmpl_period_fact.period_actual_sales_over_expected}"
+      value_format:
+      value_format_name: decimal_0
+    - table_calculation: actual_sales_to_date_over_committment
+      label: Actual Sales To Date - Over Committment
+      expression: "${mn_cmpl_period_fact.period_actual_sales_over_expected}"
+      value_format:
+      value_format_name: decimal_0
+    - table_calculation: missing_committed_sales_to_date
+      label: Missing Committed Sales To Date
+      expression: "${mn_cmpl_period_fact.period_revenue_gap}"
+      value_format:
+      value_format_name: decimal_0
+    - table_calculation: projected_sales_gap
+      label: Projected Sales Gap
+      expression: "${mn_cmpl_period_fact.period_total_revenue_gap} - ${mn_cmpl_period_fact.period_revenue_gap}"
+      value_format:
+      value_format_name: decimal_0
+    filters:
+    listen:
+      date_frame_selection: mn_cmpl_period_fact.date_frame_selection
+      customer_name: mn_customer_dim.customer_name
+      contract_name: mn_contract_header_dim.contract_name
+      contract_number: mn_contract_header_dim.contract_number
+      pg_name: mn_product_group_dim.pg_name
+      year_month: mn_date_dim.year_month
+      year: mn_date_dim.year
+      rolling_12_months: mn_cmpl_period_fact.rolling_12_months
+    sorts: [mn_cmpl_period_fact.date_period]
+    limit: '500'
+    column_limit: '50'
+    query_timezone: America/Los_Angeles
+    stacking: normal
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: true
+    show_silhouette: false
+    totals_color: "#808080"
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: editable
+    series_labels:
+      mn_product_group_dim.pg_name: Price Program
+      mn_cmpl_period_fact.compliance_percent: Compliance %
+      mn_cmpl_period_fact.period_expected_sales: Expected Sales
+      mn_cmpl_period_fact.period_actual_sales: Actual Sales
+      mn_cmpl_period_fact.commit_tier: Committed Tier
+      mn_date_dim.year: Year
+      mn_date_dim.month_name: Month
+      missing_sales: Gap
+    series_types: {}
+    hidden_series: []
+    hidden_fields: [mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_expected_sales,
+      missing_sales, mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_actual_sales_over_expected,
+      mn_cmpl_period_fact.period_revenue_gap]
+    colors: ["#33BCE7", "#9895EE", "#FE8F60", "#FFCC00", "#FFCC00"]
+    series_colors:
+    label_color: ["#33BCE7", "#FE8F60", "#9895EE", "#EF6E64", "#0079BC", "#FD90B5",
+      "#DC37D", "#54698D", "#FFCC00"]
+
+
+  - name: account_compliance_chart_simple
     title: Compliance Trend
     type: looker_column
     model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_cmpl_period_fact.date_period]
-    measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_total_revenue_gap]
+    measures: [mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_expected_sales,
+      mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_actual_sales_over_expected,
+      mn_cmpl_period_fact.period_revenue_gap]
+    dynamic_fields:
+    - table_calculation: committed_actual_sales
+      label: Committed Actual Sales
+      expression: "${mn_cmpl_period_fact.period_actual_sales} - ${mn_cmpl_period_fact.period_actual_sales_over_expected}"
+      value_format:
+      value_format_name: decimal_0
+    - table_calculation: over_committed_actual_sales
+      label: Over Committed Actual Sales
+      expression: "${mn_cmpl_period_fact.period_actual_sales_over_expected}"
+      value_format:
+      value_format_name: decimal_0
+    - table_calculation: missing_revenue
+      label: Missing Revenue
+      expression: "${mn_cmpl_period_fact.period_revenue_gap}"
+      value_format:
+      value_format_name: decimal_0
+    - table_calculation: projected_gap
+      label: Projected Gap
+      expression: "${mn_cmpl_period_fact.period_total_revenue_gap} - ${mn_cmpl_period_fact.period_revenue_gap}"
+      value_format:
+      value_format_name: decimal_0
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
@@ -117,14 +237,14 @@
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
+    y_axis_tick_density_custom: 4
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
     y_axis_scale_mode: linear
     ordering: none
     show_null_labels: false
-    show_totals_labels: false
+    show_totals_labels: true
     show_silhouette: false
     totals_color: "#808080"
     show_row_numbers: true
@@ -132,15 +252,39 @@
     hide_totals: false
     hide_row_totals: false
     table_theme: editable
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
     series_labels:
       mn_product_group_dim.pg_name: Price Program
       mn_cmpl_period_fact.compliance_percent: Compliance %
-      mn_cmpl_period_fact.period_expected_sales: Expected Sales
-      mn_cmpl_period_fact.period_actual_sales: Actual Sales
+      mn_cmpl_period_fact.period_expected_sales: Expected Sales To Date
+      mn_cmpl_period_fact.period_actual_sales: Actual Sales To Date
       mn_cmpl_period_fact.commit_tier: Committed Tier
       mn_date_dim.year: Year
       mn_date_dim.month_name: Month
-    series_types: {}
+      missing_sales: Gap
+      mn_cmpl_period_fact.period_total_revenue_gap: Projected End Of Period Sales Gap
+    series_types:
+      mn_cmpl_period_fact.period_expected_sales: scatter
+      mn_cmpl_period_fact.period_total_revenue_gap: line
+    hidden_series: [committed_actual_sales, missing_revenue, projected_gap]
+    hidden_fields: [missing_sales, mn_cmpl_period_fact.period_actual_sales_over_expected,
+      mn_cmpl_period_fact.period_revenue_gap, over_committed_actual_sales, committed_actual_sales,
+      missing_revenue, projected_gap]
+    colors: ["#FE8F60", black, "#33BCE7", "#FFCC00", "#FFCC0"]
+    series_colors: {}
+    label_color: ["#33BCE7", black, "#FE8F60", "#9895EE", "#EF6E64", "#0079BC", "#FD90B5",
+      "#DC37D", "#54698D", "#FFCC00"]
+    hide_legend: false
+    y_axis_orientation: [left, left, right, right, right]
+    y_axis_unpin: false
+
+
 
   - name: account_compliance_table
     title: Compliance Data
@@ -148,8 +292,8 @@
     model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_contract_header_dim.contract_name, mn_contract_header_dim.contract_number,
-      mn_product_group_dim.pg_name, mn_date_dim.year, mn_date_dim.month_name, mn_cmpl_period_fact.commit_tier,
-      mn_cmpl_period_fact.attained_tier, mn_cmpl_period_fact.date_period]
+      mn_product_group_dim.pg_name, mn_cmpl_period_fact.date_period, mn_cmpl_period_fact.commit_tier,
+      mn_cmpl_period_fact.attained_tier]
     measures: [mn_cmpl_period_fact.period_expected_sales, mn_cmpl_period_fact.period_actual_sales,
       mn_cmpl_period_fact.compliance_percent, mn_cmpl_period_fact.period_total_revenue_gap]
     filters:
@@ -181,7 +325,7 @@
       mn_cmpl_period_fact.commit_tier: Committed Tier
       mn_date_dim.year: Year
       mn_date_dim.month_name: Month
-    hidden_fields: [mn_cmpl_period_fact.date_period]
+    hidden_fields: []
 
   - name: account_compliance_kpi2
     title: Untitled Visualization
@@ -326,3 +470,4 @@
     series_types: {}
     single_value_title: Total Revenue Gap
     value_format: '[>=10000000]0.0,,"M";[>=10000]0.0,"K";0'
+
