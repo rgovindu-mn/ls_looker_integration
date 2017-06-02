@@ -113,7 +113,7 @@ view: mn_combined_sale_fact {
             ORG_WID,
             NULL ,
             PAID_DATE_WID,
-            NULL ,
+            CUSTOMER_WID AS PARENT_DISTR_WID,
             PG_COMMIT_WID,
             PG_WID,
             PRC_CONDITION_CODE1,
@@ -136,8 +136,7 @@ view: mn_combined_sale_fact {
             NULL ,
             NULL ,
             TOTAL_RBT_AMT,
-            CONTRACT_WID AS DISTR_WID,
-            CONTRACT_WID AS PARENT_DISTR_WID,
+            CUSTOMER_WID AS DISTR_WID,
             'Direct' as SALE_TYPE
         FROM MN_DIR_SALE_FACT_VW
        ;;

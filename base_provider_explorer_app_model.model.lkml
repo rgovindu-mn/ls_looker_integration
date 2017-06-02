@@ -6,14 +6,6 @@ include: "*.view.lkml"         # include all views in this project
 label: "Provider Explorer"
 
 
-explore: mn_cmpl_per_lines_fact {
-  label: "Compliance"
-  from:  mn_cmpl_per_lines_fact
-  view_label: "Compliance Data"
-
-}
-
-
 explore: mn_combined_sale_fact {
   label: "Sales"
   from:  mn_combined_sale_fact
@@ -142,4 +134,12 @@ explore: mn_combined_sale_fact {
             AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
   }
 
+  join: mn_user_access_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_access_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
+  }
 }
