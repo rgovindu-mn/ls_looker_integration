@@ -1,7 +1,20 @@
 view: mn_pg_product_pricing_fact {
   sql_table_name: MN_PG_PRODUCT_PRICING_FACT_VW ;;
 
-  dimension: adj_high {
+
+  dimension: access_user_wid {
+    type: string
+    sql: ${mn_user_access_map.user_wid};;
+  }
+
+
+  dimension: access_user_name {
+    type: string
+    sql: ${mn_user_access_map.user_name};;
+  }
+
+
+    dimension: adj_high {
     type: string
     sql: ${TABLE}.ADJ_HIGH ;;
   }

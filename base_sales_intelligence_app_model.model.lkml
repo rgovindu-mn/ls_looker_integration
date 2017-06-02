@@ -297,7 +297,7 @@ explore: mn_pg_product_pricing_fact{
 #  always_join: [mn_user_access_map]
 
 # access_filter: {
-#    field: ????.access_user_name
+#    fieldmn_pg_product_pricing_fact.access_user_name
 #    user_attribute: access_user_name
 #  }
 
@@ -307,8 +307,28 @@ explore: mn_pg_product_pricing_fact{
     from: mn_user_access_map
     view_label: "User Access"
     fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
+    sql_on: ${mn_pg_ben_elig_cust_map.elig_customer_wid} = ${mn_user_access_map.customer_wid};;
   }
+
+  join: mn_pg_ben_elig_cust_map {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_ben_elig_cust_map
+    view_label: "Product"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_product_pricing_fact.pg_wid} = ${mn_pg_ben_elig_cust_map.pg_wid};;
+  }
+
+
+  join: mn_eligible_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Eligible Account"
+    #fields: [full_name]
+    sql_on: ${mn_pg_ben_elig_cust_map.elig_customer_wid} = ${mn_eligible_customer_dim.customer_wid};;
+  }
+
 
   join: mn_product_dim {
     type: left_outer
