@@ -9,7 +9,7 @@ label: "Provider Explorer"
 
 explore: mn_combined_sale_fact {
   label: "Sales"
-  extends: [mn_contract_header_dim_base]
+  extends: [mn_contract_header_dim_base, mn_product_group_dim_base]
   from:  mn_combined_sale_fact
   view_name: mn_combined_sale_fact
   hidden: no
@@ -119,30 +119,6 @@ explore: mn_combined_sale_fact {
     from: mn_product_group_dim
     view_label: "Pricing Program"
     sql_on: ${mn_combined_sale_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
-  }
-
-  join: mn_prc_method_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_prc_method_dim
-    view_label: "Pricing Method"
-    sql_on: ${mn_product_group_dim.pricing_method_wid} = ${mn_prc_method_dim.prc_method_wid};;
-  }
-
-  join: mn_price_list_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_price_list_dim
-    view_label: "Price List"
-    sql_on: ${mn_product_group_dim.base_price_list_wid} = ${mn_price_list_dim.price_list_wid};;
-  }
-
-  join: mn_bus_segment_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_bus_segment_dim
-    view_label: "Pricing Segment"
-    sql_on: ${mn_product_group_dim.bus_seg_wid} = ${mn_bus_segment_dim.bus_seg_wid};;
   }
 
   join: mn_product_eff_attr_fact {

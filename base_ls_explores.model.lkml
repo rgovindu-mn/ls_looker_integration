@@ -8,6 +8,10 @@ include: "base_mn_ctrt_domain_dim.view.lkml"
 include: "base_mn_ctrt_type_dim.view.lkml"
 include: "base_mn_ctrt_sub_type_dim.view.lkml"
 include: "base_mn_customer_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
+include: "base_mn_bus_segment_dim.view.lkml"
+include: "base_mn_price_list_dim.view.lkml"
+include: "base_mn_prc_method_dim.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -89,5 +93,36 @@ explore: mn_contract_header_dim_base {
     view_label: "Contract Owner Account"
     #fields: []
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_owner_dim.customer_wid};;
+  }
+}
+
+explore: mn_product_group_dim_base {
+
+  from:  mn_product_group_dim
+  view_name: mn_product_group_dim
+  hidden: yes
+
+  join: mn_prc_method_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_prc_method_dim
+    view_label: "Pricing Method"
+    sql_on: ${mn_product_group_dim.pricing_method_wid} = ${mn_prc_method_dim.prc_method_wid};;
+  }
+
+  join: mn_price_list_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_price_list_dim
+    view_label: "Price List"
+    sql_on: ${mn_product_group_dim.base_price_list_wid} = ${mn_price_list_dim.price_list_wid};;
+  }
+
+  join: mn_bus_segment_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_bus_segment_dim
+    view_label: "Pricing Segment"
+    sql_on: ${mn_product_group_dim.bus_seg_wid} = ${mn_bus_segment_dim.bus_seg_wid};;
   }
 }
