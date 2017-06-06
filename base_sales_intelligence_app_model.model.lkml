@@ -63,7 +63,7 @@ explore: mn_cmpl_period_fact {
     from: mn_user_dim
     view_label: "Contract Owner"
     #fields: [full_name]
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_contract_owner_dim.user_wid};;
+    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_contract_owner_dim.user_wid};;
   }
 
   join: mn_contract_author_dim {
@@ -187,13 +187,13 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${mn_user_access_map.customer_wid};;
   }
 
-  join: mn_customer_dim {
+  join: mn_customer_account_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Account"
     #fields: [full_name]
-    sql_on: ${mn_combined_sale_fact.customer_wid} = ${mn_customer_dim.customer_wid};;
+    sql_on: ${mn_combined_sale_fact.customer_wid} = ${mn_customer_account_dim.customer_wid};;
   }
 
   join: mn_date_dim {
@@ -376,15 +376,6 @@ explore: mn_pg_product_pricing_fact{
     sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
   }
 
-  join: mn_contract_owner_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_user_dim
-    view_label: "Contract Owner"
-    #fields: [full_name]
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_contract_owner_dim.user_wid};;
-  }
-
   join: mn_contract_author_dim {
     type: left_outer
     relationship: many_to_one
@@ -440,13 +431,13 @@ explore: mn_pg_product_pricing_fact{
     sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
 
-  join: mn_customer_dim {
+  join: mn_customer_account_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Contract Account"
     #fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_dim.customer_wid};;
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_account_dim.customer_wid};;
   }
 
   join: mn_prc_method_dim {
@@ -482,15 +473,6 @@ explore: mn_contract_header_dim{
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
   }
 
-  join: mn_contract_owner_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_user_dim
-    view_label: "Contract Owner"
-    #fields: [full_name]
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_contract_owner_dim.user_wid};;
-  }
-
   join: mn_contract_author_dim {
     type: left_outer
     relationship: many_to_one
@@ -546,13 +528,13 @@ explore: mn_contract_header_dim{
     sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
 
-  join: mn_customer_dim {
+  join: mn_customer_dim2 {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Contract Account"
+    view_label: "Account"
     #fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_dim.customer_wid};;
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_dim2.customer_wid};;
   }
 
 }
