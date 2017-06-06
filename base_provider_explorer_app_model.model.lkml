@@ -7,6 +7,30 @@ include: "base_ls_explores.model.lkml"
 label: "Provider Explorer"
 
 
+explore: mn_contract_header_dim{
+
+  label: "Contract Structure"
+
+  extends: [mn_contract_header_dim_secure_base, mn_product_group_dim_base]
+
+  from:  mn_contract_header_dim
+  view_name: mn_contract_header_dim
+  hidden: no
+
+  sql_always_where: ${mn_product_group_dim.latest_flag} = 'Y' and ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+
+
+  join: mn_product_group_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
+  }
+
+
+}
+
 explore: mn_combined_sale_fact {
   label: "Sales"
   extends: [mn_contract_header_dim_base, mn_product_group_dim_base]
@@ -133,10 +157,10 @@ explore: mn_combined_sale_fact {
   join: mn_user_access_sale_map {
     type: inner
     relationship: many_to_one
-    from: mn_user_access_map
+    from: mn_user_org_map
     view_label: "User Access"
     fields: []
-    sql_on: ${mn_combined_sale_fact.customer_wid} = ${mn_user_access_sale_map.customer_wid};;
+    sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
   }
 
 }

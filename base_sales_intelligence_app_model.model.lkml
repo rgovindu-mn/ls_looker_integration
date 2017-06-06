@@ -339,7 +339,7 @@ explore: mn_pg_product_pricing_fact{
 
 }
 
-explore: mn_contract_header_dim{
+explore: mn_contract_header_dim {
 
   label: "Contract Header"
 
@@ -347,7 +347,7 @@ explore: mn_contract_header_dim{
 
   from:  mn_contract_header_dim
   view_name: mn_contract_header_dim
-  hidden: no
+  hidden: yes
 
   sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
 

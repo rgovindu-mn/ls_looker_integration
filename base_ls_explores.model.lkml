@@ -12,6 +12,7 @@ include: "base_mn_product_group_dim.view.lkml"
 include: "base_mn_bus_segment_dim.view.lkml"
 include: "base_mn_price_list_dim.view.lkml"
 include: "base_mn_prc_method_dim.view.lkml"
+include: "base_mn_user_org_map.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -19,16 +20,6 @@ explore: mn_contract_header_dim_base {
   from:  mn_contract_header_dim
   view_name: mn_contract_header_dim
   hidden: yes
-
-
-  join: mn_user_access_ctrt_map {
-    type: inner
-    relationship: many_to_one
-    from: mn_user_access_map
-    view_label: "User Access"
-    fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_ctrt_map.customer_wid};;
-  }
 
 
   join: mn_contract_author_dim {
@@ -86,8 +77,8 @@ explore: mn_contract_header_dim_base {
     sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
 
-  join: mn_customer_owner_dim {
-    type: left_outer
+join: mn_customer_owner_dim {
+  type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Contract Owner Account"
@@ -96,6 +87,23 @@ explore: mn_contract_header_dim_base {
   }
 }
 
+
+explore: mn_contract_header_dim_secure_base {
+  extends: [mn_contract_header_dim_base]
+  from:  mn_contract_header_dim
+  view_name: mn_contract_header_dim
+  hidden: yes
+
+
+  join: mn_user_access_ctrt_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_org_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
+  }
+}
 explore: mn_product_group_dim_base {
 
   from:  mn_product_group_dim
