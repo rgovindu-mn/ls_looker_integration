@@ -29,7 +29,7 @@
        model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact
        default_value: Mercy Hospital South
-       field: mn_customer_dim.customer_name
+       field: mn_customer_cmpl_dim.customer_name
        listens_to_filters: [contract_name, contract_number, pg_name, year_month, year, rolling_12_months]
 
      - name: contract_name
@@ -123,7 +123,7 @@
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
-      customer_name: mn_customer_dim.customer_name
+      customer_name: mn_customer_cmpl_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       pg_name: mn_product_group_dim.pg_name
@@ -214,7 +214,7 @@
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
-      customer_name: mn_customer_dim.customer_name
+      customer_name: mn_customer_cmpl_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       pg_name: mn_product_group_dim.pg_name
@@ -299,7 +299,7 @@
     filters:
     listen:
       date_frame_selection: mn_cmpl_period_fact.date_frame_selection
-      customer_name: mn_customer_dim.customer_name
+      customer_name: mn_customer_cmpl_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       pg_name: mn_product_group_dim.pg_name
@@ -337,7 +337,7 @@
     filters:
       mn_cmpl_period_fact.date_frame_selection: Year
     listen:
-      customer_name: mn_customer_dim.customer_name
+      customer_name: mn_customer_cmpl_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       pg_name: mn_product_group_dim.pg_name
@@ -396,7 +396,7 @@
     dynamic_fields:
     filters:
     listen:
-      customer_name: mn_customer_dim.customer_name
+      customer_name: mn_customer_cmpl_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       pg_name: mn_product_group_dim.pg_name
@@ -470,4 +470,3 @@
     series_types: {}
     single_value_title: Total Revenue Gap
     value_format: '[>=10000000]0.0,,"M";[>=10000]0.0,"K";0'
-

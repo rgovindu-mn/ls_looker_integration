@@ -40,7 +40,7 @@ view: mn_user_access_map {
     dimension: user_wid {
         type: number
         hidden:  yes
-        sql: ${TABLE}.BILL_TO_CUSTOMER_WID ;;
+        sql: ${TABLE}.USER_WID ;;
     }
 
     dimension: customer_wid {

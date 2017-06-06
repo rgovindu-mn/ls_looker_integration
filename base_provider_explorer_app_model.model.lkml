@@ -2,14 +2,20 @@ connection: "oracle_rds_ls"
 
 include: "*.view.lkml"         # include all views in this project
 #include: "*.dashboard.lookml"  # include all dashboards in this project
+include: "base_ls_explores.model.lkml"
 
 label: "Provider Explorer"
 
 
 explore: mn_combined_sale_fact {
   label: "Sales"
+  extends: [mn_contract_header_dim_base]
   from:  mn_combined_sale_fact
+  view_name: mn_combined_sale_fact
+  hidden: no
+
   view_label: "Sales Data"
+
 
   join: contracted_customer {
     type: left_outer
@@ -99,38 +105,6 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.contract_wid} = ${mn_contract_header_dim.contract_wid};;
   }
 
-  join: mn_ctrt_type_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_type_dim
-    view_label: "Pricing Contract Type"
-    sql_on: ${mn_contract_header_dim.contract_type_wid} = ${mn_ctrt_type_dim.ctrt_type_wid};;
-  }
-
-  join: mn_ctrt_status_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_status_dim
-    view_label: "Pricing Contract Status"
-    sql_on: ${mn_contract_header_dim.contract_status_wid} = ${mn_ctrt_status_dim.status_wid};;
-  }
-
-  join: mn_ctrt_domain_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_domain_dim
-    view_label: "Pricing Contract Domain"
-    sql_on: ${mn_contract_header_dim.contract_domain_wid} = ${mn_ctrt_domain_dim.domain_wid};;
-  }
-
-  join: mn_ctrt_sub_type_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_sub_type_dim
-    view_label: "Pricing Contract Sub Type"
-    sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
-  }
-
   join: mn_product_dim {
     type: left_outer
     relationship: many_to_one
@@ -180,12 +154,13 @@ explore: mn_combined_sale_fact {
             AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
   }
 
-  join: mn_user_access_map {
+  join: mn_user_access_sale_map {
     type: inner
     relationship: many_to_one
     from: mn_user_access_map
     view_label: "User Access"
     fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
+    sql_on: ${mn_combined_sale_fact.customer_wid} = ${mn_user_access_sale_map.customer_wid};;
   }
+
 }
