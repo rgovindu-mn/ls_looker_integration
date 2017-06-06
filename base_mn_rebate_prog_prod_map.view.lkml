@@ -1,5 +1,5 @@
 view: mn_rebate_prog_prod_map {
-  sql_table_name: MN_REBATE_PROG_PROD_MAP ;;
+  sql_table_name: MN_REBATE_PROG_PROD_MAP_VW ;;
 
   dimension: basket_wid {
     hidden: yes

@@ -1,5 +1,5 @@
 view: mn_discount_bridge_fact {
-  sql_table_name: MN_DISCOUNT_BRIDGE_FACT ;;
+  sql_table_name: MN_DISCOUNT_BRIDGE_FACT_VW ;;
 
   dimension: bill_to_customer_wid {
     hidden: yes

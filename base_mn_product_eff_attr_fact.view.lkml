@@ -1,5 +1,5 @@
 view: mn_product_eff_attr_fact {
-  sql_table_name: MN_PRODUCT_EFF_ATTR_FACT ;;
+  sql_table_name: MN_PRODUCT_EFF_ATTR_FACT_VW;;
 
   dimension: attr_format {
     type: string

@@ -1,5 +1,5 @@
 view: mn_est_rebate_payment_fact {
-  sql_table_name: MN_EST_REBATE_PAYMENT_FACT ;;
+  sql_table_name: MN_EST_REBATE_PAYMENT_FACT_VW ;;
 
   dimension_group: applied_due_customer {
     type: time

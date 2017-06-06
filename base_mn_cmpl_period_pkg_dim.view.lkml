@@ -1,5 +1,5 @@
 view: mn_cmpl_period_pkg_dim {
-  sql_table_name: MN_CMPL_PERIOD_PKG_DIM ;;
+  sql_table_name: MN_CMPL_PERIOD_PKG_DIM_VW ;;
 
   dimension: cmpl_period_pkg_wid {
     hidden: yes

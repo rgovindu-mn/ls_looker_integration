@@ -1,5 +1,5 @@
 view: mn_contract_attr_fact {
-  sql_table_name: MN_CONTRACT_ATTR_FACT ;;
+  sql_table_name: MN_CONTRACT_ATTR_FACT_VW ;;
 
   dimension: attr_format {
     type: string

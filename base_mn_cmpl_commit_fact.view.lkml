@@ -1,5 +1,5 @@
 view: mn_cmpl_commit_fact {
-  sql_table_name: MN_CMPL_COMMIT_FACT ;;
+  sql_table_name: MN_CMPL_COMMIT_FACT_VW ;;
 
   dimension: cmt_change_code_wid {
     hidden: yes

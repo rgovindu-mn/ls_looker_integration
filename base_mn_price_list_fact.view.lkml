@@ -1,5 +1,5 @@
 view: mn_price_list_fact {
-  sql_table_name: .MN_PRICE_LIST_FACT ;;
+  sql_table_name: MN_PRICE_LIST_FACT_VW ;;
 
   dimension: customer_wid {
     hidden: yes

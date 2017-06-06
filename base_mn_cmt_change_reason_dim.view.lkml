@@ -1,5 +1,5 @@
 view: mn_cmt_change_reason_dim {
-  sql_table_name: MN_CMT_CHANGE_REASON_DIM ;;
+  sql_table_name: MN_CMT_CHANGE_REASON_DIM_VW ;;
 
   dimension: cmt_change_code_desc {
     type: string

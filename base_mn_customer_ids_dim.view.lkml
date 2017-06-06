@@ -1,5 +1,5 @@
 view: mn_customer_ids_dim {
-  sql_table_name: MN_CUSTOMER_IDS_DIM ;;
+  sql_table_name: MN_CUSTOMER_IDS_DIM_VW ;;
 
   dimension: created_user_wid {
     hidden: yes

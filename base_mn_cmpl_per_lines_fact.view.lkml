@@ -1,5 +1,5 @@
 view: mn_cmpl_per_lines_fact {
-  sql_table_name: MN_CMPL_PER_LINES_FACT ;;
+  sql_table_name: MN_CMPL_PER_LINES_FACT_VW ;;
 
   dimension: bucket_wid {
     hidden: yes

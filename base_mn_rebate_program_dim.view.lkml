@@ -1,5 +1,5 @@
 view: mn_rebate_program_dim {
-  sql_table_name: MN_REBATE_PROGRAM_DIM ;;
+  sql_table_name: MN_REBATE_PROGRAM_DIM_VW ;;
 
   dimension: accru_cust_wid {
     hidden: yes

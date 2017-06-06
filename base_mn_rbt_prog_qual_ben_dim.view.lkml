@@ -1,5 +1,5 @@
 view: mn_rbt_prog_qual_ben_dim {
-  sql_table_name: MN_RBT_PROG_QUAL_BEN_DIM ;;
+  sql_table_name: MN_RBT_PROG_QUAL_BEN_DIM_VW ;;
 
   dimension: calc_level {
     type: string
