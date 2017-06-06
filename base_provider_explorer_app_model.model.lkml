@@ -10,7 +10,6 @@ explore: mn_combined_sale_fact {
   label: "Sales"
   from:  mn_combined_sale_fact
   view_label: "Sales Data"
-  always_join: [mn_ctrt_type_dim]
 
   join: contracted_customer {
     type: left_outer
@@ -93,7 +92,7 @@ explore: mn_combined_sale_fact {
   }
 
   join: mn_contract_header_dim {
-    type: inner
+    type: left_outer
     relationship: many_to_one
     from: mn_contract_header_dim
     view_label: "Pricing Contract"
@@ -101,12 +100,11 @@ explore: mn_combined_sale_fact {
   }
 
   join: mn_ctrt_type_dim {
-    type: inner
+    type: left_outer
     relationship: many_to_one
     from: mn_ctrt_type_dim
     view_label: "Pricing Contract Type"
     sql_on: ${mn_contract_header_dim.contract_type_wid} = ${mn_ctrt_type_dim.ctrt_type_wid};;
-    sql_where: ${mn_ctrt_type_dim.ctrt_type_name} in ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
   }
 
   join: mn_ctrt_status_dim {
