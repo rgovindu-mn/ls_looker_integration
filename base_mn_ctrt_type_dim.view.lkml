@@ -5,12 +5,14 @@ view: mn_ctrt_type_dim {
     type: string
     label: "Contract Type Description"
     sql: ${TABLE}.CTRT_TYPE_DESC ;;
+    group_label: "Contract Type"
   }
 
   dimension: ctrt_type_name {
     type: string
     label: "Contract Type"
     sql: ${TABLE}.CTRT_TYPE_NAME ;;
+    group_label: "Contract Type"
   }
 
   dimension: ctrt_type_wid {
@@ -22,7 +24,7 @@ view: mn_ctrt_type_dim {
 
   dimension_group: date_created {
     type: time
-    hidden: yes
+#     hidden: yes
     timeframes: [
       raw,
       time,
@@ -33,6 +35,7 @@ view: mn_ctrt_type_dim {
       year
     ]
     sql: ${TABLE}.DATE_CREATED ;;
+    group_label: "Contract Type"
   }
 
   dimension_group: date_updated {
@@ -66,7 +69,13 @@ view: mn_ctrt_type_dim {
     type: string
     hidden: yes
     sql: ${TABLE}.SRC_SYS_CTRT_TYPE_CODE ;;
+    group_label: "Contract Type"
   }
 
-
+  measure: count {
+    hidden: yes
+    type: count
+    drill_fields: [ctrt_type_name]
+    group_label: "Contract Type"
+  }
 }

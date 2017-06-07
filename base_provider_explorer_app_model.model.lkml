@@ -114,6 +114,8 @@ explore: mn_combined_sale_fact {
     from: mn_customer_ids_dim
     sql_on: ${mn_combined_sale_fact.distr_wid}=${wholesaler_customer_ids.customer_wid};;
     sql_where:  ${wholesaler.member_info_type} =  'Wholesaler'  ;;
+    view_label: "Wholesaler"
+    fields: [id_num, id_type]
   }
 
   join: parent_wholesaler {
@@ -135,6 +137,8 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Sold to Customer"
+    fields: [id_num, id_type]
     sql_on: ${mn_combined_sale_fact.sold_to_customer_wid}=${sold_to_customer_ids.customer_wid};;
   }
 
@@ -149,6 +153,8 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Ship to Customer"
+    fields: [id_num, id_type]
     sql_on: ${mn_combined_sale_fact.ship_to_customer_wid}=${ship_to_customer_ids.customer_wid};;
   }
 
@@ -163,6 +169,8 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Bill to Customer"
+    fields: [id_num, id_type]
     sql_on: ${mn_combined_sale_fact.bill_to_customer_wid}=${bill_to_customer_ids.customer_wid};;
   }
 
@@ -194,7 +202,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_product_eff_attr_fact
-    view_label: "Product Effective Dated Attributes"
+    view_label: "Pricing Program"
     sql_on: ${mn_combined_sale_fact.product_wid} = ${mn_product_eff_attr_fact.product_wid}
             AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
   }
