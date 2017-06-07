@@ -16,6 +16,7 @@ include: "base_mn_user_org_map.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_cot_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
+include: "base_mn_customer_cot_dim.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -87,6 +88,24 @@ join: mn_customer_owner_dim {
     view_label: "Contract Owner Account"
     #fields: []
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_owner_dim.customer_wid};;
+  }
+
+  join: mn_customer_cot_dim {
+    type: left_outer
+    relationship: many_to_many
+    from: mn_customer_cot_dim
+    view_label: "Customer COT"
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_cot_dim.customer_wid} ;;
+  }
+
+  join: mn_cot_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cot_dim
+    view_label: "Customer COT"
+    sql_on: ${mn_customer_cot_dim.cot_wid}.owner_wid} = ${mn_cot_dim.cot_wid}
+            and ${mn_customer_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
+            and ${mn_customer_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
   }
 }
 
