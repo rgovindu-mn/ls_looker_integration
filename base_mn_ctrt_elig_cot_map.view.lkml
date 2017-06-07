@@ -14,7 +14,7 @@ view: mn_ctrt_elig_cot_map {
   }
 
   dimension: ctrt_ver_num {
-    type: string
+    type: number
     sql: ${TABLE}.CTRT_VER_NUM ;;
   }
 
@@ -48,22 +48,10 @@ view: mn_ctrt_elig_cot_map {
     sql: ${TABLE}.DATE_UPDATED ;;
   }
 
-  dimension_group: eff_end {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.EFF_END_DATE ;;
-  }
 
   dimension_group: eff_start {
     type: time
+    label: "COT Effective Start"
     timeframes: [
       raw,
       time,
@@ -76,6 +64,21 @@ view: mn_ctrt_elig_cot_map {
     sql: ${TABLE}.EFF_START_DATE ;;
   }
 
+  dimension_group: eff_end {
+    type: time
+    label: "COT Effective End"
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.EFF_END_DATE ;;
+  }
+
   dimension: run_id {
     hidden: yes
     type: number
@@ -84,7 +87,7 @@ view: mn_ctrt_elig_cot_map {
 
   dimension: source_system_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
@@ -100,12 +103,8 @@ view: mn_ctrt_elig_cot_map {
   }
 
   dimension: ver_num {
-    type: string
+    type: number
     sql: ${TABLE}.VER_NUM ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
 }

@@ -8,12 +8,13 @@ view: mn_cot_dim {
 
   dimension: cot_type {
     type: string
+    label: "COT Type"
     sql: ${TABLE}.COT_TYPE ;;
   }
 
   dimension: cot_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COT_WID ;;
   }
 
@@ -49,33 +50,37 @@ view: mn_cot_dim {
 
   dimension: description {
     type: string
+    label: "COT Description"
     sql: ${TABLE}.DESCRIPTION ;;
   }
 
   dimension: domain {
     type: string
+    label: "COT Domain"
     sql: ${TABLE}.DOMAIN ;;
   }
 
   dimension: domain_cot {
     type: string
+    label: "Domain.COT"
     sql: ${TABLE}.DOMAIN_COT ;;
   }
 
-  dimension: domain_description {
+  dimension: cot_domain_description {
     type: string
+    label: "COT Domain Description"
     sql: ${TABLE}.DOMAIN_DESCRIPTION ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

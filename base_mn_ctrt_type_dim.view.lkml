@@ -3,12 +3,14 @@ view: mn_ctrt_type_dim {
 
   dimension: ctrt_type_desc {
     type: string
+    label: "Contract Type Description"
     sql: ${TABLE}.CTRT_TYPE_DESC ;;
     group_label: "Contract Type"
   }
 
   dimension: ctrt_type_name {
     type: string
+    label: "Contract Type"
     sql: ${TABLE}.CTRT_TYPE_NAME ;;
     group_label: "Contract Type"
   }
@@ -53,7 +55,7 @@ view: mn_ctrt_type_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -65,6 +67,7 @@ view: mn_ctrt_type_dim {
 
   dimension: src_sys_ctrt_type_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_CTRT_TYPE_CODE ;;
     group_label: "Contract Type"
   }
