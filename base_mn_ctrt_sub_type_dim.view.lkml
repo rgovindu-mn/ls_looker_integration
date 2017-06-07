@@ -3,11 +3,13 @@ view: mn_ctrt_sub_type_dim {
 
   dimension: ctrt_sub_type_desc {
     type: string
+    label: "Contract Sub Type Description"
     sql: ${TABLE}.CTRT_SUB_TYPE_DESC ;;
   }
 
   dimension: ctrt_sub_type_name {
     type: string
+    label: "Contract Sub Type Name"
     sql: ${TABLE}.CTRT_SUB_TYPE_NAME ;;
   }
 
@@ -51,7 +53,6 @@ view: mn_ctrt_sub_type_dim {
   dimension: run_id {
     type: number
     hidden: yes
-    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -63,11 +64,8 @@ view: mn_ctrt_sub_type_dim {
 
   dimension: src_sys_ctrt_sub_type_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_CTRT_SUB_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [ctrt_sub_type_name]
-  }
 }

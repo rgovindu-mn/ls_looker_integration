@@ -13,6 +13,9 @@ include: "base_mn_bus_segment_dim.view.lkml"
 include: "base_mn_price_list_dim.view.lkml"
 include: "base_mn_prc_method_dim.view.lkml"
 include: "base_mn_user_org_map.view.lkml"
+include: "base_mn_ctrt_elig_cot_map.view.lkml"
+include: "base_mn_cot_dim.view.lkml"
+include: "base_mn_ctrt_elig_cot_map.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -45,7 +48,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_status_dim
-    view_label: "Contract Status"
+    view_label: "Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_status_wid} = ${mn_ctrt_status_dim.status_wid};;
   }
@@ -54,7 +57,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_domain_dim
-    view_label: "Contract Domain"
+    view_label: "Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_domain_wid} = ${mn_ctrt_domain_dim.domain_wid};;
   }
@@ -63,7 +66,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_type_dim
-    view_label: "Contract Type"
+    view_label: "Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_type_wid} = ${mn_ctrt_type_dim.ctrt_type_wid};;
   }
@@ -72,7 +75,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_sub_type_dim
-    view_label: "Contract Sub Type"
+    view_label: "Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
@@ -88,6 +91,15 @@ join: mn_customer_owner_dim {
 }
 
 
+explore: mn_contract_header_dim_adhoc_base {
+  extends: [mn_contract_header_dim_base]
+  from:  mn_contract_header_dim
+  view_name: mn_contract_header_dim
+  hidden: yes
+
+
+
+}
 explore: mn_contract_header_dim_secure_base {
   extends: [mn_contract_header_dim_base]
   from:  mn_contract_header_dim

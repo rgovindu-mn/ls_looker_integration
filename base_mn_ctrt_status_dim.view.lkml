@@ -33,28 +33,31 @@ view: mn_ctrt_status_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_status_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_STATUS_CODE ;;
   }
 
   dimension: status_desc {
     type: string
+    label: "Contract Status Description"
     sql: ${TABLE}.STATUS_DESC ;;
   }
 
   dimension: status_name {
     type: string
+    label: "Contract Status Name"
     sql: ${TABLE}.STATUS_NAME ;;
   }
 
@@ -65,8 +68,4 @@ view: mn_ctrt_status_dim {
     sql: ${TABLE}.STATUS_WID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [status_name]
-  }
 }

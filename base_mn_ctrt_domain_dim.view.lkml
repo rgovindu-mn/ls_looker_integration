@@ -33,11 +33,13 @@ view: mn_ctrt_domain_dim {
 
   dimension: domain_desc {
     type: string
+    label: "Contract Domain Description"
     sql: ${TABLE}.DOMAIN_DESC ;;
   }
 
   dimension: domain_name {
     type: string
+    label: "Contract Domain Name"
     sql: ${TABLE}.DOMAIN_NAME ;;
   }
 
@@ -50,23 +52,20 @@ view: mn_ctrt_domain_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_domain_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_DOMAIN_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [domain_name]
-  }
 }
