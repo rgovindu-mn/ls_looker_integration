@@ -1,5 +1,5 @@
 view: mn_est_rebate_pmt_prod_map {
-  sql_table_name: MN_EST_REBATE_PMT_PROD_MAP ;;
+  sql_table_name: MN_EST_REBATE_PMT_PROD_MAP_VW ;;
 
   dimension: aggr_rebate_type {
     type: string

@@ -16,7 +16,7 @@
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: Bryn Mawr Clinic,Paoli Clinic,Paoli Dialysis Center,Pilgrim Group
-    field: mn_customer_dim.customer_name
+    field: mn_customer_account_dim.customer_name
     listens_to_filters: [product, product_cat_name, invoice_year, invoice_month. sale_type]
 
   - name: product_cat_name
@@ -78,12 +78,12 @@
     type: table
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    dimensions: [mn_customer_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name]
+    dimensions: [mn_customer_account_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name]
     measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.revenue, mn_combined_sale_fact.oninvoice_rebate_percent,
       mn_combined_sale_fact.net_rebate_percent, mn_combined_sale_fact.total_rebate_percent , mn_combined_sale_fact.price, mn_combined_sale_fact.net_price]
     filters:
     listen:
-      account: mn_customer_dim.customer_name
+      account: mn_customer_account_dim.customer_name
       invoice_month: mn_combined_sale_fact.invoice_month
       invoice_year: mn_combined_sale_fact.invoice_year
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
@@ -113,12 +113,12 @@
     type: looker_bar
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    dimensions: [mn_customer_dim.customer_name]
+    dimensions: [mn_customer_account_dim.customer_name]
     measures: [mn_combined_sale_fact.revenue, mn_combined_sale_fact.oninvoice_rebate_percent,
       mn_combined_sale_fact.net_rebate_percent]
     filters:
     listen:
-      account: mn_customer_dim.customer_name
+      account: mn_customer_account_dim.customer_name
       invoice_month: mn_combined_sale_fact.invoice_month
       invoice_year: mn_combined_sale_fact.invoice_year
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
@@ -210,12 +210,12 @@
     type: looker_bar
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    dimensions: [mn_customer_dim.customer_name]
+    dimensions: [mn_customer_account_dim.customer_name]
     measures: [mn_combined_sale_fact.revenue]
     dynamic_fields:
     filters:
     listen:
-      account: mn_customer_dim.customer_name
+      account: mn_customer_account_dim.customer_name
       invoice_month: mn_combined_sale_fact.invoice_month
       invoice_year: mn_combined_sale_fact.invoice_year
       rolling_12_months: mn_combined_sale_fact.rolling_12_months

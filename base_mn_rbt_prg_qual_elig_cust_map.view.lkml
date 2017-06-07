@@ -1,5 +1,5 @@
 view: mn_rbt_prg_qual_elig_cust_map {
-  sql_table_name: MN_RBT_PRG_QUAL_ELIG_CUST_MAP ;;
+  sql_table_name: MN_RBT_PRG_QUAL_ELIG_CUST_MAP_VW ;;
 
   dimension: commit_customer_wid {
     hidden: yes

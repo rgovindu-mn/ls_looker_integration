@@ -67,6 +67,8 @@ view: mn_combined_sale_fact {
             TOTAL_DISCREPANCY_AMT,
             TOTAL_DISTR_COST_AMT,
             TOTAL_RBT_AMT,
+            EXTERNAL_CONTRACT_QTY,
+            EXTERNAL_CONTRACT_AMT,
             NVL(BRANCH_DISTR_WID, PARENT_DISTR_WID) AS DISTR_WID,
             'Indirect' as SALE_TYPE
          FROM MN_INDIR_SALE_FACT_VW
@@ -136,6 +138,8 @@ view: mn_combined_sale_fact {
             NULL ,
             NULL ,
             TOTAL_RBT_AMT,
+            NULL,
+            NULL,
             CUSTOMER_WID AS DISTR_WID,
             'Direct' as SALE_TYPE
         FROM MN_DIR_SALE_FACT_VW
@@ -145,13 +149,13 @@ view: mn_combined_sale_fact {
 
   dimension: access_user_wid {
     type: string
-    sql: ${mn_user_access_map.user_wid};;
+    sql: ${mn_user_access_sale_map.user_wid};;
   }
 
 
   dimension: access_user_name {
     type: string
-    sql: ${mn_user_access_map.user_name};;
+    sql: ${mn_user_access_sale_map.user_name};;
   }
 
   dimension: adm_fee_amt {
@@ -296,6 +300,16 @@ view: mn_combined_sale_fact {
     type: number
     hidden:  yes
     sql: ${TABLE}.EXCHANGE_RATE ;;
+  }
+
+  dimension: external_contract_qty {
+    type: number
+    sql: ${TABLE}.EXTERNAL_CONTRACT_QTY ;;
+  }
+
+  dimension: external_contract_amt {
+    type: number
+    sql: ${TABLE}.EXTERNAL_CONTRACT_AMT ;;
   }
 
   dimension: fee_for_srvs_amt {
@@ -769,6 +783,35 @@ view: mn_combined_sale_fact {
       AND TO_DATE(${inv_date_wid},'YYYYMMDD') < TRUNC(SYSDATE,'YYYY') THEN ${inv_qty} * ${inv_amt} ELSE  0 END ;;
   }
 
+  measure: invoice_revenue {
+    type: sum
+    label: "Total Invoice Revenue"
+    sql: ${inv_qty} * ${inv_amt} ;;
+  }
+
+  measure: invoice_quantity {
+    type: sum
+    label: "Total Invoice Quantity"
+    sql: ${inv_qty};;
+  }
+
+  measure: paid_chargeback_amount {
+    type: sum
+    label: "Total Paid Chargeback Amount"
+    sql: ${paid_chgbk_amt};;
+  }
+
+  measure: total_chargeback_amount {
+    type: sum
+    label: "Total Chargeback Amount"
+    sql: ${total_chgbk_amt};;
+  }
+
+  measure: total_ext_contract_amount {
+    type: sum
+    label: "Total External Contract Amount"
+    sql: ${external_contract_amt} * ${external_contract_qty}  ;;
+  }
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

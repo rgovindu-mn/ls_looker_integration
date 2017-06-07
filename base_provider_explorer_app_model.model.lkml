@@ -2,15 +2,44 @@ connection: "oracle_rds_ls"
 
 include: "*.view.lkml"         # include all views in this project
 #include: "*.dashboard.lookml"  # include all dashboards in this project
+include: "base_ls_explores.model.lkml"
 
 label: "Provider Explorer"
 
 
+explore: mn_contract_header_dim{
+
+  label: "Contract Structure"
+
+  extends: [mn_contract_header_dim_secure_base, mn_product_group_dim_base]
+
+  from:  mn_contract_header_dim
+  view_name: mn_contract_header_dim
+  hidden: no
+
+  sql_always_where: ${mn_product_group_dim.latest_flag} = 'Y' and ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+
+
+  join: mn_product_group_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
+  }
+
+
+}
+
 explore: mn_combined_sale_fact {
   label: "Sales"
+  extends: [mn_contract_header_dim_base, mn_product_group_dim_base]
   from:  mn_combined_sale_fact
+  view_name: mn_combined_sale_fact
+  hidden: no
+
   view_label: "Sales Data"
-  always_join: [mn_ctrt_type_dim]
+
 
   join: contracted_customer {
     type: left_outer
@@ -40,6 +69,8 @@ explore: mn_combined_sale_fact {
     from: mn_customer_ids_dim
     sql_on: ${mn_combined_sale_fact.distr_wid}=${wholesaler_customer_ids.customer_wid};;
     sql_where:  ${wholesaler.member_info_type} =  'Wholesaler'  ;;
+    view_label: "Wholesaler"
+    fields: [id_num, id_type]
   }
 
   join: parent_wholesaler {
@@ -61,6 +92,8 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Sold to Customer"
+    fields: [id_num, id_type]
     sql_on: ${mn_combined_sale_fact.sold_to_customer_wid}=${sold_to_customer_ids.customer_wid};;
   }
 
@@ -75,6 +108,8 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Ship to Customer"
+    fields: [id_num, id_type]
     sql_on: ${mn_combined_sale_fact.ship_to_customer_wid}=${ship_to_customer_ids.customer_wid};;
   }
 
@@ -89,48 +124,17 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Bill to Customer"
+    fields: [id_num, id_type]
     sql_on: ${mn_combined_sale_fact.bill_to_customer_wid}=${bill_to_customer_ids.customer_wid};;
   }
 
   join: mn_contract_header_dim {
-    type: inner
+    type: left_outer
     relationship: many_to_one
     from: mn_contract_header_dim
     view_label: "Pricing Contract"
     sql_on: ${mn_combined_sale_fact.contract_wid} = ${mn_contract_header_dim.contract_wid};;
-  }
-
-  join: mn_ctrt_type_dim {
-    type: inner
-    relationship: many_to_one
-    from: mn_ctrt_type_dim
-    view_label: "Pricing Contract Type"
-    sql_on: ${mn_contract_header_dim.contract_type_wid} = ${mn_ctrt_type_dim.ctrt_type_wid};;
-    sql_where: ${mn_ctrt_type_dim.ctrt_type_name} in ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
-  }
-
-  join: mn_ctrt_status_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_status_dim
-    view_label: "Pricing Contract Status"
-    sql_on: ${mn_contract_header_dim.contract_status_wid} = ${mn_ctrt_status_dim.status_wid};;
-  }
-
-  join: mn_ctrt_domain_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_domain_dim
-    view_label: "Pricing Contract Domain"
-    sql_on: ${mn_contract_header_dim.contract_domain_wid} = ${mn_ctrt_domain_dim.domain_wid};;
-  }
-
-  join: mn_ctrt_sub_type_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_ctrt_sub_type_dim
-    view_label: "Pricing Contract Sub Type"
-    sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
 
   join: mn_product_dim {
@@ -149,45 +153,22 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
   }
 
-  join: mn_prc_method_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_prc_method_dim
-    view_label: "Pricing Method"
-    sql_on: ${mn_product_group_dim.pricing_method_wid} = ${mn_prc_method_dim.prc_method_wid};;
-  }
-
-  join: mn_price_list_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_price_list_dim
-    view_label: "Price List"
-    sql_on: ${mn_product_group_dim.base_price_list_wid} = ${mn_price_list_dim.price_list_wid};;
-  }
-
-  join: mn_bus_segment_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_bus_segment_dim
-    view_label: "Pricing Segment"
-    sql_on: ${mn_product_group_dim.bus_seg_wid} = ${mn_bus_segment_dim.bus_seg_wid};;
-  }
-
   join: mn_product_eff_attr_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_product_eff_attr_fact
-    view_label: "Product Effective Dated Attributes"
+    view_label: "Pricing Program"
     sql_on: ${mn_combined_sale_fact.product_wid} = ${mn_product_eff_attr_fact.product_wid}
             AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
   }
 
-  join: mn_user_access_map {
+  join: mn_user_access_sale_map {
     type: inner
     relationship: many_to_one
-    from: mn_user_access_map
+    from: mn_user_org_map
     view_label: "User Access"
     fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_user_access_map.customer_wid};;
+    sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
   }
+
 }

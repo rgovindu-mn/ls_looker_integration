@@ -1,5 +1,5 @@
 view: mn_cmt_type_dim {
-  sql_table_name: MN_CMT_TYPE_DIM ;;
+  sql_table_name: MN_CMT_TYPE_DIM_VW ;;
 
   dimension: cmt_type_desc {
     type: string

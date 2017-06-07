@@ -1,17 +1,7 @@
 view: mn_contract_header_dim {
   sql_table_name: MN_CONTRACT_HEADER_DIM_VW ;;
 
-
-  dimension: access_user_wid {
-    type: string
-    sql: ${mn_user_access_map.user_wid};;
-  }
-
-
-  dimension: access_user_name {
-    type: string
-    sql: ${mn_user_access_map.user_name};;
-  }
+  label: "Contract"
 
 
   dimension: additional_delegate_wid {

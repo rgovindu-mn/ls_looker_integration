@@ -28,7 +28,7 @@
      model: base_sales_intelligence_app_model
      explore: mn_contract_header_dim
      default_value:
-     field: mn_customer_dim.customer_name
+     field: mn_customer_owner_dim.customer_name
      listens_to_filters: [product_name, product_group_name, srep_full_name, contract_number, contract_name, elig_customer_name]
 
 
@@ -189,14 +189,14 @@
       type: table
       model: base_sales_intelligence_app_model
       explore: mn_pg_product_pricing_fact
-      dimensions: [mn_customer_dim.customer_name, mn_contract_header_dim.contract_name,
+      dimensions: [mn_customer_owner_dim.customer_name, mn_contract_header_dim.contract_name,
         mn_contract_header_dim.contract_number, mn_contract_header_dim.contract_number_url, mn_contract_header_dim.eff_start_date, mn_contract_header_dim.eff_end_date,
         mn_contract_header_dim.days_to_expire_fmt, mn_contract_author_dim.full_name, mn_contract_srep_dim.full_name,
         mn_contract_header_dim.value, mn_ctrt_type_dim.ctrt_type_name, mn_ctrt_status_dim.status_name]
       filters:
       listen:
         elig_customer_name: mn_eligible_customer_dim.customer_name
-        customer_name: mn_customer_dim.customer_name
+        customer_name: mn_customer_owner_dim.customer_name
         contract_number: mn_contract_header_dim.contract_number
         contract_name: mn_contract_header_dim.contract_name
         days_to_expire: mn_contract_header_dim.days_to_expire
@@ -239,7 +239,7 @@
       filters:
       listen:
         elig_customer_name: mn_eligible_customer_dim.customer_name
-        customer_name: mn_customer_dim.customer_name
+        customer_name: mn_customer_owner_dim.customer_name
         contract_number: mn_contract_header_dim.contract_number
         contract_name: mn_contract_header_dim.contract_name
         days_to_expire: mn_contract_header_dim.days_to_expire

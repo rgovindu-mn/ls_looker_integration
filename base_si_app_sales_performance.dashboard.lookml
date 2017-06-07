@@ -67,7 +67,7 @@
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
-    field: mn_customer_dim.customer_name
+    field: mn_customer_account_dim.customer_name
     listens_to_filters: [contract_name, contract_number, sale_type, product_cat_name, sku,account, channel, invoice_year]
 
   - name: channel
@@ -124,7 +124,7 @@
     measures: [mn_combined_sale_fact.volume]
     filters:
     listen:
-      customer: mn_customer_dim.customer_name
+      customer: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       sale_type: mn_combined_sale_fact.sale_type
@@ -183,7 +183,7 @@
     measures: [mn_combined_sale_fact.revenue]
     filters:
     listen:
-      customer: mn_customer_dim.customer_name
+      customer: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       sale_type: mn_combined_sale_fact.sale_type
@@ -237,13 +237,13 @@
     type: table
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    dimensions: [ mn_1shipto_customer_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_dim.customer_name,
+    dimensions: [ mn_1shipto_customer_dim.customer_name, mn_category_dim.product_name, mn_product_dim.product_name, mn_customer_account_dim.customer_name,
       mn_billto_customer_dim.customer_name, mn_contract_header_dim.contract_name,
       mn_channel_customer_dim.customer_name, mn_combined_sale_fact.date_period, mn_combined_sale_fact.sale_type]
     measures: [mn_combined_sale_fact.volume, mn_combined_sale_fact.revenue]
     filters:
     listen:
-      customer: mn_customer_dim.customer_name
+      customer: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       sale_type: mn_combined_sale_fact.sale_type
@@ -269,7 +269,7 @@
       mn_combined_sale_fact.date_frame_selection: Date Period
       mn_combined_sale_fact.invoice_month: Year Month
       mn_category_dim.product_name: Product Category
-      mn_customer_dim.customer_name: Contracted Customer
+      mn_customer_account_dim.customer_name: Contracted Customer
       mn_billto_customer_dim.customer_name: Bill To Customer
       mn_1shipto_customer_dim.customer_name: Account
       mn_channel_customer_dim.customer_name: Channel

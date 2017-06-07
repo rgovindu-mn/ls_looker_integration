@@ -1,5 +1,5 @@
 view: mn_customer_ids_dim {
-  sql_table_name: MN_CUSTOMER_IDS_DIM ;;
+  sql_table_name: MN_CUSTOMER_IDS_DIM_VW ;;
 
   dimension: created_user_wid {
     hidden: yes
@@ -80,11 +80,13 @@ view: mn_customer_ids_dim {
   dimension: id_num {
     type: string
     sql: ${TABLE}.ID_NUM ;;
+    label: "Alternate ID Number"
   }
 
   dimension: id_type {
     type: string
     sql: ${TABLE}.ID_TYPE ;;
+    label: "Alternate ID Type"
   }
 
   dimension: primary_flag {

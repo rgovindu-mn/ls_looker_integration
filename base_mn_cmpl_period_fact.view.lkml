@@ -5,13 +5,13 @@ view: mn_cmpl_period_fact {
 
   dimension: access_user_wid {
     type: string
-    sql: ${mn_user_access_map.user_wid};;
+    sql: ${mn_user_access_cmpl_map.user_wid};;
   }
 
 
   dimension: access_user_name {
     type: string
-    sql: ${mn_user_access_map.user_name};;
+    sql: ${mn_user_access_cmpl_map.user_name};;
   }
 
 

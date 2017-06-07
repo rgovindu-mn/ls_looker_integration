@@ -1,5 +1,5 @@
 view: mn_erp_payment_fact {
-  sql_table_name: MN_ERP_PAYMENT_FACT ;;
+  sql_table_name: MN_ERP_PAYMENT_FACT_VW ;;
 
   dimension_group: date_created {
     hidden: yes

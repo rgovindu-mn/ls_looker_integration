@@ -1,5 +1,5 @@
 view: mn_ctrt_wholesaler_map {
-  sql_table_name: MN_CTRT_WHOLESALER_MAP ;;
+  sql_table_name: MN_CTRT_WHOLESALER_MAP_VW ;;
 
   dimension: contract_wid {
     hidden: yes

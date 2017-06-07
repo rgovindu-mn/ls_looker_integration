@@ -1,5 +1,5 @@
 view: mn_rbt_prog_qual_prod_map {
-  sql_table_name: MN_RBT_PROG_QUAL_PROD_MAP ;;
+  sql_table_name: MN_RBT_PROG_QUAL_PROD_MAP_VW ;;
 
   dimension: basket_wid {
     hidden: yes

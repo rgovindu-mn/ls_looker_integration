@@ -1,5 +1,5 @@
 view: mn_bus_segment_dim {
-  sql_table_name: MN_BUS_SEGMENT_DIM ;;
+  sql_table_name: MN_BUS_SEGMENT_DIM_VW ;;
 
   dimension: bus_seg_code {
     type: string

@@ -1,5 +1,5 @@
 view: mn_cot_dim {
-  sql_table_name: MN_COT_DIM ;;
+  sql_table_name: MN_COT_DIM_VW ;;
 
   dimension: class_of_trade {
     type: string

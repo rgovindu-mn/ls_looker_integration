@@ -1,5 +1,5 @@
 view: mn_bid_award_fact {
-  sql_table_name: MN_BID_AWARD_FACT ;;
+  sql_table_name: MN_BID_AWARD_FACT_VW ;;
 
   dimension: bid_award_desc {
     type: string

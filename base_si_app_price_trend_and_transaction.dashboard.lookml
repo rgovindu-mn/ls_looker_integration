@@ -16,7 +16,7 @@
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value:
-    field: mn_customer_dim.customer_name
+    field: mn_customer_account_dim.customer_name
     listens_to_filters: [product_name, contract_number, contract_name, invoice_year, invoice_month]
 
   - name: product_name
@@ -93,7 +93,7 @@
       mn_combined_sale_fact.price, mn_combined_sale_fact.net_price]
     filters:
     listen:
-      account: mn_customer_dim.customer_name
+      account: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       invoice_month: mn_combined_sale_fact.invoice_month
@@ -126,7 +126,7 @@
     measures: [mn_combined_sale_fact.price, mn_combined_sale_fact.net_price]
     filters:
     listen:
-      account: mn_customer_dim.customer_name
+      account: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
       invoice_month: mn_combined_sale_fact.invoice_month
