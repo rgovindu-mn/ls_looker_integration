@@ -33,11 +33,13 @@ view: mn_pmt_mth_type_dim {
 
   dimension: pmt_mth_type_desc {
     type: string
+    label: "Payment Method Type"
     sql: ${TABLE}.PMT_MTH_TYPE_DESC ;;
   }
 
   dimension: pmt_mth_type_name {
     type: string
+    label: "PAyment Method Type Description"
     sql: ${TABLE}.PMT_MTH_TYPE_NAME ;;
   }
 
@@ -61,11 +63,8 @@ view: mn_pmt_mth_type_dim {
 
   dimension: src_sys_pmt_mth_type_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_PMT_MTH_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [pmt_mth_type_name]
-  }
 }

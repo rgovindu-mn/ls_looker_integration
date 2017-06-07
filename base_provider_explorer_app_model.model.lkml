@@ -7,9 +7,9 @@ include: "base_ls_explores.model.lkml"
 label: "Provider Explorer"
 
 
-explore: mn_contract_header_dim{
+explore: mn_contract_header_dim {
 
-  label: "Contract Structure"
+  label: "Full Contract Structure"
 
   extends: [mn_contract_header_dim_secure_base, mn_product_group_dim_base]
 
@@ -22,12 +22,57 @@ explore: mn_contract_header_dim{
 
   join: mn_product_group_dim {
     type: left_outer
+    view_label: "Pricing Program"
     relationship: many_to_one
     from: mn_product_group_dim
-    view_label: "Pricing Program"
     sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
   }
 
+  join: mn_ctrt_wholesaler_map {
+    type: left_outer
+    view_label: "Contract Trading Partner"
+    relationship: many_to_one
+    from: mn_ctrt_wholesaler_map
+    fields: [eff_start_date, eff_end_date]
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_ctrt_wholesaler_map.contract_wid};;
+  }
+
+
+  join: mn_ctrt_elig_cot_map {
+    type: left_outer
+    view_label: "Contract COT"
+    relationship: many_to_one
+    from: mn_ctrt_elig_cot_map
+    fields: [eff_start_date, eff_end_date]
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_ctrt_elig_cot_map.contract_wid};;
+  }
+
+  join: mn_ctrt_elig_cot_dim {
+    type: left_outer
+    view_label: "Contract COT"
+    relationship: many_to_one
+    from: mn_cot_dim
+    #fields: []
+    sql_on: ${mn_ctrt_elig_cot_dim.cot_wid} = ${mn_ctrt_elig_cot_map.cot_wid};;
+  }
+
+
+  join: mn_ctrt_wholesaler_dim {
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Contract Trading Partner"
+    from: mn_customer_dim
+    sql_on: ${mn_ctrt_wholesaler_map.customer_wid} = ${mn_ctrt_wholesaler_dim.customer_wid};;
+  }
+
+  join: mn_contract_attr_fact {
+    type: left_outer
+    view_label: "Contract Effective Dated Attributes (EDA)"
+    relationship: many_to_one
+    from: mn_contract_attr_fact
+    fields: [eff_start_date, eff_end_date, attr_name, attr_value]
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_contract_attr_fact.contract_wid};;
+  }
 
 }
 

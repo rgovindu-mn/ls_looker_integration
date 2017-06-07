@@ -3,25 +3,25 @@ view: mn_ctrt_wholesaler_map {
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: created_by_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CREATED_BY_WID ;;
   }
 
   dimension: created_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CREATED_DATE_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -56,6 +56,7 @@ view: mn_ctrt_wholesaler_map {
   }
 
   dimension_group: eff_end {
+    label: "Partner Effective End"
     type: time
     timeframes: [
       raw,
@@ -70,6 +71,7 @@ view: mn_ctrt_wholesaler_map {
   }
 
   dimension_group: eff_start {
+    label: "Partner Effective Start"
     type: time
     timeframes: [
       raw,
@@ -85,24 +87,21 @@ view: mn_ctrt_wholesaler_map {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_qual_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_QUAL_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+
 }

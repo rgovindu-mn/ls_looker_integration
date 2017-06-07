@@ -7,11 +7,13 @@ view: mn_contract_attr_fact {
   }
 
   dimension: attr_name {
+    label: "Contract EDA Name"
     type: string
     sql: ${TABLE}.ATTR_NAME ;;
   }
 
   dimension: attr_value {
+    label: "Contract EDA Value"
     type: string
     sql: ${TABLE}.ATTR_VALUE ;;
   }
@@ -54,6 +56,7 @@ view: mn_contract_attr_fact {
 
   dimension_group: eff_end {
     type: time
+    label: "Contract EDA End"
     timeframes: [
       raw,
       time,
@@ -68,6 +71,7 @@ view: mn_contract_attr_fact {
 
   dimension_group: eff_start {
     type: time
+    label: "Contract EDA Start"
     timeframes: [
       raw,
       time,
@@ -93,13 +97,13 @@ view: mn_contract_attr_fact {
 
   dimension: source_system_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_contract_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
   }
 
