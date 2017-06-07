@@ -80,11 +80,13 @@ view: mn_customer_ids_dim {
   dimension: id_num {
     type: string
     sql: ${TABLE}.ID_NUM ;;
+    label: "Alternate ID Number"
   }
 
   dimension: id_type {
     type: string
     sql: ${TABLE}.ID_TYPE ;;
+    label: "Alternate ID Type"
   }
 
   dimension: primary_flag {
