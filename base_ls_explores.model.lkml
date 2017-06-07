@@ -13,6 +13,11 @@ include: "base_mn_bus_segment_dim.view.lkml"
 include: "base_mn_price_list_dim.view.lkml"
 include: "base_mn_prc_method_dim.view.lkml"
 include: "base_mn_user_org_map.view.lkml"
+include: "base_mn_combined_rebate_program_dim.view.lkml"
+include: "base_mn_accrual_type_dim.view.lkml"
+include: "base_mn_pmt_type_dim.view.lkml"
+include: "base_mn_program_type_dim.view.lkml"
+include: "base_mn_pmt_mth_type_dim.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -132,5 +137,52 @@ explore: mn_product_group_dim_base {
     from: mn_bus_segment_dim
     view_label: "Pricing Segment"
     sql_on: ${mn_product_group_dim.bus_seg_wid} = ${mn_bus_segment_dim.bus_seg_wid};;
+  }
+}
+
+explore: mn_combined_rebate_program_dim {
+
+  from:  mn_combined_rebate_program_dim
+  view_name: mn_combined_rebate_program_dim
+  hidden: yes
+
+  join: mn_accrual_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_accrual_type_dim
+    view_label: "Accrual Type"
+    sql_on: ${mn_combined_rebate_program_dim.accrual_type_wid} = ${mn_accrual_type_dim.accrual_type_wid};;
+  }
+
+  join: mn_pmt_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pmt_type_dim
+    view_label: "Payment Type"
+    sql_on: ${mn_combined_rebate_program_dim.pmt_type_wid} = ${mn_pmt_type_dim.pmt_type_wid};;
+  }
+
+  join: mn_program_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_program_type_dim
+    view_label: "Program Type"
+    sql_on: ${mn_combined_rebate_program_dim.program_type_wid} = ${mn_program_type_dim.program_type_wid};;
+  }
+
+  join: mn_pmt_mth_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pmt_mth_type_dim
+    view_label: "Program Method Type"
+    sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_pmt_mth_type_dim.pmt_mth_type_wid};;
+  }
+
+  join: mn_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Payee"
+    sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_customer_dim.customer_wid};;
   }
 }

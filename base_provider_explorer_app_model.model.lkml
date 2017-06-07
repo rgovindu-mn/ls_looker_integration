@@ -31,6 +31,14 @@ explore: mn_contract_header_dim{
 
 }
 
+explore: pbc_rebate_contract{
+  label: "Rebates"
+  extends: [mn_contract_header_dim_base]
+  hidden: no
+
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+}
+
 explore: mn_combined_sale_fact {
   label: "Sales"
   extends: [mn_contract_header_dim_base, mn_product_group_dim_base]
@@ -45,6 +53,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
+    view_label: "Contracted Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${contracted_customer.customer_wid};;
   }
 
