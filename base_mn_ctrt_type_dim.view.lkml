@@ -24,7 +24,7 @@ view: mn_ctrt_type_dim {
 
   dimension_group: date_created {
     type: time
-#     hidden: yes
+    hidden: yes
     timeframes: [
       raw,
       time,

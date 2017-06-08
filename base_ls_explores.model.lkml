@@ -17,6 +17,8 @@ include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_cot_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_customer_cot_dim.view.lkml"
+include: "base_mn_org_dim.view.lkml"
+include: "base_mn_distrib_mthd_dim.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -90,25 +92,9 @@ join: mn_customer_owner_dim {
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_owner_dim.customer_wid};;
   }
 
-  join: mn_customer_cot_dim {
-    type: left_outer
-    relationship: many_to_many
-    from: mn_customer_cot_dim
-    view_label: "Customer COT"
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_cot_dim.customer_wid} ;;
-  }
-
-  join: mn_cot_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_cot_dim
-    view_label: "Customer COT"
-    sql_on: ${mn_customer_cot_dim.cot_wid}.owner_wid} = ${mn_cot_dim.cot_wid}
-            and ${mn_customer_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
-            and ${mn_customer_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
-  }
 }
 
+# Adhoc base explore for contract header with all needed joins
 
 explore: mn_contract_header_dim_adhoc_base {
   extends: [mn_contract_header_dim_base]
@@ -116,9 +102,51 @@ explore: mn_contract_header_dim_adhoc_base {
   view_name: mn_contract_header_dim
   hidden: yes
 
+  join: mn_org_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_org_dim
+    view_label: "Org"
+    sql_on: ${mn_contract_header_dim.org_wid} = ${mn_org_dim.org_wid} ;;
+  }
 
+  join: mn_customer_cot_dim {
+    type: left_outer
+    relationship: many_to_many
+    from: mn_customer_cot_dim
+    view_label: "Contracted Customer COT"
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_cot_dim.customer_wid} ;;
+  }
+
+  join: mn_cot_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cot_dim
+    view_label: "Contracted Customer COT"
+    sql_on: ${mn_customer_cot_dim.cot_wid}.owner_wid} = ${mn_cot_dim.cot_wid}
+            and ${mn_customer_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
+            and ${mn_customer_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
+  }
+
+  join: mn_parent_contract_header_dim {
+    from: mn_contract_header_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Parent Contract"
+    fields: [mn_parent_contract_header_dim.contract_number]
+    sql_on: ${mn_contract_header_dim.parent_contract_wid} = ${mn_parent_contract_header_dim.contract_wid} ;;
+  }
+
+  join: mn_distrib_mthd_dim {
+    from: mn_distrib_mthd_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Distribution Method"
+    sql_on: ${mn_contract_header_dim.distribution_method_wid} = ${mn_distrib_mthd_dim.dist_method_wid} ;;
+  }
 
 }
+
 explore: mn_contract_header_dim_secure_base {
   extends: [mn_contract_header_dim_base]
   from:  mn_contract_header_dim
