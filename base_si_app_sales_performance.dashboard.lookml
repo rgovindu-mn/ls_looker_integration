@@ -89,12 +89,12 @@
     listens_to_filters: [customer, contract_name, contract_number, product_cat_name, sku,account, channel, invoice_year]
 
   - name: invoice_year
-    title: 'Invoice Year'
+    title: 'Invoice Date'
     type: field_filter
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: after 2014/01/01
-    field: mn_combined_sale_fact.invoice_year
+    field: mn_date_dim.date_sql_date
     listens_to_filters: [customer, contract_name, contract_number, sale_type, product_cat_name, sku,account, channel]
 
   - name: date_frame_selection
@@ -132,7 +132,7 @@
       sku: mn_product_dim.product_name
       account: mn_1shipto_customer_dim.customer_name
       channel: mn_channel_customer_dim.customer_name
-      invoice_year: mn_combined_sale_fact.invoice_year
+      invoice_year: mn_date_dim.date_sql_date
       date_frame_selection: mn_combined_sale_fact.date_frame_selection
     sorts: [mn_combined_sale_fact.date_period desc]
     limit: '500'
@@ -191,7 +191,7 @@
       sku: mn_product_dim.product_name
       account: mn_1shipto_customer_dim.customer_name
       channel: mn_channel_customer_dim.customer_name
-      invoice_year: mn_combined_sale_fact.invoice_year
+      invoice_year: mn_date_dim.date_sql_date
       date_frame_selection: mn_combined_sale_fact.date_frame_selection
     sorts: [mn_combined_sale_fact.date_period desc]
     limit: '500'
@@ -251,7 +251,7 @@
       sku: mn_product_dim.product_name
       account: mn_1shipto_customer_dim.customer_name
       channel: mn_channel_customer_dim.customer_name
-      invoice_year: mn_combined_sale_fact.invoice_year
+      invoice_year: mn_date_dim.date_sql_date
       date_frame_selection: mn_combined_sale_fact.date_frame_selection
     sorts: [ mn_1shipto_customer_dim.customer_name, mn_combined_sale_fact.date_period, mn_category_dim.product_name, mn_product_dim.product_name]
     limit: '500'
