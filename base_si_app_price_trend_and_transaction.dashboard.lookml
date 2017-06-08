@@ -17,7 +17,7 @@
     explore: mn_combined_sale_fact
     default_value:
     field: mn_customer_account_dim.customer_name
-    listens_to_filters: [product_name, contract_number, contract_name, invoice_year, invoice_month]
+    listens_to_filters: [product_name, contract_number, contract_name, invoice_year]
 
   - name: product_name
     title: 'Product Name'
@@ -26,7 +26,7 @@
     explore: mn_combined_sale_fact
     default_value:
     field: mn_product_dim.product_name
-    listens_to_filters: [account, contract_number, contract_name, invoice_year, invoice_month]
+    listens_to_filters: [account, contract_number, contract_name, invoice_year]
 
   - name: contract_name
     title: 'Contract Name'
@@ -35,7 +35,7 @@
     explore: mn_combined_sale_fact
     default_value: 'Adv Specialty Hosp - TB v1'
     field: mn_contract_header_dim.contract_name
-    listens_to_filters: [product_name, account, contract_number, invoice_year, invoice_month]
+    listens_to_filters: [product_name, account, contract_number, invoice_year]
 
   - name: contract_number
     title: 'Contract Number'
@@ -44,25 +44,16 @@
     explore: mn_combined_sale_fact
     default_value:
     field: mn_contract_header_dim.contract_number
-    listens_to_filters: [product_name, account, contract_name, invoice_year, invoice_month]
+    listens_to_filters: [product_name, account, contract_name, invoice_year]
 
   - name: invoice_year
-    title: 'Invoice Year'
+    title: 'Invoice Date'
     type: field_filter
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
     default_value: ''
-    field: mn_combined_sale_fact.invoice_year
+    field: mn_date_dim.date_sql_date
     listens_to_filters: [product_name, account, contract_number, contract_name, invoice_month]
-
-  - name: invoice_month
-    title: 'Invoice Month'
-    type: field_filter
-    model: base_sales_intelligence_app_model
-    explore: mn_combined_sale_fact
-    default_value: ''
-    field: mn_combined_sale_fact.invoice_month
-    listens_to_filters: [product_name, account, contract_number, contract_name, invoice_year]
 
   - name: rolling_12_months
     title: 'Rolling 12 Months'
@@ -96,8 +87,7 @@
       account: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
-      invoice_month: mn_combined_sale_fact.invoice_month
-      invoice_year: mn_combined_sale_fact.invoice_year
+      invoice_year: mn_date_dim.date_sql_date
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
       product_name: mn_product_dim.product_name
     sorts: [mn_product_dim.product_name, mn_combined_sale_fact.invoice_month]
@@ -129,8 +119,7 @@
       account: mn_customer_account_dim.customer_name
       contract_name: mn_contract_header_dim.contract_name
       contract_number: mn_contract_header_dim.contract_number
-      invoice_month: mn_combined_sale_fact.invoice_month
-      invoice_year: mn_combined_sale_fact.invoice_year
+      invoice_year: mn_date_dim.date_sql_date
       rolling_12_months: mn_combined_sale_fact.rolling_12_months
       product_name: mn_product_dim.product_name
       date_frame_selection: mn_combined_sale_fact.date_frame_selection

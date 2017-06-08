@@ -92,6 +92,7 @@ view: mn_date_dim {
 
   dimension_group: date_sql {
     type: time
+    label: ""
     timeframes: [
       raw,
       time,

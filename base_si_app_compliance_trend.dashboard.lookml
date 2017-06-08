@@ -89,7 +89,7 @@
   - name: account_compliance_chart
     title: Compliance Trend Breakdown
     note:
-      text: 'Simple chart with KPIs'
+      text: 'Compliance Breakdown.'
       state: collapsed
       display: hover
     type: looker_column
@@ -183,17 +183,21 @@
 
   - name: account_compliance_chart_simple
     title: Compliance Trend
+    note:
+      text: 'Compliance Expected and Actuals for currenct period represend projected values, not To-Date'
+      state: expanded
+      display: middle
     type: looker_column
     model: base_sales_intelligence_app_model
     explore: mn_cmpl_period_fact_dated
     dimensions: [mn_cmpl_period_fact.date_period]
-    measures: [mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_expected_sales,
-      mn_cmpl_period_fact.period_actual_sales, mn_cmpl_period_fact.period_actual_sales_over_expected,
+    measures: [mn_cmpl_period_fact.period_total_revenue_gap, mn_cmpl_period_fact.period_expected_sales_proj,
+      mn_cmpl_period_fact.period_actual_sales_proj, mn_cmpl_period_fact.period_actual_sales_over_expected,
       mn_cmpl_period_fact.period_revenue_gap]
     dynamic_fields:
     - table_calculation: committed_actual_sales
       label: Committed Actual Sales
-      expression: "${mn_cmpl_period_fact.period_actual_sales} - ${mn_cmpl_period_fact.period_actual_sales_over_expected}"
+      expression: "${mn_cmpl_period_fact.period_actual_sales_proj} - ${mn_cmpl_period_fact.period_actual_sales_over_expected}"
       value_format:
       value_format_name: decimal_0
     - table_calculation: over_committed_actual_sales
@@ -262,15 +266,15 @@
     series_labels:
       mn_product_group_dim.pg_name: Price Program
       mn_cmpl_period_fact.compliance_percent: Compliance %
-      mn_cmpl_period_fact.period_expected_sales: Expected Sales To Date
-      mn_cmpl_period_fact.period_actual_sales: Actual Sales To Date
+      mn_cmpl_period_fact.period_expected_sales_proj: Expected Sales
+      mn_cmpl_period_fact.period_actual_sales_proj: Actual Sales
       mn_cmpl_period_fact.commit_tier: Committed Tier
       mn_date_dim.year: Year
       mn_date_dim.month_name: Month
       missing_sales: Gap
       mn_cmpl_period_fact.period_total_revenue_gap: Projected End Of Period Sales Gap
     series_types:
-      mn_cmpl_period_fact.period_expected_sales: scatter
+      mn_cmpl_period_fact.period_expected_sales_proj: scatter
       mn_cmpl_period_fact.period_total_revenue_gap: line
     hidden_series: [committed_actual_sales, missing_revenue, projected_gap]
     hidden_fields: [missing_sales, mn_cmpl_period_fact.period_actual_sales_over_expected,
