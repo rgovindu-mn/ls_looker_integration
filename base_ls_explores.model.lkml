@@ -16,7 +16,7 @@ include: "base_mn_user_org_map.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_cot_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
-
+include: "base_mn_pg_tier_basis_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -126,7 +126,7 @@ explore: mn_product_group_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_prc_method_dim
-    view_label: "Pricing Method"
+    view_label: "Pricing Program"
     sql_on: ${mn_product_group_dim.pricing_method_wid} = ${mn_prc_method_dim.prc_method_wid};;
   }
 
@@ -134,7 +134,7 @@ explore: mn_product_group_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_price_list_dim
-    view_label: "Price List"
+    view_label: "Contracted Price List"
     sql_on: ${mn_product_group_dim.base_price_list_wid} = ${mn_price_list_dim.price_list_wid};;
   }
 
@@ -142,7 +142,17 @@ explore: mn_product_group_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_bus_segment_dim
-    view_label: "Pricing Segment"
+    view_label: "Pricing Program"
     sql_on: ${mn_product_group_dim.bus_seg_wid} = ${mn_bus_segment_dim.bus_seg_wid};;
   }
+  join: mn_pg_tier_basis_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_tier_basis_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid};;
+  }
+
+
+
 }

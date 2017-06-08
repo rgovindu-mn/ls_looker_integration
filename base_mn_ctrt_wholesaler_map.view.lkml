@@ -57,6 +57,7 @@ view: mn_ctrt_wholesaler_map {
 
   dimension_group: eff_end {
     label: "Partner Effective End"
+    #group_label: "Contract Trading Partner"
     type: time
     timeframes: [
       raw,
@@ -72,6 +73,7 @@ view: mn_ctrt_wholesaler_map {
 
   dimension_group: eff_start {
     label: "Partner Effective Start"
+    #group_label: "Contract Trading Partner"
     type: time
     timeframes: [
       raw,

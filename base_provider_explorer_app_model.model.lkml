@@ -11,9 +11,9 @@ explore: mn_contract_header_dim {
 
   label: "Full Contract Structure"
 
-  extends: [mn_contract_header_dim_secure_base, mn_product_group_dim_base]
+  extends: [mn_contract_header_dim_secure_base, mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
 
-  from:  mn_contract_header_dim
+  from:  mn_contract_header_dim_secure
   view_name: mn_contract_header_dim
   hidden: no
 
@@ -40,7 +40,7 @@ explore: mn_contract_header_dim {
 
   join: mn_ctrt_elig_cot_map {
     type: left_outer
-    view_label: "Contract COT"
+    view_label: "Contract Eligible Class Of Trade"
     relationship: many_to_one
     from: mn_ctrt_elig_cot_map
     fields: [eff_start_date, eff_end_date]
@@ -49,7 +49,7 @@ explore: mn_contract_header_dim {
 
   join: mn_ctrt_elig_cot_dim {
     type: left_outer
-    view_label: "Contract COT"
+    view_label: "Contract Eligible Class Of Trade"
     relationship: many_to_one
     from: mn_cot_dim
     #fields: []
@@ -67,12 +67,39 @@ explore: mn_contract_header_dim {
 
   join: mn_contract_attr_fact {
     type: left_outer
-    view_label: "Contract Effective Dated Attributes (EDA)"
+    view_label: "Contract"
     relationship: many_to_one
     from: mn_contract_attr_fact
     fields: [eff_start_date, eff_end_date, attr_name, attr_value]
     sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_contract_attr_fact.contract_wid};;
   }
+
+  join: mn_ctrt_elig_customers_map {
+    type: left_outer
+    view_label: "Contract Eligibility"
+    relationship: many_to_one
+    from: mn_ctrt_elig_customers_map
+    #fields: []
+    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_ctrt_elig_customers_map.src_sys_contract_id};;
+  }
+
+  join: mn_ctrt_elig_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Contract Eligibility"
+    from: mn_customer_dim
+    sql_on: ${mn_ctrt_elig_customers_map.elig_customer_wid} = ${mn_ctrt_elig_customer_dim.customer_wid};;
+  }
+
+  join: mn_ctrt_commit_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Contract Eligibility"
+    from: mn_customer_commit_dim_ext
+    fields: [committed_customer_name, committed_customer_num]
+    sql_on: ${mn_ctrt_elig_customers_map.commit_customer_wid} = ${mn_ctrt_commit_customer_dim.customer_wid};;
+  }
+
 
 }
 

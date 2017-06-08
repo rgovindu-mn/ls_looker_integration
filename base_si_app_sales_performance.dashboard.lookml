@@ -98,7 +98,7 @@
     listens_to_filters: [customer, contract_name, contract_number, sale_type, product_cat_name, sku,account, channel]
 
   - name: date_frame_selection
-    title: "Period Timeframe Selection"
+    title: "Period Selection"
     default_value: "Year"
     type: field_filter
     model: base_sales_intelligence_app_model

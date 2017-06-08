@@ -8,12 +8,14 @@ view: mn_contract_attr_fact {
 
   dimension: attr_name {
     label: "Contract EDA Name"
+    group_label: " Effective Dated Attributes (EDA)"
     type: string
     sql: ${TABLE}.ATTR_NAME ;;
   }
 
   dimension: attr_value {
     label: "Contract EDA Value"
+    group_label: " Effective Dated Attributes (EDA)"
     type: string
     sql: ${TABLE}.ATTR_VALUE ;;
   }
@@ -56,6 +58,7 @@ view: mn_contract_attr_fact {
 
   dimension_group: eff_end {
     type: time
+    group_label: " Effective Dated Attributes (EDA)"
     label: "Contract EDA End"
     timeframes: [
       raw,
@@ -72,6 +75,7 @@ view: mn_contract_attr_fact {
   dimension_group: eff_start {
     type: time
     label: "Contract EDA Start"
+    group_label: " Effective Dated Attributes (EDA)"
     timeframes: [
       raw,
       time,
