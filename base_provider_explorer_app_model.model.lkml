@@ -104,11 +104,37 @@ explore: mn_contract_header_dim {
 }
 
 explore: pbc_rebate_contract{
-  label: "Rebates"
-  extends: [mn_contract_header_dim_base]
+  label: "Rebate Contracts"
+  from: mn_contract_header_dim
+  view_name: mn_contract_header_dim
+  extends: [mn_contract_header_dim_base,mn_combined_rebate_program_dim_base,mn_payment_package_dim_base]
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+
+  join: mn_combined_rebate_program_dim {
+    type: left_outer
+    view_label: "Rebate Program"
+    relationship: many_to_one
+    from: mn_combined_rebate_program_dim
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid};;
+  }
+
+  join: mn_rebate_payment_fact {
+    type: left_outer
+    view_label: "Rebate Payment"
+    relationship: many_to_one
+    from: mn_rebate_payment_fact
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rebate_payment_fact.rebate_program_wid};;
+  }
+
+  join: mn_payment_package_dim {
+    type: left_outer
+    view_label: "Rebate Payment Package"
+    relationship: many_to_one
+    from: mn_payment_package_dim
+    sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
+  }
 }
 
 explore: mn_combined_sale_fact {

@@ -1,100 +1,112 @@
 connection: "oracle_rds_ls"
 
-include: "base_mn_rebate_program_sd_rpt.view.lkml"
-include: "base_mn_rebate_program_dim.view.lkml"
-# include: "base_mn_contract_header_dim.view.lkml"
-include: "base_mn_accrual_type_dim.view.lkml"
+include: "base_mn_user_access_map.view.lkml"
+include: "base_mn_contract_header_dim.view.lkml"
+include: "base_mn_user_dim.view.lkml"
+include: "base_mn_ctrt_status_dim.view.lkml"
+include: "base_mn_ctrt_domain_dim.view.lkml"
+include: "base_mn_ctrt_type_dim.view.lkml"
+include: "base_mn_ctrt_sub_type_dim.view.lkml"
 include: "base_mn_customer_dim.view.lkml"
-include: "base_mn_program_type_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
+include: "base_mn_bus_segment_dim.view.lkml"
+include: "base_mn_price_list_dim.view.lkml"
+include: "base_mn_prc_method_dim.view.lkml"
+include: "base_mn_user_org_map.view.lkml"
+include: "base_mn_combined_rebate_program_dim.view.lkml"
+include: "base_mn_accrual_type_dim.view.lkml"
 include: "base_mn_pmt_type_dim.view.lkml"
+include: "base_mn_program_type_dim.view.lkml"
 include: "base_mn_pmt_mth_type_dim.view.lkml"
-include: "base_mn_contract_fact.view.lkml"
+include: "base_mn_ctrt_elig_cot_map.view.lkml"
+include: "base_mn_cot_dim.view.lkml"
+include: "base_mn_ctrt_elig_cot_map.view.lkml"
+include: "base_mn_pg_tier_basis_dim.view.lkml"
+include: "base_mn_rbt_qual_mb_prod_map.view.lkml"
+include: "base_mn_product_dim.view.lkml"
+include: "base_mn_market_basket_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
+include: "base_mn_rbt_prog_qual_prod_map.view.lkml"
+include: "base_mn_rbt_prog_ben_prod_map.view.lkml"
+include: "base_mn_rebate_payment_fact.view.lkml"
+include: "base_mn_payment_package_dim.view.lkml"
 
-  explore:  mn_rebate_program_sd_rpt {
-    extends: [mn_rebate_program_sd_rpt_base]
-    label: "SD Rebate Program"
-    hidden: no
-  }
 
- explore: mn_rebate_program_sd_rpt_base {
-
-  from: mn_rebate_program_sd_rpt
-  view_name: mn_rebate_program_sd_rpt
-
-  sql_always_where:  ${mn_contract_fact.record_type} = '2' ;;
-
+explore: mn_rbt_qual_mb_prod_map_base {
+  from:  mn_rbt_qual_mb_prod_map
+  view_name: mn_rbt_qual_mb_prod_map
   hidden: yes
 
-   join: mn_rebate_program_dim {
+  join: mn_product_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_rebate_program_dim
-    view_label: "Rebate Program"
-    #fields: [full_name]
-    sql_on: ${mn_rebate_program_sd_rpt.program_wid} = ${mn_rebate_program_dim.program_wid};;
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_rbt_qual_mb_prod_map.product_wid} = ${mn_product_dim.product_wid};;
   }
 
-  join: mn_contract_fact {
+  join: mn_market_basket_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_contract_fact
-    fields: [mn_contract_fact.contract_wid]
-    view_label: "Rebate Program"
-    sql_on: ${mn_rebate_program_sd_rpt.program_wid} = ${mn_contract_fact.program_wid};;
-
+    from: mn_market_basket_dim
+    view_label: "Market Basket"
+    sql_on: ${mn_rbt_qual_mb_prod_map.basket_wid} = ${mn_market_basket_dim.market_basket_wid} ;;
   }
 
-#   join: mn_contract_header_dim {
-#     type: left_outer
-#     relationship: many_to_one
-#     from: mn_contract_header_dim
-#     view_label: "Rebate Program"
-#     fields: [full_name]
-#     sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_contract_fact.contract_wid};;
-#   }
-
-  join: mn_accrual_type_dim {
+  join: mn_product_group_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_accrual_type_dim
-    view_label: "Rebate Program Accrual Type"
-    #fields: [full_name]
-    sql_on: ${mn_rebate_program_sd_rpt.accrual_type_wid} = ${mn_accrual_type_dim.accrual_type_wid};;
-  }
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_rbt_qual_mb_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
+    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
 
-  join: mn_payee_customer_dim {
+  }
+}
+
+explore: mn_rbt_prog_ben_prod_map_base {
+  from:  mn_rbt_prog_ben_prod_map
+  view_name: mn_rbt_prog_ben_prod_map
+  hidden: yes
+
+  join: mn_product_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Rebate Program Payee"
-    #fields: [full_name]
-    sql_on: ${mn_rebate_program_sd_rpt.customer_wid} = ${mn_payee_customer_dim.customer_wid};;
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_rbt_prog_ben_prod_map.product_wid} = ${mn_product_dim.product_wid};;
   }
 
-  join: mn_program_type_dim {
+  join: mn_product_group_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_program_type_dim
-    view_label: "Rebate Program Type"
-    #fields: [full_name]
-    sql_on: ${mn_rebate_program_sd_rpt.program_type_wid} = ${mn_program_type_dim.program_type_wid};;
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_rbt_prog_ben_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
+    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
 
-  join: mn_pmt_type_dim {
+}
+
+explore: mn_rbt_prog_qual_prod_map_base {
+  from:  mn_rbt_prog_qual_prod_map
+  view_name: mn_rbt_prog_qual_prod_map
+  hidden: yes
+
+  join: mn_product_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_pmt_type_dim
-    view_label: "Rebate Program Payment Type"
-    #fields: [full_name]
-    sql_on: ${mn_rebate_program_sd_rpt.payment_type_wid} = ${mn_pmt_type_dim.pmt_type_wid};;
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_rbt_prog_qual_prod_map.product_wid} = ${mn_product_dim.product_wid};;
   }
 
-  join: mn_pmt_mth_type_dim {
+  join: mn_product_group_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_pmt_mth_type_dim
-    view_label: "Rebate Program Payment Method Type"
-    sql_on: ${mn_rebate_program_sd_rpt.pmt_mth_type_wid} = ${mn_pmt_mth_type_dim.pmt_mth_type_wid};;
-
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_rbt_prog_qual_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
+    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
- }
+}

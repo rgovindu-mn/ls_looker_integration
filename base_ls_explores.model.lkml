@@ -28,6 +28,8 @@ include: "base_mn_market_basket_dim.view.lkml"
 include: "base_mn_product_group_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_prod_map.view.lkml"
 include: "base_mn_rbt_prog_ben_prod_map.view.lkml"
+include: "base_mn_rebate_payment_fact.view.lkml"
+include: "base_mn_payment_package_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -169,7 +171,7 @@ explore: mn_product_group_dim_base {
 
 }
 
-explore: mn_combined_rebate_program_dim {
+explore: mn_combined_rebate_program_dim_base {
 
   from:  mn_combined_rebate_program_dim
   view_name: mn_combined_rebate_program_dim
@@ -179,7 +181,7 @@ explore: mn_combined_rebate_program_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_accrual_type_dim
-    view_label: "Accrual Type"
+    view_label: "Rebate Program Accrual Type"
     sql_on: ${mn_combined_rebate_program_dim.accrual_type_wid} = ${mn_accrual_type_dim.accrual_type_wid};;
   }
 
@@ -187,7 +189,7 @@ explore: mn_combined_rebate_program_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_type_dim
-    view_label: "Payment Type"
+    view_label: "Rebate Program Payment Type"
     sql_on: ${mn_combined_rebate_program_dim.pmt_type_wid} = ${mn_pmt_type_dim.pmt_type_wid};;
   }
 
@@ -195,7 +197,7 @@ explore: mn_combined_rebate_program_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_program_type_dim
-    view_label: "Program Type"
+    view_label: "Rebate Program Program Type"
     sql_on: ${mn_combined_rebate_program_dim.program_type_wid} = ${mn_program_type_dim.program_type_wid};;
   }
 
@@ -203,7 +205,7 @@ explore: mn_combined_rebate_program_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_mth_type_dim
-    view_label: "Program Method Type"
+    view_label: "Rebate Program Program Method Type"
     sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
@@ -216,81 +218,89 @@ explore: mn_combined_rebate_program_dim {
   }
 }
 
-explore: mn_rbt_qual_mb_prod_map_base {
-  from:  mn_rbt_qual_mb_prod_map
-  view_name: mn_rbt_qual_mb_prod_map
+
+explore: mn_rebate_payment_fact_base {
+
+  from:  mn_rebate_payment_fact
+  view_name: mn_rebate_payment_fact
   hidden: yes
 
-  join: mn_product_dim {
+  join: rebate_payment_payee {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_dim
-    view_label: "Product"
-    sql_on: ${mn_rbt_qual_mb_prod_map.product_wid} = ${mn_product_dim.product_wid};;
+    from: mn_customer_dim
+    view_label: "Rebate Payment Payee"
+    sql_on: ${mn_rebate_payment_fact.payee_customer_wid} = ${rebate_payment_payee.customer_wid};;
   }
 
-  join: mn_market_basket_dim {
+  join: accrued_customer {
     type: left_outer
     relationship: many_to_one
-    from: mn_market_basket_dim
-    view_label: "Market Basket"
-    sql_on: ${mn_rbt_qual_mb_prod_map.basket_wid} = ${mn_market_basket_dim.market_basket_wid} ;;
+    from: mn_customer_dim
+    view_label: "Accrued Customer"
+    sql_on: ${mn_rebate_payment_fact.accrued_customer_wid} = ${accrued_customer.customer_wid};;
   }
 
-  join: mn_product_group_dim {
+  join: analyst {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_group_dim
-    view_label: "Product Group"
-    sql_on: ${mn_rbt_qual_mb_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
-    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
+    from: mn_user_dim
+    view_label: "Analyst"
+    sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${analyst.user_wid};;
+  }
 
+  join: sales_rep {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Sales Rep"
+    sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${sales_rep.user_wid};;
   }
 }
 
-explore: mn_rbt_prog_ben_prod_map_base {
-  from:  mn_rbt_prog_ben_prod_map
-  view_name: mn_rbt_prog_ben_prod_map
+explore: mn_payment_package_dim_base {
+  from:  mn_payment_package_dim
+  view_name: mn_payment_package_dim
   hidden: yes
 
-  join: mn_product_dim {
+  join: mn_pmt_mth_type_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_dim
-    view_label: "Product"
-    sql_on: ${mn_rbt_prog_ben_prod_map.product_wid} = ${mn_product_dim.product_wid};;
+    from: mn_customer_dim
+    view_label: "Payment Package Payment Method Type"
+    sql_on: ${mn_payment_package_dim.pymt_method_wid} = ${mn_pmt_mth_type_dim.customer_wid};;
   }
 
-  join: mn_product_group_dim {
+  join: mn_customer_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_group_dim
-    view_label: "Product Group"
-    sql_on: ${mn_rbt_prog_ben_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
-    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
+    from: mn_customer_dim
+    view_label: "Payment Package Payee"
+    sql_on: ${mn_payment_package_dim.payee_wid} = ${mn_customer_dim.customer_wid};;
   }
 
-}
-
-explore: mn_rbt_prog_qual_prod_map_base {
-  from:  mn_rbt_prog_qual_prod_map
-  view_name: mn_rbt_prog_qual_prod_map
-  hidden: yes
-
-  join: mn_product_dim {
+  join: analyst {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_dim
-    view_label: "Product"
-    sql_on: ${mn_rbt_prog_qual_prod_map.product_wid} = ${mn_product_dim.product_wid};;
+    from: mn_user_dim
+    view_label: "Payment Package Analyst"
+    sql_on: ${mn_payment_package_dim.analyst_wid} = ${analyst.user_wid};;
   }
 
-  join: mn_product_group_dim {
+  join: created_by {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_group_dim
-    view_label: "Product Group"
-    sql_on: ${mn_rbt_prog_qual_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
-    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
+    from: mn_user_dim
+    view_label: "Payment Package Created By"
+    sql_on: ${mn_payment_package_dim.created_by_user_wid} = ${created_by.user_wid};;
   }
+
+  join: modified_by {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Payment Package Modified By"
+    sql_on: ${mn_payment_package_dim.last_modified_by_user_wid} = ${created_by.user_wid};;
+  }
+
 }
