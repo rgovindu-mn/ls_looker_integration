@@ -102,6 +102,7 @@ join: mn_customer_owner_dim {
 # Adhoc base explore for contract header with all needed joins
 
 explore: mn_contract_header_dim_adhoc_base {
+
   extends: [mn_contract_header_dim_base]
   from:  mn_contract_header_dim
   view_name: mn_contract_header_dim

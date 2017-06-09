@@ -11,7 +11,7 @@ explore: mn_contract_header_dim {
 
   label: "Contracts"
 
-  extends: [mn_contract_header_dim_adhoc_base, mn_contract_header_dim_secure_base]
+  extends: [mn_contract_header_dim_base, mn_contract_header_dim_secure_base]
 
   from: mn_contract_header_dim
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
@@ -22,18 +22,3 @@ explore: mn_contract_header_dim {
 
 
 }
-
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }

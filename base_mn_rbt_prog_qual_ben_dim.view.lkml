@@ -27,6 +27,11 @@ view: mn_rbt_prog_qual_ben_dim {
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
+  dimension: contract_type {
+    type: string
+    sql: ${TABLE}.CONTRACT_TYPE ;;
+  }
+
   dimension_group: date_created {
     hidden: yes
     type: time
@@ -62,33 +67,33 @@ view: mn_rbt_prog_qual_ben_dim {
     sql: ${TABLE}.DESCRIPTION ;;
   }
 
-  dimension_group: eff_end {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.EFF_END_DATE ;;
-  }
-
-  dimension_group: eff_start {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.EFF_START_DATE ;;
-  }
+#   dimension_group: eff_end {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.EFF_END_DATE ;;
+#   }
+#
+#   dimension_group: eff_start {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.EFF_START_DATE ;;
+#   }
 
   dimension: end_ver_num {
     type: string
@@ -101,6 +106,7 @@ view: mn_rbt_prog_qual_ben_dim {
   }
 
   dimension: is_qual_component {
+    hidden: yes
     type: string
     sql: ${TABLE}.IS_QUAL_COMPONENT ;;
   }
@@ -240,4 +246,10 @@ view: mn_rbt_prog_qual_ben_dim {
     type: count
     drill_fields: [name, component_name]
   }
+
+#   set: rebate_prog_qual_ben_fields_set {
+#     fields: [program_qual_ben_wid, program_wid, src_sys_qual_ben_id, name, component_name, component_type,
+#       description, strategy_based_flag, num_tiers, sale_line_type, item_override_flag, ver_num, end_ver_num,
+#       ver_start_date, ver_end_date, contract_type]
+#   }
 }
