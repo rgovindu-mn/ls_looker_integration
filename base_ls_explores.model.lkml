@@ -1,4 +1,4 @@
-connection: "oracle_rds_ls"
+include: "db_connection.model.lkml"
 
 include: "base_mn_user_access_map.view.lkml"
 include: "base_mn_contract_header_dim.view.lkml"
