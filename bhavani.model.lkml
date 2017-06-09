@@ -32,6 +32,7 @@ include: "base_mn_rebate_payment_fact.view.lkml"
 include: "base_mn_payment_package_dim.view.lkml"
 
 
+
 explore: mn_rbt_qual_mb_prod_map_base {
   from:  mn_rbt_qual_mb_prod_map
   view_name: mn_rbt_qual_mb_prod_map
@@ -41,7 +42,7 @@ explore: mn_rbt_qual_mb_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_product_dim
-    view_label: "Product"
+    view_label: "Rebate Program Qualification Market Basket Product"
     sql_on: ${mn_rbt_qual_mb_prod_map.product_wid} = ${mn_product_dim.product_wid};;
   }
 
@@ -49,7 +50,7 @@ explore: mn_rbt_qual_mb_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_market_basket_dim
-    view_label: "Market Basket"
+    view_label: "Rebate Program Qualification Market Basket"
     sql_on: ${mn_rbt_qual_mb_prod_map.basket_wid} = ${mn_market_basket_dim.market_basket_wid} ;;
   }
 
@@ -57,7 +58,7 @@ explore: mn_rbt_qual_mb_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_product_group_dim
-    view_label: "Product Group"
+    view_label: "Rebate Program Qualification Market Basket Product Group"
     sql_on: ${mn_rbt_qual_mb_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
     sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
 
@@ -73,7 +74,7 @@ explore: mn_rbt_prog_ben_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_product_dim
-    view_label: "Product"
+    view_label: "Rebate Program Benefit Product"
     sql_on: ${mn_rbt_prog_ben_prod_map.product_wid} = ${mn_product_dim.product_wid};;
   }
 
@@ -81,7 +82,7 @@ explore: mn_rbt_prog_ben_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_product_group_dim
-    view_label: "Product Group"
+    view_label: "Rebate Program Benefit Product Group"
     sql_on: ${mn_rbt_prog_ben_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
     sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
@@ -97,7 +98,7 @@ explore: mn_rbt_prog_qual_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_product_dim
-    view_label: "Product"
+    view_label: "Rebate Program Qualification Product"
     sql_on: ${mn_rbt_prog_qual_prod_map.product_wid} = ${mn_product_dim.product_wid};;
   }
 
@@ -105,7 +106,7 @@ explore: mn_rbt_prog_qual_prod_map_base {
     type: left_outer
     relationship: many_to_one
     from: mn_product_group_dim
-    view_label: "Product Group"
+    view_label: "Rebate Program Qualification Product Group"
     sql_on: ${mn_rbt_prog_qual_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
     sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
