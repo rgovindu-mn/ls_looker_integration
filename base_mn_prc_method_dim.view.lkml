@@ -33,14 +33,12 @@ view: mn_prc_method_dim {
 
   dimension: prc_method_desc {
     type: string
-    group_label: "Pricing Program"
     label: "Pricing Method Description"
     sql: ${TABLE}.PRC_METHOD_DESC ;;
   }
 
   dimension: prc_method_name {
     type: string
-    group_label: "Pricing Program"
     label: "Pricing Method Name"
 
     sql: ${TABLE}.PRC_METHOD_NAME ;;
@@ -67,6 +65,7 @@ view: mn_prc_method_dim {
 
   dimension: src_sys_prc_method_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_PRC_METHOD_CODE ;;
   }
 

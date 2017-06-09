@@ -65,13 +65,7 @@ view: mn_pg_tier_basis_dim {
     group_label: "Tier Basis"
     type: time
     timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
+      date
     ]
     sql: ${TABLE}.EFF_END_DATE ;;
   }
@@ -80,13 +74,7 @@ view: mn_pg_tier_basis_dim {
     group_label: "Tier Basis"
     type: time
     timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
+      date
     ]
     sql: ${TABLE}.EFF_START_DATE ;;
   }
@@ -97,7 +85,7 @@ view: mn_pg_tier_basis_dim {
     sql: ${TABLE}.END_VER_NUM ;;
   }
 
-  dimension: is_mb_component {
+  dimension: is_market_basket_component {
     type: string
     group_label: "Tier Basis"
     sql: ${TABLE}.IS_MB_COMPONENT ;;
@@ -105,6 +93,7 @@ view: mn_pg_tier_basis_dim {
 
   dimension: is_qual_comp_flag {
     type: string
+    hidden: yes
     group_label: "Tier Basis"
     sql: ${TABLE}.IS_QUAL_COMP_FLAG ;;
   }
@@ -145,7 +134,7 @@ view: mn_pg_tier_basis_dim {
     sql: ${TABLE}.RUN_ID ;;
   }
 
-  dimension: separate_tb_prod_flag {
+  dimension: separate_tier_basis_product_flag {
     type: string
     group_label: "Tier Basis"
     sql: ${TABLE}.SEPARATE_TB_PROD_FLAG ;;
@@ -879,6 +868,7 @@ view: mn_pg_tier_basis_dim {
 
   measure: count {
     type: count
+    label: "Count of Tier Bases"
     drill_fields: [name, component_name]
   }
 }

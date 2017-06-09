@@ -240,7 +240,7 @@ explore: mn_pg_product_pricing_fact{
 
   extends: [mn_contract_header_dim_base]
 
-  from:  mn_pg_product_pricing_fact
+  from:  mn_pg_product_pricing_fact_secure
   view_name: mn_pg_product_pricing_fact
   hidden: no
 

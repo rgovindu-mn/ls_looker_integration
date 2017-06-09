@@ -1,7 +1,7 @@
 view: mn_product_group_dim {
   sql_table_name: MN_PRODUCT_GROUP_DIM_VW ;;
 
-  dimension: adj_type {
+  dimension: adjustment_type {
     type: string
     sql: ${TABLE}.ADJ_TYPE ;;
   }
@@ -25,10 +25,11 @@ view: mn_product_group_dim {
 
   dimension: calc_obj_type {
     type: string
+    hidden: yes
     sql: ${TABLE}.CALC_OBJ_TYPE ;;
   }
 
-  dimension: calc_offset {
+  dimension: calculation_offset {
     type: string
     sql: ${TABLE}.CALC_OFFSET ;;
   }
@@ -48,7 +49,7 @@ view: mn_product_group_dim {
     sql: ${TABLE}.COMPLIANCE_TIER_TRACKING ;;
   }
 
-  dimension: ctrt_order_idx {
+  dimension: contract_order_index {
     type: string
     sql: ${TABLE}.CTRT_ORDER_IDX ;;
   }
@@ -114,6 +115,7 @@ view: mn_product_group_dim {
 
   dimension: end_ver_num {
     type: string
+    hidden: yes
     sql: ${TABLE}.END_VER_NUM ;;
   }
 
@@ -127,7 +129,7 @@ view: mn_product_group_dim {
     sql: ${TABLE}.INDEX_TYPE ;;
   }
 
-  dimension: indexation_incr_cap {
+  dimension: indexation_increase_cap {
     type: string
     sql: ${TABLE}.INDEXATION_INCR_CAP ;;
   }
@@ -140,18 +142,12 @@ view: mn_product_group_dim {
   dimension_group: indexation_start {
     type: time
     timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
+      date
     ]
     sql: ${TABLE}.INDEXATION_START_DATE ;;
   }
 
-  dimension: is_flat {
+  dimension: is_flat_program {
     type: string
     sql: ${TABLE}.IS_FLAT ;;
   }
@@ -166,12 +162,12 @@ view: mn_product_group_dim {
     sql: ${TABLE}.MODULE_TYPE ;;
   }
 
-  dimension: num_defined_increases {
+  dimension: number_defined_increases {
     type: string
     sql: ${TABLE}.NUM_DEFINED_INCREASES ;;
   }
 
-  dimension: num_tiers {
+  dimension: number_tiers {
     type: string
     sql: ${TABLE}.NUM_TIERS ;;
   }
@@ -184,6 +180,7 @@ view: mn_product_group_dim {
 
   dimension: pg_name {
     type: string
+    label: "Product Group Name"
     sql: ${TABLE}.PG_NAME ;;
   }
 
@@ -194,7 +191,7 @@ view: mn_product_group_dim {
     sql: ${TABLE}.PG_WID ;;
   }
 
-  dimension: prc_overr_tolerance {
+  dimension: price_override_tolerance {
     type: string
     sql: ${TABLE}.PRC_OVERR_TOLERANCE ;;
   }
@@ -225,17 +222,17 @@ view: mn_product_group_dim {
     sql: ${TABLE}.PRODUCT_TYPE_PRICED ;;
   }
 
-  dimension: qual_method {
+  dimension: qualification_method {
     type: string
     sql: ${TABLE}.QUAL_METHOD ;;
   }
 
-  dimension: qual_method_name {
+  dimension: qualification_method_name {
     type: string
     sql: ${TABLE}.QUAL_METHOD_NAME ;;
   }
 
-  dimension: resolve_to_this_pg_flag {
+  dimension: resolve_to_this_program_flag {
     type: string
     sql: ${TABLE}.RESOLVE_TO_THIS_PG_FLAG ;;
   }
@@ -261,7 +258,7 @@ view: mn_product_group_dim {
     sql: ${TABLE}.SCHEDULE_BASIS ;;
   }
 
-  dimension: seperate_prod_for_tiers {
+  dimension: seperate_products_for_tiers {
     type: string
     sql: ${TABLE}.SEPERATE_PROD_FOR_TIERS ;;
   }
@@ -272,22 +269,22 @@ view: mn_product_group_dim {
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
-  dimension: src_strategy_name {
+  dimension: source_strategy_name {
     type: string
     sql: ${TABLE}.SRC_STRATEGY_NAME ;;
   }
 
-  dimension: src_strategy_num {
+  dimension: source_strategy_number {
     type: string
     sql: ${TABLE}.SRC_STRATEGY_NUM ;;
   }
 
-  dimension: src_strategy_type {
+  dimension: source_strategy_type {
     type: string
     sql: ${TABLE}.SRC_STRATEGY_TYPE ;;
   }
 
-  dimension: src_strategy_ver_num {
+  dimension: source_strategy_version_number {
     type: string
     sql: ${TABLE}.SRC_STRATEGY_VER_NUM ;;
   }
@@ -336,6 +333,7 @@ view: mn_product_group_dim {
 
   dimension_group: ver_end {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -350,11 +348,13 @@ view: mn_product_group_dim {
 
   dimension: ver_num {
     type: string
+    hidden: yes
     sql: ${TABLE}.VER_NUM ;;
   }
 
   dimension_group: ver_start {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -373,6 +373,7 @@ view: mn_product_group_dim {
   }
   measure: count {
     type: count
-    drill_fields: [qual_method_name, src_strategy_name, pg_name]
+    label: "Count of Price Programs"
+    drill_fields: [pg_name]
   }
 }

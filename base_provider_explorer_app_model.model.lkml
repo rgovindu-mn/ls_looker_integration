@@ -17,7 +17,7 @@ explore: mn_contract_header_dim {
   view_name: mn_contract_header_dim
   hidden: no
 
-  sql_always_where: ${mn_product_group_dim.latest_flag} = 'Y' and ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
 
 
   join: mn_product_group_dim {
@@ -25,7 +25,8 @@ explore: mn_contract_header_dim {
     view_label: "Pricing Program"
     relationship: many_to_one
     from: mn_product_group_dim
-    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
+    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id}
+    AND ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_ctrt_wholesaler_map {
@@ -36,7 +37,6 @@ explore: mn_contract_header_dim {
     fields: [eff_start_date, eff_end_date]
     sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_ctrt_wholesaler_map.contract_wid};;
   }
-
 
   join: mn_ctrt_elig_cot_map {
     type: left_outer
@@ -100,6 +100,45 @@ explore: mn_contract_header_dim {
     sql_on: ${mn_ctrt_elig_customers_map.commit_customer_wid} = ${mn_ctrt_commit_customer_dim.customer_wid};;
   }
 
+
+  join: mn_pg_pg_prc_adhoc_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_product_pricing_fact_adhoc_ext
+    view_label: "Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+    AND ${mn_pg_pg_prc_adhoc_fact.tier_idx}=1;;
+  }
+
+  join: mn_pg_pg_prc_fact_flat {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_pg_prc_fact_flat
+    view_label: "Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid};;
+  }
+
+
+  join: mn_big_award_flat_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_bid_award_flat_fact
+    view_label: "Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_big_award_flat_fact.pg_wid};;
+  }
+
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Products and Pricing"
+    fields: [product_name, product_num]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.product_wid} = ${mn_product_dim.product_wid};;
+  }
 
 }
 
