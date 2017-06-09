@@ -1,5 +1,5 @@
-connection: "oracle_rds_ls"
-
+#connection: "oracle_rds_ls"
+include: "base_ls_database_connection.model.lkml"
 include: "*.view.lkml"         # include all views in this project
 #include: "*.dashboard.lookml"  # include all dashboards in this project
 include: "base_ls_explores.model.lkml"
