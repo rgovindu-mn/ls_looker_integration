@@ -40,6 +40,17 @@ view: mn_cmpl_period_fact_dated {
       - TRUNC(LEAST(GREATEST(CAST(${mn_date_dim.start_date_sql_raw} AS DATE), ${period_start_raw}), SYSDATE),'DD') +1 ) ;;
   }
 
+  measure: period_actual_sales_proj {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${actual_amt_to_date}  *  (${days_in_current_period} +  ${date_period_days_remaning}) /  ${total_days_in_period};;
+  }
+  measure: period_expected_sales_proj {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${expected_amt_to_date} *  (${days_in_current_period} +  ${date_period_days_remaning}) /  ${total_days_in_period}  ;;
+  }
+
   measure: period_actual_sales {
     type: sum
     value_format_name: decimal_0
