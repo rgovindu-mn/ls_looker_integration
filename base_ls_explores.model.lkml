@@ -22,6 +22,12 @@ include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_cot_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_pg_tier_basis_dim.view.lkml"
+include: "base_mn_rbt_qual_mb_prod_map.view.lkml"
+include: "base_mn_product_dim.view.lkml"
+include: "base_mn_market_basket_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
+include: "base_mn_rbt_prog_qual_prod_map.view.lkml"
+include: "base_mn_rbt_prog_ben_prod_map.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -121,6 +127,7 @@ explore: mn_contract_header_dim_secure_base {
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
   }
 }
+
 explore: mn_product_group_dim_base {
 
   from:  mn_product_group_dim
@@ -206,5 +213,84 @@ explore: mn_combined_rebate_program_dim {
     from: mn_customer_dim
     view_label: "Payee"
     sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_customer_dim.customer_wid};;
+  }
+}
+
+explore: mn_rbt_qual_mb_prod_map_base {
+  from:  mn_rbt_qual_mb_prod_map
+  view_name: mn_rbt_qual_mb_prod_map
+  hidden: yes
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_rbt_qual_mb_prod_map.product_wid} = ${mn_product_dim.product_wid};;
+  }
+
+  join: mn_market_basket_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_market_basket_dim
+    view_label: "Market Basket"
+    sql_on: ${mn_rbt_qual_mb_prod_map.basket_wid} = ${mn_market_basket_dim.market_basket_wid} ;;
+  }
+
+  join: mn_product_group_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_rbt_qual_mb_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
+    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
+
+  }
+}
+
+explore: mn_rbt_prog_ben_prod_map_base {
+  from:  mn_rbt_prog_ben_prod_map
+  view_name: mn_rbt_prog_ben_prod_map
+  hidden: yes
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_rbt_prog_ben_prod_map.product_wid} = ${mn_product_dim.product_wid};;
+  }
+
+  join: mn_product_group_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_rbt_prog_ben_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
+    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
+  }
+
+}
+
+explore: mn_rbt_prog_qual_prod_map_base {
+  from:  mn_rbt_prog_qual_prod_map
+  view_name: mn_rbt_prog_qual_prod_map
+  hidden: yes
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_rbt_prog_qual_prod_map.product_wid} = ${mn_product_dim.product_wid};;
+  }
+
+  join: mn_product_group_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_rbt_prog_qual_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
+    sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
 }
