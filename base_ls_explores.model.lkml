@@ -123,7 +123,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_org_dim
-    view_label: "Org"
+    view_label: "Contract Org"
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_org_dim.org_wid} ;;
   }
 
@@ -139,7 +139,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_cot_dim
-    view_label: "Contracted Customer COT"
+    view_label: "Contract Customer COT"
     sql_on: ${mn_customer_cot_dim.cot_wid}.owner_wid} = ${mn_cot_dim.cot_wid}
             and ${mn_customer_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
             and ${mn_customer_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
@@ -149,7 +149,7 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_contract_header_dim
     type: left_outer
     relationship: many_to_one
-    view_label: "Parent Contract"
+    view_label: "Contract Parent"
     fields: [mn_parent_contract_header_dim.contract_number]
     sql_on: ${mn_contract_header_dim.parent_contract_wid} = ${mn_parent_contract_header_dim.contract_wid} ;;
   }
@@ -158,7 +158,7 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_distrib_mthd_dim
     type: left_outer
     relationship: many_to_one
-    view_label: "Distribution Method"
+    view_label: "Contract Distribution Method"
     sql_on: ${mn_contract_header_dim.distribution_method_wid} = ${mn_distrib_mthd_dim.dist_method_wid} ;;
   }
 
