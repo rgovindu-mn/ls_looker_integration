@@ -36,6 +36,8 @@ include: "base_mn_org_dim.view.lkml"
 include: "base_mn_distrib_mthd_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_sd_rpt.view.lkml"
+include: "base_mn_discount_bridge_fact.view.lkml"
+include: "base_mn_rebate_type_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -469,5 +471,28 @@ explore: mn_rebate_prog_ben_dim_base {
     view_label: "Rebate Program Benefit"
     #fields: [full_name]
     sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
+  }
+}
+
+explore: mn_pbc_rebate_lines_base {
+
+  from:  mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  hidden: yes
+
+  join: mn_rebate_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "PBC Rebate Lines Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rebate_type_dim.rebate_type_wid};;
+  }
+
+  join: mn_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "PBC Rebate Lines Payee"
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_customer_dim.customer_wid};;
   }
 }
