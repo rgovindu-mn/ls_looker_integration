@@ -1,5 +1,5 @@
-connection: "oracle_rds_ls"
-
+#connection: "oracle_rds_ls"
+include: "base_ls_database_connection.model.lkml"
 include: "*.view.lkml"         # include all views in this project
 include: "*.dashboard.lookml"  # include all dashboards in this project
 include: "base_ls_explores.model.lkml"
@@ -240,7 +240,7 @@ explore: mn_pg_product_pricing_fact{
 
   extends: [mn_contract_header_dim_base]
 
-  from:  mn_pg_product_pricing_fact
+  from:  mn_pg_product_pricing_fact_secure
   view_name: mn_pg_product_pricing_fact
   hidden: no
 

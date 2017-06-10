@@ -1,20 +1,21 @@
 view: mn_pg_product_pricing_fact {
   sql_table_name: MN_PG_PRODUCT_PRICING_FACT_VW ;;
 
-
-  dimension: access_user_wid {
-    type: string
-    sql: ${mn_user_access_pg_map.user_wid};;
+  dimension_group: added {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.ADDED_ON ;;
   }
 
-
-  dimension: access_user_name {
-    type: string
-    sql: ${mn_user_access_pg_map.user_name};;
-  }
-
-
-    dimension: adj_high {
+  dimension: adj_high {
     type: string
     sql: ${TABLE}.ADJ_HIGH ;;
   }
@@ -24,7 +25,7 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.ADJ_LOW ;;
   }
 
-  dimension: adj_operator {
+  dimension: adjustment_operator {
     type: string
     sql: ${TABLE}.ADJ_OPERATOR ;;
   }
@@ -45,16 +46,35 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.BASE_PRICE ;;
   }
 
-  dimension: base_price_curr {
+  dimension: base_price_currency {
     type: string
     sql: ${TABLE}.BASE_PRICE_CURR ;;
   }
 
+  dimension_group: billing_start {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.BILLING_START_DATE ;;
+  }
   dimension: category_product_wid {
     type: number
     hidden:  yes
     sql: ${TABLE}.CATEGORY_PRODUCT_WID ;;
   }
+
+  dimension: current_price {
+    type: string
+    sql: ${TABLE}.CURRENT_PRICE ;;
+  }
+
 
   dimension_group: date_created {
     type: time
@@ -110,12 +130,32 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.END_DATE ;;
   }
 
-  dimension: min_order_amt {
+  dimension: freight_code {
+    type: string
+    sql: ${TABLE}.FREIGHT_CODE ;;
+  }
+
+  dimension: handling {
+    type: string
+    sql: ${TABLE}.HANDLING ;;
+  }
+
+  dimension: instrument_name {
+    type: string
+    sql: ${TABLE}.INSTRUMENT_NAME ;;
+  }
+
+  dimension: instrument_number {
+    type: string
+    sql: ${TABLE}.INSTRUMENT_NUMBER ;;
+  }
+
+  dimension: min_order_amount {
     type: string
     sql: ${TABLE}.MIN_ORDER_AMT ;;
   }
 
-  dimension: min_order_amt_curr {
+  dimension: min_order_amount_currency {
     type: string
     sql: ${TABLE}.MIN_ORDER_AMT_CURR ;;
   }
@@ -130,14 +170,19 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.MIN_ORDER_PENALTY ;;
   }
 
-  dimension: min_order_penalty_curr {
+  dimension: min_order_penalty_currency {
     type: string
     sql: ${TABLE}.MIN_ORDER_PENALTY_CURR ;;
   }
 
-  dimension: min_order_qty {
+  dimension: min_order_quantity {
     type: string
     sql: ${TABLE}.MIN_ORDER_QTY ;;
+  }
+
+  dimension: ownership {
+    type: string
+    sql: ${TABLE}.OWNERSHIP ;;
   }
 
   dimension: payment_code {
@@ -152,6 +197,7 @@ view: mn_pg_product_pricing_fact {
 
   dimension: pg_end_ver_num {
     type: string
+    hidden: yes
     sql: ${TABLE}.PG_END_VER_NUM ;;
   }
 
@@ -163,6 +209,7 @@ view: mn_pg_product_pricing_fact {
 
   dimension: pg_ver_num {
     type: string
+    hidden: yes
     sql: ${TABLE}.PG_VER_NUM ;;
   }
 
@@ -192,6 +239,11 @@ view: mn_pg_product_pricing_fact {
     hidden:  yes
     type: number
     sql: ${TABLE}.PRODUCT_WID ;;
+  }
+
+  dimension: rental_id {
+    type: string
+    sql: ${TABLE}.RENTAL_ID ;;
   }
 
   dimension: run_id {
@@ -224,6 +276,12 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.SRC_SYS_PMLI_ID ;;
   }
 
+  dimension: src_sys_struct_li_id {
+    type: string
+    hidden: yes
+    sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
+  }
+
   dimension_group: start {
     type: time
     timeframes: [
@@ -238,9 +296,24 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.START_DATE ;;
   }
 
+  dimension: surcharge {
+    type: string
+    sql: ${TABLE}.SURCHARGE ;;
+  }
+
+  dimension: tax_on {
+    type: string
+    sql: ${TABLE}.TAX_ON ;;
+  }
+
   dimension: tier_idx {
     type: string
     sql: ${TABLE}.TIER_IDX ;;
+  }
+
+  dimension: tier_volume {
+    type: string
+    sql: ${TABLE}.TIER_VOLUME ;;
   }
 
   dimension: tiered_flag {
@@ -253,6 +326,35 @@ view: mn_pg_product_pricing_fact {
     sql: ${TABLE}.TIMEZONE ;;
   }
 
+  dimension: total_price {
+    type: string
+    sql: ${TABLE}.TOTAL_PRICE ;;
+  }
+
+  dimension: up_charge {
+    type: string
+    sql: ${TABLE}.UP_CHARGE ;;
+  }
+
+  dimension: up_charge1 {
+    type: string
+    sql: ${TABLE}.UP_CHARGE1 ;;
+  }
+
+  dimension: up_charge2 {
+    type: string
+    sql: ${TABLE}.UP_CHARGE2 ;;
+  }
+
+  dimension: up_charge3 {
+    type: string
+    sql: ${TABLE}.UP_CHARGE3 ;;
+  }
+
+  dimension: warranty {
+    type: string
+    sql: ${TABLE}.WARRANTY ;;
+  }
   measure: count {
     type: count
     drill_fields: []
@@ -262,6 +364,7 @@ view: mn_pg_product_pricing_fact {
     type:  average
     sql: ${prc_high} ;;
   }
+
 
 measure:  count_contracts {
     type:  count_distinct

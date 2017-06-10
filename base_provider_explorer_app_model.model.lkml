@@ -1,5 +1,5 @@
-connection: "oracle_rds_ls"
-
+#connection: "oracle_rds_ls"
+include: "base_ls_database_connection.model.lkml"
 include: "*.view.lkml"         # include all views in this project
 #include: "*.dashboard.lookml"  # include all dashboards in this project
 include: "base_ls_explores.model.lkml"
@@ -17,7 +17,7 @@ explore: mn_contract_header_dim {
   view_name: mn_contract_header_dim
   hidden: no
 
-  sql_always_where: ${mn_product_group_dim.latest_flag} = 'Y' and ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y' and  ;;
 
 
   join: mn_product_group_dim {
@@ -25,7 +25,8 @@ explore: mn_contract_header_dim {
     view_label: "Pricing Program"
     relationship: many_to_one
     from: mn_product_group_dim
-    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
+    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id}
+    AND ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_ctrt_wholesaler_map {
@@ -36,7 +37,6 @@ explore: mn_contract_header_dim {
     fields: [eff_start_date, eff_end_date]
     sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_ctrt_wholesaler_map.contract_wid};;
   }
-
 
   join: mn_ctrt_elig_cot_map {
     type: left_outer
@@ -101,13 +101,56 @@ explore: mn_contract_header_dim {
   }
 
 
+  join: mn_pg_pg_prc_adhoc_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_product_pricing_fact_adhoc_ext
+    view_label: "Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+    AND ${mn_pg_pg_prc_adhoc_fact.tier_idx}=1;;
+  }
+
+  join: mn_pg_pg_prc_fact_flat {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_pg_prc_fact_flat
+    view_label: "Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid};;
+  }
+
+
+  join: mn_big_award_flat_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_bid_award_flat_fact
+    view_label: "Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_big_award_flat_fact.pg_wid};;
+  }
+
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Products and Pricing"
+    fields: [product_name, product_num]
+    sql_on: ${mn_pg_pg_prc_adhoc_fact.product_wid} = ${mn_product_dim.product_wid};;
+  }
+
 }
 
 explore: pbc_rebate_contract{
   label: "Rebate Contracts"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
-  extends: [mn_contract_header_dim_base,mn_combined_rebate_program_dim_base,mn_payment_package_dim_base]
+  extends: [mn_contract_header_dim_adhoc_base,
+              mn_combined_rebate_program_dim_base,
+              mn_payment_package_dim_base,
+              mn_rebate_payment_fact_base,
+              mn_pbc_rebate_lines_base]
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
@@ -135,6 +178,34 @@ explore: pbc_rebate_contract{
     from: mn_payment_package_dim
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
   }
+
+  join: mn_discount_bridge_fact {
+    type: left_outer
+    view_label: "Rebate Line"
+    relationship: many_to_one
+    from: mn_discount_bridge_fact
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid};;
+  }
+
+  join: mn_rbt_prog_qual_ben_dim {
+    type: left_outer
+    view_label: "Rebate Program Benefit"
+    relationship: many_to_one
+    from: mn_rbt_prog_qual_ben_dim
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid};;
+    sql_where: (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N' or ${mn_rbt_prog_qual_ben_dim.is_qual_component} IS NULL) ;;
+  }
+
+  join: mn_rbt_prog_qual_ben_sd_rpt {
+    type: left_outer
+    relationship: one_to_many
+    from: mn_rbt_prog_qual_ben_sd_rpt
+    view_label: "Rebate Program Benefit"
+    #fields: [full_name]
+    sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
+  }
+
+
 }
 
 explore: mn_combined_sale_fact {

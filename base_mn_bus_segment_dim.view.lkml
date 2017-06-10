@@ -3,14 +3,12 @@ view: mn_bus_segment_dim {
 
   dimension: bus_seg_code {
     type: string
-    group_label: "Pricing Program"
     label: "Business Segment Code"
     sql: ${TABLE}.BUS_SEG_CODE ;;
   }
 
   dimension: bus_seg_name {
     type: string
-    group_label: "Pricing Program"
     label: "Business Segment Name"
     sql: ${TABLE}.BUS_SEG_NAME ;;
   }
