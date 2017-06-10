@@ -1,3 +1,4 @@
+#connection: "oracle_rds_ls"
 connection: "oracle_rds_ls"
 
 include: "base_mn_user_access_map.view.lkml"
