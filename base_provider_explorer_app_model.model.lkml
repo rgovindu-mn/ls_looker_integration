@@ -150,7 +150,7 @@ explore: provider_rebate_contract{
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
               mn_rebate_payment_fact_base,
-              mn_provider_rebate_lines_base]
+              mn_paid_rebate_lines_base]
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
@@ -213,6 +213,58 @@ explore: provider_rebate_contract{
     sql_on:  ${mn_rebate_payment_fact.payee_customer_wid} = ${mn_customer_cot_dim.customer_wid};;
   }
 
+  join: mn_shipto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Ship To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.ship_to_customer_wid} = ${mn_shipto_customer_dim.customer_wid};;
+  }
+
+  join: ship_to_customer_ids {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Ship to Customer"
+    fields: [id_num, id_type]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${ship_to_customer_ids.customer_wid};;
+  }
+
+  join: mn_soldto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Sold To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+
+  join: sold_to_customer_ids {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Sold to Customer"
+    fields: [id_num, id_type]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${sold_to_customer_ids.customer_wid};;
+  }
+
+   join: mn_committed_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Rebate Payment Committed Customer"
+    sql_on: ${mn_combined_rebate_program_dim.customer_wid} = ${mn_committed_customer_dim.customer_wid};;
+  }
+
+  join: mn_product_eff_attr_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_eff_attr_fact
+    view_label: "Pricing Program"
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_eff_attr_fact.product_wid}
+      AND (${mn_discount_bridge_fact.inv_date_wid} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
+  }
 }
 
 explore: mn_combined_sale_fact {
@@ -355,5 +407,6 @@ explore: mn_combined_sale_fact {
     fields: []
     sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
   }
+
 
 }

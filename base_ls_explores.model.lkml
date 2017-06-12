@@ -445,7 +445,7 @@ explore: mn_rbt_prog_qual_prod_map_base {
   }
 }
 
-explore: mn_provider_rebate_lines_base {
+explore: mn_paid_rebate_lines_base {
 
   from:  mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
