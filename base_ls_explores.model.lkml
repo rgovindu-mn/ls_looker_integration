@@ -54,6 +54,15 @@ explore: mn_contract_header_dim_base {
     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_contract_author_dim.user_wid};;
   }
 
+  join: mn_additional_delegate_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+    #fields: [full_name]
+    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_additional_delegate_dim.user_wid};;
+  }
+
   join: mn_contract_srep_dim {
     type: left_outer
     relationship: many_to_one
