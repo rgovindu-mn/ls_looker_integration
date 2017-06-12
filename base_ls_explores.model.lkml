@@ -436,7 +436,7 @@ explore: mn_rbt_prog_qual_prod_map_base {
   }
 }
 
-explore: mn_pbc_rebate_lines_base {
+explore: mn_provider_rebate_lines_base {
 
   from:  mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
@@ -446,7 +446,7 @@ explore: mn_pbc_rebate_lines_base {
     type: left_outer
     relationship: many_to_one
     from: mn_rebate_type_dim
-    view_label: "PBC Rebate Lines Rebate Type"
+    view_label: "Rebate Lines Rebate Type"
     sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rebate_type_dim.rebate_type_wid};;
   }
 
@@ -454,7 +454,7 @@ explore: mn_pbc_rebate_lines_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "PBC Rebate Lines Payee"
+    view_label: "Rebate Lines Payee"
     sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_customer_dim.customer_wid};;
   }
 }
