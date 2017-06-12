@@ -1,4 +1,3 @@
-# ************** Call connection model file
 include: "base_ls_database_connection.model.lkml"
 
 include: "base_mn_user_access_map.view.lkml"
@@ -36,6 +35,8 @@ include: "base_mn_org_dim.view.lkml"
 include: "base_mn_distrib_mthd_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_sd_rpt.view.lkml"
+include: "base_mn_discount_bridge_fact.view.lkml"
+include: "base_mn_rebate_type_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -432,5 +433,28 @@ explore: mn_rbt_prog_qual_prod_map_base {
     view_label: "Rebate Program Qualification Product Group"
     sql_on: ${mn_rbt_prog_qual_prod_map.source_pg_id} = ${mn_product_group_dim.src_sys_pg_id} ;;
     sql_where: ${mn_product_group_dim.latest_flag} = 'Y' ;;
+  }
+}
+
+explore: mn_pbc_rebate_lines_base {
+
+  from:  mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  hidden: yes
+
+  join: mn_rebate_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "PBC Rebate Lines Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rebate_type_dim.rebate_type_wid};;
+  }
+
+  join: mn_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "PBC Rebate Lines Payee"
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_customer_dim.customer_wid};;
   }
 }

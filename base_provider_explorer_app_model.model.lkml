@@ -17,7 +17,7 @@ explore: mn_contract_header_dim {
   view_name: mn_contract_header_dim
   hidden: no
 
-  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y' and  ;;
 
 
   join: mn_product_group_dim {
@@ -146,7 +146,11 @@ explore: pbc_rebate_contract{
   label: "Rebate Contracts"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
-  extends: [mn_contract_header_dim_base,mn_combined_rebate_program_dim_base,mn_payment_package_dim_base]
+  extends: [mn_contract_header_dim_adhoc_base,
+              mn_combined_rebate_program_dim_base,
+              mn_payment_package_dim_base,
+              mn_rebate_payment_fact_base,
+              mn_pbc_rebate_lines_base]
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
@@ -174,6 +178,34 @@ explore: pbc_rebate_contract{
     from: mn_payment_package_dim
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
   }
+
+  join: mn_discount_bridge_fact {
+    type: left_outer
+    view_label: "Rebate Line"
+    relationship: many_to_one
+    from: mn_discount_bridge_fact
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid};;
+  }
+
+  join: mn_rbt_prog_qual_ben_dim {
+    type: left_outer
+    view_label: "Rebate Program Benefit"
+    relationship: many_to_one
+    from: mn_rbt_prog_qual_ben_dim
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid};;
+    sql_where: (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N' or ${mn_rbt_prog_qual_ben_dim.is_qual_component} IS NULL) ;;
+  }
+
+  join: mn_rbt_prog_qual_ben_sd_rpt {
+    type: left_outer
+    relationship: one_to_many
+    from: mn_rbt_prog_qual_ben_sd_rpt
+    view_label: "Rebate Program Benefit"
+    #fields: [full_name]
+    sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
+  }
+
+
 }
 
 explore: mn_combined_sale_fact {
