@@ -37,6 +37,7 @@ include: "base_mn_rbt_prog_qual_ben_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_sd_rpt.view.lkml"
 include: "base_mn_discount_bridge_fact.view.lkml"
 include: "base_mn_rebate_type_dim.view.lkml"
+include: "base_mn_rebate_payment_package_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 

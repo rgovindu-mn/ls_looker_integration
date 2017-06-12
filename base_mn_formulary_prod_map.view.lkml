@@ -1,6 +1,5 @@
-view: base_mn_plan_formulary_map {
-
-  sql_table_name: MN_PLAN_FORMULARY_MAP_VW ;;
+view: base_mn_formulary_prod_map {
+  sql_table_name: MN_FORMULARY_PROD_MAP_VW ;;
 
   measure: count {
     type: count
@@ -71,10 +70,40 @@ view: base_mn_plan_formulary_map {
     sql: ${TABLE}.FORMULARY_WID ;;
   }
 
-  dimension: plan_wid {
+  dimension: line_sev {
+    type: string
+    sql: ${TABLE}.LINE_SEV ;;
+  }
+
+  dimension: ndc_lock {
+    type: string
+    sql: ${TABLE}.NDC_LOCK ;;
+  }
+
+  dimension: notes {
+    type: string
+    sql: ${TABLE}.NOTES ;;
+  }
+
+  dimension: other_rest {
+    type: string
+    sql: ${TABLE}.OTHER_REST ;;
+  }
+
+  dimension: prior_auth {
+    type: string
+    sql: ${TABLE}.PRIOR_AUTH ;;
+  }
+
+  dimension: product_wid {
     hidden: yes
     type: string
-    sql: ${TABLE}.PLAN_WID ;;
+    sql: ${TABLE}.PRODUCT_WID ;;
+  }
+
+  dimension: qty_limit {
+    type: string
+    sql: ${TABLE}.QTY_LIMIT ;;
   }
 
   dimension: run_id {
@@ -89,10 +118,32 @@ view: base_mn_plan_formulary_map {
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
+  dimension: step_edit {
+    type: string
+    sql: ${TABLE}.STEP_EDIT ;;
+  }
+
+  dimension: tier_num {
+    type: string
+    sql: ${TABLE}.TIER_NUM ;;
+  }
+
+  dimension: tier_on_off {
+    type: string
+    sql: ${TABLE}.TIER_ON_OFF ;;
+  }
+
   set: detail {
     fields: [
-      formulary_wid,
-      plan_wid
+      line_sev,
+      ndc_lock,
+      notes,
+      other_rest,
+      prior_auth,
+      qty_limit,
+      step_edit,
+      tier_num,
+      tier_on_off
     ]
   }
 }
