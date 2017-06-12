@@ -142,7 +142,7 @@ explore: mn_contract_header_dim {
 
 }
 
-explore: pbc_rebate_contract{
+explore: provider_rebate_contract{
   label: "Rebate Contracts"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
@@ -150,7 +150,7 @@ explore: pbc_rebate_contract{
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
               mn_rebate_payment_fact_base,
-              mn_pbc_rebate_lines_base]
+              mn_provider_rebate_lines_base]
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
@@ -205,6 +205,13 @@ explore: pbc_rebate_contract{
     sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
   }
 
+  join: mn_customer_dim {
+    type: left_outer
+    view_label: "Rebate Payment Payee"
+    relationship: many_to_one
+    from: mn_customer_dim
+    sql_on:  ${mn_rebate_payment_fact.payee_customer_wid} = ${mn_customer_cot_dim.customer_wid};;
+  }
 
 }
 
