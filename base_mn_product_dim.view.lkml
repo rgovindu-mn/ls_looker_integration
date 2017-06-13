@@ -244,6 +244,7 @@ view: mn_product_dim {
   dimension: ndc {
     type: string
     sql: ${TABLE}.NDC ;;
+    label: "NDC"
   }
 
   dimension: non_cmty_pharma_drug_flag {
@@ -312,6 +313,7 @@ view: mn_product_dim {
   dimension: sku {
     type: string
     sql: ${TABLE}.SKU ;;
+    label: "SKU"
   }
 
   dimension: source_system_id {
