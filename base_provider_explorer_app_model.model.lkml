@@ -101,23 +101,114 @@ explore: mn_contract_header_dim {
   }
 
 
-  join: mn_pg_pg_prc_adhoc_fact {
+  join: mn_pg_prc_adhoc_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_pg_product_pricing_fact_adhoc_ext
-    view_label: "Products and Pricing"
+    view_label: "Pricing Program Products and Pricing"
     #fields: [channel_name]
-    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
-    AND ${mn_pg_pg_prc_adhoc_fact.tier_idx}=1;;
+    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+    AND ${mn_pg_prc_adhoc_fact.tier_idx}=1;;
+  }
+
+
+  join: mn_pg_prod_adhoc_map {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_prod_adhoc_map
+    view_label: "Pricing Program Product Information"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_prod_adhoc_map.pg_wid} = ${mn_product_group_dim.pg_wid}
+      ;;
+  }
+
+  join: mn_pg_mb_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_market_basket_dim
+    view_label: "Pricing Program Product Information"
+    #fields: [product_name, product_num, product_type]
+    sql_on: ${mn_pg_prod_adhoc_map.pg_basket_wid} = ${mn_pg_mb_dim.market_basket_wid};;
+  }
+
+
+  join: mn_product_pg_inc_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim_adhoc_ext
+    view_label: "Pricing Program Product Information"
+    fields: [inc_product_name, inc_product_num, inc_product_type_adhoc]
+    sql_on: ${mn_pg_prod_adhoc_map.pg_product_wid} = ${mn_product_pg_inc_dim.product_wid};;
+  }
+
+
+  join: mn_product_pg_exp_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim_adhoc_ext
+    view_label: "Pricing Program Product Information"
+    fields: [product_name, product_num, product_type_adhoc]
+    sql_on: ${mn_pg_prod_adhoc_map.pg_expanded_product_wid} = ${mn_product_pg_inc_dim.product_wid};;
+  }
+
+  join: mn_product_attr_adhoc_inc {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_attr_adhoc_ext
+    view_label: "Pricing Program Product Information"
+    fields: [pg_inc_attr_name, pg_inc_attr_value, pg_inc_eff_start_date, pg_inc_eff_end_date]
+    sql_on: ${mn_pg_prod_adhoc_map.pg_product_wid} = ${mn_product_attr_adhoc_inc.product_wid};;
+  }
+
+
+
+  join: mn_product_attr_adhoc_exp {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_attr_adhoc_ext
+    view_label: "Pricing Program Product Information"
+    fields: [pg_exp_attr_name, pg_exp_attr_value, pg_exp_eff_start_date, pg_exp_eff_end_date]
+    sql_on: ${mn_pg_prod_adhoc_map.pg_expanded_product_wid} = ${mn_product_attr_adhoc_exp.product_wid};;
+  }
+
+
+
+  join: mn_pg_prd_prc_entlmt_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_prd_prc_entlmt_fact
+    view_label: "Pricing Program Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_prd_prc_entlmt_fact.src_sys_struct_li_id} = ${mn_pg_prc_adhoc_fact.src_sys_struct_li_id};;
+  }
+
+
+  join: mn_pg_prod_attr_sn_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_prod_attr_sn_fact
+    view_label: "Pricing Program Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_prod_attr_sn_fact.src_sys_struct_li_id} = ${mn_pg_prc_adhoc_fact.src_sys_struct_li_id};;
+  }
+
+
+  join: mn_pg_prod_attr_po_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_prod_attr_po_fact
+    view_label: "Pricing Program Products and Pricing"
+    #fields: [channel_name]
+    sql_on: ${mn_pg_prod_attr_po_fact.src_sys_struct_li_id} = ${mn_pg_prc_adhoc_fact.src_sys_struct_li_id};;
   }
 
   join: mn_pg_pg_prc_fact_flat {
     type: left_outer
     relationship: many_to_one
-    from: mn_pg_pg_prc_fact_flat
-    view_label: "Products and Pricing"
+    from: mn_pg_prc_fact_flat
+    view_label: "Pricing Program Products and Pricing"
     #fields: [channel_name]
-    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid};;
+    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid};;
   }
 
 
@@ -125,19 +216,19 @@ explore: mn_contract_header_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_bid_award_flat_fact
-    view_label: "Products and Pricing"
+    view_label: "Pricing Program Products and Pricing"
     #fields: [channel_name]
-    sql_on: ${mn_pg_pg_prc_adhoc_fact.pg_wid} = ${mn_big_award_flat_fact.pg_wid};;
+    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_big_award_flat_fact.pg_wid};;
   }
 
 
-  join: mn_product_dim {
+  join: mn_product_prc_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_product_dim
-    view_label: "Products and Pricing"
+    view_label: "Pricing Program Products and Pricing"
     fields: [product_name, product_num]
-    sql_on: ${mn_pg_pg_prc_adhoc_fact.product_wid} = ${mn_product_dim.product_wid};;
+    sql_on: ${mn_pg_prc_adhoc_fact.product_wid} = ${mn_product_prc_dim.product_wid};;
   }
 
 }
