@@ -100,6 +100,7 @@ view: mn_customer_dim {
 
   dimension: member_info_type {
     type: string
+    label: "Customer Type"
     sql: ${TABLE}.MEMBER_INFO_TYPE ;;
   }
 

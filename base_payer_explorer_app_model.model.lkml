@@ -42,7 +42,7 @@ explore: mn_contract_header_dim {
       view_label: "Rebate Program Qualification"
       #fields: [full_name]
       sql_on: ${mn_rbt_prog_qual_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_sd_rpt.program_qual_ben_wid};;
-      fields: [- mn_rbt_prog_qual_sd_rpt.rebate_program_ben_sd_rpt_additional_fields_set*]
+      fields: [ - mn_rbt_prog_qual_sd_rpt.rebate_program_ben_sd_rpt_additional_fields_set*]
     }
 
   join: mn_rbt_prog_ben_dim {

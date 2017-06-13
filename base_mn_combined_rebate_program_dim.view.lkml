@@ -1,178 +1,133 @@
 view: mn_combined_rebate_program_dim {
   derived_table: {
-    sql:SELECT
-        RP.ACCRUAL_RATE,
-        RP.ACCRUAL_TYPE_WID,
-        NULL AS ACCRU_CUST_WID,
-        RP.BENEFIT_CALC_RULE,
-        RP.CALC_LEVEL,
-        RP.CONTRACT_TYPE,
-        RP.CONTRACT_TYPE_WID,
-        NULL AS CUSTOMER_WID,
-        RP.DATE_CREATED,
-        RP.DATE_UPDATED,
-        RP.DOC_TZ_EFF_END_DATE,
-        RP.DOC_TZ_EFF_START_DATE,
-        RP.EFFECTIVE_TIMEZONE,
-        RP.EFF_END_DATE,
-        RP.EFF_START_DATE,
-        RP.END_VER_NUM,
-        RP.FLAT_PROGRAM,
-        RP.GRP_NAME,
-        RP.LATEST_FLAG,
-        RP.LATE_DATE_LAG,
-        NULL AS MARKET_BASKET_TYPE,
-        RP.NON_STD_PROGRAM,
-        RP.NOTES,
-        RP.NUM_TIERS,
-        RP.ORDER_IDX,
-        RP.ORG_WID,
-        RP.PAYEE_CUSTOMER_WID,
-        RP.PAYMENT_CUST_TYPE,
-        RP.PAYMENT_FREQ,
-        RP.PAYMENT_GRACE_FREQ,
-        RP.PAYMENT_LEVEL,
-        RP.PMT_METHOD_WID,
-        RP.PMT_TYPE_WID,
-        RP.PROCESSING_DATE_LAG,
-        RP.PROGRAM_NAME,
-        RP.PROGRAM_SUB_TYPE,
-        RP.PROGRAM_SUB_TYPE_NAME,
-        RP.PROGRAM_TYPE_WID,
-        RP.PROGRAM_WID,
-        NULL AS QUAL_METHOD,
-        NULL AS RBT_STRATEGY_RPT_WID,
-        RP.RUN_ID,
-        NULL AS RX_NORM_METHOD,
-        RP.SALE_LINE_FROM,
-        RP.SALE_LINE_TYPE,
-        RP.SCHEDULE_BASIS,
-        RP.SOURCE_SYSTEM_ID,
-        NULL AS SPREADSHEET_END_DATE,
-        NULL AS SPREADSHEET_NAME,
-        NULL AS SPREADSHEET_START_DATE,
-        NULL AS SPREADSHEET_TYPE,
-        RP.SRC_STRATEGY_NAME,
-        RP.SRC_STRATEGY_NUM,
-        RP.SRC_STRATEGY_TYPE,
-        RP.SRC_STRATEGY_VER_NUM,
-        RP.SRC_SYS_CONTRACT_ID,
-        NULL AS SRC_SYS_DATE_UPDATED,
-        RP.SRC_SYS_MGR_ID,
-        RP.SRC_SYS_PK_ID,
-        RP.SRC_SYS_PROGRAM_ID,
-        RP.STRATEGY_BASED_FLAG,
-        RP.SYSTEM_ACCRUE,
-        RP.TB_CALC_RULE,
-        NULL AS TIER_MGMT_TYPE,
-        NULL AS UTIL_TYPE,
-        RP.VER_END_DATE,
-        RP.VER_NUM,
-        RP.VER_START_DATE,
-        NULL AS SRC_SYS_RBT_STRATEGY_RPT_ID,
-        NULL AS SRC_SYS_STRATEGY_ID,
-        NULL AS STRATEGY_END_VER_NUM,
-        NULL AS STRATEGY_VER_NUM,
-        NULL AS TYPE,
-        CF.CONTRACT_WID AS CONTRACT_WID
-        FROM
-        MN_REBATE_PROGRAM_DIM_VW RP
-        INNER JOIN MN_CONTRACT_FACT_VW CF ON CF.PROGRAM_WID = RP.PROGRAM_WID AND CF.RECORD_TYPE = 2
-        WHERE RP.STRATEGY_BASED_FLAG='N'
+    sql: SELECT
+            RP.ACCRUAL_TYPE_WID,
+            RP.PROGRAM_TYPE_WID,
+            RP.PMT_TYPE_WID,
+            RP.PROGRAM_WID,
+            RP.PMT_METHOD_WID,
+            RP.ORG_WID,
+            Null as ACCRU_CUST_WID,
+            Null as CUSTOMER_WID,
+            RP.PAYEE_CUSTOMER_WID,
+            RP.ACCRUAL_RATE,
+            RP.BENEFIT_CALC_RULE,
+            RP.CALC_LEVEL,
+            'GMT' || TZ_OFFSET(RP.EFFECTIVE_TIMEZONE) AS EFFECTIVE_TIMEZONE_GMT,
+            RP.DOC_TZ_EFF_END_DATE,
+            RP.DOC_TZ_EFF_START_DATE,
+            RP.END_VER_NUM,
+            RP.FLAT_PROGRAM,
+            RP.GRP_NAME,
+            RP.LATEST_FLAG,
+            RP.LATE_DATE_LAG,
+            Null as MARKET_BASKET_TYPE,
+            RP.NON_STD_PROGRAM,
+            RP.NUM_TIERS,
+            RP.ORDER_IDX ,
+            RP.PAYMENT_CUST_TYPE,
+            RP.PAYMENT_FREQ,
+            RP.PAYMENT_GRACE_FREQ,
+            RP.PAYMENT_LEVEL,
+            RP.PROCESSING_DATE_LAG,
+            RP.PROGRAM_NAME,
+            RP.PROGRAM_SUB_TYPE,
+            RP.PROGRAM_SUB_TYPE_NAME,
+            Null as QUAL_METHOD,
+            Null as RX_NORM_METHOD,
+            RP.SALE_LINE_FROM,
+            RP.SALE_LINE_TYPE,
+            RP.SCHEDULE_BASIS,
+            RP.SRC_STRATEGY_NAME,
+            RP.SRC_STRATEGY_NUM,
+            RP.SRC_STRATEGY_TYPE,
+            RP.SRC_STRATEGY_VER_NUM,
+            RP.SRC_SYS_PROGRAM_ID,
+            RP.STRATEGY_BASED_FLAG,
+            RP.SYSTEM_ACCRUE,
+            RP.TB_CALC_RULE,
+            Null as TIER_MGMT_TYPE,
+            Null as UTIL_TYPE,
+            RP.VER_END_DATE,
+            RP.VER_NUM,
+            RP.VER_START_DATE,
+            RP.CONTRACT_TYPE AS CONTRACT_TYPE,
+            RP.SRC_SYS_PK_ID AS SRC_SYS_PK_ID,
+            RP.SRC_SYS_MGR_ID SRC_SYS_MGR_ID,
+            CF.CONTRACT_WID AS CONTRACT_WID
+            FROM
+            MN_REBATE_PROGRAM_DIM_VW RP
+            INNER JOIN MN_CONTRACT_FACT_VW CF ON CF.PROGRAM_WID = RP.PROGRAM_WID AND CF.RECORD_TYPE = 2
+            WHERE RP.STRATEGY_BASED_FLAG='N'
 
-        UNION
+                    UNION
 
-        SELECT
-        RPSD.ACCRUAL_RATE,
-        RPSD.ACCRUAL_TYPE_WID,
-        RPSD.ACCRU_CUST_WID,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        RPSD.CUSTOMER_WID,
-        RPSD.DATE_CREATED,
-        RPSD.DATE_UPDATED,
-        NULL,
-        NULL,
-        NULL,
-        RPSD.EFF_END_DATE,
-        RPSD.EFF_START_DATE,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        RPSD.LATE_DATE_LAG,
-        RPSD.MARKET_BASKET_TYPE,
-        RPSD.NON_STD_PROGRAM,
-        NULL,
-        RPSD.NUM_TIERS,
-        RPSD.ORDER_IDX,
-        NULL,
-        RPSD.PAYEE_CUSTOMER_WID,
-        RPSD.PAYMENT_CUST_TYPE,
-        NULL,
-        NULL,
-        RPSD.PAYMENT_LEVEL,
-        RPSD.PMT_MTH_TYPE_WID,
-        RPSD.PMT_TYPE_WID,
-        RPSD.PROCESSING_DATE_LAG,
-        RPSD.PROGRAM_NAME,
-        NULL,
-        NULL,
-        NULL,
-        RPSD.PROGRAM_WID,
-        RPSD.QUAL_METHOD,
-        RPSD.RBT_STRATEGY_RPT_WID,
-        RPSD.RUN_ID,
-        RPSD.RX_NORM_METHOD,
-        RPSD.SALE_LINE_FROM,
-        RPSD.SALE_LINE_TYPE,
-        NULL,
-        RPSD.SOURCE_SYSTEM_ID,
-        RPSD.SPREADSHEET_END_DATE,
-        RPSD.SPREADSHEET_NAME,
-        RPSD.SPREADSHEET_START_DATE,
-        RPSD.SPREADSHEET_TYPE,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        RPSD.SRC_SYS_CONTRACT_ID,
-        RPSD.SRC_SYS_DATE_UPDATED,
-        RPSD.SRC_SYS_MGR_ID,
-        NULL,
-        NULL,
-        NULL,
-        RPSD.SYSTEM_ACCRUE,
-        NULL,
-        RPSD.TIER_MGMT_TYPE,
-        RPSD.UTIL_TYPE,
-        RPSD.VER_END_DATE,
-        NULL,
-        RPSD.VER_START_DATE,
-        RPSD.SRC_SYS_RBT_STRATEGY_RPT_ID,
-        RPSD.SRC_SYS_STRATEGY_ID,
-        RPSD.STRATEGY_END_VER_NUM,
-        RPSD.STRATEGY_VER_NUM,
-        RPSD.TYPE,
-        CF.CONTRACT_WID AS CONTRACT_WID
-        FROM
-        MN_REBATE_PROGRAM_SD_RPT_VW RPSD
-        LEFT JOIN MN_REBATE_PROGRAM_DIM_VW RP ON RP.PROGRAM_WID = RPSD.PROGRAM_WID
-        INNER JOIN MN_CONTRACT_FACT_VW CF ON CF.PROGRAM_WID = RPSD.PROGRAM_WID AND CF.RECORD_TYPE = 2
-        WHERE RP.STRATEGY_BASED_FLAG='Y'
-       ;;
+            SELECT
+            RPSD.ACCRUAL_TYPE_WID,
+            RP.PROGRAM_TYPE_WID,
+            RPSD.PMT_TYPE_WID,
+            RPSD.PROGRAM_WID,
+            RP.PMT_METHOD_WID,
+            RP.ORG_WID,
+            RPSD.ACCRU_CUST_WID,
+            RPSD.CUSTOMER_WID,
+            RPSD.PAYEE_CUSTOMER_WID,
+            RPSD.ACCRUAL_RATE,
+            RP.BENEFIT_CALC_RULE,
+            RP.CALC_LEVEL,
+            'GMT' || TZ_OFFSET(RP.EFFECTIVE_TIMEZONE) AS EFFECTIVE_TIMEZONE_GMT,
+            RP.DOC_TZ_EFF_END_DATE,
+            RP.DOC_TZ_EFF_START_DATE,
+            RP.END_VER_NUM,
+            RP.FLAT_PROGRAM,
+            RP.GRP_NAME,
+            RP.LATEST_FLAG,
+            RPSD.LATE_DATE_LAG,
+            RPSD.MARKET_BASKET_TYPE,
+            RPSD.NON_STD_PROGRAM,
+            RPSD.NUM_TIERS,
+            RPSD.ORDER_IDX ,
+            RPSD.PAYMENT_CUST_TYPE,
+            RP.PAYMENT_FREQ,
+            RP.PAYMENT_GRACE_FREQ,
+            RPSD.PAYMENT_LEVEL,
+            RPSD.PROCESSING_DATE_LAG,
+            RPSD.PROGRAM_NAME,
+            RP.PROGRAM_SUB_TYPE,
+            RP.PROGRAM_SUB_TYPE_NAME,
+            RPSD.QUAL_METHOD,
+            RPSD.RX_NORM_METHOD,
+            RPSD.SALE_LINE_FROM,
+            RPSD.SALE_LINE_TYPE,
+            RP.SCHEDULE_BASIS,
+            RP.SRC_STRATEGY_NAME,
+            RP.SRC_STRATEGY_NUM,
+            RP.SRC_STRATEGY_TYPE,
+            RP.SRC_STRATEGY_VER_NUM,
+            RP.SRC_SYS_PROGRAM_ID,
+            RP.STRATEGY_BASED_FLAG,
+            RPSD.SYSTEM_ACCRUE,
+            RP.TB_CALC_RULE,
+            RPSD.TIER_MGMT_TYPE,
+            RPSD.UTIL_TYPE,
+            RPSD.VER_END_DATE,
+            RP.VER_NUM,
+            RPSD.VER_START_DATE,
+            RP.CONTRACT_TYPE AS CONTRACT_TYPE,
+            RP.SRC_SYS_PK_ID AS SRC_SYS_PK_ID,
+            RPSD.SRC_SYS_MGR_ID SRC_SYS_MGR_ID,
+            CF.CONTRACT_WID AS CONTRACT_WID
+            FROM
+            MN_REBATE_PROGRAM_SD_RPT_VW RPSD
+            LEFT JOIN MN_REBATE_PROGRAM_DIM_VW RP ON RP.PROGRAM_WID = RPSD.PROGRAM_WID
+            INNER JOIN MN_CONTRACT_FACT_VW CF ON CF.PROGRAM_WID = RPSD.PROGRAM_WID AND CF.RECORD_TYPE = 2
+            WHERE RP.STRATEGY_BASED_FLAG='Y'
+             ;;
   }
 
   measure: count {
     type: count
     drill_fields: [detail*]
-  }
-
-  dimension: accrual_rate {
-    type: string
-    sql: ${TABLE}.ACCRUAL_RATE ;;
   }
 
   dimension: accrual_type_wid {
@@ -181,10 +136,57 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.ACCRUAL_TYPE_WID ;;
   }
 
+  dimension: program_type_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.PROGRAM_TYPE_WID ;;
+  }
+
+  dimension: pmt_type_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.PMT_TYPE_WID ;;
+  }
+
+  dimension: program_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.PROGRAM_WID ;;
+  }
+
+  dimension: pmt_method_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.PMT_METHOD_WID ;;
+  }
+
+  dimension: org_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.ORG_WID ;;
+  }
+
   dimension: accru_cust_wid {
     hidden: yes
     type: string
     sql: ${TABLE}.ACCRU_CUST_WID ;;
+  }
+
+  dimension: customer_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.CUSTOMER_WID ;;
+  }
+
+  dimension: payee_customer_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
+  }
+
+  dimension: accrual_rate {
+    type: string
+    sql: ${TABLE}.ACCRUAL_RATE ;;
   }
 
   dimension: benefit_calc_rule {
@@ -197,39 +199,9 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.CALC_LEVEL ;;
   }
 
-  dimension: contract_type {
+  dimension: effective_timezone_gmt {
     type: string
-    sql: ${TABLE}.CONTRACT_TYPE ;;
-  }
-
-  dimension: contract_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.CONTRACT_WID ;;
-  }
-
-  dimension: contract_type_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.CONTRACT_TYPE_WID ;;
-  }
-
-  dimension: customer_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.CUSTOMER_WID ;;
-  }
-
-  dimension_group: date_created {
-    hidden: yes
-    type: time
-    sql: ${TABLE}.DATE_CREATED ;;
-  }
-
-  dimension_group: date_updated {
-    hidden: yes
-    type: time
-    sql: ${TABLE}.DATE_UPDATED ;;
+    sql: ${TABLE}.EFFECTIVE_TIMEZONE_GMT ;;
   }
 
   dimension: doc_tz_eff_end_date {
@@ -240,21 +212,6 @@ view: mn_combined_rebate_program_dim {
   dimension: doc_tz_eff_start_date {
     type: date
     sql: ${TABLE}.DOC_TZ_EFF_START_DATE ;;
-  }
-
-  dimension: effective_timezone {
-    type: string
-    sql: ${TABLE}.EFFECTIVE_TIMEZONE ;;
-  }
-
-  dimension_group: eff_end_date {
-    type: time
-    sql: ${TABLE}.EFF_END_DATE ;;
-  }
-
-  dimension_group: eff_start_date {
-    type: time
-    sql: ${TABLE}.EFF_START_DATE ;;
   }
 
   dimension: end_ver_num {
@@ -292,11 +249,6 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.NON_STD_PROGRAM ;;
   }
 
-  dimension: notes {
-    type: string
-    sql: ${TABLE}.NOTES ;;
-  }
-
   dimension: num_tiers {
     type: string
     sql: ${TABLE}.NUM_TIERS ;;
@@ -305,18 +257,6 @@ view: mn_combined_rebate_program_dim {
   dimension: order_idx {
     type: string
     sql: ${TABLE}.ORDER_IDX ;;
-  }
-
-  dimension: org_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.ORG_WID ;;
-  }
-
-  dimension: payee_customer_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
   }
 
   dimension: payment_cust_type {
@@ -339,18 +279,6 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.PAYMENT_LEVEL ;;
   }
 
-  dimension: pmt_method_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.PMT_METHOD_WID ;;
-  }
-
-  dimension: pmt_type_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.PMT_TYPE_WID ;;
-  }
-
   dimension: processing_date_lag {
     type: string
     sql: ${TABLE}.PROCESSING_DATE_LAG ;;
@@ -371,33 +299,9 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.PROGRAM_SUB_TYPE_NAME ;;
   }
 
-  dimension: program_type_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.PROGRAM_TYPE_WID ;;
-  }
-
-  dimension: program_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.PROGRAM_WID ;;
-  }
-
   dimension: qual_method {
     type: string
     sql: ${TABLE}.QUAL_METHOD ;;
-  }
-
-  dimension: rbt_strategy_rpt_wid {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.RBT_STRATEGY_RPT_WID ;;
-  }
-
-  dimension: run_id {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: rx_norm_method {
@@ -420,32 +324,6 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.SCHEDULE_BASIS ;;
   }
 
-  dimension: source_system_id {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
-  }
-
-  dimension_group: spreadsheet_end_date {
-    type: time
-    sql: ${TABLE}.SPREADSHEET_END_DATE ;;
-  }
-
-  dimension: spreadsheet_name {
-    type: string
-    sql: ${TABLE}.SPREADSHEET_NAME ;;
-  }
-
-  dimension_group: spreadsheet_start_date {
-    type: time
-    sql: ${TABLE}.SPREADSHEET_START_DATE ;;
-  }
-
-  dimension: spreadsheet_type {
-    type: string
-    sql: ${TABLE}.SPREADSHEET_TYPE ;;
-  }
-
   dimension: src_strategy_name {
     type: string
     sql: ${TABLE}.SRC_STRATEGY_NAME ;;
@@ -464,29 +342,6 @@ view: mn_combined_rebate_program_dim {
   dimension: src_strategy_ver_num {
     type: string
     sql: ${TABLE}.SRC_STRATEGY_VER_NUM ;;
-  }
-
-  dimension: src_sys_contract_id {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
-  }
-
-  dimension_group: src_sys_date_updated {
-    type: time
-    sql: ${TABLE}.SRC_SYS_DATE_UPDATED ;;
-  }
-
-  dimension: src_sys_mgr_id {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.SRC_SYS_MGR_ID ;;
-  }
-
-  dimension: src_sys_pk_id {
-    hidden: yes
-    type: string
-    sql: ${TABLE}.SRC_SYS_PK_ID ;;
   }
 
   dimension: src_sys_program_id {
@@ -535,31 +390,27 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.VER_START_DATE ;;
   }
 
-  dimension: src_sys_rbt_strategy_rpt_id {
+  dimension: contract_type {
+    type: string
+    sql: ${TABLE}.CONTRACT_TYPE ;;
+  }
+
+  dimension: src_sys_pk_id {
     hidden: yes
     type: string
-    sql: ${TABLE}.SRC_SYS_RBT_STRATEGY_RPT_ID ;;
+    sql: ${TABLE}.SRC_SYS_PK_ID ;;
   }
 
-  dimension: src_sys_strategy_id {
+  dimension: src_sys_mgr_id {
     hidden: yes
     type: string
-    sql: ${TABLE}.SRC_SYS_STRATEGY_ID ;;
+    sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 
-  dimension: strategy_end_ver_num {
+  dimension: contract_wid {
+    hidden: yes
     type: string
-    sql: ${TABLE}.STRATEGY_END_VER_NUM ;;
-  }
-
-  dimension: strategy_ver_num {
-    type: string
-    sql: ${TABLE}.STRATEGY_VER_NUM ;;
-  }
-
-  dimension: type {
-    type: string
-    sql: ${TABLE}.TYPE ;;
+    sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   set: detail {
@@ -567,12 +418,9 @@ view: mn_combined_rebate_program_dim {
       accrual_rate,
       benefit_calc_rule,
       calc_level,
-      contract_type,
+      effective_timezone_gmt,
       doc_tz_eff_end_date,
       doc_tz_eff_start_date,
-      effective_timezone,
-      eff_end_date_time,
-      eff_start_date_time,
       end_ver_num,
       flat_program,
       grp_name,
@@ -580,7 +428,6 @@ view: mn_combined_rebate_program_dim {
       late_date_lag,
       market_basket_type,
       non_std_program,
-      notes,
       num_tiers,
       order_idx,
       payment_cust_type,
@@ -596,15 +443,10 @@ view: mn_combined_rebate_program_dim {
       sale_line_from,
       sale_line_type,
       schedule_basis,
-      spreadsheet_end_date_time,
-      spreadsheet_name,
-      spreadsheet_start_date_time,
-      spreadsheet_type,
       src_strategy_name,
       src_strategy_num,
       src_strategy_type,
       src_strategy_ver_num,
-      src_sys_date_updated_time,
       strategy_based_flag,
       system_accrue,
       tb_calc_rule,
@@ -613,9 +455,7 @@ view: mn_combined_rebate_program_dim {
       ver_end_date_time,
       ver_num,
       ver_start_date_time,
-      strategy_end_ver_num,
-      strategy_ver_num,
-      type
+      contract_type,
     ]
   }
 }

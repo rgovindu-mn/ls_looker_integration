@@ -1,12 +1,8 @@
 view: mn_formulary_dim {
-  sql_table_name: MN_INDIR_SALE_FACT_VW ;;
-
-  measure: count {
-    type: count
-    drill_fields: [formulary_name]
-  }
+  sql_table_name: MN_FORMULARY_DIM_VW ;;
 
   dimension: src_sys_formulary_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SRC_SYS_FORMULARY_ID ;;
   }
@@ -50,7 +46,7 @@ view: mn_formulary_dim {
     sql: ${TABLE}.FORMULARY_NAME ;;
   }
 
-  dimension_group: eff_start_date {
+  dimension_group: eff_start {
     hidden: yes
     type: time
     timeframes: [
@@ -65,7 +61,7 @@ view: mn_formulary_dim {
     sql: ${TABLE}.EFF_START_DATE ;;
   }
 
-  dimension_group: eff_end_date {
+  dimension_group: eff_end {
     hidden: yes
     type: time
     timeframes: [
@@ -113,5 +109,10 @@ view: mn_formulary_dim {
       year
     ]
     sql: ${TABLE}.DATE_CREATED ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [formulary_name]
   }
 }

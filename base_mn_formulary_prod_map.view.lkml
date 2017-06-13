@@ -1,4 +1,4 @@
-view: base_mn_formulary_prod_map {
+view: mn_formulary_prod_map {
   sql_table_name: MN_FORMULARY_PROD_MAP_VW ;;
 
   measure: count {
