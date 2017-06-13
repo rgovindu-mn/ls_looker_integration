@@ -231,6 +231,32 @@ explore: mn_contract_header_dim {
     sql_on: ${mn_pg_prc_adhoc_fact.product_wid} = ${mn_product_prc_dim.product_wid};;
   }
 
+  join: mn_combined_rebate_program_dim {
+    type: left_outer
+    view_label: "Rebate Program"
+    relationship: many_to_one
+    from: mn_combined_rebate_program_dim
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid} ;;
+  }
+
+  join: mn_rebate_program_qual_dim {
+    type: left_outer
+    view_label: "Rebate Program"
+    relationship: many_to_one
+    from: mn_rbt_prg_qual_flat_dim
+    sql_on: ${mn_rebate_program_qual_dim.program_wid} = ${mn_combined_rebate_program_dim.program_wid} ;;
+  }
+
+  join: mn_rebate_program_payee_dim {
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Program Payee"
+    from: mn_customer_dim
+    fields: [customer_name, customer_num, member_info_type]
+    sql_on: ${mn_rebate_program_payee_dim.customer_wid} = ${mn_combined_rebate_program_dim.payee_customer_wid};;
+  }
+
+
 }
 
 explore: provider_rebate_contract{

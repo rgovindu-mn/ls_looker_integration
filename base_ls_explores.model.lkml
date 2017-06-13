@@ -229,8 +229,6 @@ explore: mn_product_group_dim_base {
     sql_on: ${mn_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid};;
   }
 
-
-
 }
 
 explore: mn_combined_rebate_program_dim_base {
