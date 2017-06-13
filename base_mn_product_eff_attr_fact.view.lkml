@@ -98,6 +98,7 @@ view: mn_product_eff_attr_fact {
   }
 
   dimension_group: src_sys_date_updated {
+    hidden: yes
     type: time
     timeframes: [
       raw,

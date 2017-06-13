@@ -1,4 +1,5 @@
-view: mn_product_map_all_vers {
+view: mn_product_map_all_ver {
+
   derived_table: {
     sql: SELECT
         AV.LEVEL0_PROD_WID
@@ -113,14 +114,10 @@ view: mn_product_map_all_vers {
        ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [level0_product_wid]
-  }
 
   dimension: level0_product_wid {
-    type: string
     hidden: yes
+    type: string
     sql: ${TABLE}.LEVEL0_PROD_WID ;;
   }
 
@@ -135,14 +132,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level0_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL0_PROD_START_DT_WID ;;
   }
 
-  dimension_group: level0_product_start_date {
+  dimension_group: level0_product_start {
     type: time
-    sql: ${TABLE}.P_L0_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -152,11 +148,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L0_START_DATE ;;
   }
 
-  dimension_group: level0_product_end_date {
+  dimension_group: level0_product_end {
     type: time
-    sql: ${TABLE}.P_L0_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -166,17 +162,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L0_END_DATE ;;
   }
 
   dimension: level0_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL0_PROD_END_DT_WID ;;
   }
 
   dimension: level1_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL1_PROD_WID ;;
   }
 
@@ -191,14 +188,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level1_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL1_PROD_START_DT_WID ;;
   }
 
-  dimension_group: level1_product_start_date {
+  dimension_group: level1_product_start {
     type: time
-    sql: ${TABLE}.P_L1_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -208,11 +204,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L1_START_DATE ;;
   }
 
-  dimension_group: level1_product_end_date {
+  dimension_group: level1_product_end {
     type: time
-    sql: ${TABLE}.P_L1_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -222,17 +218,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L1_END_DATE ;;
   }
 
   dimension: level1_product_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL1_PROD_END_DT_WID ;;
   }
 
   dimension: level2_product_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL2_PROD_WID ;;
   }
 
@@ -247,14 +244,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level2_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL2_PROD_START_DT_WID ;;
   }
 
   dimension_group: level2_product_start_date {
     type: time
-    sql: ${TABLE}.P_L2_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -264,11 +260,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L2_START_DATE ;;
   }
 
   dimension_group: level2_product_end_date {
     type: time
-    sql: ${TABLE}.P_L2_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -278,17 +274,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L2_END_DATE ;;
   }
 
   dimension: level2_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL2_PROD_END_DT_WID ;;
   }
 
   dimension: level3_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL3_PROD_WID ;;
   }
 
@@ -303,14 +300,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level3_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL3_PROD_START_DT_WID ;;
   }
 
-  dimension_group: level3_product_start_date {
+  dimension_group: level3_product_start {
     type: time
-    sql: ${TABLE}.P_L3_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -320,11 +316,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L3_START_DATE ;;
   }
 
-  dimension_group: level3_product_end_date {
+  dimension_group: level3_product_end {
     type: time
-    sql: ${TABLE}.P_L3_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -334,17 +330,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L3_END_DATE ;;
   }
 
   dimension: level3_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL3_PROD_END_DT_WID ;;
   }
 
   dimension: level4_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL4_PROD_WID ;;
   }
 
@@ -359,14 +356,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level4_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL4_PROD_START_DT_WID ;;
   }
 
   dimension_group: level4_product_start_date {
     type: time
-    sql: ${TABLE}.P_L4_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -376,11 +372,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L4_START_DATE ;;
   }
 
   dimension_group: level4_product_end_date {
     type: time
-    sql: ${TABLE}.P_L4_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -390,17 +386,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L4_END_DATE ;;
   }
 
   dimension: level4_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL4_PROD_END_DT_WID ;;
   }
 
   dimension: level5_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL5_PROD_WID ;;
   }
 
@@ -415,14 +412,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level5_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL5_PROD_START_DT_WID ;;
   }
 
   dimension_group: level5_product_start_date {
     type: time
-    sql: ${TABLE}.P_L5_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -432,11 +428,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L5_START_DATE ;;
   }
 
   dimension_group: level5_product_end_date {
     type: time
-    sql: ${TABLE}.P_L5_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -446,17 +442,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L5_END_DATE ;;
   }
 
   dimension: level5_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL5_PROD_END_DT_WID ;;
   }
 
   dimension: level6_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL6_PROD_WID ;;
   }
 
@@ -471,14 +468,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level6_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL6_PROD_START_DT_WID ;;
   }
 
   dimension_group: level6_product_start_date {
     type: time
-    sql: ${TABLE}.P_L6_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -488,11 +484,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L6_START_DATE ;;
   }
 
   dimension_group: level6_product_end_date {
     type: time
-    sql: ${TABLE}.P_L6_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -502,17 +498,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L6_END_DATE ;;
   }
 
   dimension: level6_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL6_PROD_END_DT_WID ;;
   }
 
   dimension: level7_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL7_PROD_WID ;;
   }
 
@@ -527,14 +524,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level7_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL7_PROD_START_DT_WID ;;
   }
 
   dimension_group: level7_product_start_date {
     type: time
-    sql: ${TABLE}.P_L7_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -544,11 +540,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L7_START_DATE ;;
   }
 
   dimension_group: level7_product_end_date {
     type: time
-    sql: ${TABLE}.P_L7_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -558,17 +554,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L7_END_DATE ;;
   }
 
   dimension: level7_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL7_PROD_END_DT_WID ;;
   }
 
   dimension: level8_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL8_PROD_WID ;;
   }
 
@@ -583,14 +580,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level8_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL8_PROD_START_DT_WID ;;
   }
 
   dimension_group: level8_product_start_date {
     type: time
-    sql: ${TABLE}.P_L8_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -600,11 +596,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L8_START_DATE ;;
   }
 
   dimension_group: level8_product_end_date {
     type: time
-    sql: ${TABLE}.P_L8_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -614,17 +610,18 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L8_END_DATE ;;
   }
 
   dimension: level8_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL8_PROD_END_DT_WID ;;
   }
 
   dimension: level9_prod_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL9_PROD_WID ;;
   }
 
@@ -639,14 +636,13 @@ view: mn_product_map_all_vers {
   }
 
   dimension: level9_prod_start_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL9_PROD_START_DT_WID ;;
   }
 
   dimension_group: level9_product_start_date {
     type: time
-    sql: ${TABLE}.P_L9_START_DATE ;;
     timeframes: [
       raw,
       time,
@@ -656,11 +652,11 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L9_START_DATE ;;
   }
 
   dimension_group: level9_product_end_date {
     type: time
-    sql: ${TABLE}.P_L9_END_DATE ;;
     timeframes: [
       raw,
       time,
@@ -670,27 +666,30 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.P_L9_END_DATE ;;
   }
 
   dimension: level9_prod_end_dt_wid {
-    type: string
     hidden:  yes
+    type: string
     sql: ${TABLE}.LEVEL9_PROD_END_DT_WID ;;
   }
 
   dimension: run_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
+    hidden:  yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension_group: date_created {
+    hidden: yes
     type: time
-    sql: ${TABLE}.DATE_CREATED ;;
     timeframes: [
       raw,
       time,
@@ -700,11 +699,12 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.DATE_CREATED ;;
   }
 
   dimension_group: date_updated {
+    hidden: yes
     type: time
-    sql: ${TABLE}.DATE_UPDATED ;;
     timeframes: [
       raw,
       time,
@@ -714,6 +714,12 @@ view: mn_product_map_all_vers {
       quarter,
       year
     ]
+    sql: ${TABLE}.DATE_UPDATED ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [level0_product_wid]
   }
 
 }
