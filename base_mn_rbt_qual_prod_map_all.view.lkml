@@ -1,5 +1,5 @@
-view: mn_rebate_prog_prod_map_all {
-  sql_table_name: FROM MN_REBATE_PROG_PROD_MAP_ALL_VW ;;
+view: mn_rbt_qual_prod_map_all {
+  sql_table_name: MN_RBT_QUAL_PROD_MAP_ALL_VW ;;
 
   dimension: basket_wid {
     hidden: yes
@@ -103,19 +103,9 @@ view: mn_rebate_prog_prod_map_all {
     sql: ${TABLE}.INCLUDED_FROM_PG_FLAG ;;
   }
 
-  dimension: mco_pp_cap_perc {
+  dimension: override_flag {
     type: string
-    sql: ${TABLE}.MCO_PP_CAP_PERC ;;
-  }
-
-  dimension: mco_pp_threshold_perc {
-    type: string
-    sql: ${TABLE}.MCO_PP_THRESHOLD_PERC ;;
-  }
-
-  dimension: mco_pp_total_disc_cap_perc {
-    type: string
-    sql: ${TABLE}.MCO_PP_TOTAL_DISC_CAP_PERC ;;
+    sql: ${TABLE}.OVERRIDE_FLAG ;;
   }
 
   dimension: product_type {
@@ -144,14 +134,15 @@ view: mn_rebate_prog_prod_map_all {
   }
 
   dimension: prod_added_date_wid {
+    hidden: yes
     type: string
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 
-  dimension: program_wid {
+  dimension: program_qual_wid {
     hidden: yes
     type: string
-    sql: ${TABLE}.PROGRAM_WID ;;
+    sql: ${TABLE}.PROGRAM_QUAL_WID ;;
   }
 
   dimension: run_id {
@@ -198,9 +189,10 @@ view: mn_rebate_prog_prod_map_all {
     fields: [
       contract_type,
       excluded_flag,
-      included_from_ctrt_flag,
-      included_from_pg_flag,
-      program_wid
+      override_flag,
+      product_type,
+      product_wid,
+      prod_added_date_time
     ]
   }
 }

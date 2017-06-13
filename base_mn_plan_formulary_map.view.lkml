@@ -1,4 +1,4 @@
-view: base_mn_plan_formulary_map {
+view: mn_plan_formulary_map {
 
   sql_table_name: MN_PLAN_FORMULARY_MAP_VW ;;
 
