@@ -1,4 +1,3 @@
-# ************** Call connection model file
 include: "base_ls_database_connection.model.lkml"
 
 include: "base_mn_user_access_map.view.lkml"
@@ -36,6 +35,9 @@ include: "base_mn_org_dim.view.lkml"
 include: "base_mn_distrib_mthd_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_dim.view.lkml"
 include: "base_mn_rbt_prog_qual_ben_sd_rpt.view.lkml"
+include: "base_mn_discount_bridge_fact.view.lkml"
+include: "base_mn_rebate_type_dim.view.lkml"
+include: "base_mn_rebate_payment_package_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -51,6 +53,15 @@ explore: mn_contract_header_dim_base {
     view_label: "Contract Author"
     #fields: [full_name]
     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_contract_author_dim.user_wid};;
+  }
+
+  join: mn_additional_delegate_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+    #fields: [full_name]
+    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_additional_delegate_dim.user_wid};;
   }
 
   join: mn_contract_srep_dim {
@@ -123,7 +134,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_org_dim
-    view_label: "Org"
+    view_label: "Contract Org"
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_org_dim.org_wid} ;;
   }
 
@@ -131,7 +142,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_many
     from: mn_customer_cot_dim
-    view_label: "Contracted Customer COT"
+    view_label: "Contract Customer COT"
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_cot_dim.customer_wid} ;;
   }
 
@@ -139,7 +150,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_cot_dim
-    view_label: "Contracted Customer COT"
+    view_label: "Contract Customer COT"
     sql_on: ${mn_customer_cot_dim.cot_wid}.owner_wid} = ${mn_cot_dim.cot_wid}
             and ${mn_customer_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
             and ${mn_customer_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
@@ -149,7 +160,7 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_contract_header_dim
     type: left_outer
     relationship: many_to_one
-    view_label: "Parent Contract"
+    view_label: "Contract Parent"
     fields: [mn_parent_contract_header_dim.contract_number]
     sql_on: ${mn_contract_header_dim.parent_contract_wid} = ${mn_parent_contract_header_dim.contract_wid} ;;
   }
@@ -158,7 +169,7 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_distrib_mthd_dim
     type: left_outer
     relationship: many_to_one
-    view_label: "Distribution Method"
+    view_label: "Contract Distribution Method"
     sql_on: ${mn_contract_header_dim.distribution_method_wid} = ${mn_distrib_mthd_dim.dist_method_wid} ;;
   }
 
@@ -435,39 +446,25 @@ explore: mn_rbt_prog_qual_prod_map_base {
   }
 }
 
-explore: mn_rebate_prog_qual_dim_base {
+explore: mn_paid_rebate_lines_base {
 
-  from: mn_rbt_prog_qual_ben_dim
-  view_name: mn_rbt_prog_qual_ben_dim
+  from:  mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
   hidden: yes
-  sql_always_where: ${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'Y';;
-  view_label: "Rebate Program Qualification"
 
-  join: mn_rbt_prog_qual_ben_sd_rpt {
+  join: mn_rebate_type_dim {
     type: left_outer
-    relationship: one_to_many
-    from: mn_rbt_prog_qual_ben_sd_rpt
-    view_label: "Rebate Program Qualification"
-    #fields: [full_name]
-    sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "Rebate Lines Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rebate_type_dim.rebate_type_wid};;
   }
-  fields: [ALL_FIELDS*, -mn_rbt_prog_qual_ben_sd_rpt.rebate_program_ben_sd_rpt_additional_fields_set*]
-}
 
-explore: mn_rebate_prog_ben_dim_base {
-
-  from: mn_rbt_prog_qual_ben_dim
-  view_name: mn_rbt_prog_qual_ben_dim
-  hidden: yes
-  sql_always_where: ${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N';;
-  view_label: "Rebate Program Benefit"
-
-  join: mn_rbt_prog_qual_ben_sd_rpt {
+  join: mn_customer_dim {
     type: left_outer
-    relationship: one_to_many
-    from: mn_rbt_prog_qual_ben_sd_rpt
-    view_label: "Rebate Program Benefit"
-    #fields: [full_name]
-    sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Rebate Lines Payee"
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_customer_dim.customer_wid};;
   }
 }
