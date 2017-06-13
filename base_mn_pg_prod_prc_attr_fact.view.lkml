@@ -1,5 +1,5 @@
 view: mn_pg_prod_prc_attr_fact {
-  sql_table_name: LSETLDM.MN_PG_PROD_PRC_ATTR_FACT ;;
+  sql_table_name: MN_PG_PROD_PRC_ATTR_FACT_VW ;;
 
   dimension: attr_name {
     type: string

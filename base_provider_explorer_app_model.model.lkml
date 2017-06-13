@@ -17,7 +17,7 @@ explore: mn_contract_header_dim {
   view_name: mn_contract_header_dim
   hidden: no
 
-  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y' and  ;;
+  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
 
 
   join: mn_product_group_dim {
