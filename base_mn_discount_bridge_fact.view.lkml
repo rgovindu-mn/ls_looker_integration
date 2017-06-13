@@ -259,6 +259,12 @@ view: mn_discount_bridge_fact {
     sql: ${TABLE}.PAYEE_WID ;;
   }
 
+  dimension: plan_wid {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.PLAN_WID ;;
+  }
+
   dimension_group: payment_end {
     type: time
     timeframes: [
