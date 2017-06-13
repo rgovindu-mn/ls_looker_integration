@@ -58,6 +58,11 @@ view: mn_customer_dim {
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
+  dimension: customer_type {
+    type: string
+    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+  }
+
   dimension_group: date_created {
     type: time
     hidden:  yes
@@ -95,6 +100,7 @@ view: mn_customer_dim {
 
   dimension: member_info_type {
     type: string
+    label: "Customer Type"
     sql: ${TABLE}.MEMBER_INFO_TYPE ;;
   }
 

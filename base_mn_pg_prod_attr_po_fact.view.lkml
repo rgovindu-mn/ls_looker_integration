@@ -4,7 +4,7 @@ view: mn_pg_prod_attr_po_fact {
       SELECT  SRC_SYS_STRUCT_LI_ID,
               ATTR_VALUE
       FROM MN_PG_PROD_PRC_ATTR_FACT_VW
-      WHERE ATTR_NAME IN ('PONum','SerialNum')
+      WHERE ATTR_NAME IN ('PONum')
       ;;
   }
 
