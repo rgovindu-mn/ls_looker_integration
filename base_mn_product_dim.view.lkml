@@ -271,6 +271,12 @@ view: mn_product_dim {
     sql: ${TABLE}.PRODUCT_TYPE ;;
   }
 
+  dimension: product_type_adhoc {
+    type: string
+    label: "Product Type"
+    sql: CASE WHEN ${product_type} ='Bundle'  THEN 'Kit' ELSE ${product_type}  END ;;
+  }
+
   dimension: product_wid {
     hidden:  yes
     type: number

@@ -13,7 +13,8 @@ view: mn_market_basket_dim {
   }
 
   dimension: market_basket_wid {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.BASKET_WID;;
   }
 
@@ -63,22 +64,25 @@ view: mn_market_basket_dim {
   }
 
   dimension: market_basket_run_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID;;
   }
 
   dimension: market_basket_source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID;;
   }
 
   dimension: market_basket_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_BASKET_ID;;
   }
 
   dimension_group: market_basket_start_date {
-      hidden: yes
+    hidden: yes
     type: time
     timeframes: [
       raw,
