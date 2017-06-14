@@ -259,8 +259,45 @@ explore: mn_contract_header_dim {
 
 }
 
-explore: provider_rebate_contract{
-  label: "Rebate Contracts"
+explore: provider_historical_rebates {
+  label: "Historical Rebates"
+  from: mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+
+  sql_always_where: ${mn_discount_bridge_fact.is_historical_flag}='N'
+                    AND (${mn_discount_bridge_fact.ds_line_ref_num} NOT NULL OR ${mn_discount_bridge_fact.ids_line_ref_num} IS NOT NULL
+                          OR ${mn_discount_bridge_fact.cs_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'INCENTV') ;;
+
+  join: mn_soldto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Sold To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+
+  join: mn_billto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Bill To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Rebate Product"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+}
+
+explore: provider_rebates{
+  label: "Rebates"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
   extends: [mn_contract_header_dim_adhoc_base,
@@ -307,30 +344,12 @@ explore: provider_rebate_contract{
             AND (${mn_discount_bridge_fact.ds_line_ref_num} NOT NULL OR ${mn_discount_bridge_fact.ids_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.cs_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'INCENTV');;
   }
 
-  join: mn_rbt_prog_qual_ben_dim {
+  join: mn_rbt_prg_ben_flat_dim {
     type: left_outer
     view_label: "Rebate Program Benefit"
     relationship: many_to_one
-    from: mn_rbt_prog_qual_ben_dim
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid}
-            AND (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N';;
-  }
-
-  join: mn_rbt_prog_qual_ben_sd_rpt {
-    type: left_outer
-    relationship: one_to_many
-    from: mn_rbt_prog_qual_ben_sd_rpt
-    view_label: "Rebate Program Benefit"
-    #fields: [full_name]
-    sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
-  }
-
-  join: mn_customer_dim {
-    type: left_outer
-    view_label: "Rebate Payment Payee"
-    relationship: many_to_one
-    from: mn_customer_dim
-    sql_on:  ${mn_rebate_payment_fact.payee_customer_wid} = ${mn_customer_cot_dim.customer_wid};;
+    from: mn_rbt_prg_ben_flat_dim
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
   }
 
   join: mn_shipto_customer_dim {
@@ -403,8 +422,8 @@ explore: provider_rebate_contract{
   }
 }
 
-explore: provider_estimated_rebate_contract{
-  label: "Estimated Rebate Contracts"
+explore: provider_estimated_rebates{
+  label: "Estimated Rebates"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
   extends: [mn_contract_header_dim_adhoc_base,
@@ -458,30 +477,12 @@ explore: provider_estimated_rebate_contract{
             AND ${mn_discount_bridge_fact.is_historical_flag}='N' ;;
   }
 
-  join: mn_rbt_prog_qual_ben_dim {
+  join: mn_rbt_prg_ben_flat_dim {
     type: left_outer
     view_label: "Rebate Program Benefit"
     relationship: many_to_one
-    from: mn_rbt_prog_qual_ben_dim
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid}
-            AND (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N' or ${mn_rbt_prog_qual_ben_dim.is_qual_component} IS NULL) ;;
-  }
-
-  join: mn_rbt_prog_qual_ben_sd_rpt {
-    type: left_outer
-    relationship: one_to_many
-    from: mn_rbt_prog_qual_ben_sd_rpt
-    view_label: "Rebate Program Benefit"
-    #fields: [full_name]
-    sql_on: ${mn_rbt_prog_qual_ben_dim.program_qual_ben_wid} = ${mn_rbt_prog_qual_ben_sd_rpt.program_qual_ben_wid};;
-  }
-
-  join: mn_customer_dim {
-    type: left_outer
-    view_label: "Rebate Payment Payee"
-    relationship: many_to_one
-    from: mn_customer_dim
-    sql_on:  ${mn_est_rebate_payment_fact.payee_wid} = ${mn_customer_cot_dim.customer_wid};;
+    from: mn_rbt_prg_ben_flat_dim
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
   }
 
   join: mn_shipto_customer_dim {
