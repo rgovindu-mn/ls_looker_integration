@@ -152,4 +152,11 @@ view: mn_erp_payment_fact {
     type: count
     drill_fields: []
   }
+
+  measure: total_erp_payment_amount_base {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${payment_amt_base} ;;
+  }
+
 }

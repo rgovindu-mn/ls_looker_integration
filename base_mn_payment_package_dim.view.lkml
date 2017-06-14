@@ -286,4 +286,16 @@ view: mn_payment_package_dim {
     type: count
     drill_fields: [pymt_pkg_name]
   }
+
+  measure: total_payment_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${total_pmt_amt} ;;
+  }
+
+  measure: total_estimated_payment_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${total_estimated_pmt_amt} ;;
+  }
 }

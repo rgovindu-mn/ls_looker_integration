@@ -277,8 +277,8 @@ explore: provider_rebate_contract{
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
-    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid};;
-    sql_where: ${mn_combined_rebate_program_dim.latest_flag} = 'Y' ;;
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
+            AND: ${mn_combined_rebate_program_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_rebate_payment_fact {
@@ -302,8 +302,9 @@ explore: provider_rebate_contract{
     view_label: "Rebate Line"
     relationship: many_to_one
     from: mn_discount_bridge_fact
-    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid};;
-    sql_where: ${mn_discount_bridge_fact.is_historical_flag}='N' ;;
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}
+            AND ${mn_discount_bridge_fact.is_historical_flag}='N'
+            AND (${mn_discount_bridge_fact.ds_line_ref_num} NOT NULL OR ${mn_discount_bridge_fact.ids_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.cs_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'INCENTV');;
   }
 
   join: mn_rbt_prog_qual_ben_dim {
@@ -311,8 +312,8 @@ explore: provider_rebate_contract{
     view_label: "Rebate Program Benefit"
     relationship: many_to_one
     from: mn_rbt_prog_qual_ben_dim
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid};;
-    sql_where: (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N' or ${mn_rbt_prog_qual_ben_dim.is_qual_component} IS NULL) ;;
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid}
+            AND (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N';;
   }
 
   join: mn_rbt_prog_qual_ben_sd_rpt {
@@ -419,8 +420,8 @@ explore: provider_estimated_rebate_contract{
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
-    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid};;
-    sql_where: ${mn_combined_rebate_program_dim.latest_flag} = 'Y' ;;
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
+            AND ${mn_combined_rebate_program_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_est_rebate_pmt_prod_map {
@@ -453,8 +454,8 @@ explore: provider_estimated_rebate_contract{
     view_label: "Rebate Line"
     relationship: many_to_one
     from: mn_discount_bridge_fact
-    sql_on: ${mn_est_rebate_payment_fact.estimate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid};;
-    sql_where: ${mn_discount_bridge_fact.is_historical_flag}='N' ;;
+    sql_on: ${mn_est_rebate_payment_fact.estimate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}
+            AND ${mn_discount_bridge_fact.is_historical_flag}='N' ;;
   }
 
   join: mn_rbt_prog_qual_ben_dim {
@@ -462,8 +463,8 @@ explore: provider_estimated_rebate_contract{
     view_label: "Rebate Program Benefit"
     relationship: many_to_one
     from: mn_rbt_prog_qual_ben_dim
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid};;
-    sql_where: (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N' or ${mn_rbt_prog_qual_ben_dim.is_qual_component} IS NULL) ;;
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prog_qual_ben_dim.program_wid}
+            AND (${mn_rbt_prog_qual_ben_dim.is_qual_component} = 'N' or ${mn_rbt_prog_qual_ben_dim.is_qual_component} IS NULL) ;;
   }
 
   join: mn_rbt_prog_qual_ben_sd_rpt {

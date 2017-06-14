@@ -363,4 +363,40 @@ view: mn_rebate_payment_fact {
     type: count
     drill_fields: [pay_prog_status_name, pay_prog_name, name]
   }
+
+  measure: total_net_due_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${net_due_amt} ;;
+  }
+
+  measure: total_net_due_base_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${net_due_amt_base} ;;
+  }
+
+  measure: total_rebate_due_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${rebate_due_amt} ;;
+  }
+
+  measure: total_rebate_due_base_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${rebate_due_amt_base} ;;
+  }
+
+  measure: total_accrued_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${total_accrued_amt} ;;
+  }
+
+  measure: total_accrued_base_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${total_accrued_amt_base} ;;
+  }
 }

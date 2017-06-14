@@ -525,4 +525,12 @@ view: mn_est_rebate_payment_fact {
     type: count
     drill_fields: [calculation_method_name, estimate_pmt_name]
   }
+
+  measure: total_estimated_payment_amount_base {
+    type: sum
+    label: "Estimated Payment Amount"
+    value_format_name: decimal_0
+    sql: ${estimate_pmt_amount_base} ;;
+  }
+
 }

@@ -373,4 +373,23 @@ view: mn_discount_bridge_fact {
     type: count
     drill_fields: []
   }
+
+  measure: total_rebate_line_paid_amount {
+    type: sum
+    label: "Total Benefit Line Paid Amount"
+    value_format_name: decimal_0
+    sql: ${paid_amt} ;;
+  }
+
+  measure: external_invoive_amount {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${external_inv_amt} ;;
+  }
+
+  measure: total_external_invoice_quantity {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${external_invoice_qty} ;;
+  }
 }

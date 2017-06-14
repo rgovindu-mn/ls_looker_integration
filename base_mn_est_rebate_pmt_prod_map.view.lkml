@@ -323,4 +323,12 @@ view: mn_est_rebate_pmt_prod_map {
     type: count
     drill_fields: [program_type_name, aggr_rebate_type_name, util_type_name]
   }
+
+  measure: estimated_payment_base {
+    type: sum
+    label: "Total Estimated Payment Amount"
+    value_format_name: decimal_0
+    sql: ${estimate_pmt_base} ;;
+  }
+
 }
