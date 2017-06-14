@@ -3,6 +3,9 @@ include: "base_mn_rbt_qual_prod_map_all.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
 include: "base_mn_product_eff_attr_fact.view.lkml"
 include: "base_mn_rbt_ben_prod_map_all.view.lkml"
+include: "base_mn_rbt_qual_mb_prod_map_all.view.lkml"
+include: "base_mn_market_basket_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
 
 explore: mn_contract_header_dim {
   label: "Payer Contracts"
@@ -124,6 +127,15 @@ explore: mn_contract_header_dim {
     from: mn_product_eff_attr_fact
     view_label: "Rebate Program Benefit Product EDA"
     sql_on: ${mn_rbt_ben_prod_map_all.product_wid} = ${mn_rbt_prog_ben_prod_eda.product_wid} ;;
+  }
+
+# ******************** Rebate Program Qualification MB joins
+  join: mn_rbt_qual_mb_prod_map_all {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rbt_qual_mb_prod_map_all
+    view_label: "Rebate Program Qualification MB"
+    sql_on: ${mn_rbt_qual_prod_map_all.program_qual_wid} = ${mn_rbt_qual_mb_prod_map_all.program_qual_wid} ;;
   }
 
 }
