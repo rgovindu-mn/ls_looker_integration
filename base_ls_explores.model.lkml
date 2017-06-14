@@ -257,7 +257,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_program_type_dim
-    view_label: "Rebate Program Program Type"
+    view_label: "Rebate Program Type"
     sql_on: ${mn_combined_rebate_program_dim.program_type_wid} = ${mn_program_type_dim.program_type_wid};;
   }
 
@@ -265,7 +265,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_mth_type_dim
-    view_label: "Rebate Program Program Method Type"
+    view_label: "Rebate Program Method Type"
     sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
@@ -273,7 +273,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Payee"
+    view_label: "Rebate Program Payee"
     sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_customer_dim.customer_wid};;
   }
 }

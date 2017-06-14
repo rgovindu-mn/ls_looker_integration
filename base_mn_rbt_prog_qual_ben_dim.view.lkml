@@ -247,9 +247,9 @@ view: mn_rbt_prog_qual_ben_dim {
     drill_fields: [name, component_name]
   }
 
-#   set: rebate_prog_qual_ben_fields_set {
-#     fields: [program_qual_ben_wid, program_wid, src_sys_qual_ben_id, name, component_name, component_type,
-#       description, strategy_based_flag, num_tiers, sale_line_type, item_override_flag, ver_num, end_ver_num,
-#       ver_start_date, ver_end_date, contract_type]
-#   }
+  set: rebate_prog_qual_ben_fields_set {
+    fields: [program_qual_ben_wid, program_wid, src_sys_qual_ben_id, name, component_name, component_type,
+      description, strategy_based_flag, num_tiers, sale_line_type, item_override_flag, ver_num, end_ver_num,
+      ver_start_date, ver_end_date, contract_type]
+  }
 }
