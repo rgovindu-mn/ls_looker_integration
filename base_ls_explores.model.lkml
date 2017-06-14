@@ -134,7 +134,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_org_dim
-    view_label: "Contract Org"
+    view_label: "Contract"
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_org_dim.org_wid} ;;
   }
 
