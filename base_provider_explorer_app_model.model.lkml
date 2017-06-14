@@ -564,6 +564,9 @@ explore: mn_combined_sale_fact {
 
   view_label: "Sales Data"
 
+  join: mn_contract_author_dim {
+    fields: []
+  }
 
   join: contracted_customer {
     type: left_outer
@@ -577,6 +580,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
+    view_label: "Contracted Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${contracted_customer_ids.customer_wid};;
   }
 
@@ -678,13 +682,14 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
   }
 
-  join: mn_product_eff_attr_fact {
+  join: product_eff_attr_fact {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_eff_attr_fact
-    view_label: "Pricing Program"
-    sql_on: ${mn_combined_sale_fact.product_wid} = ${mn_product_eff_attr_fact.product_wid}
-            AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
+    from: mn_product_eff_attr_fact_ext
+    view_label: "Sold Product"
+    fields: [Product_EDA_Attributes*]
+    sql_on: ${mn_combined_sale_fact.product_wid} = ${product_eff_attr_fact.product_wid}
+            AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${product_eff_attr_fact.eff_start_date} AND ${product_eff_attr_fact.eff_end_date});;
   }
 
   join: mn_user_access_sale_map {

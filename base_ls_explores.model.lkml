@@ -193,7 +193,6 @@ explore: mn_contract_header_dim_secure_base {
 }
 
 explore: mn_product_group_dim_base {
-
   from:  mn_product_group_dim
   view_name: mn_product_group_dim
   hidden: yes
