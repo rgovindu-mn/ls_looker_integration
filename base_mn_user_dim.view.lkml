@@ -155,4 +155,25 @@ view: mn_user_dim {
     type: count
     drill_fields: [fname, member_name, lname]
   }
+
+  set: mn_user_all_visible_fields  {
+          fields: [address_line1,
+                    address_line2,
+                    address_line3,
+                    address_line4,
+                    city,
+                    country,
+                    external_segment,
+                    fname,
+                    full_name,
+                    lname,
+                    member_name,
+                    postal_zip,
+                    pwd,
+                    salutation,
+                    state_prov,
+                    title,
+                    count
+            ]
+      }
 }
