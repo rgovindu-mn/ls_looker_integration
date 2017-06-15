@@ -2,8 +2,13 @@ connection: "oracle_rds_ls"
 
 include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
+include: "base_mn_mco_submission_dim.view.lkml"
+include: "base_mn_product_map_all_vers.view.lkml"
+include: "base_mn_formulary_dim.view.lkml"
+include: "base_mn_customer_ids_dim.view.lkml"
 
 explore: mn_mco_util_fact {
+  view_label: "Payer Utilization"
 
   hidden: no
 
@@ -11,7 +16,7 @@ explore: mn_mco_util_fact {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Util Book of Business"
+    view_label: "Book of Business"
     sql_on: ${mn_mco_util_fact.bob_wid} = ${mn_customer_dim_bob.customer_wid} ;;
   }
 
@@ -21,6 +26,78 @@ explore: mn_mco_util_fact {
     from: mn_customer_dim
     view_label: "Parent PBM"
     sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_customer_dim_parent_pbm.customer_wid} ;;
+  }
+
+  join: mn_customer_dim_plan {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Plan"
+    sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_customer_dim_plan.customer_wid} ;;
+  }
+
+  join: mn_contracted_customer_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Contracted Customer"
+    sql_on: ${mn_mco_util_fact.contract_cust_wid} = ${mn_contracted_customer_dim.customer_wid} ;;
+  }
+
+  join: mn_contracted_customer_id {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Contracted Customer"
+    sql_on: ${mn_contracted_customer_dim.customer_wid} = ${mn_contracted_customer_id.customer_wid} ;;
+  }
+
+  join: mn_mco_submission_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_mco_submission_dim
+    view_label: "Submissions"
+    sql_on: ${mn_mco_util_fact.mco_submission_wid} = ${mn_mco_submission_dim.mco_submission_wid} ;;
+  }
+
+  join: mn_product_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_mco_util_fact.product_wid} = ${mn_product_dim.product_wid} ;;
+  }
+
+  join: mn_product_map_all_ver {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Product"
+    sql_on: ${mn_product_dim.product_wid} = ${mn_product_map_all_ver.level0_product_wid} ;;
+  }
+
+  join: mn_formulary_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_formulary_dim
+    view_label: "Formulary"
+    sql_on: ${mn_mco_util_fact.formulary_wid} = ${mn_formulary_dim.formulary_wid} ;;
+  }
+
+  join: mn_org_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_org_dim
+    view_label: "Org"
+    sql_on: ${mn_mco_util_fact.org_wid} = ${mn_org_dim.org_wid} ;;
+  }
+
+  join: mn_cot_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_cot_dim
+    view_label: "Class of Trade"
+    sql_on: ${mn_mco_util_fact.cot_wid} = ${mn_cot_dim.cot_wid} ;;
   }
 
 }
