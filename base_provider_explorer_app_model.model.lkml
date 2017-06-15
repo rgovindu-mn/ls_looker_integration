@@ -569,7 +569,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Contracted Customer"
+    view_label: "Pricing Contract Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${contracted_customer.customer_wid};;
   }
 
@@ -577,7 +577,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
-    view_label: "Contracted Customer"
+    view_label: "Pricing Contract Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${contracted_customer_ids.customer_wid};;
   }
 
@@ -732,4 +732,8 @@ explore: mn_combined_sale_fact {
       view_label: "Pricing Contract Subtype"
   }
 
+  join: mn_price_list_dim {
+      view_label: "Pricing Program Price List"
+      fields: [price_list_name]
+  }
 }
