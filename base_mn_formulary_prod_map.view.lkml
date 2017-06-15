@@ -1,11 +1,6 @@
 view: mn_formulary_prod_map {
   sql_table_name: MN_FORMULARY_PROD_MAP_VW ;;
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
   dimension_group: date_created {
     hidden: yes
     type: time
@@ -131,6 +126,11 @@ view: mn_formulary_prod_map {
   dimension: tier_on_off {
     type: string
     sql: ${TABLE}.TIER_ON_OFF ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
   set: detail {
