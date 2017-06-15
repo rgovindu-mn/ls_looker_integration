@@ -187,7 +187,7 @@ explore: mn_contract_header_dim_secure_base {
     relationship: many_to_one
     from: mn_user_org_map
     view_label: "User Access"
-    fields: []
+    fields: [user_wid]
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
   }
 }
