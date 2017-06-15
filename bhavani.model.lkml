@@ -1,6 +1,29 @@
 connection: "oracle_rds_ls"
 
 include: "base_ls_explores.model.lkml"
+include: "base_mn_mco_util_fact.view.lkml"
+
+explore: mn_mco_util_fact {
+
+  hidden: no
+
+  join: mn_customer_dim_bob {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Util Book of Business"
+    sql_on: ${mn_mco_util_fact.bob_wid} = ${mn_customer_dim_bob.customer_wid} ;;
+  }
+
+  join: mn_customer_dim_parent_pbm {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Parent PBM"
+    sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_customer_dim_parent_pbm.customer_wid} ;;
+  }
+
+}
 
 # Adhoc base explore for Discount Bridge fact with all needed joins
 
