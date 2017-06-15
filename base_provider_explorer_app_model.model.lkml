@@ -560,7 +560,7 @@ explore: mn_combined_sale_fact {
   extends: [mn_contract_header_dim_base, mn_combined_product_group_dim_base]
   from:  mn_combined_sale_fact
   view_name: mn_combined_sale_fact
-  #fields: [ALL_FIELDS*,-mn_contract_author_dim.mn_user_all_visible_fields*]
+  fields: [ALL_FIELDS*,-mn_combined_sale_fact.custom_measure_set1*]
   hidden: no
 
   view_label: "Sales Data"
@@ -585,16 +585,16 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    sql_on: ${mn_combined_sale_fact.distr_wid} = ${wholesaler.customer_wid};;
-    sql_where:  ${wholesaler.member_info_type} =  'Wholesaler'  ;;
+    sql_on: ${mn_combined_sale_fact.distr_wid} = ${wholesaler.customer_wid}
+            AND ${wholesaler.member_info_type} =  'Wholesaler'  ;;
   }
 
   join: wholesaler_customer_ids {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
-    sql_on: ${mn_combined_sale_fact.distr_wid}=${wholesaler_customer_ids.customer_wid};;
-    sql_where:  ${wholesaler.member_info_type} =  'Wholesaler'  ;;
+    sql_on: ${mn_combined_sale_fact.distr_wid}=${wholesaler_customer_ids.customer_wid}
+              AND ${wholesaler.member_info_type} =  'Wholesaler'  ;;
     view_label: "Wholesaler"
     fields: [id_num, id_type]
   }
@@ -603,8 +603,8 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    sql_on: ${mn_combined_sale_fact.parent_distr_wid} = ${parent_wholesaler.customer_wid};;
-    sql_where:  ${parent_wholesaler.member_info_type} =  'Wholesaler'  ;;
+    sql_on: ${mn_combined_sale_fact.parent_distr_wid} = ${parent_wholesaler.customer_wid}
+            AND ${parent_wholesaler.member_info_type} =  'Wholesaler'  ;;
   }
 
   join: sold_to_customer {
