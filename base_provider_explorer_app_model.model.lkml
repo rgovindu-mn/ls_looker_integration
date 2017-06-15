@@ -557,16 +557,13 @@ explore: provider_estimated_rebates{
 
 explore: mn_combined_sale_fact {
   label: "Sales"
-  extends: [mn_contract_header_dim_base, mn_product_group_dim_base]
+  extends: [mn_contract_header_dim_base, mn_combined_product_group_dim_base]
   from:  mn_combined_sale_fact
   view_name: mn_combined_sale_fact
+  #fields: [ALL_FIELDS*,-mn_contract_author_dim.mn_user_all_visible_fields*]
   hidden: no
 
   view_label: "Sales Data"
-
-  join: mn_contract_author_dim {
-    fields: []
-  }
 
   join: contracted_customer {
     type: left_outer
@@ -674,12 +671,12 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.product_wid} = ${mn_product_dim.product_wid};;
   }
 
-  join: mn_product_group_dim {
+  join: mn_combined_product_group_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_product_group_dim
+    from: mn_combined_product_group_dim
     view_label: "Pricing Program"
-    sql_on: ${mn_combined_sale_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
+    sql_on: ${mn_combined_sale_fact.pg_wid} = ${mn_combined_product_group_dim.pg_wid};;
   }
 
   join: product_eff_attr_fact {
@@ -701,5 +698,38 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
   }
 
+  ### This Part is to modify views retrieved through extending
+  join: mn_contract_author_dim {
+    #fields: [mn_contract_author_dim.fname,mn_contract_author_dim.lname]
+    view_label: "Pricing Contract Author"
+  }
+
+  join: mn_contract_srep_dim {
+    view_label: "Pricing Contract Sales Rep"
+  }
+
+  join: mn_ctrt_domain_dim {
+    view_label: "Pricing Contract Domain"
+  }
+
+  join: mn_additional_delegate_dim  {
+    fields: []
+  }
+
+  join: mn_customer_owner_dim  {
+    fields: []
+  }
+
+  join: mn_ctrt_status_dim {
+      view_label: "Pricing Contract Status"
+  }
+
+  join: mn_ctrt_type_dim {
+      view_label: "Pricing Contract Type"
+  }
+
+  join: mn_ctrt_sub_type_dim {
+      view_label: "Pricing Contract Subtype"
+  }
 
 }
