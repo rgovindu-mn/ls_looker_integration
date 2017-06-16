@@ -22,7 +22,9 @@ include: "base_mn_formulary_prod_map.view.lkml"
 
 include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 
-explore: mn_contract_header_dim {
+include: "base_mn_contract_attr_fact.view.lkml"
+
+explore: mn_payer_contract {
   label: "Payer Contracts"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
@@ -32,6 +34,7 @@ explore: mn_contract_header_dim {
 
   hidden: no
 
+# Data security
   #access_filter: {
   #  field: mn_user_access_ctrt_map.user_wid
   #  user_attribute: access_user_name
@@ -244,5 +247,14 @@ explore: mn_contract_header_dim {
     fields: [product_num, product_name]
   }
 
+# ******************** Contract attr fact
+
+  join: mn_contract_attr_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_contract_attr_fact
+    view_label: "Contract Attributes"
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_contract_attr_fact.contract_wid} ;;
+  }
 
 }
