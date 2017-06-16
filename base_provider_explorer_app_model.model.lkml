@@ -758,6 +758,7 @@ explore: mn_combined_sale_fact {
   }
 }
 
+# PBC Compliance model
 explore: compliance {
   label: "Compliance"
   extends: [mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
