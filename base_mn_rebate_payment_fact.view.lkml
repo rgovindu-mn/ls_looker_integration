@@ -266,6 +266,7 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: rebate_pmt_wid {
+    primary_key: yes
     type: string
     sql: ${TABLE}.REBATE_PMT_WID ;;
   }
