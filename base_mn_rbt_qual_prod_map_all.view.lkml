@@ -3,7 +3,7 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: basket_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BASKET_WID ;;
   }
 
@@ -14,7 +14,7 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
@@ -50,6 +50,7 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension_group: eff_end {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -64,12 +65,13 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: eff_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 
   dimension_group: eff_start {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -84,7 +86,7 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: eff_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_START_DATE_WID ;;
   }
 
@@ -115,7 +117,7 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -135,31 +137,31 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: prod_added_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 
   dimension: program_qual_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_QUAL_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_ctrt_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_CTRT_ID ;;
   }
 
   dimension: source_pg_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_PG_ID ;;
   }
 
@@ -171,13 +173,13 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension: src_sys_included_li_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_INCLUDED_LI_ID ;;
   }
 
   dimension: src_sys_struct_li_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
 

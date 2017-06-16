@@ -3,13 +3,13 @@ view: mn_rbt_prog_ben_prod_map {
 
   dimension: basket_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BASKET_WID ;;
   }
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
@@ -45,6 +45,7 @@ view: mn_rbt_prog_ben_prod_map {
 
   dimension_group: eff_end {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -54,7 +55,7 @@ view: mn_rbt_prog_ben_prod_map {
       quarter,
       year
     ]
-    sql: ${TABLE}.EFF_END_DATE ;;
+    sql: NULLIF(${TABLE}.EFF_END_DATE, To_Date('07/03/1776','mm/dd/yyyy')) ;;
   }
 
   dimension: eff_end_date_wid {
@@ -65,6 +66,7 @@ view: mn_rbt_prog_ben_prod_map {
 
   dimension_group: eff_start {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -74,12 +76,12 @@ view: mn_rbt_prog_ben_prod_map {
       quarter,
       year
     ]
-    sql: ${TABLE}.EFF_START_DATE ;;
+    sql:  NULLIF(${TABLE}.EFF_START_DATE, To_Date('07/03/1776','mm/dd/yyyy')) ;;
   }
 
   dimension: eff_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_START_DATE_WID ;;
   }
 
@@ -88,29 +90,31 @@ view: mn_rbt_prog_ben_prod_map {
     sql: ${TABLE}.EXCLUDED_FLAG ;;
   }
 
-  dimension: included_from_ctrt_flag {
+  dimension: included_from_contract_flag {
     type: string
+    label: "Is Included From Contract?"
     sql: ${TABLE}.INCLUDED_FROM_CTRT_FLAG ;;
   }
 
   dimension: included_from_pg_flag {
     type: string
+    label: "Is Included From Price Program?"
     sql: ${TABLE}.INCLUDED_FROM_PG_FLAG ;;
   }
 
   dimension: mco_pp_cap_perc {
     type: string
-    sql: ${TABLE}.MCO_PP_CAP_PERC ;;
+    sql: ${TABLE}.MCO_PP_CAP_PERC *100 ;;
   }
 
   dimension: mco_pp_threshold_perc {
     type: string
-    sql: ${TABLE}.MCO_PP_THRESHOLD_PERC ;;
+    sql: ${TABLE}.MCO_PP_THRESHOLD_PERC *100 ;;
   }
 
   dimension: mco_pp_total_disc_cap_perc {
     type: string
-    sql: ${TABLE}.MCO_PP_TOTAL_DISC_CAP_PERC ;;
+    sql: ${TABLE}.MCO_PP_TOTAL_DISC_CAP_PERC *100;;
   }
 
   dimension_group: prod_added {
@@ -129,7 +133,7 @@ view: mn_rbt_prog_ben_prod_map {
 
   dimension: prod_added_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 
@@ -140,51 +144,53 @@ view: mn_rbt_prog_ben_prod_map {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: program_ben_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_BEN_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_ctrt_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_CTRT_ID ;;
   }
 
   dimension: source_pg_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_PG_ID ;;
   }
 
   dimension: source_system_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_included_li_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_INCLUDED_LI_ID ;;
   }
 
   dimension: src_sys_struct_li_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
+
+
 
   measure: count {
     type: count

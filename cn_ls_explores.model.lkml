@@ -32,10 +32,10 @@ explore: mn_contract_header_dim {
 
   hidden: no
 
-  access_filter: {
-    field: mn_user_access_ctrt_map.user_wid
-    user_attribute: access_user_name
-  }
+  #access_filter: {
+  #  field: mn_user_access_ctrt_map.user_wid
+  #  user_attribute: access_user_name
+  #}
 
    sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
 

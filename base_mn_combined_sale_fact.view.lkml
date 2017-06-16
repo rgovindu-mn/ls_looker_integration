@@ -822,4 +822,12 @@ view: mn_combined_sale_fact {
     ]
   }
 
+  set: custom_measure_set1  {
+    fields: [  rebate,volume,list_revenue ,revenue ,unit_rebate ,oninvoice_rebate_percent , net_rebate_percent,
+              total_rebate_percent, net_price, price , inv_qty_year1 , inv_revenue_year1 , inv_qty_year2 ,
+              inv_revenue_year3 ,  inv_qty_year3 , inv_revenue_year2 , inv_qty_ytd_year , inv_revenue_ytd_year ,
+              inv_qty_prior_ytd_year , inv_revenue_prior_ytd_year
+            ]
+  }
+
 }

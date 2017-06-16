@@ -2,7 +2,7 @@ view: mn_mco_util_fact {
 
   sql_table_name: MN_MCO_UTIL_FACT_VW ;;
 
-  dimension: access_rbebate_amount {
+  dimension: access_rebate_amount {
     type: string
     sql: ${TABLE}.ACCESS_RBT_AMT ;;
   }
