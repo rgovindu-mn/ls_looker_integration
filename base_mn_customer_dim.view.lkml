@@ -182,6 +182,7 @@ view: mn_customer_dim {
   }
 
   dimension_group: src_sys_date_created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -196,6 +197,7 @@ view: mn_customer_dim {
   }
 
   dimension_group: src_sys_date_updated {
+    hidden: yes
     type: time
     timeframes: [
       raw,
