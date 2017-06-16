@@ -444,6 +444,7 @@ explore: provider_rebates{
   label: "Rebates"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
+  view_label: "Rebate Contract"
   extends: [mn_contract_header_dim_adhoc_base,
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
@@ -496,57 +497,12 @@ explore: provider_rebates{
     sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
   }
 
-  join: mn_shipto_customer_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Ship To Customer"
-    #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.ship_to_customer_wid} = ${mn_shipto_customer_dim.customer_wid};;
-  }
-
-  join: ship_to_customer_ids {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_ids_dim
-    view_label: "Ship to Customer"
-    fields: [id_num, id_type]
-    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${ship_to_customer_ids.customer_wid};;
-  }
-
-  join: mn_soldto_customer_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Sold To Customer"
-    #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
-  }
-
-  join: sold_to_customer_ids {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_ids_dim
-    view_label: "Sold to Customer"
-    fields: [id_num, id_type]
-    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${sold_to_customer_ids.customer_wid};;
-  }
-
    join: mn_committed_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Rebate Payment Committed Customer"
     sql_on: ${mn_combined_rebate_program_dim.customer_wid} = ${mn_committed_customer_dim.customer_wid};;
-  }
-
-  join: mn_product_eff_attr_fact {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_product_eff_attr_fact
-    view_label: "Product EDA"
-    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_eff_attr_fact.product_wid}
-      AND (${mn_discount_bridge_fact.inv_date_wid} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
   }
 
   join: mn_erp_payment_fact {
@@ -557,13 +513,79 @@ explore: provider_rebates{
     sql_on: ${mn_discount_bridge_fact.rebate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
   }
 
-  join: mn_product_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_product_dim
-    view_label: "Rebate Benefit Product"
-    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_dim.product_wid};;
+  ### This Part is to modify views retrieved through extending
+  join: mn_ctrt_status_dim {
+    view_label: "Rebate Contract"
   }
+
+  join: mn_ctrt_domain_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_type_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_sub_type_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_contract_author_dim {
+    view_label: "Rebate Contract Author"
+  }
+
+  join: mn_additional_delegate_dim {
+    view_label: "Rebate Contract Additional Delegate"
+  }
+
+  join: mn_contract_srep_dim {
+    view_label: "Rebate Contract Sales Rep"
+  }
+
+  join: mn_customer_owner_dim {
+    fields: []
+  }
+
+  join: mn_org_dim {
+      fields: []
+  }
+
+  join: mn_customer_cot_dim {
+    fields: []
+  }
+
+  join: mn_cot_dim {
+    fields: []
+  }
+
+  join: mn_parent_contract_header_dim {
+    view_label: "Rebate Contract Parent"
+  }
+
+  join: mn_distrib_mthd_dim {
+    view_label: "Rebate Contract Distribution Method"
+  }
+
+  join: mn_pmt_mth_type_dim {
+    view_label: "Rebate Payment Package Payment Method Type"
+  }
+
+  join: payee {
+    view_label: "Rebate Payment Package Payee"
+  }
+
+  join: analyst {
+    view_label: "Rebate Payment Package Analyst"
+  }
+
+  join: created_by {
+    view_label: "Rebate Payment Package Created By"
+  }
+
+  join: modified_by {
+    view_label: "Rebate Payment Package Modified By"
+  }
+
 }
 
 explore: provider_estimated_rebates{
