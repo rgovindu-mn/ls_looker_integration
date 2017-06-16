@@ -1,4 +1,4 @@
-connection: "oracle_rds_ls"
+#connection: "oracle_rds_ls"
 include: "base_ls_database_connection.model.lkml"
 include: "*.view.lkml"         # include all views in this project
 include: "*.dashboard.lookml"  # include all dashboards in this project
@@ -8,10 +8,12 @@ label: "Sales Intelligence"
 
 explore: mn_date_dim {
   label: " Invoice Date"
+  hidden: yes
 }
 
 explore: mn_cmpl_bucket_fact {
   hidden:  yes
+  extension:  required
 }
 
 explore: mn_date_labels {
@@ -21,15 +23,16 @@ explore: mn_date_labels {
 
 explore: mn_user_access_map {
   label: "User Customer Access"
-  hidden: yes
+  hidden: no
+ # extension:  required
 
-  join: mn_customer_dim {
+  join: mn_customer_access_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Account"
     #fields: []
-    sql_on: ${mn_user_access_map.customer_wid} = ${mn_customer_dim.customer_wid};;
+    sql_on: ${mn_user_access_map.customer_wid} = ${mn_customer_access_dim.customer_wid};;
   }
 
 }
@@ -70,12 +73,11 @@ explore: mn_cmpl_period_fact {
     sql_on: ${mn_cmpl_period_fact.customer_wid} = ${mn_customer_cmpl_dim.customer_wid};;
   }
 
-#  always_join: [mn_user_access_map]
 
-# access_filter: {
-#    field: ????.access_user_name
-#    user_attribute: access_user_name
-#  }
+#  access_filter: {
+#     field: mn_cmpl_period_fact.access_user_name
+#     user_attribute: rme_access_user_name
+#   }
 
   join: mn_user_access_cmpl_map {
     type: inner
@@ -119,10 +121,10 @@ explore: mn_combined_sale_fact {
 
 #  always_join: [mn_user_access_map]
 
-# access_filter: {
-#    field: ????.access_user_name
-#    user_attribute: access_user_name
-#  }
+#  access_filter: {
+#     field: mn_combined_sale_fact.access_user_name
+#     user_attribute: rme_access_user_name
+#   }
 
   join: mn_user_access_sale_map {
     type: inner
@@ -248,10 +250,10 @@ explore: mn_pg_product_pricing_fact{
 
 #  always_join: [mn_user_access_map]
 
-# access_filter: {
-#    fieldmn_pg_product_pricing_fact.access_user_name
-#    user_attribute: access_user_name
-#  }
+#  access_filter: {
+#     field: mn_pg_product_pricing_fact.access_user_name
+#     user_attribute: rme_access_user_name
+#   }
 
   join: mn_user_access_pg_map {
     type: inner
@@ -345,17 +347,42 @@ explore: mn_contract_header_dim {
 
   extends: [mn_contract_header_dim_base]
 
-  from:  mn_contract_header_dim
+  from:  mn_contract_header_dim #mn_contract_header_dim_secure
   view_name: mn_contract_header_dim
-  hidden: yes
+  hidden: no
+  #extension:
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
 
-  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
-
-#  always_join: [mn_user_access_map]
-
-# access_filter: {
-#    field: ????.access_user_name
-#    user_attribute: access_user_name
-#  }
-
+#   join: mn_user_access_ctrt_map {
+#       type: inner
+#       relationship: many_to_one
+#       from: mn_user_access_map
+#       view_label: "User Access"
+#       fields: []
+#       sql_on: ${mn_pg_ben_elig_cust_map.elig_customer_wid} = ${mn_user_access_ctrt_map.customer_wid};;
+#     }
+#
+#     join: mn_pg_ben_elig_cust_map {
+#       type: left_outer
+#       relationship: many_to_one
+#       from: mn_pg_ben_elig_cust_map #mn_ctrt_elig_customers_map
+#       view_label: "Product"
+#       #fields: [channel_name]
+#       sql_on: ${mn_product_group_dim.pg_wid} = ${mn_pg_ben_elig_cust_map.pg_wid};;
+#     }
+#
+#
+#     join: mn_product_group_dim {
+#       type: left_outer
+#       relationship: many_to_one
+#       from: mn_product_group_dim
+#       view_label: "Price Program"
+#       #fields: [channel_name]
+#       sql_on:  ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id};;
+#     }
+#
+#     access_filter: {
+#       field: mn_contract_header_dim.access_user_name
+#       user_attribute: rme_access_user_name
+#     }
 }

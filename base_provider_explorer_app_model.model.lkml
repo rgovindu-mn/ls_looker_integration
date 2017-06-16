@@ -29,6 +29,36 @@ explore: mn_contract_header_dim {
     AND ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
 
+  join: mn_price_list_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_price_list_fact
+    view_label: "Contracted Price List Product"
+    sql_on: ${mn_price_list_fact.price_list_wid} = ${mn_price_list_dim.price_list_wid};;
+  }
+
+
+  join: mn_price_list_prod_hrc_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Contracted Price List Product Hierarchy"
+    #fields: []
+    sql_on: ${mn_price_list_prod_hrc_dim.level0_product_wid} = ${mn_price_list_fact.product_wid};;
+  }
+
+
+  join: mn_price_list_prod_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label:"Contracted Price List Product"
+    fields: [product_name, product_num]
+    sql_on: ${mn_price_list_prod_dim.product_wid} = ${mn_price_list_fact.product_wid};;
+  }
+
+
+
   join: mn_ctrt_wholesaler_map {
     type: left_outer
     view_label: "Contract Trading Partner"

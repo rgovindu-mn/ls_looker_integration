@@ -3,6 +3,16 @@ view: mn_contract_header_dim {
 
   label: "Contract"
 
+  dimension: access_user_wid {
+    type: string
+    sql: 0;;
+  }
+
+
+  dimension: access_user_name {
+    type: string
+    sql: 'X';;
+  }
 
   dimension: additional_delegate_wid {
     type: number
