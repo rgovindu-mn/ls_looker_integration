@@ -1,5 +1,5 @@
 view: mn_rebate_prog_prod_map_all {
-  sql_table_name: FROM MN_REBATE_PROG_PROD_MAP_ALL_VW ;;
+  sql_table_name: MN_REBATE_PROG_PROD_MAP_ALL_VW ;;
 
   dimension: basket_wid {
     hidden: yes
@@ -8,6 +8,7 @@ view: mn_rebate_prog_prod_map_all {
   }
 
   dimension: contract_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }
@@ -129,7 +130,7 @@ view: mn_rebate_prog_prod_map_all {
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
-  dimension_group: prod_added_date {
+  dimension_group: prod_added {
     type: time
     timeframes: [
       raw,
@@ -202,5 +203,11 @@ view: mn_rebate_prog_prod_map_all {
       included_from_pg_flag,
       program_wid
     ]
+  }
+  set: rbt_prog_prod_fields_set {
+    fields: [excluded_flag, eff_end_date, eff_end_month, eff_end_quarter, eff_end_raw, eff_end_time, eff_end_week,
+      eff_end_year, eff_start_date, eff_start_month, eff_start_quarter, eff_start_raw, eff_start_time, eff_start_week,
+      eff_start_year, prod_added_date, prod_added_month, prod_added_quarter, prod_added_raw, prod_added_time,
+      prod_added_week, prod_added_year]
   }
 }

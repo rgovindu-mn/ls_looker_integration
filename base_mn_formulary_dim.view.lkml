@@ -27,7 +27,7 @@ view: mn_formulary_dim {
 
   dimension: national_flag {
     type: string
-    sql: ${TABLE}.NATIONAL_FLAG ;;
+    sql: case when ${TABLE}.NATIONAL_FLAG = 1 then 'Yes' else 'No' end ;;
   }
 
   dimension: lifecycle_status {
@@ -78,7 +78,7 @@ view: mn_formulary_dim {
 
   dimension: default_flag {
     type: string
-    sql: ${TABLE}.DEFAULT_FLAG ;;
+    sql: case when ${TABLE}.DEFAULT_FLAG = 1 then 'Yes' else 'No' end  ;;
   }
 
   dimension_group: date_updated {

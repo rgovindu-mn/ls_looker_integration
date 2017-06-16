@@ -38,6 +38,7 @@ include: "base_mn_rbt_prog_qual_ben_sd_rpt.view.lkml"
 include: "base_mn_discount_bridge_fact.view.lkml"
 include: "base_mn_rebate_type_dim.view.lkml"
 include: "base_mn_rebate_payment_package_dim.view.lkml"
+include: "base_mn_combined_product_group_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -187,13 +188,12 @@ explore: mn_contract_header_dim_secure_base {
     relationship: many_to_one
     from: mn_user_org_map
     view_label: "User Access"
-    fields: []
+    fields: [user_wid]
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
   }
 }
 
 explore: mn_product_group_dim_base {
-
   from:  mn_product_group_dim
   view_name: mn_product_group_dim
   hidden: yes
@@ -231,6 +231,43 @@ explore: mn_product_group_dim_base {
 
 }
 
+explore: mn_combined_product_group_dim_base {
+  from:  mn_combined_product_group_dim
+  view_name: mn_combined_product_group_dim
+  hidden: yes
+
+  join: mn_prc_method_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_prc_method_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_combined_product_group_dim.pricing_method_wid} = ${mn_prc_method_dim.prc_method_wid};;
+  }
+
+  join: mn_price_list_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_price_list_dim
+    view_label: "Contracted Price List"
+    sql_on: ${mn_combined_product_group_dim.base_price_list_wid} = ${mn_price_list_dim.price_list_wid};;
+  }
+
+  join: mn_bus_segment_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_bus_segment_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_combined_product_group_dim.bus_seg_wid} = ${mn_bus_segment_dim.bus_seg_wid};;
+  }
+  join: mn_pg_tier_basis_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_pg_tier_basis_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_combined_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid};;
+  }
+
+}
 explore: mn_combined_rebate_program_dim_base {
 
   from:  mn_combined_rebate_program_dim

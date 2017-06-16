@@ -2,11 +2,6 @@ view: mn_plan_formulary_map {
 
   sql_table_name: MN_PLAN_FORMULARY_MAP_VW ;;
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
   dimension_group: date_created {
     hidden: yes
     type: time
@@ -87,6 +82,11 @@ view: mn_plan_formulary_map {
     hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
   set: detail {
