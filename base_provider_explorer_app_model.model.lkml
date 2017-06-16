@@ -613,3 +613,37 @@ explore: mn_combined_sale_fact {
       fields: [price_list_name]
   }
 }
+
+explore: compliance {
+  label: "Compliance"
+  extends: [mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
+  from: mn_cmpl_commit_fact
+  view_name: mn_cmpl_commit_fact
+
+  join: mn_product_group_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Product Group"
+    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid} ;;
+  }
+
+  join: mn_contract_header_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_contract_header_dim
+    view_label: "Contract"
+    sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
+  }
+
+  join: mn_cmt_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmt_type_dim
+    view_label: "Commitment Type"
+    sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
+    fields:[cmt_type_name]
+
+  }
+
+}
