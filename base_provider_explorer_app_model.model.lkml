@@ -263,37 +263,13 @@ explore: provider_historical_rebates {
   label: "Historical Rebates"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
+  extends: [historical_rebates_base]
+  hidden: no
 
   sql_always_where: ${mn_discount_bridge_fact.is_historical_flag}='N'
-                    AND (${mn_discount_bridge_fact.ds_line_ref_num} NOT NULL OR ${mn_discount_bridge_fact.ids_line_ref_num} IS NOT NULL
+                    AND (${mn_discount_bridge_fact.ds_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.ids_line_ref_num} IS NOT NULL
                           OR ${mn_discount_bridge_fact.cs_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'INCENTV') ;;
 
-  join: mn_soldto_customer_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Sold To Customer"
-    #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
-  }
-
-  join: mn_billto_customer_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Bill To Customer"
-    #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
-  }
-
-  join: mn_product_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_product_dim
-    view_label: "Rebate Product"
-    #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_soldto_customer_dim.customer_wid};;
-  }
 }
 
 explore: provider_rebates{
