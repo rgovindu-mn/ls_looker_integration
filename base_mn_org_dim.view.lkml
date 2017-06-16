@@ -3,6 +3,7 @@ view: mn_org_dim {
 
   dimension: currency {
     type: string
+    group_label: "Org"
     sql: ${TABLE}.CURRENCY ;;
   }
 
@@ -37,16 +38,19 @@ view: mn_org_dim {
   }
 
   dimension: description {
+    group_label: "Org"
     type: string
     sql: ${TABLE}.DESCRIPTION ;;
   }
 
   dimension: org_display_name {
+    group_label: "Org"
     type: string
     sql: ${TABLE}.ORG_DISPLAY_NAME ;;
   }
 
   dimension: org_name {
+    group_label: "Org"
     type: string
     sql: ${TABLE}.ORG_NAME ;;
   }
@@ -82,6 +86,7 @@ view: mn_org_dim {
   }
 
   measure: count {
+    group_label: "Org"
     type: count
     drill_fields: [org_name, org_display_name]
   }
