@@ -342,15 +342,23 @@ explore: mn_rebate_payment_fact_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Accrued Customer"
+    view_label: "Rebate Payment Accrued Customer"
     sql_on: ${mn_rebate_payment_fact.accrued_customer_wid} = ${accrued_customer.customer_wid};;
+  }
+
+  join: committed_cutomer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Rebate Payment Committed Customer"
+    sql_on: ${mn_rebate_payment_fact.commited_customer_wid} = ${committed_cutomer.customer_wid};;
   }
 
   join: analyst {
     type: left_outer
     relationship: many_to_one
     from: mn_user_dim
-    view_label: "Analyst"
+    view_label: "Rebate Payment Analyst"
     sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${analyst.user_wid};;
   }
 
@@ -358,9 +366,11 @@ explore: mn_rebate_payment_fact_base {
     type: left_outer
     relationship: many_to_one
     from: mn_user_dim
-    view_label: "Sales Rep"
+    view_label: "Rebate Payment Sales Rep"
     sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${sales_rep.user_wid};;
   }
+
+
 }
 
 explore: mn_payment_package_dim_base {
@@ -371,17 +381,17 @@ explore: mn_payment_package_dim_base {
   join: mn_pmt_mth_type_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_customer_dim
+    from: mn_pmt_mth_type_dim
     view_label: "Payment Package Payment Method Type"
-    sql_on: ${mn_payment_package_dim.pymt_method_wid} = ${mn_pmt_mth_type_dim.customer_wid};;
+    sql_on: ${mn_payment_package_dim.pymt_method_wid} = ${mn_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
-  join: mn_customer_dim {
+  join: payee {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Payment Package Payee"
-    sql_on: ${mn_payment_package_dim.payee_wid} = ${mn_customer_dim.customer_wid};;
+    sql_on: ${mn_payment_package_dim.payee_wid} = ${payee.customer_wid};;
   }
 
   join: analyst {

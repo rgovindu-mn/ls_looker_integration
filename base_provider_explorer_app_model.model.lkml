@@ -444,6 +444,7 @@ explore: provider_rebates{
   label: "Rebates"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
+  view_label: "Rebate Contract"
   extends: [mn_contract_header_dim_adhoc_base,
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
@@ -564,6 +565,80 @@ explore: provider_rebates{
     view_label: "Rebate Benefit Product"
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_dim.product_wid};;
   }
+
+  ### This Part is to modify views retrieved through extending
+  join: mn_ctrt_status_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_domain_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_type_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_sub_type_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_contract_author_dim {
+    view_label: "Rebate Contract Author"
+  }
+
+  join: mn_additional_delegate_dim {
+    view_label: "Rebate Contract Additional Delegate"
+  }
+
+  join: mn_contract_srep_dim {
+    view_label: "Rebate Contract Sales Rep"
+  }
+
+  join: mn_customer_owner_dim {
+    fields: []
+  }
+
+  join: mn_org_dim {
+      fields: []
+  }
+
+  join: mn_customer_cot_dim {
+    fields: []
+  }
+
+  join: mn_cot_dim {
+    fields: []
+  }
+
+  join: mn_parent_contract_header_dim {
+    view_label: "Rebate Contract Parent"
+  }
+
+  join: mn_distrib_mthd_dim {
+    view_label: "Rebate Contract Distribution Method"
+  }
+
+  join: mn_pmt_mth_type_dim {
+    view_label: "Rebate Payment Package Payment Method Type"
+  }
+
+  join: payee {
+    view_label: "Rebate Payment Package Payee"
+  }
+
+  join: analyst {
+    view_label: "Rebate Payment Package Analyst"
+  }
+
+  join: created_by {
+    view_label: "Rebate Payment Package Created By"
+  }
+
+  join: modified_by {
+    view_label: "Rebate Payment Package Modified By"
+  }
+
 }
 
 explore: provider_estimated_rebates{
