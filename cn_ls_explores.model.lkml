@@ -22,23 +22,6 @@ include: "base_mn_formulary_prod_map.view.lkml"
 
 include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 
-# explore: user_access_test {
-#   from: mn_user_org_map
-
-#   view_label: "User Access"
-#   access_filter: {
-#     field: user_access_test.user_wid
-#     user_attribute: access_user_name
-#   }
-
-#   join: mn_org_dim {
-#     type: left_outer
-#     relationship: many_to_one
-#     view_label: "User Access"
-#     sql_on: ${user_access_test.org_wid} = ${mn_org_dim.org_wid} ;;
-#   }
-# }
-
 explore: mn_contract_header_dim {
   label: "Payer Contracts"
   from: mn_contract_header_dim
@@ -46,6 +29,7 @@ explore: mn_contract_header_dim {
 
   extends: [mn_contract_header_dim_secure_base,
     mn_contract_header_dim_adhoc_base, mn_combined_rebate_program_dim_base]
+
   hidden: no
 
   #access_filter: {
@@ -54,15 +38,6 @@ explore: mn_contract_header_dim {
   #}
 
    sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
-
-  join: mn_user_access_ctrt_map1 {
-    type: inner
-    relationship: many_to_one
-    from: mn_user_org_map
-    view_label: "User Access"
-    fields: [user_wid]
-    sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map1.org_wid};;
-  }
 
   join: mn_combined_rebate_program_dim {
     type: left_outer

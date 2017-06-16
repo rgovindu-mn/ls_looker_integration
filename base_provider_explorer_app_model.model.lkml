@@ -29,6 +29,36 @@ explore: mn_contract_header_dim {
     AND ${mn_product_group_dim.latest_flag} = 'Y' ;;
   }
 
+  join: mn_price_list_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_price_list_fact
+    view_label: "Contracted Price List Product"
+    sql_on: ${mn_price_list_fact.price_list_wid} = ${mn_price_list_dim.price_list_wid};;
+  }
+
+
+  join: mn_price_list_prod_hrc_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Contracted Price List Product Hierarchy"
+    #fields: []
+    sql_on: ${mn_price_list_prod_hrc_dim.level0_product_wid} = ${mn_price_list_fact.product_wid};;
+  }
+
+
+  join: mn_price_list_prod_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label:"Contracted Price List Product"
+    fields: [product_name, product_num]
+    sql_on: ${mn_price_list_prod_dim.product_wid} = ${mn_price_list_fact.product_wid};;
+  }
+
+
+
   join: mn_ctrt_wholesaler_map {
     type: left_outer
     view_label: "Contract Trading Partner"
@@ -151,6 +181,16 @@ explore: mn_contract_header_dim {
     sql_on: ${mn_pg_prod_adhoc_map.pg_expanded_product_wid} = ${mn_product_pg_inc_dim.product_wid};;
   }
 
+  join: mn_pg_prod_hrc {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label:"Pricing Program Product Hierarchy"
+    #fields: []
+    sql_on: ${mn_pg_prod_hrc.level0_product_wid} = ${mn_product_pg_inc_dim.product_wid};;
+  }
+
+
   join: mn_product_attr_adhoc_inc {
     type: left_outer
     relationship: many_to_one
@@ -236,15 +276,17 @@ explore: mn_contract_header_dim {
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
-    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid} ;;
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
+    AND ${mn_combined_rebate_program_dim.latest_flag} = 'Y';;
   }
 
   join: mn_rebate_program_qual_dim {
     type: left_outer
-    view_label: "Rebate Program"
+    view_label: "Rebate Program Qualification"
     relationship: many_to_one
     from: mn_rbt_prg_qual_flat_dim
-    sql_on: ${mn_rebate_program_qual_dim.program_wid} = ${mn_combined_rebate_program_dim.program_wid} ;;
+    sql_on: ${mn_rebate_program_qual_dim.program_wid} = ${mn_combined_rebate_program_dim.program_wid}
+     ;;
   }
 
   join: mn_rebate_program_payee_dim {
@@ -256,6 +298,132 @@ explore: mn_contract_header_dim {
     sql_on: ${mn_rebate_program_payee_dim.customer_wid} = ${mn_combined_rebate_program_dim.payee_customer_wid};;
   }
 
+  join: mn_rebate_program_ben_dim {
+    type: left_outer
+    view_label: "Rebate Program Benefit"
+    relationship: many_to_one
+    from: mn_rbt_prg_ben_flat_dim
+    sql_on: ${mn_rebate_program_ben_dim.program_wid} = ${mn_combined_rebate_program_dim.program_wid}
+    ;;
+  }
+
+  join: mn_rbt_prog_ben_prod_map {
+    type: left_outer
+    view_label: "Rebate Program Benefit Product"
+    relationship: many_to_one
+    from: mn_rbt_prog_ben_prod_map_adhoc_ext
+    sql_on: ${mn_rbt_prog_ben_prod_map.program_ben_wid} = ${mn_rebate_program_ben_dim.program_ben_wid} ;;
+  }
+
+  join: mn_rbt_prog_ben_prod_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Rebate Program Benefit Product"
+    fields: []
+    sql_on: ${mn_rbt_prog_ben_prod_dim.product_wid} = ${mn_rbt_prog_ben_prod_map.product_wid};;
+  }
+
+  join: mn_rbt_prog_ben_prod_hrc {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Rebate Program Benefit Product Hierarchy"
+    #fields: []
+    sql_on: ${mn_rbt_prog_ben_prod_hrc.level0_product_wid} = ${mn_rbt_prog_ben_prod_map.product_wid};;
+  }
+
+  join: mn_rbt_prog_pg_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Rebate Program Benefit Product"
+    fields: []
+    sql_on: ${mn_rbt_prog_pg_dim.src_sys_pg_id} = ${mn_rbt_prog_ben_prod_map.source_pg_id}
+    AND ${mn_rbt_prog_pg_dim.latest_flag}='Y';;
+  }
+
+  join: mn_rbt_prog_qual_prod_map {
+    type: left_outer
+    view_label: "Rebate Program Qualification Product"
+    relationship: many_to_one
+    from: mn_rbt_prog_qual_prod_map_adhoc_ext
+    sql_on: ${mn_rbt_prog_qual_prod_map.program_qual_wid} = ${mn_rebate_program_qual_dim.program_qual_wid}
+    AND ${mn_rbt_prog_qual_prod_map.product_wid} IS NOT NULL;;
+  }
+
+  join: mn_rbt_prog_qual_prod_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Rebate Program Qualification Product"
+    fields: []
+    sql_on: ${mn_rbt_prog_qual_prod_dim.product_wid} = ${mn_rbt_prog_qual_prod_map.product_wid};;
+  }
+
+  join: mn_rbt_prog_qual_prod_hrc {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Rebate Program Qualification Product Hierarchy"
+    #fields: []
+    sql_on: ${mn_rbt_prog_qual_prod_hrc.level0_product_wid} = ${mn_rbt_prog_qual_prod_map.product_wid};;
+  }
+
+  join: mn_rbt_prog_qual_pg_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Rebate Program Qualification Product"
+    fields: []
+    sql_on: ${mn_rbt_prog_qual_pg_dim.src_sys_pg_id} = ${mn_rbt_prog_qual_prod_map.source_pg_id}
+      AND ${mn_rbt_prog_qual_pg_dim.latest_flag}='Y';;
+  }
+
+  join: mn_rbt_qual_mb_prod_map {
+    type: left_outer
+    view_label: "Rebate Program Qualification MB Product"
+    relationship: many_to_one
+    from: mn_rbt_qual_mb_prod_map_adhoc_ext
+    sql_on: ${mn_rbt_qual_mb_prod_map.program_qual_wid} = ${mn_rebate_program_qual_dim.program_qual_wid};;
+  }
+
+  join: mn_rbt_qual_mb_prod_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Rebate Program Qualification MB Product"
+    fields: []
+    sql_on: ${mn_rbt_qual_mb_prod_dim.product_wid} = ${mn_rbt_qual_mb_prod_map.product_wid};;
+  }
+
+  join: mn_rbt_qual_mb_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_market_basket_dim
+    view_label: "Rebate Program Qualification MB Product"
+    fields: [market_basket_name, market_basket_number]
+    sql_on: ${mn_rbt_qual_mb_prod_map.basket_wid} = ${mn_rbt_qual_mb_dim.market_basket_wid};;
+  }
+
+  join: mn_rbt_qual_mb_prod_hrc {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Rebate Program Qualification MB Product Hierarchy"
+    #fields: []
+    sql_on: ${mn_rbt_qual_mb_prod_hrc.level0_product_wid} = ${mn_rbt_qual_mb_prod_map.product_wid};;
+  }
+
+  join: mn_rbt_qual_mb_pg_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Rebate Program Qualification MB Product"
+    fields: []
+    sql_on: ${mn_rbt_qual_mb_pg_dim.src_sys_pg_id} = ${mn_rbt_qual_mb_prod_map.source_pg_id}
+      AND ${mn_rbt_qual_mb_pg_dim.latest_flag}='Y';;
+  }
 
 }
 

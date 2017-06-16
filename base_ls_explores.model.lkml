@@ -2,6 +2,7 @@ include: "base_ls_database_connection.model.lkml"
 
 include: "base_mn_user_access_map.view.lkml"
 include: "base_mn_contract_header_dim.view.lkml"
+include: "base_mn_contract_header_dim_secure.view.lkml"
 include: "base_mn_user_dim.view.lkml"
 include: "base_mn_ctrt_status_dim.view.lkml"
 include: "base_mn_ctrt_domain_dim.view.lkml"
@@ -113,14 +114,14 @@ explore: mn_contract_header_dim_base {
     sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
 
-join: mn_customer_owner_dim {
-  type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Contract Owner Account"
-    #fields: []
-    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_owner_dim.customer_wid};;
-  }
+  join: mn_customer_owner_dim {
+    type: left_outer
+      relationship: many_to_one
+      from: mn_customer_dim
+      view_label: "Contract Owner Account"
+      #fields: []
+      sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_owner_dim.customer_wid};;
+    }
 
 }
 
@@ -180,10 +181,15 @@ explore: mn_contract_header_dim_adhoc_base {
 
 explore: mn_contract_header_dim_secure_base {
   extends: [mn_contract_header_dim_base]
-  from:  mn_contract_header_dim
+  from:  mn_contract_header_dim_secure
   view_name: mn_contract_header_dim
   hidden: yes
 
+
+#  access_filter: {
+#    field: mn_contract_header_dim.access_user_name
+#    user_attribute: rme_access_user_name
+#  }
 
   join: mn_user_access_ctrt_map {
     type: inner

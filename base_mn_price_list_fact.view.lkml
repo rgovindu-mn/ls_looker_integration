@@ -3,7 +3,7 @@ view: mn_price_list_fact {
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -58,7 +58,7 @@ view: mn_price_list_fact {
 
   dimension: period_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PERIOD_END_DATE_WID ;;
   }
 
@@ -83,12 +83,12 @@ view: mn_price_list_fact {
   }
 
   dimension: price {
-    type: string
+    type: number
     sql: ${TABLE}.PRICE ;;
   }
 
   dimension: price_base {
-    type: string
+    type: number
     sql: ${TABLE}.PRICE_BASE ;;
   }
 
@@ -99,19 +99,19 @@ view: mn_price_list_fact {
 
   dimension: price_list_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRICE_LIST_WID ;;
   }
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
