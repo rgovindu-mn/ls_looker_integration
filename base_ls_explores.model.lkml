@@ -574,3 +574,38 @@ explore: estimated_rebates_base {
     sql_on: ${mn_est_rebate_pmt_prod_map.program_wid} = ${mn_combined_rebate_program_dim.program_wid};;
   }
 }
+
+explore: historical_rebates_base {
+  label: "Historical Rebates"
+  from: mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  view_label: "Historical Rebate Lines"
+  hidden: yes
+
+  join: mn_soldto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Sold To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+
+  join: mn_billto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Bill To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Rebate Product"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+  }
