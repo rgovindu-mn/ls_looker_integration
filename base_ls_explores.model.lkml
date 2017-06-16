@@ -42,6 +42,8 @@ include: "base_mn_rebate_payment_package_dim.view.lkml"
 include: "base_mn_combined_product_group_dim.view.lkml"
 include: "base_mn_est_rebate_payment_fact.view.lkml"
 include: "base_mn_est_rebate_pmt_prod_map.view.lkml"
+include: "base_mn_customer_ids_dim.view.lkml"
+include: "base_mn_product_eff_attr_fact.view.lkml"
 
 explore: mn_contract_header_dim_base {
 
@@ -619,3 +621,63 @@ explore: historical_rebates_base {
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_soldto_customer_dim.customer_wid};;
   }
   }
+
+explore: rebate_lines_base {
+  from: mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  view_label: "Rebate Lines"
+  hidden: yes
+
+  join: mn_shipto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Ship To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.ship_to_customer_wid} = ${mn_shipto_customer_dim.customer_wid};;
+  }
+
+  join: ship_to_customer_ids {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Ship to Customer"
+    fields: [id_num, id_type]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${ship_to_customer_ids.customer_wid};;
+  }
+
+  join: mn_soldto_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Sold To Customer"
+    #fields: [full_name]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_soldto_customer_dim.customer_wid};;
+  }
+
+  join: sold_to_customer_ids {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Sold to Customer"
+    fields: [id_num, id_type]
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${sold_to_customer_ids.customer_wid};;
+  }
+
+  join: mn_product_eff_attr_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_eff_attr_fact
+    view_label: "Product EDA"
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_eff_attr_fact.product_wid}
+      AND (${mn_discount_bridge_fact.inv_date_wid} BETWEEN ${mn_product_eff_attr_fact.eff_start_date} AND ${mn_product_eff_attr_fact.eff_end_date});;
+  }
+
+  join: mn_product_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Rebate Benefit Product"
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_dim.product_wid};;
+  }
+}
