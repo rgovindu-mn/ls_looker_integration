@@ -764,13 +764,18 @@ explore: compliance {
   extends: [mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
+  view_label: "Commitments"
+
+
 
   join: mn_product_group_dim {
     type: inner
     relationship: many_to_one
     from: mn_product_group_dim
     view_label: "Product Group"
-    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid} ;;
+    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+              and
+              ${mn_product_group_dim.strategy_based_flag} = 'N';;
   }
 
   join: mn_contract_header_dim {
@@ -790,5 +795,13 @@ explore: compliance {
     fields:[cmt_type_name]
 
   }
+
+  join: mn_distrib_mthd_dim {
+    view_label: "Contract"
+    fields: [dist_method_name]
+
+  }
+
+
 
 }
