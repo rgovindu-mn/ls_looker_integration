@@ -504,7 +504,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.VALUE ;;
   }
 
-  dimension_group: ver_end {
+  dimension_group: version_end {
     type: time
     timeframes: [
       raw,
@@ -523,7 +523,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.VER_NUM ;;
   }
 
-  dimension_group: ver_start {
+  dimension_group: version_start {
     type: time
     timeframes: [
       raw,
