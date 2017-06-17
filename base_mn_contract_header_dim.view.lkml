@@ -20,7 +20,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.ADDITIONAL_DELEGATE_WID ;;
   }
 
-  dimension: alternate_ctrt_num {
+  dimension: alternate_contract_number {
     type: string
     sql: ${TABLE}.ALTERNATE_CTRT_NUM ;;
   }

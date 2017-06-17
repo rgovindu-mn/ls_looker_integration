@@ -788,7 +788,10 @@ explore: compliance {
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
 
-sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N' ;;
+ sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N'
+                    AND
+                    ${mn_cmpl_commit_fact.is_access_price_flag} <> 1
+                    ;;
 
   join: mn_product_group_dim {
     type: inner
@@ -796,7 +799,8 @@ sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N' ;;
     from: mn_product_group_dim
     view_label: "Product Group"
     sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
-            --  and ${mn_product_group_dim.strategy_based_flag} = 'N'
+              --and (${mn_product_group_dim.strategy_based_flag} = 'N'
+              --and ${mn_cmpl_commit_fact.is_access_price_flag} <> 1)
               ;;
   }
 
