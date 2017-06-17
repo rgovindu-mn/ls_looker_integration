@@ -788,7 +788,7 @@ explore: compliance {
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
 
-
+sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N' ;;
 
   join: mn_product_group_dim {
     type: inner
@@ -796,8 +796,8 @@ explore: compliance {
     from: mn_product_group_dim
     view_label: "Product Group"
     sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
-              and
-              ${mn_product_group_dim.strategy_based_flag} = 'N';;
+            --  and ${mn_product_group_dim.strategy_based_flag} = 'N'
+              ;;
   }
 
   join: mn_contract_header_dim {
