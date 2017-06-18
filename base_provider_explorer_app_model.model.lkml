@@ -781,8 +781,8 @@ explore: mn_combined_sale_fact {
 }
 
 # PBC Compliance model
-explore: compliance {
-  label: "Compliance"
+explore: commercial_compliance {
+  label: "Commercial Compliance"
   extends: [mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
@@ -797,11 +797,8 @@ explore: compliance {
     type: inner
     relationship: many_to_one
     from: mn_product_group_dim
-    view_label: "Product Group"
-    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
-              --and (${mn_product_group_dim.strategy_based_flag} = 'N'
-              --and ${mn_cmpl_commit_fact.is_access_price_flag} <> 1)
-              ;;
+    view_label: "Pricing Program"
+    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
   }
 
   join: mn_contract_header_dim {
@@ -816,7 +813,7 @@ explore: compliance {
     type: left_outer
     relationship: many_to_one
     from: mn_cmt_type_dim
-    view_label: "Commitment Type"
+    view_label: "Commitments"
     sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
     fields:[cmt_type_name]
 
@@ -828,6 +825,14 @@ explore: compliance {
 
   }
 
+
+  join: commited_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Committed Customer"
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${commited_customer.customer_wid};;
+  }
 
 
 }
