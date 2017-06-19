@@ -688,10 +688,12 @@ explore: rebate_lines_base {
   }
 }
 
-explore: compliance_commitment_fact {
+explore: compl_commitment_fact_base {
   label: "Compliance Commitments"
   from: mn_cmpl_commit_fact
-  view_name: mn_discount_bridge_fact
+  view_name: mn_cmpl_commit_fact
   view_label: "Compliance Commitment Fact"
   hidden: yes
+
+
 }
