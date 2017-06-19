@@ -807,9 +807,14 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_contract_header_dim
     view_label: "Contract"
-    sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
+    sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
+    --and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS', 'IDN', 'Independent')
+    ;;
   }
 
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
+                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
+                    ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
   join: mn_cmt_type_dim {
     type: left_outer
     relationship: many_to_one
