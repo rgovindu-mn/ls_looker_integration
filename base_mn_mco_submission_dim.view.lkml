@@ -4,7 +4,7 @@ view: mn_mco_submission_dim {
 
   dimension: adjusted_by_user_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ADJUSTED_BY_USER_WID ;;
   }
 
@@ -29,7 +29,7 @@ view: mn_mco_submission_dim {
 
   dimension: analyst_user_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ANALYST_USER_WID ;;
   }
 
@@ -104,13 +104,13 @@ view: mn_mco_submission_dim {
 
   dimension: mco_submission_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.MCO_SUBMISSION_WID ;;
   }
 
   dimension: org_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
@@ -130,7 +130,7 @@ view: mn_mco_submission_dim {
 
   dimension: pbm_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PBM_WID ;;
   }
 
@@ -178,7 +178,7 @@ view: mn_mco_submission_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -235,7 +235,7 @@ view: mn_mco_submission_dim {
 
   dimension: uploaded_by_user_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.UPLOADED_BY_USER_WID ;;
   }
 

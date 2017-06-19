@@ -168,7 +168,7 @@ view: mn_pg_prc_fact_flat {
     }
 
     dimension: pg_wid {
-      type: string
+      type: number
       sql: ${TABLE}.PG_WID ;;
     }
 

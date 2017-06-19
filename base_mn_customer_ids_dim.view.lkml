@@ -3,19 +3,20 @@ view: mn_customer_ids_dim {
 
   dimension: created_user_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CREATED_USER_WID ;;
   }
 
   dimension: customer_id_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CUSTOMER_ID_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -96,7 +97,7 @@ view: mn_customer_ids_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -138,13 +139,13 @@ view: mn_customer_ids_dim {
 
   dimension: src_sys_id_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_ID_ID ;;
   }
 
   dimension: updated_user_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.UPDATED_USER_WID ;;
   }
 

@@ -3,17 +3,6 @@ view: mn_contract_header_dim {
 
   label: "Contract"
 
-  dimension: access_user_wid {
-    type: string
-    sql: 0;;
-  }
-
-
-  dimension: access_user_name {
-    type: string
-    sql: 'X';;
-  }
-
   dimension: additional_delegate_wid {
     type: number
     hidden:  yes
@@ -124,6 +113,7 @@ view: mn_contract_header_dim {
 
   dimension: contract_wid {
     type: number
+    primary_key: yes
     hidden:  yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }
@@ -474,7 +464,7 @@ view: mn_contract_header_dim {
   }
 
   dimension: src_sys_mgr_id {
-    type: string
+    type: number
     hidden:  yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }

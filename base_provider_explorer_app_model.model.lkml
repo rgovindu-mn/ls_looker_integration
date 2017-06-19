@@ -11,22 +11,22 @@ explore: mn_contract_header_dim {
 
   label: "Full Contract Structure"
 
-  extends: [mn_contract_header_dim_secure_base, mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
+  extends: [mn_contract_header_dim_secure_base, mn_contract_header_dim_adhoc_base, mn_combined_product_group_dim_base]
 
   from:  mn_contract_header_dim_secure
   view_name: mn_contract_header_dim
   hidden: no
 
-  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y'  ;;
+  sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')   ;;
 
 
-  join: mn_product_group_dim {
+  join: mn_combined_product_group_dim {
     type: left_outer
     view_label: "Pricing Program"
     relationship: many_to_one
-    from: mn_product_group_dim
-    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_product_group_dim.src_sys_contract_id}
-    AND ${mn_product_group_dim.latest_flag} = 'Y' ;;
+    from: mn_combined_product_group_dim
+    sql_on: ${mn_contract_header_dim.src_sys_contract_id} = ${mn_combined_product_group_dim.src_sys_pk_id}
+    AND ${mn_combined_product_group_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_price_list_fact {
@@ -137,7 +137,7 @@ explore: mn_contract_header_dim {
     from: mn_pg_product_pricing_fact_adhoc_ext
     view_label: "Pricing Program Products and Pricing"
     #fields: [channel_name]
-    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_combined_product_group_dim.pg_wid}
     AND ${mn_pg_prc_adhoc_fact.tier_idx}=1;;
   }
 
@@ -148,7 +148,7 @@ explore: mn_contract_header_dim {
     from: mn_pg_prod_adhoc_map
     view_label: "Pricing Program Product Information"
     #fields: [channel_name]
-    sql_on: ${mn_pg_prod_adhoc_map.pg_wid} = ${mn_product_group_dim.pg_wid}
+    sql_on: ${mn_pg_prod_adhoc_map.pg_wid} = ${mn_combined_product_group_dim.pg_wid}
       ;;
   }
 

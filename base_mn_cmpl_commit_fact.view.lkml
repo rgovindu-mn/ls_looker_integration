@@ -3,7 +3,7 @@ view: mn_cmpl_commit_fact {
 
   dimension: cmt_change_code_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CMT_CHANGE_CODE_WID ;;
   }
 
@@ -23,7 +23,7 @@ view: mn_cmpl_commit_fact {
 
   dimension: commit_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_END_DATE_WID ;;
   }
 
@@ -48,7 +48,7 @@ view: mn_cmpl_commit_fact {
 
   dimension: commit_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_START_DATE_WID ;;
   }
 
@@ -58,30 +58,30 @@ view: mn_cmpl_commit_fact {
   }
 
   dimension: commit_tier {
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_TIER ;;
   }
 
   dimension: commit_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_TYPE_WID ;;
   }
 
   dimension: commitment_value {
-    type: string
+    type: number
     sql: ${TABLE}.COMMITMENT_VALUE ;;
   }
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -117,29 +117,30 @@ view: mn_cmpl_commit_fact {
 
   dimension: definition_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.DEFINITION_WID ;;
   }
 
   dimension: is_access_price_flag {
-    type: string
+    type: number
     sql: ${TABLE}.IS_ACCESS_PRICE_FLAG ;;
   }
 
   dimension: on_hold {
-    type: string
+    type: number
     sql: ${TABLE}.ON_HOLD ;;
   }
 
   dimension: org_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
   dimension: pg_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -150,7 +151,7 @@ view: mn_cmpl_commit_fact {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -176,13 +177,13 @@ view: mn_cmpl_commit_fact {
 
   dimension: src_sys_commit_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
   dimension: src_sys_definition_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_DEFINITION_ID ;;
   }
 
@@ -193,7 +194,7 @@ view: mn_cmpl_commit_fact {
 
   dimension: track_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.TRACK_START_DATE_WID ;;
   }
 

@@ -66,22 +66,21 @@ view: mn_contract_fact {
 
   dimension: contract_wid {
     hidden: yes
+    primary_key: yes
     type: number
-
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: ctrt_fact_wid {
     hidden: yes
     type: number
-
+    primary_key: yes
     sql: ${TABLE}.CTRT_FACT_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
     type: number
-
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -173,7 +172,6 @@ view: mn_contract_fact {
   dimension: pg_wid {
     hidden: yes
     type: number
-
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -192,7 +190,6 @@ view: mn_contract_fact {
   dimension: program_wid {
     hidden: yes
     type: number
-
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
@@ -203,7 +200,6 @@ view: mn_contract_fact {
 
   dimension: run_id {
     type: number
-    hidden: yes
     hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }

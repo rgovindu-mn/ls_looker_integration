@@ -3,19 +3,20 @@ view: mn_customer_cot_dim {
 
   dimension: cot_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COT_WID ;;
   }
 
   dimension: customer_cot_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CUSTOMER_COT_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -79,7 +80,7 @@ view: mn_customer_cot_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

@@ -3,7 +3,7 @@ view: mn_discount_bridge_fact {
 
   dimension: bill_to_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BILL_TO_CUSTOMER_WID ;;
   }
 
@@ -125,7 +125,7 @@ view: mn_discount_bridge_fact {
 
   dimension: external_paid_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EXTERNAL_PAID_DATE_WID ;;
   }
 
@@ -150,7 +150,7 @@ view: mn_discount_bridge_fact {
 
   dimension: extraction_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EXTRACTION_DATE_WID ;;
   }
 
@@ -181,7 +181,7 @@ view: mn_discount_bridge_fact {
 
   dimension: inv_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.INV_DATE_WID ;;
   }
 
@@ -197,7 +197,7 @@ view: mn_discount_bridge_fact {
 
   dimension: mcd_claim_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.MCD_CLAIM_WID ;;
   }
 
@@ -208,7 +208,7 @@ view: mn_discount_bridge_fact {
 
   dimension: mcd_payment_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.MCD_PAYMENT_WID ;;
   }
 
@@ -249,19 +249,19 @@ view: mn_discount_bridge_fact {
 
   dimension: paid_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAID_DATE_WID ;;
   }
 
   dimension: payee_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAYEE_WID ;;
   }
 
   dimension: plan_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_WID ;;
   }
 
@@ -295,12 +295,12 @@ view: mn_discount_bridge_fact {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: pub_util_id {
-    type: string
+    type: number
     sql: ${TABLE}.PUB_UTIL_ID ;;
   }
 
@@ -316,7 +316,7 @@ view: mn_discount_bridge_fact {
 
   dimension: rebate_pmt_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.REBATE_PMT_WID ;;
   }
 
@@ -327,25 +327,25 @@ view: mn_discount_bridge_fact {
 
   dimension: rebate_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.REBATE_TYPE_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: ship_to_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SHIP_TO_CUSTOMER_WID ;;
   }
 
   dimension: sold_to_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SOLD_TO_CUSTOMER_WID ;;
   }
 

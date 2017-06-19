@@ -14,6 +14,7 @@ view: mn_cot_dim {
 
   dimension: cot_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.COT_WID ;;
   }
