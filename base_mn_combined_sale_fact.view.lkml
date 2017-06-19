@@ -560,7 +560,7 @@ view: mn_combined_sale_fact {
   }
 
   dimension: src_sys_commit_id {
-    type: string
+    type: number
     hidden:  yes
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
