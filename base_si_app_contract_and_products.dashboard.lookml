@@ -100,7 +100,7 @@
       type: single_value
       model: base_sales_intelligence_app_model
       explore: mn_contract_header_dim
-      measures: [mn_contract_header_dim.count]
+      measures: [mn_contract_header_dim.no_of_contracts]
       filters:
         mn_contract_header_dim.days_to_expire: "[1, 30]"
         mn_ctrt_status_dim.status_name: "Implemented"

@@ -461,7 +461,7 @@ explore: provider_rebates{
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
     sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
-            AND: ${mn_combined_rebate_program_dim.latest_flag} = 'Y' ;;
+    ;;
   }
 
   join: mn_rebate_payment_fact {
@@ -511,7 +511,7 @@ explore: provider_rebates{
     relationship: many_to_one
     from: mn_erp_payment_fact
     view_label: "ERP Payment Fact"
-    sql_on: ${mn_discount_bridge_fact.rebate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
   }
 
   ### This Part is to modify views retrieved through extending

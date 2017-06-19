@@ -38,8 +38,8 @@ explore: mn_user_access_map {
 }
 
 explore: mn_cmpl_period_fact {
-  label: " Compliance Data"
-  from:  mn_cmpl_period_fact
+  label: "Compliance Data"
+  from:  mn_cmpl_period_fact_secure
   view_name: mn_cmpl_period_fact
   extends: [mn_contract_header_dim_base]
 

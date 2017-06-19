@@ -2,19 +2,6 @@ view: mn_cmpl_period_fact {
   sql_table_name: MN_CMPL_PERIOD_FACT_VW ;;
 
 
-
-  dimension: access_user_wid {
-    type: number
-    sql: ${mn_user_access_cmpl_map.user_wid};;
-  }
-
-
-  dimension: access_user_name {
-    type: string
-    sql: ${mn_user_access_cmpl_map.user_name};;
-  }
-
-
   dimension: actual_amt_to_date {
     type: number
     sql: NVL(${TABLE}.ACTUAL_AMT_TO_DATE,0) ;;
