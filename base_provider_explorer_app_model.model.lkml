@@ -787,6 +787,7 @@ explore: commercial_compliance {
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
+ # always_join: [mn_contract_header_dim]
 
  sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N'
                     AND
@@ -825,14 +826,14 @@ explore: commercial_compliance {
 
   }
 
-
-  join: commited_customer {
+  join: committed_customer {
     type: left_outer
     relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Committed Customer"
-    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${commited_customer.customer_wid};;
+    from: mn_customer_commit_dim_ext
+    view_label: "Commitments"
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
   }
+
 
 
 }
