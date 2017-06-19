@@ -760,7 +760,7 @@ explore: mn_combined_sale_fact {
   }
 }
 
-# PBC Compliance model
+# PBC Compliance Commitments model
 explore: commercial_compliance {
   label: "Commercial Compliance"
   extends: [mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
@@ -815,6 +815,16 @@ explore: commercial_compliance {
     from: mn_customer_commit_dim_ext
     view_label: "Commitments"
     sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
+  }
+
+  join: mn_cmt_change_reason_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmt_change_reason_dim
+    view_label: "Commitments"
+    fields: [cmt_change_code_name]
+    sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
+
   }
 
 

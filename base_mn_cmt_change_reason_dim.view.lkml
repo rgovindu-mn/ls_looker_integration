@@ -8,6 +8,7 @@ view: mn_cmt_change_reason_dim {
 
   dimension: cmt_change_code_name {
     type: string
+    label: "Commitment Change Reason"
     sql: ${TABLE}.CMT_CHANGE_CODE_NAME ;;
   }
 
