@@ -286,7 +286,7 @@ view: mn_product_dim {
 
   dimension: run_id {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

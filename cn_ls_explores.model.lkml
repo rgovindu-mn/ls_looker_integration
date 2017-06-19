@@ -22,47 +22,44 @@ include: "base_mn_formulary_prod_map.view.lkml"
 
 include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 
-# explore: user_access_test {
-#   from: mn_user_org_map
+include: "base_mn_contract_attr_fact.view.lkml"
 
-#   view_label: "User Access"
-#   access_filter: {
-#     field: user_access_test.user_wid
-#     user_attribute: access_user_name
-#   }
+explore: ben_eligible_plan_map {
+  from: mn_rbt_prg_ben_elg_cust_map
+  view_name: mn_rbt_prg_ben_elg_cust_map
+  label: "Test"
+}
 
-#   join: mn_org_dim {
-#     type: left_outer
-#     relationship: many_to_one
-#     view_label: "User Access"
-#     sql_on: ${user_access_test.org_wid} = ${mn_org_dim.org_wid} ;;
-#   }
-# }
+explore: mn_combined_rebate_program_dim {
+  from: mn_combined_rebate_program_dim
+  view_name: mn_combined_rebate_program_dim
 
-explore: mn_contract_header_dim {
+  join: mn_rbt_prg_ben_elg_cust_map {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rbt_prg_ben_elg_cust_map
+    view_label: "Rebate Program Elig Plan"
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_elg_cust_map.program_wid} ;;
+  }
+}
+
+explore: mn_payer_contract {
   label: "Payer Contracts"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
 
   extends: [mn_contract_header_dim_secure_base,
     mn_contract_header_dim_adhoc_base, mn_combined_rebate_program_dim_base]
+
   hidden: no
 
+# Data security
   #access_filter: {
   #  field: mn_user_access_ctrt_map.user_wid
   #  user_attribute: access_user_name
   #}
 
-   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
-
-  join: mn_user_access_ctrt_map1 {
-    type: inner
-    relationship: many_to_one
-    from: mn_user_org_map
-    view_label: "User Access"
-    fields: [user_wid]
-    sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map1.org_wid};;
-  }
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
 
   join: mn_combined_rebate_program_dim {
     type: left_outer
@@ -269,5 +266,14 @@ explore: mn_contract_header_dim {
     fields: [product_num, product_name]
   }
 
+# ******************** Contract attr fact
+
+  join: mn_contract_attr_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_contract_attr_fact
+    view_label: "Contract Attributes"
+    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_contract_attr_fact.contract_wid} ;;
+  }
 
 }

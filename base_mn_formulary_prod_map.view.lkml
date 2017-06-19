@@ -61,7 +61,7 @@ view: mn_formulary_prod_map {
 
   dimension: formulary_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_WID ;;
   }
 
@@ -92,7 +92,7 @@ view: mn_formulary_prod_map {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 

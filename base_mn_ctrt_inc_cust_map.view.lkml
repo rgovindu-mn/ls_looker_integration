@@ -4,6 +4,7 @@ view: mn_ctrt_inc_cust_map {
   dimension: contract_wid {
     hidden: yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
@@ -89,7 +90,7 @@ view: mn_ctrt_inc_cust_map {
   }
 
   dimension: src_sys_elig_id {
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_ELIG_ID ;;
   }
 

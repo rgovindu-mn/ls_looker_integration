@@ -47,7 +47,7 @@ view: mn_erp_payment_fact {
 
   dimension: erp_pmt_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ERP_PMT_DATE_WID ;;
   }
 
@@ -68,7 +68,7 @@ view: mn_erp_payment_fact {
 
   dimension: erp_pmt_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ERP_PMT_WID ;;
   }
 
@@ -88,19 +88,19 @@ view: mn_erp_payment_fact {
 
   dimension: erp_process_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ERP_PROCESS_DATE_WID ;;
   }
 
   dimension: estimate_pmt_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ESTIMATE_PMT_WID ;;
   }
 
   dimension: payee_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
   }
 
@@ -126,13 +126,13 @@ view: mn_erp_payment_fact {
 
   dimension: rebate_pmt_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.REBATE_PMT_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

@@ -248,7 +248,7 @@ view: mn_pg_product_pricing_fact {
 
   dimension: run_id {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

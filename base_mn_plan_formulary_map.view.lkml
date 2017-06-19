@@ -62,19 +62,19 @@ view: mn_plan_formulary_map {
 
   dimension: formulary_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_WID ;;
   }
 
   dimension: plan_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

@@ -21,6 +21,11 @@ view: mn_user_dim {
     sql: ${TABLE}.ADDRESS_LINE4 ;;
   }
 
+  dimension: full_address {
+    type: string
+    sql: ${address_line1}||' '||${address_line2}||' '||${address_line3}||' '||${address_line4} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.CITY ;;
@@ -157,10 +162,7 @@ view: mn_user_dim {
   }
 
   set: mn_user_all_visible_fields  {
-          fields: [address_line1,
-                    address_line2,
-                    address_line3,
-                    address_line4,
+          fields: [full_address,
                     city,
                     country,
                     external_segment,

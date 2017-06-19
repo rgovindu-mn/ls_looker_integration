@@ -3,7 +3,8 @@ view: mn_cmpl_period_pkg_dim {
 
   dimension: cmpl_period_pkg_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CMPL_PERIOD_PKG_WID ;;
   }
 
@@ -131,7 +132,7 @@ view: mn_cmpl_period_pkg_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -214,7 +215,7 @@ view: mn_cmpl_period_pkg_dim {
 
   dimension: src_sys_period_pkg_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PERIOD_PKG_ID ;;
   }
 
