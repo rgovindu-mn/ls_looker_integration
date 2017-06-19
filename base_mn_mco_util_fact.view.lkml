@@ -24,7 +24,7 @@ view: mn_mco_util_fact {
 
   dimension: bob_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BOB_WID ;;
   }
 
@@ -54,7 +54,7 @@ view: mn_mco_util_fact {
 
   dimension: contract_cust_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_CUST_WID ;;
   }
 
@@ -70,7 +70,7 @@ view: mn_mco_util_fact {
 
   dimension: cot_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COT_WID ;;
   }
 
@@ -179,7 +179,7 @@ view: mn_mco_util_fact {
 
   dimension: formulary_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_WID ;;
   }
 
@@ -219,7 +219,7 @@ view: mn_mco_util_fact {
 
   dimension: mco_submission_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.MCO_SUBMISSION_WID ;;
   }
 
@@ -245,29 +245,29 @@ view: mn_mco_util_fact {
 
   dimension: org_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
   dimension: parent_pbm_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PARENT_PBM_WID ;;
   }
 
   dimension: pbm_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PBM_WID ;;
   }
 
   dimension: perf_rebate_amount {
-    type: string
+    type: number
     sql: ${TABLE}.PERF_RBT_AMT ;;
   }
 
   dimension: perf_rebate_amount_base {
-    type: string
+    type: number
     sql: ${TABLE}.PERF_RBT_AMT_BASE ;;
   }
 
@@ -301,19 +301,19 @@ view: mn_mco_util_fact {
 
   dimension: plan_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_CUSTOMER_WID ;;
   }
 
   dimension: plan_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_WID ;;
   }
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -328,12 +328,12 @@ view: mn_mco_util_fact {
   }
 
   dimension: run_id {
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: rx_quantity {
-    type: string
+    type: number
     sql: ${TABLE}.RX_QTY ;;
   }
 
@@ -349,7 +349,7 @@ view: mn_mco_util_fact {
 
   dimension: sponsor_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SPONSOR_WID ;;
   }
 

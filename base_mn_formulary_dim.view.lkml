@@ -21,7 +21,7 @@ view: mn_formulary_dim {
 
   dimension: pbm_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PBM_WID ;;
   }
 
@@ -37,7 +37,7 @@ view: mn_formulary_dim {
 
   dimension: formulary_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_WID ;;
   }
 

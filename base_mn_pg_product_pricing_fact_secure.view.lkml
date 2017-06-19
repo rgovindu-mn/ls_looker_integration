@@ -5,7 +5,7 @@ view: mn_pg_product_pricing_fact_secure {
 
 
     dimension: access_user_wid {
-      type: string
+      type: number
       sql: ${mn_user_access_pg_map.user_wid};;
     }
 

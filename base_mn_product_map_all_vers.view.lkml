@@ -75,7 +75,7 @@ view: mn_product_map_all_ver {
 
   dimension: level0_product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL0_PROD_WID ;;
   }
 
@@ -119,7 +119,7 @@ view: mn_product_map_all_ver {
 
   dimension: level1_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL1_PROD_WID ;;
   }
 
@@ -163,7 +163,7 @@ view: mn_product_map_all_ver {
 
   dimension: level2_product_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL2_PROD_WID ;;
   }
 
@@ -207,7 +207,7 @@ view: mn_product_map_all_ver {
 
   dimension: level3_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL3_PROD_WID ;;
   }
 
@@ -251,7 +251,7 @@ view: mn_product_map_all_ver {
 
   dimension: level4_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL4_PROD_WID ;;
   }
 
@@ -295,7 +295,7 @@ view: mn_product_map_all_ver {
 
   dimension: level5_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL5_PROD_WID ;;
   }
 
@@ -339,7 +339,7 @@ view: mn_product_map_all_ver {
 
   dimension: level6_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL6_PROD_WID ;;
   }
 
@@ -383,7 +383,7 @@ view: mn_product_map_all_ver {
 
   dimension: level7_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL7_PROD_WID ;;
   }
 
@@ -427,7 +427,7 @@ view: mn_product_map_all_ver {
 
   dimension: level8_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL8_PROD_WID ;;
   }
 
@@ -471,7 +471,7 @@ view: mn_product_map_all_ver {
 
   dimension: level9_prod_wid {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.LEVEL9_PROD_WID ;;
   }
 

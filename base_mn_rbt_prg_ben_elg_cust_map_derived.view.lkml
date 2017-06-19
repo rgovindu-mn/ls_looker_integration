@@ -33,13 +33,13 @@ view: mn_rbt_prg_ben_elg_cust_map {
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: elig_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ELIG_CUSTOMER_WID ;;
   }
 
@@ -122,7 +122,7 @@ view: mn_rbt_prg_ben_elg_cust_map {
 
   dimension: plan_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_CUSTOMER_WID ;;
   }
 
