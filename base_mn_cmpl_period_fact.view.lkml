@@ -2,19 +2,6 @@ view: mn_cmpl_period_fact {
   sql_table_name: MN_CMPL_PERIOD_FACT_VW ;;
 
 
-
-  dimension: access_user_wid {
-    type: number
-    sql: ${mn_user_access_cmpl_map.user_wid};;
-  }
-
-
-  dimension: access_user_name {
-    type: string
-    sql: ${mn_user_access_cmpl_map.user_name};;
-  }
-
-
   dimension: actual_amt_to_date {
     type: number
     sql: NVL(${TABLE}.ACTUAL_AMT_TO_DATE,0) ;;
@@ -470,7 +457,7 @@ view: mn_cmpl_period_fact {
     sql:  ROUND(TRUNC(LEAST(CAST(${period_end_raw} AS DATE), SYSDATE),'DD') - TRUNC(LEAST(CAST(${period_start_raw} AS DATE), SYSDATE),'DD') +1) ;;
   }
 
-  measure: count {
+  measure: cmpl_period_count {
     type: count
     drill_fields: []
   }

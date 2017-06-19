@@ -696,7 +696,7 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.UOM ;;
   }
 
-  measure: count {
+  measure: cmpl_reiod_lines_count {
     type: count
     drill_fields: []
   }

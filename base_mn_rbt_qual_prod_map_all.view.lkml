@@ -183,11 +183,11 @@ view: mn_rbt_qual_prod_map_all {
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-  set: detail {
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
+   set: detail {
     fields: [
       contract_type,
       excluded_flag,

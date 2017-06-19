@@ -66,8 +66,8 @@ view: mn_accrual_type_dim {
     sql: ${TABLE}.SRC_SYS_ACCRUAL_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [accrual_type_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [accrual_type_name]
+#   }
 }

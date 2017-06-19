@@ -574,11 +574,6 @@ view: mn_contract_header_dim {
     sql: CASE WHEN trunc(MONTHS_BETWEEN(${TABLE}.eff_end_date,sysdate)) = 0 THEN  '1 Month' WHEN trunc(MONTHS_BETWEEN(${TABLE}.eff_end_date,sysdate)) BETWEEN 1 and 2 THEN '3 Months' ELSE NULL END ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [contract_name]
-  }
-
   measure:  contract_value {
     type:  sum
     value_format: "[>=1000000]0,,\"M\";[>=1000]0,\"K\";0"

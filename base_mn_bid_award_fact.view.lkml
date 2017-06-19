@@ -180,7 +180,7 @@ view: mn_bid_award_fact {
     sql: ${TABLE}.TIER_INDEX ;;
   }
 
-  measure: count {
+  measure: bid_award_count {
     type: count
     drill_fields: [gen_name]
   }

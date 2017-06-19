@@ -149,7 +149,7 @@ view: mn_customer_ids_dim {
     sql: ${TABLE}.UPDATED_USER_WID ;;
   }
 
-  measure: count {
+  measure: customer_ids_count {
     type: count
     drill_fields: []
   }

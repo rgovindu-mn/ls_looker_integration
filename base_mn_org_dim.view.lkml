@@ -85,7 +85,7 @@ view: mn_org_dim {
     sql: ${TABLE}.SRC_SYS_ORG_ID ;;
   }
 
-  measure: count {
+  measure: org_count {
     group_label: "Org"
     type: count
     drill_fields: [org_name, org_display_name]

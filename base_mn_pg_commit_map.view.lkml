@@ -83,8 +83,8 @@ view: mn_pg_commit_map {
     sql: ${TABLE}.START_DATE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }

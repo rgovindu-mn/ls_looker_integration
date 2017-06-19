@@ -144,10 +144,10 @@ view: mn_rbt_prg_qual_elg_cust_map {
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

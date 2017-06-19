@@ -74,8 +74,8 @@ view: mn_bus_segment_dim {
     sql: ${TABLE}.SRC_SYS_BUS_SEG_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [bus_seg_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [bus_seg_name]
+#   }
 }

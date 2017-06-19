@@ -216,8 +216,8 @@ view: mn_contract_fact {
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }

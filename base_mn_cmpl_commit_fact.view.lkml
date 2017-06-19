@@ -211,7 +211,7 @@ view: mn_cmpl_commit_fact {
   }
 
 
-  measure: count {
+  measure: cmpl_commit_count {
     type: count
     drill_fields: []
   }

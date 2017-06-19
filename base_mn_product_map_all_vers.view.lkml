@@ -555,7 +555,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.DATE_UPDATED ;;
   }
 
-  measure: count {
+  measure: prod_hierarchy_count {
     type: count
     drill_fields: [level0_product_wid]
   }

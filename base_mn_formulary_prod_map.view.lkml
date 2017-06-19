@@ -128,10 +128,10 @@ view: mn_formulary_prod_map {
     sql: ${TABLE}.TIER_ON_OFF ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

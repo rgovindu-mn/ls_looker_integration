@@ -64,8 +64,8 @@ view: mn_distrib_mthd_dim {
     sql: ${TABLE}.SRC_SYS_DIST_METHOD_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [dist_method_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [dist_method_name]
+#   }
 }

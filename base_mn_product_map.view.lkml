@@ -93,8 +93,8 @@ view: mn_product_map {
     sql: ${TABLE}.START_DATE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [level_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [level_name]
+#   }
 }

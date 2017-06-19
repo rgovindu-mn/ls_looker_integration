@@ -189,8 +189,8 @@ view: mn_rbt_prg_ben_elig_cust_map {
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }

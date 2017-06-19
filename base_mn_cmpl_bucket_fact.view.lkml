@@ -159,7 +159,7 @@ view: mn_cmpl_bucket_fact {
     sql: ${TABLE}.TIER_MIN_VALUE ;;
   }
 
-  measure: count {
+  measure: cmpl_bucket_count {
     type: count
     drill_fields: []
   }
