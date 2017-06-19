@@ -827,6 +827,26 @@ explore: commercial_compliance {
 
   }
 
+  join: mn_cmpl_period_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmpl_period_fact
+    view_label: "Period"
+    #fields: [ALL_FIELDS*]
+    sql_on: ${mn_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
+              AND
+              ${mn_cmpl_commit_fact.commit_status} <> 'Terminated'
+              ;;
+  }
+
+  join: mn_user_access_cmpl_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_access_map
+    view_label: "User Access"
+    fields: []
+    sql_on: ${mn_cmpl_period_fact.customer_wid} = ${mn_user_access_cmpl_map.customer_wid};;
+  }
 
 
 }
