@@ -475,7 +475,7 @@ view: mn_contract_header_dim {
   }
 
   dimension: src_sys_mgr_id {
-    type: string
+    type: number
     hidden:  yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }

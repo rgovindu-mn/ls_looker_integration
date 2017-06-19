@@ -13,7 +13,8 @@ view: mn_cmt_change_reason_dim {
 
   dimension: cmt_change_code_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CMT_CHANGE_CODE_WID ;;
   }
 
@@ -49,7 +50,7 @@ view: mn_cmt_change_reason_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

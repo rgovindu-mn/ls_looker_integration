@@ -132,56 +132,56 @@ view: mn_combined_rebate_program_dim {
 
   dimension: accrual_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ACCRUAL_TYPE_WID ;;
   }
 
   dimension: program_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_TYPE_WID ;;
   }
 
   dimension: pmt_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PMT_TYPE_WID ;;
   }
 
   dimension: program_wid {
     hidden: yes
     primary_key: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: pmt_method_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PMT_METHOD_WID ;;
   }
 
   dimension: org_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
   dimension: accru_cust_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ACCRU_CUST_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
   dimension: payee_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
   }
 
@@ -347,7 +347,7 @@ view: mn_combined_rebate_program_dim {
 
   dimension: src_sys_program_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PROGRAM_ID ;;
   }
 
@@ -398,19 +398,19 @@ view: mn_combined_rebate_program_dim {
 
   dimension: src_sys_pk_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PK_ID ;;
   }
 
   dimension: src_sys_mgr_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 

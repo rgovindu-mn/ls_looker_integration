@@ -141,7 +141,7 @@ view: mn_customer_dim {
 
   dimension: run_id {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -177,7 +177,7 @@ view: mn_customer_dim {
   }
 
   dimension: src_sys_cust_id {
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_CUST_ID ;;
   }
 

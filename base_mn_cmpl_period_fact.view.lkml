@@ -4,7 +4,7 @@ view: mn_cmpl_period_fact {
 
 
   dimension: access_user_wid {
-    type: string
+    type: number
     sql: ${mn_user_access_cmpl_map.user_wid};;
   }
 
@@ -242,6 +242,7 @@ view: mn_cmpl_period_fact {
   dimension: period_wid {
     hidden: yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.PERIOD_WID ;;
   }
 
@@ -252,7 +253,7 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_created_by_id {
-    type: string
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_CREATED_BY_ID ;;
   }
 
@@ -328,7 +329,7 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_updated_by_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.PRD_CMTMNT_UPDATED_BY_ID ;;
   }
@@ -403,26 +404,26 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: src_sys_commit_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
   dimension: src_sys_mgr_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 
   dimension: src_sys_period_cmtmnt_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SRC_SYS_PERIOD_CMTMNT_ID ;;
   }
 
   dimension: src_sys_period_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PERIOD_ID ;;
   }
 
