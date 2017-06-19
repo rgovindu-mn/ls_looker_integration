@@ -42,6 +42,9 @@ include: "base_mn_rebate_payment_package_dim.view.lkml"
 include: "base_mn_combined_product_group_dim.view.lkml"
 include: "base_mn_est_rebate_payment_fact.view.lkml"
 include: "base_mn_est_rebate_pmt_prod_map.view.lkml"
+include: "base_mn_mco_submission_dim.view.lkml"
+include: "base_mn_formulary_dim.view.lkml"
+include: "base_mn_customer_ids_dim.view.lkml"
 
 explore: mn_contract_header_dim_base {
 

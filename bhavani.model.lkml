@@ -2,10 +2,7 @@ connection: "oracle_rds_ls"
 
 include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
-include: "base_mn_mco_submission_dim.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
-include: "base_mn_formulary_dim.view.lkml"
-include: "base_mn_customer_ids_dim.view.lkml"
 
 explore: mn_mco_util_fact {
   view_label: "Payer Utilization"
