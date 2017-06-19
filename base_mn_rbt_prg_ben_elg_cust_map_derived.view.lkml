@@ -34,10 +34,7 @@ view: mn_rbt_prg_ben_elg_cust_map {
   dimension: program_wid {
     hidden: yes
     type: number
-<<<<<<< HEAD
-=======
     primary_key: yes
->>>>>>> branch 'master' of git@lkrgit_github_22dd3d660d9ba5639d6cc8d4236b8407b8b22445:ModelN/looker-ls.git
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
