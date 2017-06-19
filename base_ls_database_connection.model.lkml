@@ -1,1 +1,1 @@
-connection: "lssummer2017"
+connection: "oracle_rds_ls"
