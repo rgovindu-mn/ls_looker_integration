@@ -787,6 +787,7 @@ explore: commercial_compliance {
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
+ # always_join: [mn_contract_header_dim]
 
  sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N'
                     AND
@@ -809,6 +810,9 @@ explore: commercial_compliance {
     sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
   }
 
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
+                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
+                    ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
   join: mn_cmt_type_dim {
     type: left_outer
     relationship: many_to_one
@@ -825,14 +829,14 @@ explore: commercial_compliance {
 
   }
 
-
-  join: commited_customer {
+  join: committed_customer {
     type: left_outer
     relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Committed Customer"
-    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${commited_customer.customer_wid};;
+    from: mn_customer_commit_dim_ext
+    view_label: "Commitments"
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
   }
+
 
 
 }
