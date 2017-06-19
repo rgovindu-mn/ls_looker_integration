@@ -787,7 +787,6 @@ explore: commercial_compliance {
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
- # always_join: [mn_contract_header_dim]
 
  sql_always_where: ${mn_product_group_dim.strategy_based_flag} = 'N'
                     AND

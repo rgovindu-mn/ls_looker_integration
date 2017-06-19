@@ -198,6 +198,19 @@ view: mn_cmpl_commit_fact {
     sql: ${TABLE}.TRACK_START_DATE_WID ;;
   }
 
+  dimension_group: track_start {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      month,
+      week,
+      year
+    ]
+    sql: TO_DATE(${TABLE}.TRACK_START_DATE_WID, 'YYYY-MM-DD') ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: []

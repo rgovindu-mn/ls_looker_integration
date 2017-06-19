@@ -50,6 +50,7 @@ include: "base_mn_mco_submission_dim.view.lkml"
 include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_customer_ids_dim.view.lkml"
 
+include: "base_mn_cmpl_commit_fact.view.lkml"
 explore: mn_contract_header_dim_base {
 
   from:  mn_contract_header_dim
@@ -685,4 +686,12 @@ explore: rebate_lines_base {
     view_label: "Rebate Benefit Product"
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_dim.product_wid};;
   }
+}
+
+explore: compliance_commitment_fact {
+  label: "Compliance Commitments"
+  from: mn_cmpl_commit_fact
+  view_name: mn_discount_bridge_fact
+  view_label: "Compliance Commitment Fact"
+  hidden: yes
 }
