@@ -22,7 +22,8 @@ view: mn_contract_attr_fact {
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    primary_key: yes
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 

@@ -124,6 +124,7 @@ view: mn_contract_header_dim {
 
   dimension: contract_wid {
     type: number
+    primary_key: yes
     hidden:  yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }

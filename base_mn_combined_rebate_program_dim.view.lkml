@@ -150,6 +150,7 @@ view: mn_combined_rebate_program_dim {
 
   dimension: program_wid {
     hidden: yes
+    primary_key: yes
     type: string
     sql: ${TABLE}.PROGRAM_WID ;;
   }

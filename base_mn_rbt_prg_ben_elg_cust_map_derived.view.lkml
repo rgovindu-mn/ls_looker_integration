@@ -147,9 +147,15 @@ view: mn_rbt_prg_ben_elg_cust_map {
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }
 
-  measure: count {
+  measure: eligible_plan_count {
     type: count
-    drill_fields: [detail*]
+    drill_fields: [eligible_customer_num]
+  }
+
+  measure: no_of_eligible_plans {
+    type: sum
+    sql: CASE WHEN (${TABLE}.ELIG_CUSTOMER_WID) IS NULL THEN NULL ELSE 1 END ;;
+    label: "Count of Eligible Plans"
   }
 
   set: detail {

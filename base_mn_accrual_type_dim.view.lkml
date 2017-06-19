@@ -13,7 +13,8 @@ view: mn_accrual_type_dim {
 
   dimension: accrual_type_wid {
     hidden: yes
-    type: string
+    primary_key: yes
+    type: number
     sql: ${TABLE}.ACCRUAL_TYPE_WID ;;
   }
 
@@ -49,7 +50,7 @@ view: mn_accrual_type_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
