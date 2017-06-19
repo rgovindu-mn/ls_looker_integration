@@ -127,7 +127,7 @@ view: mn_contract_attr_fact {
     sql: ${TABLE}.SRC_SYS_DATE_UPDATED ;;
   }
 
-  measure: count {
+  measure: attribute_count {
     type: count
     drill_fields: [attr_name]
   }

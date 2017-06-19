@@ -192,8 +192,8 @@ view: mn_rbt_prog_ben_prod_map {
 
 
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }

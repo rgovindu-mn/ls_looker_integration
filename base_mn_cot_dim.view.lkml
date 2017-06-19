@@ -85,7 +85,7 @@ view: mn_cot_dim {
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
-  measure: count {
+  measure: cot_count {
     type: count
     drill_fields: []
   }

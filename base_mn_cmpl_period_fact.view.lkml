@@ -470,7 +470,7 @@ view: mn_cmpl_period_fact {
     sql:  ROUND(TRUNC(LEAST(CAST(${period_end_raw} AS DATE), SYSDATE),'DD') - TRUNC(LEAST(CAST(${period_start_raw} AS DATE), SYSDATE),'DD') +1) ;;
   }
 
-  measure: count {
+  measure: cmpl_period_count {
     type: count
     drill_fields: []
   }

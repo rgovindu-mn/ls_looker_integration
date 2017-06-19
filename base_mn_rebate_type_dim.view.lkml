@@ -89,7 +89,7 @@ view: mn_rebate_type_dim {
     sql: ${TABLE}.SOURCE_TYPE ;;
   }
 
-  measure: count {
+  measure: rebate_type_count {
     type: count
     drill_fields: [rbt_sub_type_name, rbt_type_name, rbt_type_shortname, rbt_sub_type_shortname]
   }

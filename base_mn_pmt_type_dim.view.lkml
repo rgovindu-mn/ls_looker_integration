@@ -65,8 +65,8 @@ view: mn_pmt_type_dim {
     sql: ${TABLE}.SRC_SYS_PMT_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [pmt_type_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [pmt_type_name]
+#   }
 }

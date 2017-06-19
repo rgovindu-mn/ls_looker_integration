@@ -67,8 +67,8 @@ view: mn_cmt_type_dim {
     sql: ${TABLE}.SRC_SYS_CMT_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [cmt_type_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [cmt_type_name]
+#   }
 }

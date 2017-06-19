@@ -84,10 +84,10 @@ view: mn_plan_formulary_map {
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

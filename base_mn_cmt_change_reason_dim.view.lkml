@@ -66,8 +66,8 @@ view: mn_cmt_change_reason_dim {
     sql: ${TABLE}.SRC_SYS_CMT_CHANGE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [cmt_change_code_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [cmt_change_code_name]
+#   }
 }

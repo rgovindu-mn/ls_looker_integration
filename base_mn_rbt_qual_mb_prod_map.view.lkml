@@ -171,8 +171,8 @@ view: mn_rbt_qual_mb_prod_map {
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }
