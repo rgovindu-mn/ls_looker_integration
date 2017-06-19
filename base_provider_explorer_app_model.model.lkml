@@ -839,14 +839,6 @@ explore: commercial_compliance {
               ;;
   }
 
-  join: mn_user_access_cmpl_map {
-    type: inner
-    relationship: many_to_one
-    from: mn_user_access_map
-    view_label: "User Access"
-    fields: []
-    sql_on: ${mn_cmpl_period_fact.customer_wid} = ${mn_user_access_cmpl_map.customer_wid};;
-  }
 
 
 }
