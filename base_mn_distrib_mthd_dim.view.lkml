@@ -36,6 +36,7 @@ view: mn_distrib_mthd_dim {
 
   dimension: dist_method_name {
     type: string
+    label: "Distribution Method"
     sql: ${TABLE}.DIST_METHOD_NAME ;;
   }
 

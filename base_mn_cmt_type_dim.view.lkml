@@ -8,6 +8,7 @@ view: mn_cmt_type_dim {
 
   dimension: cmt_type_name {
     type: string
+    label: "Commitment Type"
     sql: ${TABLE}.CMT_TYPE_NAME ;;
   }
 

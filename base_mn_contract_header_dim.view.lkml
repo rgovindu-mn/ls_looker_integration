@@ -20,7 +20,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.ADDITIONAL_DELEGATE_WID ;;
   }
 
-  dimension: alternate_ctrt_num {
+  dimension: alternate_contract_number {
     type: string
     sql: ${TABLE}.ALTERNATE_CTRT_NUM ;;
   }
@@ -353,7 +353,7 @@ view: mn_contract_header_dim {
 
   dimension: program_only {
     type: string
-    sql: ${TABLE}.PROGRAM_ONLY ;;
+    sql: CASE WHEN ${TABLE}.PROGRAM_ONLY = 1 THEN 'Yes' ELSE 'No' END ;;
   }
 
   dimension_group: rejection {
@@ -504,7 +504,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.VALUE ;;
   }
 
-  dimension_group: ver_end {
+  dimension_group: version_end {
     type: time
     timeframes: [
       raw,
@@ -523,7 +523,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.VER_NUM ;;
   }
 
-  dimension_group: ver_start {
+  dimension_group: version_start {
     type: time
     timeframes: [
       raw,
@@ -593,5 +593,10 @@ view: mn_contract_header_dim {
     type:  sum
     value_format: "[>=1000000]0,,\"M\";[>=1000]0,\"K\";0"
     sql:  ${TABLE}.value ;;
+  }
+
+  measure: no_of_contracts {
+    type: count
+    drill_fields: [contract_name]
   }
 }

@@ -5,11 +5,13 @@ view: mn_customer_commit_dim_ext {
 
   dimension: committed_customer_name {
     type: string
+    label: "Commited Customer Name"
     sql: ${TABLE}.CUSTOMER_NAME ;;
   }
 
   dimension: committed_customer_num {
     type: string
+    label: "Committed Customer Number"
     sql: ${TABLE}.CUSTOMER_NUM ;;
   }
 
