@@ -33,13 +33,14 @@ view: mn_rbt_prg_ben_elg_cust_map {
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: elig_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ELIG_CUSTOMER_WID ;;
   }
 
@@ -122,7 +123,7 @@ view: mn_rbt_prg_ben_elg_cust_map {
 
   dimension: plan_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_CUSTOMER_WID ;;
   }
 
@@ -147,9 +148,15 @@ view: mn_rbt_prg_ben_elg_cust_map {
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }
 
-  measure: count {
+  measure: eligible_plan_count {
     type: count
-    drill_fields: [detail*]
+    drill_fields: [eligible_customer_num]
+  }
+
+  measure: no_of_eligible_plans {
+    type: sum
+    sql: CASE WHEN (${TABLE}.ELIG_CUSTOMER_WID) IS NULL THEN NULL ELSE 1 END ;;
+    label: "Count of Eligible Plans"
   }
 
   set: detail {

@@ -13,7 +13,8 @@ view: mn_accrual_type_dim {
 
   dimension: accrual_type_wid {
     hidden: yes
-    type: string
+    primary_key: yes
+    type: number
     sql: ${TABLE}.ACCRUAL_TYPE_WID ;;
   }
 
@@ -49,7 +50,7 @@ view: mn_accrual_type_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -65,8 +66,8 @@ view: mn_accrual_type_dim {
     sql: ${TABLE}.SRC_SYS_ACCRUAL_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [accrual_type_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [accrual_type_name]
+#   }
 }

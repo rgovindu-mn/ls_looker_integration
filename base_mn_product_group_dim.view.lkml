@@ -180,7 +180,7 @@ view: mn_product_group_dim {
 
   dimension: pg_name {
     type: string
-    label: "Product Group Name"
+    label: "Pricing Program Name"
     sql: ${TABLE}.PG_NAME ;;
   }
 

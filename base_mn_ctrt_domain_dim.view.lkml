@@ -57,7 +57,7 @@ view: mn_ctrt_domain_dim {
   }
 
   dimension: source_system_id {
-    type: number
+    type: string
     hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }

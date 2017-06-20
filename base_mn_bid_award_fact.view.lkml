@@ -8,19 +8,20 @@ view: mn_bid_award_fact {
 
   dimension: bid_award_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.BID_AWARD_WID ;;
   }
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -85,7 +86,7 @@ view: mn_bid_award_fact {
 
   dimension: pg_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PG_WID ;;
   }
 
@@ -116,7 +117,7 @@ view: mn_bid_award_fact {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -128,7 +129,7 @@ view: mn_bid_award_fact {
 
   dimension: src_sys_ba_int_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_BA_INT_ID ;;
   }
 
@@ -179,7 +180,7 @@ view: mn_bid_award_fact {
     sql: ${TABLE}.TIER_INDEX ;;
   }
 
-  measure: count {
+  measure: bid_award_count {
     type: count
     drill_fields: [gen_name]
   }

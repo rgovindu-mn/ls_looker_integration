@@ -192,8 +192,8 @@ view: mn_pg_qual_elig_cust_map {
     sql: ${TABLE}.TB_ELIG_START_DATE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }

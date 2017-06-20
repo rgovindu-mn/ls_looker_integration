@@ -24,6 +24,25 @@ include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 
 include: "base_mn_contract_attr_fact.view.lkml"
 
+explore: ben_eligible_plan_map {
+  from: mn_rbt_prg_ben_elg_cust_map
+  view_name: mn_rbt_prg_ben_elg_cust_map
+  label: "Test"
+}
+
+explore: mn_combined_rebate_program_dim {
+  from: mn_combined_rebate_program_dim
+  view_name: mn_combined_rebate_program_dim
+
+  join: mn_rbt_prg_ben_elg_cust_map {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rbt_prg_ben_elg_cust_map
+    view_label: "Rebate Program Elig Plan"
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_elg_cust_map.program_wid} ;;
+  }
+}
+
 explore: mn_payer_contract {
   label: "Payer Contracts"
   from: mn_contract_header_dim
@@ -40,7 +59,7 @@ explore: mn_payer_contract {
   #  user_attribute: access_user_name
   #}
 
-   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
 
   join: mn_combined_rebate_program_dim {
     type: left_outer

@@ -69,8 +69,8 @@ view: mn_prc_method_dim {
     sql: ${TABLE}.SRC_SYS_PRC_METHOD_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [prc_method_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [prc_method_name]
+#   }
 }

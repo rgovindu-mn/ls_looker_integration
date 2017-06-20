@@ -281,12 +281,13 @@ view: mn_product_dim {
   dimension: product_wid {
     hidden:  yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: run_id {
     hidden:  yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

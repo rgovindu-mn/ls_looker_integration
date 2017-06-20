@@ -61,7 +61,7 @@ view: mn_formulary_prod_map {
 
   dimension: formulary_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_WID ;;
   }
 
@@ -92,7 +92,7 @@ view: mn_formulary_prod_map {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -128,10 +128,10 @@ view: mn_formulary_prod_map {
     sql: ${TABLE}.TIER_ON_OFF ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

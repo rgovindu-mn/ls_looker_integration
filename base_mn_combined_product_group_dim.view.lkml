@@ -104,30 +104,32 @@ view: mn_combined_product_group_dim {
 
   dimension: pricing_method_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRICING_METHOD_WID ;;
   }
 
   dimension: bus_seg_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BUS_SEG_WID ;;
   }
 
   dimension: pg_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.PG_WID ;;
   }
 
   dimension: src_sys_pg_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PG_ID ;;
   }
 
   dimension: pg_name {
     type: string
+    label: "Price Progrma Name"
     sql: ${TABLE}.PG_NAME ;;
   }
 
@@ -173,7 +175,7 @@ view: mn_combined_product_group_dim {
 
   dimension: base_price_list_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BASE_PRICE_LIST_WID ;;
   }
 
@@ -284,13 +286,13 @@ view: mn_combined_product_group_dim {
 
   dimension: src_sys_pk_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PK_ID ;;
   }
 
   dimension: src_sys_mgr_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 

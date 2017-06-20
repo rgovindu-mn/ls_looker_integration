@@ -36,6 +36,7 @@ view: mn_distrib_mthd_dim {
 
   dimension: dist_method_name {
     type: string
+    label: "Distribution Method"
     sql: ${TABLE}.DIST_METHOD_NAME ;;
   }
 
@@ -63,8 +64,8 @@ view: mn_distrib_mthd_dim {
     sql: ${TABLE}.SRC_SYS_DIST_METHOD_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [dist_method_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [dist_method_name]
+#   }
 }

@@ -2,19 +2,6 @@ view: mn_cmpl_period_fact {
   sql_table_name: MN_CMPL_PERIOD_FACT_VW ;;
 
 
-
-  dimension: access_user_wid {
-    type: string
-    sql: ${mn_user_access_cmpl_map.user_wid};;
-  }
-
-
-  dimension: access_user_name {
-    type: string
-    sql: ${mn_user_access_cmpl_map.user_name};;
-  }
-
-
   dimension: actual_amt_to_date {
     type: number
     sql: NVL(${TABLE}.ACTUAL_AMT_TO_DATE,0) ;;
@@ -242,6 +229,7 @@ view: mn_cmpl_period_fact {
   dimension: period_wid {
     hidden: yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.PERIOD_WID ;;
   }
 
@@ -252,7 +240,7 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_created_by_id {
-    type: string
+    type: number
     sql: ${TABLE}.PRD_CMTMNT_CREATED_BY_ID ;;
   }
 
@@ -328,7 +316,7 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: prd_cmtmnt_updated_by_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.PRD_CMTMNT_UPDATED_BY_ID ;;
   }
@@ -403,26 +391,26 @@ view: mn_cmpl_period_fact {
   }
 
   dimension: src_sys_commit_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
   dimension: src_sys_mgr_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 
   dimension: src_sys_period_cmtmnt_id {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.SRC_SYS_PERIOD_CMTMNT_ID ;;
   }
 
   dimension: src_sys_period_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_PERIOD_ID ;;
   }
 
@@ -469,7 +457,7 @@ view: mn_cmpl_period_fact {
     sql:  ROUND(TRUNC(LEAST(CAST(${period_end_raw} AS DATE), SYSDATE),'DD') - TRUNC(LEAST(CAST(${period_start_raw} AS DATE), SYSDATE),'DD') +1) ;;
   }
 
-  measure: count {
+  measure: cmpl_period_count {
     type: count
     drill_fields: []
   }

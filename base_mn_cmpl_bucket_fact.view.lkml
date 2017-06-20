@@ -19,6 +19,7 @@ view: mn_cmpl_bucket_fact {
   dimension: bucket_wid {
     hidden: yes
     type: number
+    primary_key: yes
     sql: ${TABLE}.BUCKET_WID ;;
   }
 
@@ -95,7 +96,6 @@ view: mn_cmpl_bucket_fact {
   dimension: period_wid {
     hidden: yes
     type: number
-
     sql: ${TABLE}.PERIOD_WID ;;
   }
 
@@ -159,7 +159,7 @@ view: mn_cmpl_bucket_fact {
     sql: ${TABLE}.TIER_MIN_VALUE ;;
   }
 
-  measure: count {
+  measure: cmpl_bucket_count {
     type: count
     drill_fields: []
   }

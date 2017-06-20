@@ -3,7 +3,7 @@ view: mn_rbt_prg_qual_elig_cust_map {
 
   dimension: commit_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.COMMIT_CUSTOMER_WID ;;
   }
 
@@ -65,7 +65,7 @@ view: mn_rbt_prg_qual_elig_cust_map {
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
@@ -101,7 +101,7 @@ view: mn_rbt_prg_qual_elig_cust_map {
 
   dimension: elig_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ELIG_CUSTOMER_WID ;;
   }
 
@@ -121,7 +121,7 @@ view: mn_rbt_prg_qual_elig_cust_map {
 
   dimension: elig_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ELIG_END_DATE_WID ;;
   }
 
@@ -141,25 +141,25 @@ view: mn_rbt_prg_qual_elig_cust_map {
 
   dimension: elig_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ELIG_START_DATE_WID ;;
   }
 
   dimension: program_qual_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_QUAL_WID ;;
   }
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -189,8 +189,8 @@ view: mn_rbt_prg_qual_elig_cust_map {
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: []
+#   }
 }

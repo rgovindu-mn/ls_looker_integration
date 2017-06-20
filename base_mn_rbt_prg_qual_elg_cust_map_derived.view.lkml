@@ -33,19 +33,19 @@ view: mn_rbt_prg_qual_elg_cust_map {
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: program_qual_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_QUAL_WID ;;
   }
 
   dimension: elig_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ELIG_CUSTOMER_WID ;;
   }
 
@@ -119,7 +119,7 @@ view: mn_rbt_prg_qual_elg_cust_map {
 
   dimension: plan_customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_CUSTOMER_WID ;;
   }
 
@@ -144,10 +144,10 @@ view: mn_rbt_prg_qual_elg_cust_map {
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

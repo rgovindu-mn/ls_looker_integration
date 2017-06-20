@@ -8,12 +8,14 @@ view: mn_cmt_type_dim {
 
   dimension: cmt_type_name {
     type: string
+    label: "Commitment Type"
     sql: ${TABLE}.CMT_TYPE_NAME ;;
   }
 
   dimension: cmt_type_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CMT_TYPE_WID ;;
   }
 
@@ -49,7 +51,7 @@ view: mn_cmt_type_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: yesno
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -65,8 +67,8 @@ view: mn_cmt_type_dim {
     sql: ${TABLE}.SRC_SYS_CMT_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [cmt_type_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [cmt_type_name]
+#   }
 }

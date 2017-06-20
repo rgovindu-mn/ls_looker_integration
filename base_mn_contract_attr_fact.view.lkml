@@ -22,7 +22,8 @@ view: mn_contract_attr_fact {
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    primary_key: yes
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
@@ -95,7 +96,7 @@ view: mn_contract_attr_fact {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -126,7 +127,7 @@ view: mn_contract_attr_fact {
     sql: ${TABLE}.SRC_SYS_DATE_UPDATED ;;
   }
 
-  measure: count {
+  measure: attribute_count {
     type: count
     drill_fields: [attr_name]
   }

@@ -81,7 +81,7 @@ view: mn_product_eff_attr_fact {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 

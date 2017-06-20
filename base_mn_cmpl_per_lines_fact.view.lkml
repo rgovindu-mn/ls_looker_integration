@@ -3,13 +3,13 @@ view: mn_cmpl_per_lines_fact {
 
   dimension: bucket_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BUCKET_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -44,7 +44,7 @@ view: mn_cmpl_per_lines_fact {
   }
 
   dimension: exchange_rate {
-    type: string
+    type: number
     sql: ${TABLE}.EXCHANGE_RATE ;;
   }
 
@@ -59,12 +59,12 @@ view: mn_cmpl_per_lines_fact {
   }
 
   dimension: inv_amt {
-    type: string
+    type: number
     sql: ${TABLE}.INV_AMT ;;
   }
 
   dimension: inv_amt_base {
-    type: string
+    type: number
     sql: ${TABLE}.INV_AMT_BASE ;;
   }
 
@@ -74,30 +74,31 @@ view: mn_cmpl_per_lines_fact {
   }
 
   dimension: inv_qty {
-    type: string
+    type: number
     sql: ${TABLE}.INV_QTY ;;
   }
 
   dimension: line_ref_num {
-    type: string
+    type: number
     sql: ${TABLE}.LINE_REF_NUM ;;
   }
 
   dimension: period_bucket_line_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.PERIOD_BUCKET_LINE_WID ;;
   }
 
   dimension: period_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PERIOD_WID ;;
   }
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -643,7 +644,7 @@ view: mn_cmpl_per_lines_fact {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -663,19 +664,19 @@ view: mn_cmpl_per_lines_fact {
 
   dimension: sale_inv_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SALE_INV_DATE_WID ;;
   }
 
   dimension: sale_ship_to_cust_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SALE_SHIP_TO_CUST_WID ;;
   }
 
   dimension: sale_sold_to_cust_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SALE_SOLD_TO_CUST_WID ;;
   }
 
@@ -695,7 +696,7 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.UOM ;;
   }
 
-  measure: count {
+  measure: cmpl_reiod_lines_count {
     type: count
     drill_fields: []
   }

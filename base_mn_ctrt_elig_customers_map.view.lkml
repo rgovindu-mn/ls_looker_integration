@@ -179,6 +179,7 @@ view: mn_ctrt_elig_customers_map {
   dimension: src_sys_contract_id {
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
   }
 

@@ -3,7 +3,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: basket_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BASKET_WID ;;
   }
 
@@ -15,7 +15,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
@@ -66,7 +66,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: eff_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 
@@ -86,7 +86,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: eff_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_START_DATE_WID ;;
   }
 
@@ -132,7 +132,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -152,13 +152,13 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: prod_added_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 
   dimension: program_ben_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_BEN_WID ;;
   }
 
@@ -198,10 +198,10 @@ view: mn_rbt_ben_prod_map_all {
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

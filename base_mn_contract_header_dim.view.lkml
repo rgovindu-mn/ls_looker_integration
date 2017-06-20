@@ -3,24 +3,13 @@ view: mn_contract_header_dim {
 
   label: "Contract"
 
-  dimension: access_user_wid {
-    type: string
-    sql: 0;;
-  }
-
-
-  dimension: access_user_name {
-    type: string
-    sql: 'X';;
-  }
-
   dimension: additional_delegate_wid {
     type: number
     hidden:  yes
     sql: ${TABLE}.ADDITIONAL_DELEGATE_WID ;;
   }
 
-  dimension: alternate_ctrt_num {
+  dimension: alternate_contract_number {
     type: string
     sql: ${TABLE}.ALTERNATE_CTRT_NUM ;;
   }
@@ -124,6 +113,7 @@ view: mn_contract_header_dim {
 
   dimension: contract_wid {
     type: number
+    primary_key: yes
     hidden:  yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }
@@ -474,7 +464,7 @@ view: mn_contract_header_dim {
   }
 
   dimension: src_sys_mgr_id {
-    type: string
+    type: number
     hidden:  yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
@@ -504,7 +494,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.VALUE ;;
   }
 
-  dimension_group: ver_end {
+  dimension_group: version_end {
     type: time
     timeframes: [
       raw,
@@ -523,7 +513,7 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.VER_NUM ;;
   }
 
-  dimension_group: ver_start {
+  dimension_group: version_start {
     type: time
     timeframes: [
       raw,
@@ -582,11 +572,6 @@ view: mn_contract_header_dim {
   dimension: months_to_expire {
     type: number
     sql: CASE WHEN trunc(MONTHS_BETWEEN(${TABLE}.eff_end_date,sysdate)) = 0 THEN  '1 Month' WHEN trunc(MONTHS_BETWEEN(${TABLE}.eff_end_date,sysdate)) BETWEEN 1 and 2 THEN '3 Months' ELSE NULL END ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [contract_name]
   }
 
   measure:  contract_value {

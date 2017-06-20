@@ -8,12 +8,14 @@ view: mn_cmt_change_reason_dim {
 
   dimension: cmt_change_code_name {
     type: string
+    label: "Commitment Change Reason"
     sql: ${TABLE}.CMT_CHANGE_CODE_NAME ;;
   }
 
   dimension: cmt_change_code_wid {
     hidden: yes
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.CMT_CHANGE_CODE_WID ;;
   }
 
@@ -49,7 +51,7 @@ view: mn_cmt_change_reason_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -65,8 +67,8 @@ view: mn_cmt_change_reason_dim {
     sql: ${TABLE}.SRC_SYS_CMT_CHANGE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [cmt_change_code_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [cmt_change_code_name]
+#   }
 }

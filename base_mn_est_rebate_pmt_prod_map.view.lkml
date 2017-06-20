@@ -18,7 +18,7 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
@@ -74,13 +74,13 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: estimate_pmt_li_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ESTIMATE_PMT_LI_WID ;;
   }
 
   dimension: estimate_pmt_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ESTIMATE_PMT_WID ;;
   }
 
@@ -160,7 +160,7 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: payee_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAYEE_WID ;;
   }
 
@@ -180,13 +180,13 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: period_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PERIOD_END_DATE_WID ;;
   }
 
   dimension: plan_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PLAN_WID ;;
   }
 
@@ -197,7 +197,7 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -213,13 +213,13 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

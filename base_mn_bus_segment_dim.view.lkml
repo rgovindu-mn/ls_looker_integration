@@ -14,7 +14,8 @@ view: mn_bus_segment_dim {
   }
 
   dimension: bus_seg_wid {
-    type: string
+    type: number
+    primary_key: yes
     hidden: yes
     sql: ${TABLE}.BUS_SEG_WID ;;
   }
@@ -57,7 +58,7 @@ view: mn_bus_segment_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -69,12 +70,12 @@ view: mn_bus_segment_dim {
 
   dimension: src_sys_bus_seg_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.SRC_SYS_BUS_SEG_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [bus_seg_name]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [bus_seg_name]
+#   }
 }
