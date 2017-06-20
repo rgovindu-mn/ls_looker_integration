@@ -4,7 +4,6 @@ view: mn_ctrt_elig_cot_map {
   dimension: contract_wid {
     hidden: yes
     type: number
-    primary_key: yes
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
