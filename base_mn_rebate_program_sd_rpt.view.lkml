@@ -10,6 +10,13 @@ view: mn_rebate_program_sd_rpt {
     sql: ${TABLE}.ACCRU_CUST_WID ;;
   }
 
+  dimension: rbt_strategy_rpt_wid {
+    type: number
+    hidden: yes
+    primary_key: yes
+    sql: ${TABLE}.RBT_STRATEGY_RPT_WID ;;
+  }
+
   dimension: accrual_rate {
     type: number
     sql: ${TABLE}.ACCRUAL_RATE ;;

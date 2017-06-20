@@ -88,6 +88,7 @@ view: mn_pg_commit_fact {
 
   dimension: pg_commit_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PG_COMMIT_WID ;;
   }

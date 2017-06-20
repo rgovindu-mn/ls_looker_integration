@@ -101,6 +101,7 @@ view: mn_deal_doc_dim {
 
   dimension: deal_doc_wid {
     hidden: yes
+    primary_key: yes
     type: number
 
     sql: ${TABLE}.DEAL_DOC_WID ;;

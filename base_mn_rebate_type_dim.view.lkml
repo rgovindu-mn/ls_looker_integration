@@ -71,6 +71,7 @@ view: mn_rebate_type_dim {
 
   dimension: rebate_type_wid {
     type: number
+    primary_key: yes
     sql: ${TABLE}.REBATE_TYPE_WID ;;
   }
 

@@ -106,6 +106,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
     group_label: "Benefit"
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.PROGRAM_BEN_WID ;;
   }
 

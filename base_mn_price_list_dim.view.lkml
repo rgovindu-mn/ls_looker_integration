@@ -110,8 +110,8 @@ view: mn_price_list_dim {
 
   dimension: price_list_wid {
     hidden:  yes
-    type: number
     primary_key: yes
+    type: number
     sql: ${TABLE}.PRICE_LIST_WID ;;
   }
 

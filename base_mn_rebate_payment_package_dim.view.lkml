@@ -223,6 +223,7 @@ view: mn_rebate_payment_package_dim {
 
   dimension: pymt_pkg_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PYMT_PKG_WID ;;
   }

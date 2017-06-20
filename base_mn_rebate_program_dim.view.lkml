@@ -240,6 +240,7 @@ view: mn_rebate_program_dim {
 
   dimension: program_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }

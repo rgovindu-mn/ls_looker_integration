@@ -274,6 +274,7 @@ view: mn_est_rebate_payment_fact {
 
   dimension: estimate_pmt_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.ESTIMATE_PMT_WID ;;
   }
