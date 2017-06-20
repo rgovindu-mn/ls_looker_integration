@@ -70,12 +70,12 @@ view: mn_rebate_type_dim {
   }
 
   dimension: rebate_type_wid {
-    type: string
+    type: number
     sql: ${TABLE}.REBATE_TYPE_WID ;;
   }
 
   dimension: run_id {
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

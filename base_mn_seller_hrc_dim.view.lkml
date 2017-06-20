@@ -37,7 +37,7 @@ view: mn_seller_hrc_dim {
   }
 
   dimension: district_manager_wid {
-    type: string
+    type: number
     hidden:  yes
     sql: ${TABLE}.DISTRICT_MANAGER_WID ;;
   }

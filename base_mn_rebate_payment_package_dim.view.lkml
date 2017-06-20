@@ -8,7 +8,7 @@ view: mn_rebate_payment_package_dim {
 
   dimension: analyst_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ANALYST_WID ;;
   }
 
@@ -19,19 +19,19 @@ view: mn_rebate_payment_package_dim {
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
   dimension: contract_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
   dimension: created_by_user_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CREATED_BY_USER_WID ;;
   }
 
@@ -52,7 +52,7 @@ view: mn_rebate_payment_package_dim {
 
   dimension: created_on_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CREATED_ON_DATE_WID ;;
   }
 
@@ -121,13 +121,13 @@ view: mn_rebate_payment_package_dim {
 
   dimension: last_modified_on_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.LAST_MODIFIED_ON_DATE_WID ;;
   }
 
   dimension: org_unit_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ORG_UNIT_WID ;;
   }
 
@@ -138,13 +138,13 @@ view: mn_rebate_payment_package_dim {
 
   dimension: paid_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAID_DATE_WID ;;
   }
 
   dimension: payee_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PAYEE_WID ;;
   }
 
@@ -165,13 +165,13 @@ view: mn_rebate_payment_package_dim {
 
   dimension: pymt_issued_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PYMT_ISSUED_DATE_WID ;;
   }
 
   dimension: pymt_method_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PYMT_METHOD_WID ;;
   }
 
@@ -192,7 +192,7 @@ view: mn_rebate_payment_package_dim {
 
   dimension: pymt_needed_by_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PYMT_NEEDED_BY_DATE_WID ;;
   }
 
@@ -223,7 +223,7 @@ view: mn_rebate_payment_package_dim {
 
   dimension: pymt_pkg_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PYMT_PKG_WID ;;
   }
 
@@ -245,13 +245,13 @@ view: mn_rebate_payment_package_dim {
 
   dimension: pymt_rqst_sent_on_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PYMT_RQST_SENT_ON_DATE_WID ;;
   }
 
   dimension: rebate_period_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.REBATE_PERIOD_END_DATE_WID ;;
   }
 
@@ -272,7 +272,7 @@ view: mn_rebate_payment_package_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
@@ -299,22 +299,22 @@ view: mn_rebate_payment_package_dim {
   }
 
   dimension: total_estimated_pmt_amt {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_ESTIMATED_PMT_AMT ;;
   }
 
   dimension: total_estimated_pmt_amt_curr {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_ESTIMATED_PMT_AMT_CURR ;;
   }
 
   dimension: total_pmt_amt {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_PMT_AMT ;;
   }
 
   dimension: total_pmt_amt_curr {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_PMT_AMT_CURR ;;
   }
 }

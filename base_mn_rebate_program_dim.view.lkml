@@ -3,7 +3,7 @@ view: mn_rebate_program_dim {
 
   dimension: accru_cust_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ACCRU_CUST_WID ;;
   }
 
@@ -14,7 +14,7 @@ view: mn_rebate_program_dim {
 
   dimension: accrual_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ACCRUAL_TYPE_WID ;;
   }
 
@@ -35,13 +35,13 @@ view: mn_rebate_program_dim {
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
   dimension: customer_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
 
@@ -170,7 +170,7 @@ view: mn_rebate_program_dim {
 
   dimension: org_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
@@ -202,13 +202,13 @@ view: mn_rebate_program_dim {
 
   dimension: pmt_method_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PMT_METHOD_WID ;;
   }
 
   dimension: pmt_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PMT_TYPE_WID ;;
   }
 
@@ -234,13 +234,13 @@ view: mn_rebate_program_dim {
 
   dimension: program_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_TYPE_WID ;;
   }
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
@@ -250,252 +250,252 @@ view: mn_rebate_program_dim {
   }
 
   dimension: report_definition_num_1 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_1 ;;
   }
 
   dimension: report_definition_num_10 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_10 ;;
   }
 
   dimension: report_definition_num_11 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_11 ;;
   }
 
   dimension: report_definition_num_12 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_12 ;;
   }
 
   dimension: report_definition_num_13 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_13 ;;
   }
 
   dimension: report_definition_num_14 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_14 ;;
   }
 
   dimension: report_definition_num_15 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_15 ;;
   }
 
   dimension: report_definition_num_16 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_16 ;;
   }
 
   dimension: report_definition_num_17 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_17 ;;
   }
 
   dimension: report_definition_num_18 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_18 ;;
   }
 
   dimension: report_definition_num_19 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_19 ;;
   }
 
   dimension: report_definition_num_2 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_2 ;;
   }
 
   dimension: report_definition_num_20 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_20 ;;
   }
 
   dimension: report_definition_num_21 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_21 ;;
   }
 
   dimension: report_definition_num_22 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_22 ;;
   }
 
   dimension: report_definition_num_23 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_23 ;;
   }
 
   dimension: report_definition_num_24 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_24 ;;
   }
 
   dimension: report_definition_num_25 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_25 ;;
   }
 
   dimension: report_definition_num_26 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_26 ;;
   }
 
   dimension: report_definition_num_27 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_27 ;;
   }
 
   dimension: report_definition_num_28 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_28 ;;
   }
 
   dimension: report_definition_num_29 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_29 ;;
   }
 
   dimension: report_definition_num_3 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_3 ;;
   }
 
   dimension: report_definition_num_30 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_30 ;;
   }
 
   dimension: report_definition_num_31 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_31 ;;
   }
 
   dimension: report_definition_num_32 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_32 ;;
   }
 
   dimension: report_definition_num_33 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_33 ;;
   }
 
   dimension: report_definition_num_34 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_34 ;;
   }
 
   dimension: report_definition_num_35 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_35 ;;
   }
 
   dimension: report_definition_num_36 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_36 ;;
   }
 
   dimension: report_definition_num_37 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_37 ;;
   }
 
   dimension: report_definition_num_38 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_38 ;;
   }
 
   dimension: report_definition_num_39 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_39 ;;
   }
 
   dimension: report_definition_num_4 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_4 ;;
   }
 
   dimension: report_definition_num_40 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_40 ;;
   }
 
   dimension: report_definition_num_41 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_41 ;;
   }
 
   dimension: report_definition_num_42 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_42 ;;
   }
 
   dimension: report_definition_num_43 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_43 ;;
   }
 
   dimension: report_definition_num_44 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_44 ;;
   }
 
   dimension: report_definition_num_45 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_45 ;;
   }
 
   dimension: report_definition_num_46 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_46 ;;
   }
 
   dimension: report_definition_num_47 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_47 ;;
   }
 
   dimension: report_definition_num_48 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_48 ;;
   }
 
   dimension: report_definition_num_49 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_49 ;;
   }
 
   dimension: report_definition_num_5 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_5 ;;
   }
 
   dimension: report_definition_num_50 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_50 ;;
   }
 
   dimension: report_definition_num_6 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_6 ;;
   }
 
   dimension: report_definition_num_7 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_7 ;;
   }
 
   dimension: report_definition_num_8 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_8 ;;
   }
 
   dimension: report_definition_num_9 {
-    type: string
+    type: number
     sql: ${TABLE}.REPORT_DEFINITION_NUM_9 ;;
   }
 
@@ -751,7 +751,7 @@ view: mn_rebate_program_dim {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

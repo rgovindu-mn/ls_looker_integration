@@ -203,7 +203,7 @@ view: mn_rbt_prog_qual_ben_sd_rpt {
 
   dimension: formulary_mb_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_MB_WID ;;
   }
 
@@ -214,7 +214,7 @@ view: mn_rbt_prog_qual_ben_sd_rpt {
 
   dimension: formulary_product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.FORMULARY_PRODUCT_WID ;;
   }
 
@@ -342,7 +342,7 @@ view: mn_rbt_prog_qual_ben_sd_rpt {
 
   dimension: program_qual_ben_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_QUAL_BEN_WID ;;
   }
 
@@ -354,13 +354,13 @@ view: mn_rbt_prog_qual_ben_sd_rpt {
   dimension: rbt_component_rpt_wid {
     hidden: yes
     primary_key: yes
-    type: string
+    type: number
     sql: ${TABLE}.RBT_COMPONENT_RPT_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
