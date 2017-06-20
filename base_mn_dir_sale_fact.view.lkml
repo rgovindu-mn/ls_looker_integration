@@ -377,6 +377,7 @@ view: mn_dir_sale_fact {
 
   dimension: line_ref_num {
     type: string
+    primary_key: yes
     sql: ${TABLE}.LINE_REF_NUM ;;
   }
 
@@ -633,7 +634,7 @@ view: mn_dir_sale_fact {
   }
 
   dimension: total_rbt_amt {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_RBT_AMT ;;
   }
 

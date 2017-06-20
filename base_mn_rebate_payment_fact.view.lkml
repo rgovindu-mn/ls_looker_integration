@@ -2,17 +2,17 @@ view: mn_rebate_payment_fact {
   sql_table_name: MN_REBATE_PAYMENT_FACT ;;
 
   dimension: accrued_customer_wid {
-    type: string
+    type: number
     sql: ${TABLE}.ACCRUED_CUSTOMER_WID ;;
   }
 
   dimension: analyst_user_wid {
-    type: string
+    type: number
     sql: ${TABLE}.ANALYST_USER_WID ;;
   }
 
   dimension: commited_customer_wid {
-    type: string
+    type: number
     sql: ${TABLE}.COMMITED_CUSTOMER_WID ;;
   }
 
@@ -27,12 +27,12 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: contract_type_wid {
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
   dimension: contract_wid {
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }
 
@@ -84,7 +84,7 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: end_date_wid {
-    type: string
+    type: number
     sql: ${TABLE}.END_DATE_WID ;;
   }
 
@@ -109,22 +109,22 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: net_due_amt {
-    type: string
+    type: number
     sql: ${TABLE}.NET_DUE_AMT ;;
   }
 
   dimension: net_due_amt_base {
-    type: string
+    type: number
     sql: ${TABLE}.NET_DUE_AMT_BASE ;;
   }
 
   dimension: net_due_cur {
-    type: string
+    type: number
     sql: ${TABLE}.NET_DUE_CUR ;;
   }
 
   dimension: org_wid {
-    type: string
+    type: number
     sql: ${TABLE}.ORG_WID ;;
   }
 
@@ -143,7 +143,7 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: paid_date_wid {
-    type: string
+    type: number
     sql: ${TABLE}.PAID_DATE_WID ;;
   }
 
@@ -168,7 +168,7 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: payee_customer_wid {
-    type: string
+    type: number
     sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
   }
 
@@ -202,7 +202,7 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: pmt_due_status_date_wid {
-    type: string
+    type: number
     sql: ${TABLE}.PMT_DUE_STATUS_DATE_WID ;;
   }
 
@@ -231,12 +231,12 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: prog_analyst_user_wid {
-    type: string
+    type: number
     sql: ${TABLE}.PROG_ANALYST_USER_WID ;;
   }
 
   dimension: pymt_pkg_wid {
-    type: string
+    type: number
     sql: ${TABLE}.PYMT_PKG_WID ;;
   }
 
@@ -266,12 +266,13 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: rebate_pmt_wid {
-    type: string
+    primary_key: yes
+    type: number
     sql: ${TABLE}.REBATE_PMT_WID ;;
   }
 
   dimension: rebate_program_wid {
-    type: string
+    type: number
     sql: ${TABLE}.REBATE_PROGRAM_WID ;;
   }
 
@@ -290,27 +291,27 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: reversed_due_amt {
-    type: string
+    type: number
     sql: ${TABLE}.REVERSED_DUE_AMT ;;
   }
 
   dimension: reversed_due_amt_base {
-    type: string
+    type: number
     sql: ${TABLE}.REVERSED_DUE_AMT_BASE ;;
   }
 
   dimension: reversed_due_amt_curr {
-    type: string
+    type: number
     sql: ${TABLE}.REVERSED_DUE_AMT_CURR ;;
   }
 
   dimension: run_id {
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: salesrep_user_wid {
-    type: string
+    type: number
     sql: ${TABLE}.SALESREP_USER_WID ;;
   }
 
@@ -330,7 +331,7 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: start_date_wid {
-    type: string
+    type: number
     sql: ${TABLE}.START_DATE_WID ;;
   }
 
@@ -340,22 +341,22 @@ view: mn_rebate_payment_fact {
   }
 
   dimension: tier_attained {
-    type: string
+    type: number
     sql: ${TABLE}.TIER_ATTAINED ;;
   }
 
   dimension: total_accrued_amt {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_ACCRUED_AMT ;;
   }
 
   dimension: total_accrued_amt_base {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_ACCRUED_AMT_BASE ;;
   }
 
   dimension: total_accrued_amt_cur {
-    type: string
+    type: number
     sql: ${TABLE}.TOTAL_ACCRUED_AMT_CUR ;;
   }
 

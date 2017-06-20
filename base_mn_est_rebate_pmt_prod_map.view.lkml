@@ -74,6 +74,7 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension: estimate_pmt_li_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.ESTIMATE_PMT_LI_WID ;;
   }

@@ -37,6 +37,7 @@ view: mn_formulary_dim {
 
   dimension: formulary_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.FORMULARY_WID ;;
   }

@@ -45,6 +45,7 @@ view: mn_pg_prd_prc_entlmt_fact {
   dimension: entitlement_wid {
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.ENTITLEMENT_WID ;;
   }
 

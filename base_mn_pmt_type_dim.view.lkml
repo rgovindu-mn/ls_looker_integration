@@ -43,8 +43,8 @@ view: mn_pmt_type_dim {
 
   dimension: pmt_type_wid {
     hidden:  yes
-    type: number
     primary_key: yes
+    type: number
     sql: ${TABLE}.PMT_TYPE_WID ;;
   }
 

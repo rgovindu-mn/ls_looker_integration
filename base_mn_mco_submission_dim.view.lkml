@@ -104,6 +104,7 @@ view: mn_mco_submission_dim {
 
   dimension: mco_submission_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.MCO_SUBMISSION_WID ;;
   }

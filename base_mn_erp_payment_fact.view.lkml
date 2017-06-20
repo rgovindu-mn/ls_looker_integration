@@ -68,6 +68,7 @@ view: mn_erp_payment_fact {
 
   dimension: erp_pmt_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.ERP_PMT_WID ;;
   }

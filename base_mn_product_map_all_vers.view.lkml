@@ -75,6 +75,7 @@ view: mn_product_map_all_ver {
 
   dimension: level0_product_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.LEVEL0_PROD_WID ;;
   }

@@ -5,7 +5,6 @@ include: "base_ls_explores.model.lkml"
 
 label: "Provider Explorer"
 
-
 explore: mn_contract_header_dim {
 
   label: "Contracts"
@@ -435,7 +434,7 @@ explore: provider_historical_rebates {
   extends: [historical_rebates_base]
   hidden: no
 
-  sql_always_where: ${mn_discount_bridge_fact.is_historical_flag}='N'
+  sql_always_where: ${mn_discount_bridge_fact.is_historical_flag}='Y'
                     AND (${mn_discount_bridge_fact.ds_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.ids_line_ref_num} IS NOT NULL
                           OR ${mn_discount_bridge_fact.cs_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'INCENTV') ;;
 

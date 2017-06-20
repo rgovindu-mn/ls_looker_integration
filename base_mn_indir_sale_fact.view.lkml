@@ -613,6 +613,7 @@ view: mn_indir_sale_fact {
 
   dimension: line_ref_num {
     type: string
+    primary_key: yes
     sql: ${TABLE}.LINE_REF_NUM ;;
   }
 

@@ -14,6 +14,7 @@ view: mn_market_basket_dim {
 
   dimension: market_basket_wid {
     type: number
+    primary_key: yes
     hidden: yes
     sql: ${TABLE}.BASKET_WID;;
   }

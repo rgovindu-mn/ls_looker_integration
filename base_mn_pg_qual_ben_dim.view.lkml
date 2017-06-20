@@ -131,6 +131,7 @@ view: mn_pg_qual_ben_dim {
 
   dimension: pg_tb_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PG_TB_WID ;;
   }

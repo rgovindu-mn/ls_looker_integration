@@ -60,7 +60,7 @@ view: mn_rbt_prog_ben_prod_map {
 
   dimension: eff_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 

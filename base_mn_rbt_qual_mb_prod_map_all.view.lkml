@@ -66,7 +66,7 @@ view: mn_rbt_qual_mb_prod_map_all {
 
   dimension: eff_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 

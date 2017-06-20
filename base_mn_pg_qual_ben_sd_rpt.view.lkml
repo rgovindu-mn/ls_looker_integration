@@ -102,6 +102,7 @@ view: mn_pg_qual_ben_sd_rpt {
 
   dimension: prc_component_rpt_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PRC_COMPONENT_RPT_WID ;;
   }

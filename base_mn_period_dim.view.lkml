@@ -67,6 +67,7 @@ view: mn_period_dim {
 
   dimension: period_wid {
     hidden:  yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PERIOD_WID ;;
   }
