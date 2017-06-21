@@ -5,39 +5,82 @@ explore: payer_combined {
   label: "Payer Combined Model"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
-  extends: [mn_payer_rebate_lines, mn_mco_util_fact]
+  extends: [mn_payer_rebate_lines,mn_mco_util_fact]
   hidden: no
 
-join: mn_customer_owner_dim {
+  join: mn_customer_owner_dim {
   fields: []
-}
+  }
 
-join: mn_ch_cust_cot_dim {
+  join: mn_ch_cust_cot_dim {
   fields: []
-}
+  }
 
-join: mn_ch_cot_dim {
+  join: mn_ch_cot_dim {
   fields: []
-}
+  }
 
-# join: mn_discount_bridge_fact1 {
-#   view_label: "abc"
-#   type: inner
-#   relationship: one_to_one
-#   from: mn_discount_bridge_fact
-#   sql: ${mn_payer_combined.ids_line_ref_num} = ${mn_discount_bridge_fact.ids_line_ref_num} ;;
-# }
-join: mn_mco_util_fact {
-  type: left_outer
-  relationship: many_to_one
-  from: mn_mco_util_fact
-  sql: ${mn_discount_bridge_fact.pub_util_id} = ${mn_mco_util_fact.pub_util_id} ;;
-  view_label: "Utilization lines"
-}
+  join: mn_ctrt_Adtnl_dlgt_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
+  }
 
-join: mn_customer_dim_bob {
-  view_label: "Util Book of Business"
-}
+  join: mn_mco_util_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_mco_util_fact
+    sql_on: ${mn_discount_bridge_fact.pub_util_id} = ${mn_mco_util_fact.pub_util_id} ;;
+    view_label: "Utilization lines"
+  }
+
+  join: mn_customer_dim_bob {
+    view_label: "Util Book of Business"
+  }
+
+  join: mn_customer_dim_parent_pbm {
+    view_label: "Util PBM"
+  }
+
+  join: mn_customer_dim_plan {
+    fields: []
+  }
+
+  join: mn_contracted_customer_dim {
+    view_label: "Util Contracted Customer"
+  }
+
+  join: mn_contracted_customer_id {
+    view_label: "Util Contracted Customer"
+  }
+
+  join: mn_mco_submission_dim {
+    view_label: "Util Submission"
+  }
+
+  join: mn_product_dim {
+    view_label: "Util Product"
+  }
+
+  join: mn_product_map_all_ver {
+    view_label: "Util Product"
+    fields: []
+  }
+
+  join: mn_formulary_dim {
+    view_label: "Util Formulary"
+  }
+
+  join: mn_org_dim {
+    view_label: "Util Org"
+  }
+
+  join: mn_cot_dim {
+    view_label: "Util COT"
+  }
+
 
 
 }
