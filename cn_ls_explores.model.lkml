@@ -1,5 +1,26 @@
  include: "base_ls_explores.model.lkml"
 
+# explore: payer_estimated_rebates{
+#   label: "Estimated Rebates"
+#   from: mn_est_rebate_payment_fact
+#   view_name: mn_est_rebate_payment_fact
+#   extends: [estimated_rebates_base]
+#   hidden: no
+#
+#   sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Managed Care';;
+# }
+#
+# explore: payer_historical_rebates {
+#   label: "Historical Rebates"
+#   from: mn_discount_bridge_fact
+#   view_name: mn_discount_bridge_fact
+#   extends: [historical_rebates_base]
+#   hidden: no
+#
+#   sql_always_where: ${mn_discount_bridge_fact.is_historical_flag}='Y'
+#                     AND (${mn_discount_bridge_fact.mco_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'MCO') ;;
+# }
+
 # include: "base_mn_rbt_prg_qual_flat_dim.view.lkml"
 # include: "base_mn_rbt_qual_prod_map_all.view.lkml"
 

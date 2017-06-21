@@ -59,8 +59,8 @@ include: "base_mn_product_eff_attr_fact.view.lkml"
 include: "base_mn_rbt_qual_mb_prod_map_all.view.lkml"
 include: "base_mn_market_basket_dim.view.lkml"
 include: "base_mn_product_group_dim.view.lkml"
-include: "base_mn_rbt_prg_qual_elg_cst_map_derived.view.lkml"
-include: "base_mn_rbt_prg_ben_elg_cst_map_derived.view.lkml"
+include: "base_mn_rbt_prg_qual_elg_cst_map_dt.view.lkml"
+include: "base_mn_rbt_prg_ben_elg_cst_map_dt.view.lkml"
 include: "base_mn_plan_formulary_map.view.lkml"
 include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_formulary_prod_map.view.lkml"
@@ -565,7 +565,7 @@ explore: estimated_rebates_base {
 
   join: mn_contract_header_dim {
     type: left_outer
-    view_label: "Estimated Rebate Contracts"
+#     view_label: "Contract"
     relationship: many_to_one
     from: mn_contract_header_dim
     sql_on: ${mn_contract_header_dim.contract_wid} =
