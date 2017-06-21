@@ -1,5 +1,5 @@
 view: mn_rebate_payment_fact {
-  sql_table_name: MN_REBATE_PAYMENT_FACT ;;
+  sql_table_name: MN_REBATE_PAYMENT_FACT_VW ;;
 
   dimension: accrued_customer_wid {
     type: number

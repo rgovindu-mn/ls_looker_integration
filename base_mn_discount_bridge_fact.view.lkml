@@ -53,12 +53,12 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: estimate_qty {
-    type: string
+    type: number
     sql: ${TABLE}.ESTIMATE_QTY ;;
   }
 
   dimension: exchange_rate {
-    type: string
+    type: number
     sql: ${TABLE}.EXCHANGE_RATE ;;
   }
 
@@ -80,7 +80,7 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: external_inv_amt {
-    type: string
+    type: number
     sql: ${TABLE}.EXTERNAL_INV_AMT ;;
   }
 
@@ -165,12 +165,12 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: inv_amt {
-    type: string
+    type: number
     sql: ${TABLE}.INV_AMT ;;
   }
 
   dimension: inv_amt_base {
-    type: string
+    type: number
     sql: ${TABLE}.INV_AMT_BASE ;;
   }
 
@@ -200,7 +200,7 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: inv_qty {
-    type: string
+    type: number
     sql: ${TABLE}.INV_QTY ;;
   }
 
@@ -237,7 +237,7 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: original_inv_qty {
-    type: string
+    type: number
     sql: ${TABLE}.ORIGINAL_INV_QTY ;;
   }
 
@@ -247,7 +247,7 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: paid_amt {
-    type: string
+    type: number
     sql: ${TABLE}.PAID_AMT ;;
   }
 
@@ -257,7 +257,7 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: paid_amt_curr {
-    type: string
+    type: number
     sql: ${TABLE}.PAID_AMT_CURR ;;
   }
 
@@ -319,7 +319,8 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: rebate_line_ref_num {
-    type: string
+    type: number
+    primary_key: yes
     sql: ${TABLE}.REBATE_LINE_REF_NUM ;;
   }
 
@@ -370,17 +371,20 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: src_sys_bucket_line_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_BUCKET_LINE_ID ;;
   }
 
   dimension: src_sys_est_payment_li_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_EST_PAYMENT_LI_ID ;;
   }
 
   dimension: src_sys_est_plan_id {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_EST_PLAN_ID ;;
   }
 
