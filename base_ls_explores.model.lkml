@@ -172,7 +172,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_many
     from: mn_customer_cot_dim
-    view_label: "Contract Customer COT"
+    view_label: "Contract Owner COT"
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_ch_cust_cot_dim.customer_wid} ;;
   }
 
@@ -180,10 +180,10 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_cot_dim
-    view_label: "Contract Customer COT"
-    sql_on: ${mn_ch_cust_cot_dim.cot_wid}.owner_wid} = ${mn_ch_cot_dim.cot_wid}
+    view_label: "Contract Owner COT"
+    sql_on: ${mn_ch_cust_cot_dim.cot_wid} = ${mn_ch_cot_dim.cot_wid}
             and ${mn_ch_cust_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
-            and ${mn_ch_cust_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
+            and ${mn_ch_cust_cot_dim.eff_end_date} >= ${mn_contract_header_dim.implemented_date} ;;
   }
 
   join: mn_parent_contract_header_dim {
