@@ -103,19 +103,21 @@ explore: mn_mco_util_fact {
 # Adhoc base explore for Discount Bridge fact with all needed joins
 
 explore: mn_payer_rebate_lines {
+  label: "Rebates"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
+  view_label: "Rebate Lines"
 
   extends: [mn_paid_rebate_lines_base, mn_contract_header_dim_adhoc_base]
   hidden: no
-  label: "Rebates"
 
-  sql_always_where: ${mn_discount_bridge_fact.mco_line_ref_num} is not null or
-    upper(${mn_discount_bridge_fact.rebate_module_type}) = 'MCO' ;;
-
+  sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
+    upper(${mn_discount_bridge_fact.rebate_module_type}) = 'MCO') and  ${mn_discount_bridge_fact.is_historical_flag}='N';;
+   # fields: []
 
   join: mn_rebate_payment_fact {
     from: mn_rebate_payment_fact
+    view_label: "Rebate Payment"
     type: left_outer
     relationship: many_to_one
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
@@ -124,9 +126,9 @@ explore: mn_payer_rebate_lines {
 
   join: mn_contract_header_dim {
     from: mn_contract_header_dim
+    view_label: "Contract"
     type: left_outer
     relationship: many_to_one
-#     view_label: "Rebate Contract"
     sql_on: ${mn_rebate_payment_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
   }
 
@@ -155,8 +157,8 @@ explore: mn_payer_rebate_lines {
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Plan"
-    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_customer_dim.customer_wid};;
-    sql_where: Upper(${mn_customer_dim.customer_type}) = 'PLAN' ;;
+    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_plan_dim.customer_wid};;
+    sql_where: Upper(${mn_plan_dim.customer_type}) = 'PLAN' ;;
   }
 
   join: mn_combined_rebate_program_dim {
@@ -167,29 +169,21 @@ explore: mn_payer_rebate_lines {
     sql_on: ${mn_rebate_payment_fact.rebate_program_wid} = ${mn_combined_rebate_program_dim.program_wid} ;;
   }
 
-  join: mn_rbt_prg_ben_flat_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_rbt_prg_ben_flat_dim
-    view_label: "Rebate Program Benefit"
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid} ;;
-  }
+  # join: mn_rbt_prg_ben_flat_dim {
+  #   type: left_outer
+  #   relationship: many_to_one
+  #   from: mn_rbt_prg_ben_flat_dim
+  #   view_label: "Rebate Program Benefit"
+  #   sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid} ;;
+  # }
 
 
-  join: mn_rbt_prog_ben_prod_map {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_rbt_prog_ben_prod_map
-    view_label: "Rebate Program Benefit Product"
-    sql_on: ${mn_rbt_prg_ben_flat_dim.program_ben_wid} = ${mn_rbt_prog_ben_prod_map.program_ben_wid} ;;
-  }
-
-  join: mn_customer_dim {
-    type:  left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Rebate Payment Payee"
-    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_customer_dim.customer_wid} ;;
-  }
+  # join: mn_rbt_prog_ben_prod_map {
+  #   type: left_outer
+  #   relationship: many_to_one
+  #   from: mn_rbt_prog_ben_prod_map
+  #   view_label: "Rebate Program Benefit Product"
+  #   sql_on: ${mn_rbt_prg_ben_flat_dim.program_ben_wid} = ${mn_rbt_prog_ben_prod_map.program_ben_wid} ;;
+  # }
 
 }
