@@ -66,6 +66,8 @@ include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_formulary_prod_map.view.lkml"
 include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 include: "base_mn_contract_attr_fact.view.lkml"
+include: "base_mn_mco_util_fact.view.lkml"
+
 
 explore: mn_contract_header_dim_base {
 
