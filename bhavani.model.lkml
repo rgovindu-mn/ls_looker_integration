@@ -5,9 +5,10 @@ include: "base_mn_mco_util_fact.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
 
 explore: mn_mco_util_fact {
-
   label: "Payer Utilization"
-
+  from: mn_mco_util_fact
+  view_name: mn_mco_util_fact
+  view_label: "Utilization lines"
   hidden: no
 
   join: mn_customer_dim_bob {
@@ -133,6 +134,7 @@ explore: mn_payer_rebate_lines {
 
   join: mn_additional_delegate_dim {
     view_label: "Rebate Contract Additional Delegate"
+    fields: []
   }
 
   join: mn_rebate_payment_package_dim {

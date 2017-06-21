@@ -1,5 +1,46 @@
- include: "base_ls_explores.model.lkml"
+include: "base_ls_explores.model.lkml"
+include: "bhavani.model.lkml"
 
+explore: payer_combined {
+  label: "Payer Combined Model"
+  from: mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  extends: [mn_payer_rebate_lines, mn_mco_util_fact]
+  hidden: no
+
+join: mn_customer_owner_dim {
+  fields: []
+}
+
+join: mn_ch_cust_cot_dim {
+  fields: []
+}
+
+join: mn_ch_cot_dim {
+  fields: []
+}
+
+# join: mn_discount_bridge_fact1 {
+#   view_label: "abc"
+#   type: inner
+#   relationship: one_to_one
+#   from: mn_discount_bridge_fact
+#   sql: ${mn_payer_combined.ids_line_ref_num} = ${mn_discount_bridge_fact.ids_line_ref_num} ;;
+# }
+join: mn_mco_util_fact {
+  type: left_outer
+  relationship: many_to_one
+  from: mn_mco_util_fact
+  sql: ${mn_discount_bridge_fact.pub_util_id} = ${mn_mco_util_fact.pub_util_id} ;;
+  view_label: "Utilization lines"
+}
+
+join: mn_customer_dim_bob {
+  view_label: "Util Book of Business"
+}
+
+
+}
 # explore: payer_estimated_rebates{
 #   label: "Estimated Rebates"
 #   from: mn_est_rebate_payment_fact
