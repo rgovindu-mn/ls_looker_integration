@@ -185,6 +185,20 @@ view: mn_discount_bridge_fact {
     sql: ${TABLE}.INV_DATE_WID ;;
   }
 
+  dimension_group: invoice {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: to_date(${TABLE}.INV_DATE_WID,'yyyymmdd') ;;
+  }
+
   dimension: inv_qty {
     type: string
     sql: ${TABLE}.INV_QTY ;;
@@ -377,6 +391,7 @@ view: mn_discount_bridge_fact {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 
