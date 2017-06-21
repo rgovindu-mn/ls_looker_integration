@@ -103,7 +103,7 @@ explore: mn_mco_util_fact {
 # Adhoc base explore for Discount Bridge fact with all needed joins
 
 explore: mn_payer_rebate_lines {
-  label: "Rebates"
+  label: "Payer Rebates"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
   view_label: "Rebate Lines"
@@ -113,7 +113,6 @@ explore: mn_payer_rebate_lines {
 
   sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
     upper(${mn_discount_bridge_fact.rebate_module_type}) = 'MCO') and  ${mn_discount_bridge_fact.is_historical_flag}='N';;
-   # fields: []
 
   join: mn_rebate_payment_fact {
     from: mn_rebate_payment_fact
@@ -185,5 +184,7 @@ explore: mn_payer_rebate_lines {
   #   view_label: "Rebate Program Benefit Product"
   #   sql_on: ${mn_rbt_prg_ben_flat_dim.program_ben_wid} = ${mn_rbt_prog_ben_prod_map.program_ben_wid} ;;
   # }
+
+  fields: [ALL_FIELDS*, -mn_discount_bridge_fact.cs_line_ref_num]
 
 }
