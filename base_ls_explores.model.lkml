@@ -45,12 +45,28 @@ include: "base_mn_est_rebate_pmt_prod_map.view.lkml"
 
 include: "base_mn_customer_ids_dim.view.lkml"
 include: "base_mn_product_eff_attr_fact.view.lkml"
-
 include: "base_mn_mco_submission_dim.view.lkml"
 include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_customer_ids_dim.view.lkml"
-
 include: "base_mn_cmpl_commit_fact.view.lkml"
+
+include: "base_mn_rbt_prg_qual_flat_dim.view.lkml"
+include: "base_mn_rbt_qual_prod_map_all.view.lkml"
+include: "base_mn_rbt_prg_ben_flat_dim.view.lkml"
+include: "base_mn_rbt_ben_prod_map_all.view.lkml"
+include: "base_mn_product_map_all_vers.view.lkml"
+include: "base_mn_product_eff_attr_fact.view.lkml"
+include: "base_mn_rbt_qual_mb_prod_map_all.view.lkml"
+include: "base_mn_market_basket_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
+include: "base_mn_rbt_prg_qual_elg_cst_map_derived.view.lkml"
+include: "base_mn_rbt_prg_ben_elg_cst_map_derived.view.lkml"
+include: "base_mn_plan_formulary_map.view.lkml"
+include: "base_mn_formulary_dim.view.lkml"
+include: "base_mn_formulary_prod_map.view.lkml"
+include: "base_mn_rebate_prog_prod_map_all.view.lkml"
+include: "base_mn_contract_attr_fact.view.lkml"
+
 explore: mn_contract_header_dim_base {
 
   from:  mn_contract_header_dim
