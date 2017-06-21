@@ -23,7 +23,7 @@ explore: mn_payer_contract {
   #  user_attribute: access_user_name
   #}
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' ;;
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
 
   join: mn_combined_rebate_program_dim {
     type: left_outer
@@ -430,5 +430,14 @@ explore: mn_payer_rebate_lines {
     view_label: "Rebate Payment Payee"
     sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_customer_dim.customer_wid} ;;
   }
+
+}
+
+explore: provider_estimated_rebates{
+  label: "Estimated Rebates"
+  extends: [estimated_rebates_base]
+  hidden: no
+
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
 
 }
