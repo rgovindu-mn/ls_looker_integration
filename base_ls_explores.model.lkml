@@ -68,6 +68,9 @@ include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 include: "base_mn_contract_attr_fact.view.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
 
+include: "base_mn_rbt_prg_ben_flat_dim.view.lkml"
+include: "base_mn_erp_payment_fact.view.lkml"
+
 
 explore: mn_contract_header_dim_base {
 
@@ -552,7 +555,9 @@ explore: estimated_rebates_base {
   from:  mn_est_rebate_payment_fact
   view_name: mn_est_rebate_payment_fact
   view_label:"Estimated Rebate Payments"
-  extends: [mn_contract_header_dim_base]
+  extends: [mn_contract_header_dim_adhoc_base,
+            mn_combined_rebate_program_dim_base,
+            mn_payment_package_dim_base]
   hidden: yes
 
   join: mn_est_rebate_pmt_prod_map {
@@ -565,7 +570,7 @@ explore: estimated_rebates_base {
 
   join: mn_contract_header_dim {
     type: left_outer
-#     view_label: "Contract"
+    view_label: "Rebate Contract"
     relationship: many_to_one
     from: mn_contract_header_dim
     sql_on: ${mn_contract_header_dim.contract_wid} =
@@ -578,19 +583,19 @@ explore: estimated_rebates_base {
                      ;;
   }
 
-  join: mn_er_payment_package_dim {
+  join: mn_payment_package_dim {
     type: left_outer
-    view_label: "Estimated Rebate Payment Package"
+    view_label: "Rebate Payment Package"
     relationship: many_to_one
     from: mn_payment_package_dim
-    sql_on: ${mn_est_rebate_payment_fact.pymt_pkg_wid} = ${mn_er_payment_package_dim.pymt_pkg_wid};;
+    sql_on: ${mn_est_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
   }
 
   join: mn_er_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Estimated Rebate Payee"
+    view_label: "Rebate Payment Payee"
     sql_on: ${mn_est_rebate_payment_fact.payee_wid} = ${mn_er_customer_dim.customer_wid};;
   }
 
@@ -598,17 +603,33 @@ explore: estimated_rebates_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Estimated Rebate Benefit Product"
+    view_label: "Rebate Benefit Product"
     sql_on: ${mn_est_rebate_payment_fact.payee_wid} = ${mn_er_product_dim.customer_wid};;
   }
 
-  join: mn_er_combined_rebate_program_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_combined_rebate_program_dim
-    view_label: "Estimated Rebate Program"
-    sql_on: ${mn_est_rebate_pmt_prod_map.program_wid} = ${mn_er_combined_rebate_program_dim.program_wid};;
-  }
+   join: mn_combined_rebate_program_dim {
+     type: left_outer
+     relationship: many_to_one
+     from: mn_combined_rebate_program_dim
+     view_label: "Rebate Program"
+     sql_on: ${mn_est_rebate_pmt_prod_map.program_wid} = ${mn_combined_rebate_program_dim.program_wid};;
+   }
+
+   join: mn_rbt_prg_ben_flat_dim {
+       type: left_outer
+       view_label: "Rebate Program Benefit"
+       relationship: many_to_one
+       from: mn_rbt_prg_ben_flat_dim
+       sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
+   }
+
+   join: mn_erp_payment_fact {
+     type: left_outer
+     relationship: many_to_one
+     from: mn_erp_payment_fact
+     view_label: "ERP Payment Fact"
+     sql_on: ${mn_est_rebate_payment_fact.estimate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
+   }
 }
 
 explore: historical_rebates_base {
