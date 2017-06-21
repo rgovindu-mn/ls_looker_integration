@@ -70,6 +70,7 @@ view: mn_cmpl_commit_fact {
 
   dimension: commitment_value {
     type: number
+    label: "Period Committed Value"
     sql: ${TABLE}.COMMITMENT_VALUE ;;
   }
 

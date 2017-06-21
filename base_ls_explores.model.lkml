@@ -45,12 +45,30 @@ include: "base_mn_est_rebate_pmt_prod_map.view.lkml"
 
 include: "base_mn_customer_ids_dim.view.lkml"
 include: "base_mn_product_eff_attr_fact.view.lkml"
-
 include: "base_mn_mco_submission_dim.view.lkml"
 include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_customer_ids_dim.view.lkml"
-
 include: "base_mn_cmpl_commit_fact.view.lkml"
+
+include: "base_mn_rbt_prg_qual_flat_dim.view.lkml"
+include: "base_mn_rbt_qual_prod_map_all.view.lkml"
+include: "base_mn_rbt_prg_ben_flat_dim.view.lkml"
+include: "base_mn_rbt_ben_prod_map_all.view.lkml"
+include: "base_mn_product_map_all_vers.view.lkml"
+include: "base_mn_product_eff_attr_fact.view.lkml"
+include: "base_mn_rbt_qual_mb_prod_map_all.view.lkml"
+include: "base_mn_market_basket_dim.view.lkml"
+include: "base_mn_product_group_dim.view.lkml"
+include: "base_mn_rbt_prg_qual_elg_cst_map_dt.view.lkml"
+include: "base_mn_rbt_prg_ben_elg_cst_map_dt.view.lkml"
+include: "base_mn_plan_formulary_map.view.lkml"
+include: "base_mn_formulary_dim.view.lkml"
+include: "base_mn_formulary_prod_map.view.lkml"
+include: "base_mn_rebate_prog_prod_map_all.view.lkml"
+include: "base_mn_contract_attr_fact.view.lkml"
+include: "base_mn_mco_util_fact.view.lkml"
+
+
 explore: mn_contract_header_dim_base {
 
   from:  mn_contract_header_dim
@@ -154,7 +172,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_many
     from: mn_customer_cot_dim
-    view_label: "Contract Customer COT"
+    view_label: "Contract Owner COT"
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_ch_cust_cot_dim.customer_wid} ;;
   }
 
@@ -162,10 +180,10 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_cot_dim
-    view_label: "Contract Customer COT"
+    view_label: "Contract Owner COT"
     sql_on: ${mn_ch_cust_cot_dim.cot_wid} = ${mn_ch_cot_dim.cot_wid}
             and ${mn_ch_cust_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
-            and ${mn_ch_cust_cot_dim.eff_end_date} <= ${mn_contract_header_dim.implemented_date} ;;
+            and ${mn_ch_cust_cot_dim.eff_end_date} >= ${mn_contract_header_dim.implemented_date} ;;
   }
 
   join: mn_parent_contract_header_dim {
@@ -673,7 +691,7 @@ explore: estimated_rebates_base {
 
   join: mn_contract_header_dim {
     type: left_outer
-    view_label: "Estimated Rebate Contracts"
+#     view_label: "Contract"
     relationship: many_to_one
     from: mn_contract_header_dim
     sql_on: ${mn_contract_header_dim.contract_wid} =

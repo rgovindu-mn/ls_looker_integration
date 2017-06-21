@@ -364,4 +364,28 @@ view: mn_mco_util_fact {
     drill_fields: [ref_line_id]
   }
 
+  measure: Total_NDC_Unit {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${ndc_quantity} ;;
+  }
+
+  measure: Total_Rx_Quantity {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${rx_quantity} ;;
+  }
+
+  measure: Total_Gross_Revenue {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${list_price} * ${ndc_quantity} ;;
+  }
+
+  measure: Total_Dispensed_Unit {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${cms_quantity} ;;
+  }
+
 }
