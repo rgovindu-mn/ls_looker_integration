@@ -201,6 +201,8 @@ view: mn_payment_package_dim {
 
   dimension: pymt_pkg_wid {
     type: number
+    hidden: yes
+    primary_key: yes
     sql: ${TABLE}.PYMT_PKG_WID ;;
   }
 

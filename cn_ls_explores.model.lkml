@@ -13,9 +13,9 @@ include: "base_mn_rbt_qual_mb_prod_map_all.view.lkml"
 include: "base_mn_market_basket_dim.view.lkml"
 include: "base_mn_product_group_dim.view.lkml"
 
-include: "base_mn_rbt_prg_qual_elg_cust_map_derived.view.lkml"
+include: "base_mn_rbt_prg_qual_elg_cst_map_derived.view.lkml"
 
-include: "base_mn_rbt_prg_ben_elg_cust_map_derived.view.lkml"
+include: "base_mn_rbt_prg_ben_elg_cst_map_derived.view.lkml"
 include: "base_mn_plan_formulary_map.view.lkml"
 include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_formulary_prod_map.view.lkml"
@@ -23,25 +23,6 @@ include: "base_mn_formulary_prod_map.view.lkml"
 include: "base_mn_rebate_prog_prod_map_all.view.lkml"
 
 include: "base_mn_contract_attr_fact.view.lkml"
-
-explore: ben_eligible_plan_map {
-  from: mn_rbt_prg_ben_elg_cust_map
-  view_name: mn_rbt_prg_ben_elg_cust_map
-  label: "Test"
-}
-
-explore: mn_combined_rebate_program_dim {
-  from: mn_combined_rebate_program_dim
-  view_name: mn_combined_rebate_program_dim
-
-  join: mn_rbt_prg_ben_elg_cust_map {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_rbt_prg_ben_elg_cust_map
-    view_label: "Rebate Program Elig Plan"
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_elg_cust_map.program_wid} ;;
-  }
-}
 
 explore: mn_payer_contract {
   label: "Payer Contracts"
@@ -197,36 +178,36 @@ explore: mn_payer_contract {
   }
 
 # ******************** Rebate Program Qualification eligibility
-  join: mn_rbt_prg_qual_elg_cust_map {
+  join: mn_rbt_prg_qual_elg_cst_map_dr {
     type: left_outer
     relationship: many_to_one
-    from: mn_rbt_prg_qual_elg_cust_map
+    from: mn_rbt_prg_qual_elg_cst_map_dr
     view_label: "Rebate Program Qualification Eligible Plan"
-    sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_prg_qual_elg_cust_map.program_qual_wid} ;;
+    sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_prg_qual_elg_cst_map_dr.program_qual_wid} ;;
   }
 
 # ******************** Rebate Program eligibility
-  join: mn_rbt_prg_ben_elg_cust_map {
+  join: mn_rbt_prg_ben_elg_cust_map_dr {
     type: left_outer
     relationship: many_to_one
-    from: mn_rbt_prg_ben_elg_cust_map
-    view_label: "Rebate Program Elig Plan"
-    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_elg_cust_map.program_wid} ;;
+    from: mn_rbt_prg_ben_elg_cst_map_dr
+    view_label: "Rebate Program Eligible Plan"
+    sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_elg_cust_map_dr.program_wid} ;;
   }
 
   join: mn_plan_formulary_map {
     type: left_outer
     relationship: many_to_one
     from: mn_plan_formulary_map
-    view_label: "Rebate Program Elig Plan Formulary"
-    sql_on: ${mn_rbt_prg_ben_elg_cust_map.elig_customer_wid} = ${mn_plan_formulary_map.plan_wid} ;;
+    view_label: "Rebate Program Eligible Plan Formulary"
+    sql_on: ${mn_rbt_prg_ben_elg_cust_map_dr.elig_customer_wid} = ${mn_plan_formulary_map.plan_wid} ;;
   }
 
   join: mn_formulary_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_formulary_dim
-    view_label: "Rebate Program Elig Plan Formulary"
+    view_label: "Rebate Program Eligible Plan Formulary"
     sql_on: ${mn_plan_formulary_map.formulary_wid} = ${mn_formulary_dim.formulary_wid} ;;
   }
 

@@ -626,7 +626,7 @@ explore: historical_rebates_base {
     #fields: [full_name]
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
   }
-  }
+}
 
 explore: rebate_lines_base {
   from: mn_discount_bridge_fact

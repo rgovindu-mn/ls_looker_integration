@@ -3,13 +3,13 @@ view: mn_rebate_prog_prod_map {
 
   dimension: basket_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.BASKET_WID ;;
   }
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
@@ -59,7 +59,7 @@ view: mn_rebate_prog_prod_map {
 
   dimension: eff_end_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_END_DATE_WID ;;
   }
 
@@ -79,7 +79,7 @@ view: mn_rebate_prog_prod_map {
 
   dimension: eff_start_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.EFF_START_DATE_WID ;;
   }
 
@@ -129,7 +129,7 @@ view: mn_rebate_prog_prod_map {
 
   dimension: prod_added_date_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROD_ADDED_DATE_WID ;;
   }
 
@@ -140,7 +140,7 @@ view: mn_rebate_prog_prod_map {
 
   dimension: product_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
@@ -152,7 +152,7 @@ view: mn_rebate_prog_prod_map {
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

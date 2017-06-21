@@ -324,6 +324,7 @@ view: mn_mco_util_fact {
 
   dimension: ref_line_id {
     type: string
+    primary_key: yes
     sql: ${TABLE}.REF_LINE_ID ;;
   }
 

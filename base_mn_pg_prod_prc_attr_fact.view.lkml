@@ -77,6 +77,7 @@ view: mn_pg_prod_prc_attr_fact {
 
   dimension: pg_prod_prc_attr_wid {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PG_PROD_PRC_ATTR_WID ;;
   }

@@ -77,6 +77,7 @@ view: mn_date_dim {
   dimension: date_dim_wid {
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.DATE_DIM_WID ;;
   }
 

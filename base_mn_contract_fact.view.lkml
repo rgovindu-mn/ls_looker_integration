@@ -66,7 +66,6 @@ view: mn_contract_fact {
 
   dimension: contract_wid {
     hidden: yes
-    primary_key: yes
     type: number
     sql: ${TABLE}.CONTRACT_WID ;;
   }

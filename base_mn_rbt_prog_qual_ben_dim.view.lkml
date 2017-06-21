@@ -23,7 +23,7 @@ view: mn_rbt_prog_qual_ben_dim {
 
   dimension: contract_type_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.CONTRACT_TYPE_WID ;;
   }
 
@@ -133,19 +133,20 @@ view: mn_rbt_prog_qual_ben_dim {
 
   dimension: program_qual_ben_wid {
     hidden: yes
-    type: string
+    primary_key: yes
+    type: number
     sql: ${TABLE}.PROGRAM_QUAL_BEN_WID ;;
   }
 
   dimension: program_wid {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.PROGRAM_WID ;;
   }
 
   dimension: run_id {
     hidden: yes
-    type: string
+    type: number
     sql: ${TABLE}.RUN_ID ;;
   }
 

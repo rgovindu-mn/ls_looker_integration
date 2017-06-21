@@ -203,6 +203,7 @@ view: mn_pg_product_pricing_fact {
 
   dimension: pg_prod_pricing_wid {
     hidden:  yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PG_PROD_PRICING_WID ;;
   }

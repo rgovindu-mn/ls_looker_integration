@@ -5,9 +5,16 @@ view: mn_rebate_program_sd_rpt {
   label: "Rebate Program"
 
   dimension: accrual_customer_wid {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.ACCRU_CUST_WID ;;
+  }
+
+  dimension: rbt_strategy_rpt_wid {
+    type: number
+    hidden: yes
+    primary_key: yes
+    sql: ${TABLE}.RBT_STRATEGY_RPT_WID ;;
   }
 
   dimension: accrual_rate {
@@ -16,7 +23,7 @@ view: mn_rebate_program_sd_rpt {
   }
 
   dimension: accrual_type_wid {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.ACCRU_TYPE_WID ;;
   }
@@ -28,7 +35,7 @@ view: mn_rebate_program_sd_rpt {
   }
 
   dimension: customer_wid {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.CUSTOMER_WID ;;
   }
@@ -45,19 +52,19 @@ view: mn_rebate_program_sd_rpt {
   }
 
   dimension: payment_type_wid {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.PAYMENT_TYPE_WID ;;
   }
 
   dimension: pmt_mth_type_wid {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.PMT_MTH_TYPE_WID ;;
   }
 
   dimension: program_type_wid {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.PROGRAM_TYPE_WID ;;
   }

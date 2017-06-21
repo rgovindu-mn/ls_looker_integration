@@ -45,6 +45,7 @@ view: mn_pmt_mth_type_dim {
 
   dimension: pmt_mth_type_wid {
     hidden:  yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.PMT_MTH_TYPE_WID ;;
   }

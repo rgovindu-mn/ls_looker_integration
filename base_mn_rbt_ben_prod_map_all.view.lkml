@@ -198,16 +198,15 @@ view: mn_rbt_ben_prod_map_all {
     sql: ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
   }
 
-#   measure: count {
-#     type: count
-#     drill_fields: [detail*]
-#   }
+  measure: no_of_benefit_products {
+    type: sum
+    sql: CASE WHEN (${TABLE}.PRODUCT_WID) IS NULL OR ${TABLE}.EXCLUDED_FLAG = 'Y') THEN 0 ELSE 1 END ;;
+    label: "# of Benefit Products"
+    drill_fields: [detail*]
+  }
 
   set: detail {
     fields: [
-      excluded_flag,
-      included_from_ctrt_flag,
-      included_from_pg_flag,
       mco_pp_cap_perc,
       mco_pp_threshold_perc,
       mco_pp_total_disc_cap_perc,

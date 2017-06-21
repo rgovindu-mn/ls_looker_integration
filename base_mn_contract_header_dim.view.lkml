@@ -583,5 +583,18 @@ view: mn_contract_header_dim {
   measure: no_of_contracts {
     type: count
     drill_fields: [contract_name]
+    label: "# of Contracts"
+  }
+
+  measure: contract_count {
+    type: count_distinct
+    sql: ${TABLE}.CONTRACT_WID ;;
+    label: "Contract Count"
+  }
+
+  measure: no_of_contracted_customers {
+    type: sum
+    sql: CASE WHEN ${TABLE}.OWNER_WID IS NULL THEN 0 ELSE 1 ;;
+    label: "# of Contracted Customers"
   }
 }

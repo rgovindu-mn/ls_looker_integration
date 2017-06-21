@@ -88,6 +88,7 @@ view: mn_rbt_prg_qual_flat_dim {
     group_label: "Qualification"
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.PROGRAM_QUAL_WID ;;
   }
 
