@@ -444,16 +444,16 @@ explore: provider_historical_rebates {
 explore: provider_combined{
   label: "Provider Combined Model"
   extends: [mn_combined_sale_fact
-            # mn_combined_rebate_program_dim_base,
-            # mn_payment_package_dim_base,
-            # mn_rebate_payment_fact_base,
-            # mn_paid_rebate_lines_base
+            ,mn_rbt_ctrt_header_dim_base
+            ,mn_combined_rebate_program_dim_base
+            ,mn_payment_package_dim_base
+            ,mn_rebate_payment_fact_base
             ]
   hidden: no
 
   # sql_always_where: ;;
-  # from:  mn_combined_sale_fact
-  # view_name: mn_combined_sale_fact
+  from:  mn_combined_sale_fact
+  view_name: mn_combined_sale_fact
 
   join: mn_discount_bridge_fact {
     type: left_outer
@@ -484,7 +484,7 @@ explore: provider_combined{
 
   join: mn_payment_package_dim {
     type: left_outer
-    view_label: "Rebate Payment Package"
+    view_label: "Payment Package"
     relationship: many_to_one
     from: mn_payment_package_dim
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
@@ -514,6 +514,14 @@ explore: provider_combined{
     sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
   }
 
+  join: mn_rbt_ctrt_header_dim {
+    from: mn_contract_header_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Contract"
+    #fields: [contract_number]
+    sql_on: ${mn_rbt_ctrt_header_dim.parent_contract_wid} = ${mn_combined_rebate_program_dim.contract_wid};;
+  }
 
 }
 
