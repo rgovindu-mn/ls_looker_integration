@@ -5,6 +5,7 @@ explore: payer_combined {
   label: "Payer Combined Model"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
+  view_label: "Rebate Lines"
   extends: [mn_payer_rebate_lines,mn_mco_util_fact]
   hidden: no
 
