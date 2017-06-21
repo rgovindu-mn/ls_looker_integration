@@ -14,6 +14,7 @@ view: mn_cmpl_period_fact {
 
   dimension: attained_tier {
     type: number
+    label: "Period Attained Tier"
     sql: ${TABLE}.ATTAINED_TIER ;;
   }
 
@@ -24,12 +25,14 @@ view: mn_cmpl_period_fact {
 
   dimension: commit_tier {
     type: number
+    label: "Period Committed Tier"
     sql: ${TABLE}.COMMIT_TIER ;;
   }
 
   dimension: commit_ver_num {
     type: number
     sql: ${TABLE}.COMMIT_VER_NUM ;;
+    hidden: yes
   }
 
   dimension: contract_wid {
@@ -192,6 +195,7 @@ view: mn_cmpl_period_fact {
 
   dimension: period_num {
     type: string
+    label: "Compliance Period Number"
     sql: ${TABLE}.PERIOD_NUM ;;
   }
 
@@ -223,6 +227,7 @@ view: mn_cmpl_period_fact {
 
   dimension: period_status {
     type: string
+    label: "Period Status"
     sql: ${TABLE}.PERIOD_STATUS ;;
   }
 
@@ -361,6 +366,7 @@ view: mn_cmpl_period_fact {
 
   dimension: review_status {
     type: string
+    label: "Period Review Status"
     sql: ${TABLE}.REVIEW_STATUS ;;
   }
 
@@ -472,4 +478,5 @@ view: mn_cmpl_period_fact {
     value_format_name: decimal_0
     sql: ${expected_amt_to_date} ;;
   }
+
 }
