@@ -926,74 +926,73 @@ explore: commercial_compliance {
   view_label: "Commitments"
   sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1  ;;
 
-    join: mn_product_group_dim {
-      type: inner
-      relationship: many_to_one
-      from: mn_product_group_dim
-      view_label: "Pricing Program"
-      sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
-    }
+  join: mn_product_group_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+              AND
+              ${mn_product_group_dim.latest_flag} = 'Y'
+              ;;
+  }
 
-    join: mn_contract_header_dim {
-      type: inner
-      relationship: many_to_one
-      from: mn_contract_header_dim
-      view_label: "Contract"
-      sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
-                AND
-                ${mn_contract_header_dim.latest_flag} = 'Y'
-                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
-                    ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
-                ;;
-    }
+  join: mn_contract_header_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_contract_header_dim
+    view_label: "Contract"
+    sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
+              AND
+              ${mn_contract_header_dim.latest_flag} = 'Y'
+                  and ${mn_ctrt_type_dim.ctrt_type_name} IN
+                  ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
+              ;;
+  }
 
- # sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
-#                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
- #                   ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
 
-      join: mn_cmt_type_dim {
-        type: left_outer
-        relationship: many_to_one
-        from: mn_cmt_type_dim
-        view_label: "Commitments"
-        sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
-        fields:[cmt_type_name]
+  join: mn_cmt_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmt_type_dim
+    view_label: "Commitments"
+    sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
+    fields:[cmt_type_name]
 
-      }
+  }
 
-      join: mn_distrib_mthd_dim {
-        view_label: "Contract"
-        fields: [dist_method_name]
+  join: mn_distrib_mthd_dim {
+    view_label: "Contract"
+    fields: [dist_method_name]
 
-      }
+  }
 
-      join: committed_customer {
-        type: left_outer
-        relationship: many_to_one
-        from: mn_customer_commit_dim_ext
-        view_label: "Commitments"
-        sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
-      }
+  join: committed_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_commit_dim_ext
+    view_label: "Commitments"
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
+  }
 
-      join: mn_cmt_change_reason_dim {
-        type: left_outer
-        relationship: many_to_one
-        from: mn_cmt_change_reason_dim
-        view_label: "Commitments"
-        fields: [cmt_change_code_name]
-        sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
+  join: mn_cmt_change_reason_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmt_change_reason_dim
+    view_label: "Commitments"
+    fields: [cmt_change_code_name]
+    sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
 
-      }
+  }
 
   join: mn_cmpl_period_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
-    #fields: [ALL_FIELDS*]
     sql_on: ${mn_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
-              AND
-              ${mn_cmpl_commit_fact.commit_status} <> 'Terminated'
+            --  AND ${mn_cmpl_commit_fact.commit_status} <> 'Terminated'
+              AND ${mn_cmpl_period_fact.hidden_flag} = 'N'
               ;;
   }
 
