@@ -1050,5 +1050,20 @@ explore: commercial_compliance {
     sql_on: ${mn_cmpl_period_fact.period_wid} = ${mn_cmpl_per_lines_fact.period_wid} ;;
   }
 
+  join: ship_to_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Compliance Bucket Line - Ship To Customer"
+    sql_on: ${mn_cmpl_per_lines_fact.sale_ship_to_cust_wid} = ${ship_to_customer.customer_wid};;
+  }
+
+  join: sold_to_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Compliance Bucket Line - Sold To Customer"
+    sql_on: ${mn_cmpl_per_lines_fact.sale_sold_to_cust_wid}_to_cust_wid} = ${ship_to_customer.customer_wid};;
+  }
 
 } # end of commercial_compliance explore
