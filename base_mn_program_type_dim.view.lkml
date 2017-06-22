@@ -67,6 +67,7 @@ view: mn_program_type_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [program_type_name]
   }

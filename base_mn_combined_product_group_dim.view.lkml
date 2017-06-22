@@ -98,6 +98,7 @@ view: mn_combined_product_group_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [detail*]
   }

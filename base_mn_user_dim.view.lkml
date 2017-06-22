@@ -2,27 +2,32 @@ view: mn_user_dim {
   sql_table_name: MN_USER_DIM_VW ;;
 
   dimension: address_line1 {
+    hidden: yes
     type: string
     sql: ${TABLE}.ADDRESS_LINE1 ;;
   }
 
   dimension: address_line2 {
+    hidden: yes
     type: string
     sql: ${TABLE}.ADDRESS_LINE2 ;;
   }
 
   dimension: address_line3 {
+    hidden: yes
     type: string
     sql: ${TABLE}.ADDRESS_LINE3 ;;
   }
 
   dimension: address_line4 {
+    hidden: yes
     type: string
     sql: ${TABLE}.ADDRESS_LINE4 ;;
   }
 
   dimension: full_address {
     type: string
+    label: "Address"
     sql: ${address_line1}||' '||${address_line2}||' '||${address_line3}||' '||${address_line4} ;;
   }
 
@@ -72,16 +77,19 @@ view: mn_user_dim {
   }
 
   dimension: first_name {
+    hidden: yes
     type: string
     sql: ${TABLE}.FNAME ;;
   }
 
   dimension: full_name {
     type: string
+    label: "Name"
     sql: ${TABLE}.FNAME ||' '||${TABLE}.LNAME;;
   }
 
   dimension: last_name {
+    hidden: yes
     type: string
     sql: ${TABLE}.LNAME ;;
   }
@@ -97,6 +105,7 @@ view: mn_user_dim {
   }
 
   dimension: pwd {
+    hidden: yes
     type: string
     hidden: yes
     sql: ${TABLE}.PWD ;;
@@ -158,6 +167,7 @@ view: mn_user_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [first_name, member_name, last_name]
   }

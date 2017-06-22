@@ -2,6 +2,7 @@ view: mn_distrib_mthd_dim {
   sql_table_name: MN_DISTRIB_MTHD_DIM_VW ;;
 
   dimension_group: date_created {
+    hidden: yes
     type: time
     hidden: yes
     timeframes: [
@@ -17,6 +18,7 @@ view: mn_distrib_mthd_dim {
   }
 
   dimension_group: date_updated {
+    hidden: yes
     type: time
     hidden: yes
     timeframes: [
@@ -47,7 +49,6 @@ view: mn_distrib_mthd_dim {
     hidden: yes
     primary_key: yes
     type: number
-
     sql: ${TABLE}.DIST_METHOD_WID ;;
   }
 

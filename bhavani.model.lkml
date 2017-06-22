@@ -4,7 +4,7 @@ include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
 
-explore: mn_mco_util_fact {
+explore: payer_utilization {
   label: "Payer Utilization"
   from: mn_mco_util_fact
   view_name: mn_mco_util_fact
@@ -103,7 +103,7 @@ explore: mn_mco_util_fact {
 
 # Adhoc base explore for Discount Bridge fact with all needed joins
 
-explore: mn_payer_rebate_lines {
+explore: payer_rebate {
   label: "Payer Rebates"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
@@ -113,14 +113,14 @@ explore: mn_payer_rebate_lines {
   hidden: no
 
   sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
-    upper(${mn_discount_bridge_fact.rebate_module_type}) = 'MCO') and  ${mn_discount_bridge_fact.is_historical_flag}='N';;
+    upper(${mn_discount_bridge_fact.rebate_module_type}) = 'MCO') ;;
 
   join: mn_rebate_payment_fact {
     from: mn_rebate_payment_fact
     view_label: "Rebate Payment"
     type: left_outer
     relationship: many_to_one
-    sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
 #     fields: []
   }
 

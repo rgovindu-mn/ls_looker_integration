@@ -539,9 +539,10 @@ explore: provider_rebates{
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
+  always_join: [mn_rebate_payment_fact]
 
   join: mn_combined_rebate_program_dim {
-    type: left_outer
+    type: inner
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
@@ -550,7 +551,7 @@ explore: provider_rebates{
   }
 
   join: mn_rebate_payment_fact {
-    type: left_outer
+    type: inner
     view_label: "Rebate Payment"
     relationship: many_to_one
     from: mn_rebate_payment_fact
@@ -559,7 +560,7 @@ explore: provider_rebates{
 
   join: mn_payment_package_dim {
     type: left_outer
-    view_label: "Rebate Payment Package"
+    view_label: "Payment Package"
     relationship: many_to_one
     from: mn_payment_package_dim
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
@@ -567,7 +568,7 @@ explore: provider_rebates{
 
   join: mn_discount_bridge_fact {
     type: left_outer
-    view_label: "Rebate Line"
+    view_label: "Benefit Line"
     relationship: many_to_one
     from: mn_discount_bridge_fact
     sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}
@@ -595,11 +596,36 @@ explore: provider_rebates{
     type: left_outer
     relationship: many_to_one
     from: mn_erp_payment_fact
-    view_label: "ERP Payment Fact"
+    view_label: "ERP Payment"
     sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
   }
 
   ### This Part is to modify views retrieved through extending
+
+  join: mn_rl_product_dim {
+    view_label: "Product"
+  }
+
+  join: rpf_rebate_payment_payee {
+    view_label: "Payee"
+  }
+
+  join: mn_rl_shipto_customer_dim {
+    view_label: "Benefit Line Ship To Customer"
+  }
+
+  join: rl_ship_to_customer_ids {
+    view_label: "Benefit Line Ship To Customer"
+  }
+
+  join: mn_rl_soldto_customer_dim {
+    view_label: "Benefit Line Sold To Customer"
+  }
+
+  join: rl_sold_to_customer_ids {
+    view_label: "Benefit Line Sold To Customer"
+  }
+
   join: mn_ctrt_status_dim {
     view_label: "Rebate Contract"
   }
@@ -664,7 +690,7 @@ explore: provider_estimated_rebates{
 
   #This part is for renaming or limitting fields
   join: mn_est_rebate_pmt_prod_map {
-    fields: []
+    view_label: "Estimated Payments Product Map"
   }
 
   join: mn_ctrt_status_dim {
@@ -726,6 +752,15 @@ explore: provider_estimated_rebates{
   join: mn_er_product_dim {
     view_label: "Product"
   }
+
+  join: mn_payment_package_dim {
+    view_label: "Payment Package"
+  }
+
+
+ join: mn_erp_payment_fact {
+   view_label: "ERP Payment"
+ }
 
 }
 
@@ -925,74 +960,77 @@ explore: commercial_compliance {
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
 
-  sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1  ;;
+  sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1
+                    and
+                    ${mn_ctrt_type_dim.ctrt_type_name} IN
+                      ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
+                    ;;
 
-    join: mn_product_group_dim {
-      type: inner
-      relationship: many_to_one
-      from: mn_product_group_dim
-      view_label: "Pricing Program"
-      sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid};;
-    }
+  join: mn_product_group_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_product_group_dim
+    view_label: "Pricing Program"
+    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+              AND
+              ${mn_product_group_dim.latest_flag} = 'Y'
+              ;;
+  }
 
-    join: mn_contract_header_dim {
-      type: inner
-      relationship: many_to_one
-      from: mn_contract_header_dim
-      view_label: "Contract"
-      sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
-    }
+  join: mn_contract_header_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_contract_header_dim
+    view_label: "Contract"
+    sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
+              AND ${mn_contract_header_dim.latest_flag} = 'Y'
+              ;;
+  }
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
-                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
-                    ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
+  join: mn_cmt_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmt_type_dim
+    view_label: "Commitments"
+    sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
+    fields:[cmt_type_name]
 
-      join: mn_cmt_type_dim {
-        type: left_outer
-        relationship: many_to_one
-        from: mn_cmt_type_dim
-        view_label: "Commitments"
-        sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
-        fields:[cmt_type_name]
+  }
 
-      }
+  join: mn_distrib_mthd_dim {
+    view_label: "Contract"
+    fields: [dist_method_name]
 
-      join: mn_distrib_mthd_dim {
-        view_label: "Contract"
-        fields: [dist_method_name]
+  }
 
-      }
+  join: committed_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_commit_dim_ext
+    view_label: "Commitments"
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
+  }
 
-      join: committed_customer {
-        type: left_outer
-        relationship: many_to_one
-        from: mn_customer_commit_dim_ext
-        view_label: "Commitments"
-        sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
-      }
+  join: mn_cmt_change_reason_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmt_change_reason_dim
+    view_label: "Commitments"
+    fields: [cmt_change_code_name]
+    sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
 
-      join: mn_cmt_change_reason_dim {
-        type: left_outer
-        relationship: many_to_one
-        from: mn_cmt_change_reason_dim
-        view_label: "Commitments"
-        fields: [cmt_change_code_name]
-        sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
-
-      }
+  }
 
   join: mn_cmpl_period_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
-    #fields: [ALL_FIELDS*]
     sql_on: ${mn_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
-              AND
-              ${mn_cmpl_commit_fact.commit_status} <> 'Terminated'
+              AND ${mn_cmpl_period_fact.hidden_flag} = 'N'
               ;;
   }
 
-
+# use base_mn_product_eff_attr_fact_ext to create multi level label groupping
 
 }

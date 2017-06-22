@@ -86,6 +86,7 @@ view: mn_org_dim {
   }
 
   measure: org_count {
+    hidden: yes
     group_label: "Org"
     type: count
     drill_fields: [org_name, org_display_name]

@@ -86,6 +86,7 @@ view: mn_cot_dim {
   }
 
   measure: cot_count {
+    hidden: yes
     type: count
     drill_fields: []
   }

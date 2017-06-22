@@ -557,6 +557,7 @@ view: mn_product_map_all_ver {
   }
 
   measure: prod_hierarchy_count {
+    hidden: yes
     type: count
     drill_fields: [level0_product_wid]
   }

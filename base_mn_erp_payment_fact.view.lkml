@@ -162,6 +162,7 @@ view: mn_erp_payment_fact {
 
   measure: total_erp_payment_amount {
     type: sum
+    label: "ERP Payment Amount"
     value_format_name: decimal_0
     sql: ${payment_amount} ;;
   }

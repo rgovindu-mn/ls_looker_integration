@@ -16,7 +16,7 @@ view: mn_contract_header_dim {
 
   dimension: amended_flag {
     type: string
-    sql: ${TABLE}.AMENDED_FLAG ;;
+    sql:  ${TABLE}.AMENDED_FLAG;;
   }
 
   dimension: amendment_count {
@@ -580,11 +580,11 @@ view: mn_contract_header_dim {
     sql:  ${TABLE}.value ;;
   }
 
-  measure: no_of_contracts {
-    type: count
-    drill_fields: [contract_name]
-    label: "# of Contracts"
-  }
+  # measure: no_of_contracts {
+  #   type: count
+  #   drill_fields: [contract_name]
+  #   label: "# of Contracts"
+  # }
 
   measure: contract_count {
     type: count_distinct

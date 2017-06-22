@@ -399,21 +399,23 @@ view: mn_discount_bridge_fact {
     drill_fields: []
   }
 
-  measure: total_rebate_line_paid_amount {
+  measure: total_rebate_paid_amount {
     type: sum
-    label: "Total Benefit Line Paid Amount"
+    label: "Total Rebate Paid Amount"
     value_format_name: decimal_0
     sql: ${paid_amt} ;;
   }
 
   measure: external_invoive_amount {
     type: sum
+    label: "Total Rebate Invoice Amount"
     value_format_name: decimal_0
     sql: ${external_inv_amt} ;;
   }
 
   measure: total_external_invoice_quantity {
     type: sum
+    label: "Total Rebate Invoice Quantity"
     value_format_name: decimal_0
     sql: TO_NUMBER(${external_invoice_qty}) ;;
   }

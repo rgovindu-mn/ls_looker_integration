@@ -126,6 +126,7 @@ view: mn_combined_rebate_program_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [detail*]
   }
