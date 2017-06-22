@@ -1033,4 +1033,13 @@ explore: commercial_compliance {
 
 # use base_mn_product_eff_attr_fact_ext to create multi level label groupping
 
+  join: mn_cmpl_period_pkg_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_cmpl_period_pkg_dim
+    view_label: "Period"
+    fields: [period_pkg_id_num, period_pkg_name]
+    sql_on: ${mn_cmpl_period_fact.period_pkg_wid} = ${mn_cmpl_period_pkg_dim.cmpl_period_pkg_wid} ;;
+  }
+
 }
