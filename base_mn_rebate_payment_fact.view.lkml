@@ -140,13 +140,14 @@ view: mn_rebate_payment_fact {
     sql: ${TABLE}.NET_DUE_AMT_BASE ;;
   }
 
-  dimension: net_due_cur {
-    type: number
+  dimension: net_due_currency {
+    type: string
     sql: ${TABLE}.NET_DUE_CUR ;;
   }
 
   dimension: org_wid {
-    type: number
+    type:  number
+    hidden: yes
     sql: ${TABLE}.ORG_WID ;;
   }
 
@@ -207,7 +208,7 @@ view: mn_rebate_payment_fact {
     sql: ${TABLE}.PAYMENT_AMT_BASE ;;
   }
 
-  dimension: payment_amount_cur {
+  dimension: payment_amount_currency {
     type: string
     sql: ${TABLE}.PAYMENT_AMT_CUR ;;
   }
@@ -232,7 +233,7 @@ view: mn_rebate_payment_fact {
     sql: ${TABLE}.PMT_DUE_STATUS_DATE_WID ;;
   }
 
-  dimension: pmt_priority {
+  dimension: payment_priority {
     type: string
     sql: ${TABLE}.PMT_PRIORITY ;;
   }
@@ -283,7 +284,7 @@ view: mn_rebate_payment_fact {
     sql: ${TABLE}.REBATE_DUE_AMT_BASE ;;
   }
 
-  dimension: rebate_due_cur {
+  dimension: rebate_due_currency {
     type: string
     sql: ${TABLE}.REBATE_DUE_CUR ;;
   }
@@ -330,7 +331,7 @@ view: mn_rebate_payment_fact {
     sql: ${TABLE}.REVERSED_DUE_AMT_BASE ;;
   }
 
-  dimension: reversed_due_amount_curr {
+  dimension: reversed_due_amount_currency {
     type: number
     sql: ${TABLE}.REVERSED_DUE_AMT_CURR ;;
   }
@@ -405,8 +406,8 @@ view: mn_rebate_payment_fact {
     sql: ${TABLE}.TOTAL_ACCRUED_AMT_BASE ;;
   }
 
-  dimension: total_accrued_amount_cur {
-    type: number
+  dimension: total_accrued_amount_currency {
+    type: string
     sql: ${TABLE}.TOTAL_ACCRUED_AMT_CUR ;;
   }
 

@@ -32,6 +32,7 @@ view: mn_erp_payment_fact {
   }
 
   dimension_group: erp_pmt {
+    label: "ERP Payment Date"
     type: time
     timeframes: [
       raw,
@@ -53,16 +54,19 @@ view: mn_erp_payment_fact {
 
   dimension: erp_pmt_id_num {
     type: string
+    label: "ERP Payment ID"
     sql: ${TABLE}.ERP_PMT_ID_NUM ;;
   }
 
   dimension: erp_pmt_method {
     type: string
+    label: "ERP Payment Method"
     sql: ${TABLE}.ERP_PMT_METHOD ;;
   }
 
   dimension: erp_pmt_type {
     type: string
+    label: "ERP Payment type"
     sql: ${TABLE}.ERP_PMT_TYPE ;;
   }
 
@@ -74,6 +78,7 @@ view: mn_erp_payment_fact {
   }
 
   dimension_group: erp_process {
+    label: "ERP Process Date"
     type: time
     timeframes: [
       raw,
@@ -105,23 +110,24 @@ view: mn_erp_payment_fact {
     sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
   }
 
-  dimension: payment_amt {
+  dimension: payment_amount {
     type: string
     sql: ${TABLE}.PAYMENT_AMT ;;
   }
 
-  dimension: payment_amt_base {
+  dimension: payment_amount_base {
     type: string
     sql: ${TABLE}.PAYMENT_AMT_BASE ;;
   }
 
-  dimension: payment_amt_curr {
+  dimension: payment_amount_currency {
     type: string
     sql: ${TABLE}.PAYMENT_AMT_CURR ;;
   }
 
   dimension: pkg_id_num {
     type: string
+    label: "ERP Package ID"
     sql: ${TABLE}.PKG_ID_NUM ;;
   }
 
@@ -154,11 +160,11 @@ view: mn_erp_payment_fact {
     drill_fields: []
   }
 
-  measure: total_erp_payment_amount_base {
+  measure: total_erp_payment_amount {
     type: sum
     label: "ERP Payment Amount"
     value_format_name: decimal_0
-    sql: ${payment_amt_base} ;;
+    sql: ${payment_amount} ;;
   }
 
 }

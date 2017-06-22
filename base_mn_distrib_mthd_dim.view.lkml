@@ -4,6 +4,7 @@ view: mn_distrib_mthd_dim {
   dimension_group: date_created {
     hidden: yes
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -19,6 +20,7 @@ view: mn_distrib_mthd_dim {
   dimension_group: date_updated {
     hidden: yes
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -33,7 +35,7 @@ view: mn_distrib_mthd_dim {
 
   dimension: dist_method_desc {
     type: string
-    label: "Distribution Method Desc"
+    label: "Distribution Method Description"
     sql: ${TABLE}.DIST_METHOD_DESC ;;
   }
 

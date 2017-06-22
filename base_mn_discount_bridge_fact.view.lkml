@@ -417,6 +417,6 @@ view: mn_discount_bridge_fact {
     type: sum
     label: "Total Rebate Invoice Quantity"
     value_format_name: decimal_0
-    sql: ${external_invoice_qty} ;;
+    sql: TO_NUMBER(${external_invoice_qty}) ;;
   }
 }

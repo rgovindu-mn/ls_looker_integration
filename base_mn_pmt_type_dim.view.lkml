@@ -62,6 +62,7 @@ view: mn_pmt_type_dim {
 
   dimension: src_sys_pmt_type_code {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_PMT_TYPE_CODE ;;
   }
 

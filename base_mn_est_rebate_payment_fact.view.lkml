@@ -15,7 +15,7 @@ view: mn_est_rebate_payment_fact {
     sql: ${TABLE}.APPLIED_DUE_CUSTOMER_DATE ;;
   }
 
-  dimension_group: calc_due_customer {
+  dimension_group: calculated_due_customer {
     type: time
     timeframes: [
       raw,

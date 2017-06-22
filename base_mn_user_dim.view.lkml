@@ -76,7 +76,7 @@ view: mn_user_dim {
     sql: ${TABLE}.EXTERNAL_SEGMENT ;;
   }
 
-  dimension: fname {
+  dimension: first_name {
     hidden: yes
     type: string
     sql: ${TABLE}.FNAME ;;
@@ -88,7 +88,7 @@ view: mn_user_dim {
     sql: ${TABLE}.FNAME ||' '||${TABLE}.LNAME;;
   }
 
-  dimension: lname {
+  dimension: last_name {
     hidden: yes
     type: string
     sql: ${TABLE}.LNAME ;;
@@ -107,6 +107,7 @@ view: mn_user_dim {
   dimension: pwd {
     hidden: yes
     type: string
+    hidden: yes
     sql: ${TABLE}.PWD ;;
   }
 
@@ -148,7 +149,7 @@ view: mn_user_dim {
     sql: ${TABLE}.SRC_SYS_USER_ID ;;
   }
 
-  dimension: state_prov {
+  dimension: state_province {
     type: string
     sql: ${TABLE}.STATE_PROV ;;
   }
@@ -168,7 +169,7 @@ view: mn_user_dim {
   measure: count {
     hidden: yes
     type: count
-    drill_fields: [fname, member_name, lname]
+    drill_fields: [first_name, member_name, last_name]
   }
 
   set: mn_user_all_visible_fields  {
@@ -176,14 +177,14 @@ view: mn_user_dim {
                     city,
                     country,
                     external_segment,
-                    fname,
+                    first_name,
                     full_name,
-                    lname,
+                    last_name,
                     member_name,
                     postal_zip,
                     pwd,
                     salutation,
-                    state_prov,
+                    state_province,
                     title,
                     count
             ]
