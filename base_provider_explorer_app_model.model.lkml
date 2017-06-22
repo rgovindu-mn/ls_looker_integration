@@ -959,7 +959,6 @@ explore: commercial_compliance {
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
-
   sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1  ;;
 
     join: mn_product_group_dim {
@@ -975,12 +974,17 @@ explore: commercial_compliance {
       relationship: many_to_one
       from: mn_contract_header_dim
       view_label: "Contract"
-      sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
+      sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
+                AND
+                ${mn_contract_header_dim.latest_flag} = 'Y'
+                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
+                    ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
+                ;;
     }
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
-                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
-                    ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
+ # sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
+#                    and ${mn_ctrt_type_dim.ctrt_type_name} IN
+ #                   ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
 
       join: mn_cmt_type_dim {
         type: left_outer
@@ -1028,6 +1032,6 @@ explore: commercial_compliance {
               ;;
   }
 
-
+# use base_mn_product_eff_attr_fact_ext to create multi level label groupping
 
 }
