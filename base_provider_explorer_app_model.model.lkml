@@ -1022,7 +1022,7 @@ explore: commercial_compliance {
   }
 
   join: mn_cmpl_period_fact {
-    type: left_outer
+    type: inner
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
@@ -1033,4 +1033,37 @@ explore: commercial_compliance {
 
 # use base_mn_product_eff_attr_fact_ext to create multi level label groupping
 
-}
+  join: mn_cmpl_period_pkg_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_cmpl_period_pkg_dim
+    view_label: "Period"
+    fields: [period_pkg_id_num, period_pkg_name, period_pkg_status]
+    sql_on: ${mn_cmpl_period_fact.period_pkg_wid} = ${mn_cmpl_period_pkg_dim.cmpl_period_pkg_wid} ;;
+  }
+
+  join: mn_cmpl_per_lines_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmpl_per_lines_fact
+    view_label: "Compliance Bucket Line"
+    sql_on: ${mn_cmpl_period_fact.period_wid} = ${mn_cmpl_per_lines_fact.period_wid} ;;
+  }
+
+  join: ship_to_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Compliance Bucket Line - Ship To Customer"
+    sql_on: ${mn_cmpl_per_lines_fact.sale_ship_to_cust_wid} = ${ship_to_customer.customer_wid};;
+  }
+
+  join: sold_to_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Compliance Bucket Line - Sold To Customer"
+    sql_on: ${mn_cmpl_per_lines_fact.sale_sold_to_cust_wid}_to_cust_wid} = ${ship_to_customer.customer_wid};;
+  }
+
+} # end of commercial_compliance explore

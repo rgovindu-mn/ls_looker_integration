@@ -150,7 +150,7 @@ view: mn_cmpl_period_fact {
     sql: ${TABLE}.ORG_WID ;;
   }
 
-  dimension_group: over_tier_chg {
+  dimension_group: override_tier_change {
     type: time
     timeframes: [
       raw,
@@ -426,7 +426,7 @@ view: mn_cmpl_period_fact {
     sql: ${TABLE}.STRATEGY_BASED_FLAG ;;
   }
 
-  dimension_group: sugg_tier_chg {
+  dimension_group: suggested_tier_change {
     type: time
     timeframes: [
       raw,
@@ -442,6 +442,7 @@ view: mn_cmpl_period_fact {
 
   dimension: tier_change_type {
     type: string
+    label: "Period Tier Change Type"
     sql: ${TABLE}.TIER_CHANGE_TYPE ;;
   }
 
@@ -457,6 +458,7 @@ view: mn_cmpl_period_fact {
 
   dimension: tier_reason_code {
     type: string
+    label: "Period Tier Override Reason"
     sql: ${TABLE}.TIER_REASON_CODE ;;
   }
 
