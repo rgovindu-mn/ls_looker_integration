@@ -113,6 +113,7 @@ view: mn_formulary_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [formulary_name]
   }

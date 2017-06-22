@@ -120,7 +120,7 @@ explore: payer_rebate {
     view_label: "Rebate Payment"
     type: left_outer
     relationship: many_to_one
-    sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
 #     fields: []
   }
 

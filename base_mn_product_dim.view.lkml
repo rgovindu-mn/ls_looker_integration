@@ -339,6 +339,7 @@ view: mn_product_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [product_name, drug_category_name, thera_code_name]
   }

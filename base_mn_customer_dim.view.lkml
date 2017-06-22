@@ -245,6 +245,7 @@ view: mn_customer_dim {
   }
 
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [customer_name]
   }

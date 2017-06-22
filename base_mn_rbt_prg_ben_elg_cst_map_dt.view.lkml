@@ -36,8 +36,7 @@ view: mn_rbt_prg_ben_elg_cst_map_dt {
     hidden: yes
     type: string
     primary_key: yes
-    sql: '1' ;;
-#     sql: ${TABLE}.PROGRAM_WID ||'-'|| ${TABLE}.ELIG_CUSTOMER_WID ||'-'||${TABLE}.ELIG_START_DATE ||'-'|| ${TABLE}.ELIG_END_DATE ;;
+    sql: ${TABLE}.PROGRAM_WID ||'-'|| ${TABLE}.ELIG_CUSTOMER_WID ||'-'||${TABLE}.ELIG_START_DATE ||'-'|| ${TABLE}.ELIG_END_DATE ;;
   }
 
   dimension: program_wid {
