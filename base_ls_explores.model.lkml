@@ -680,7 +680,7 @@ explore: mn_paid_rebate_lines_base {
 explore: estimated_rebates_base {
   from:  mn_est_rebate_payment_fact
   view_name: mn_est_rebate_payment_fact
-  view_label:"Estimated Rebate Payments"
+  view_label:"Estimated Payments"
   extends: [mn_contract_header_dim_adhoc_base,
             mn_combined_rebate_program_dim_base,
             mn_payment_package_dim_base]
@@ -762,14 +762,14 @@ explore: historical_rebates_base {
   label: "Historical Rebates"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
-  view_label: "Historical Rebate Lines"
+  view_label: "Historical Rebates"
   hidden: yes
 
   join: mn_hr_soldto_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Sold To Customer"
+    view_label: "Rebate Sold To Customer"
     #fields: [full_name]
     sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
   }
@@ -778,7 +778,7 @@ explore: historical_rebates_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Bill To Customer"
+    view_label: "Rebate Bill To Customer"
     #fields: [full_name]
     sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
   }
