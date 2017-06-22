@@ -91,6 +91,7 @@ view: mn_cmpl_period_pkg_dim {
 
   dimension: period_pkg_status {
     type: string
+    label: "Period Package Status"
     sql: ${TABLE}.PERIOD_PKG_STATUS ;;
   }
 

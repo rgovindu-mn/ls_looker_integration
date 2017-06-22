@@ -668,6 +668,19 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.SALE_INV_DATE_WID ;;
   }
 
+  dimension_group: invoice {
+    type: time
+    timeframes: [
+      raw,
+      year,
+      quarter,
+      month,
+      date
+    ]
+    sql: TO_DATE(${TABLE}.SALE_INV_DATE_WID, 'YYYY-MM-DD') ;;
+  }
+
+
   dimension: sale_ship_to_cust_wid {
     hidden: yes
     type: number

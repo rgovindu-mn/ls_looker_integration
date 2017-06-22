@@ -1022,7 +1022,7 @@ explore: commercial_compliance {
   }
 
   join: mn_cmpl_period_fact {
-    type: left_outer
+    type: inner
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
@@ -1038,8 +1038,17 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_cmpl_period_pkg_dim
     view_label: "Period"
-    fields: [period_pkg_id_num, period_pkg_name]
+    fields: [period_pkg_id_num, period_pkg_name, period_pkg_status]
     sql_on: ${mn_cmpl_period_fact.period_pkg_wid} = ${mn_cmpl_period_pkg_dim.cmpl_period_pkg_wid} ;;
   }
 
-}
+  join: mn_cmpl_per_lines_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmpl_per_lines_fact
+    view_label: "Compliance Bucket Line"
+    sql_on: ${mn_cmpl_period_fact.period_wid} = ${mn_cmpl_per_lines_fact.period_wid} ;;
+  }
+
+
+} # end of commercial_compliance explore
