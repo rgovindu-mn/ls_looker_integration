@@ -444,16 +444,16 @@ explore: provider_historical_rebates {
 explore: provider_combined{
   label: "Provider Combined Model"
   extends: [mn_combined_sale_fact
-            # mn_combined_rebate_program_dim_base,
-            # mn_payment_package_dim_base,
-            # mn_rebate_payment_fact_base,
-            # mn_paid_rebate_lines_base
+            ,mn_rbt_ctrt_header_dim_base
+            ,mn_combined_rebate_program_dim_base
+            ,mn_payment_package_dim_base
+            ,mn_rebate_payment_fact_base
             ]
   hidden: no
 
   # sql_always_where: ;;
-  # from:  mn_combined_sale_fact
-  # view_name: mn_combined_sale_fact
+  from:  mn_combined_sale_fact
+  view_name: mn_combined_sale_fact
 
   join: mn_discount_bridge_fact {
     type: left_outer
@@ -484,7 +484,7 @@ explore: provider_combined{
 
   join: mn_payment_package_dim {
     type: left_outer
-    view_label: "Rebate Payment Package"
+    view_label: "Payment Package"
     relationship: many_to_one
     from: mn_payment_package_dim
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid};;
@@ -514,6 +514,14 @@ explore: provider_combined{
     sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_erp_payment_fact.rebate_pmt_wid};;
   }
 
+  join: mn_rbt_ctrt_header_dim {
+    from: mn_contract_header_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Contract"
+    #fields: [contract_number]
+    sql_on: ${mn_rbt_ctrt_header_dim.parent_contract_wid} = ${mn_combined_rebate_program_dim.contract_wid};;
+  }
 
 }
 
@@ -527,7 +535,7 @@ explore: provider_rebates{
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
               mn_rebate_payment_fact_base,
-              mn_paid_rebate_lines_base]
+              rebate_lines_base]
   hidden: no
 
   sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
@@ -650,7 +658,74 @@ explore: provider_estimated_rebates{
   extends: [estimated_rebates_base]
   hidden: no
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
+  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
+                      and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
+                      and ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional';;
+
+  #This part is for renaming or limitting fields
+  join: mn_est_rebate_pmt_prod_map {
+    fields: []
+  }
+
+  join: mn_ctrt_status_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_domain_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_type_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_ctrt_sub_type_dim {
+    view_label: "Rebate Contract"
+  }
+
+  join: mn_contract_author_dim {
+    view_label: "Rebate Contract Author"
+  }
+
+  join: mn_additional_delegate_dim {
+    view_label: "Rebate Contract Additional Delegate"
+  }
+
+  join: mn_contract_srep_dim {
+    view_label: "Rebate Contract Sales Rep"
+  }
+
+  join: mn_customer_owner_dim {
+    fields: []
+  }
+
+  join: mn_ch_org_dim {
+    fields: []
+  }
+
+  join: mn_ch_cust_cot_dim {
+    fields: []
+  }
+
+  join: mn_ch_cot_dim {
+    fields: []
+  }
+
+  join: mn_parent_contract_header_dim {
+    view_label: "Rebate Contract Parent"
+  }
+
+  join: mn_distrib_mthd_dim {
+    view_label: "Rebate Contract Distribution Method"
+  }
+
+  join: mn_er_customer_dim {
+    view_label: "Payee"
+  }
+
+  join: mn_er_product_dim {
+    view_label: "Product"
+  }
 
 }
 

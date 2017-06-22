@@ -99,8 +99,8 @@
       title: Contracts Expiring in 30 Days
       type: single_value
       model: base_sales_intelligence_app_model
-      explore: mn_contract_header_dim
-      measures: [mn_contract_header_dim.no_of_contracts]
+      explore: mn_pg_product_pricing_fact
+      measures: [mn_contract_header_dim.contract_count]
       filters:
         mn_contract_header_dim.days_to_expire: "[1, 30]"
         mn_ctrt_status_dim.status_name: "Implemented"
