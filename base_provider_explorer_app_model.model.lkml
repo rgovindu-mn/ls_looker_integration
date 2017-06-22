@@ -684,9 +684,12 @@ explore: provider_estimated_rebates{
   extends: [estimated_rebates_base]
   hidden: no
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
-                      and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
-                      and ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional';;
+  sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional';;
+
+  join: mn_ctrt_type_dim {
+    view_label: "Rebate Contract"
+    sql_on: ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
+  }
 
   #This part is for renaming or limitting fields
   join: mn_est_rebate_pmt_prod_map {
@@ -701,9 +704,6 @@ explore: provider_estimated_rebates{
     view_label: "Rebate Contract"
   }
 
-  join: mn_ctrt_type_dim {
-    view_label: "Rebate Contract"
-  }
 
   join: mn_ctrt_sub_type_dim {
     view_label: "Rebate Contract"
