@@ -6,7 +6,7 @@ explore: payer_combined {
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
   view_label: "Rebate Lines"
-  extends: [mn_payer_rebate_lines,mn_mco_util_fact]
+  extends: [payer_rebate,payer_utilization]
   hidden: no
 
   join: mn_customer_owner_dim {
