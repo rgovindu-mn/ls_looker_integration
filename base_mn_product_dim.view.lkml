@@ -41,7 +41,7 @@ view: mn_product_dim {
     sql: ${TABLE}.COGS_BASE ;;
   }
 
-  dimension: cogs_curr {
+  dimension: cogs_currency {
     type: string
     sql: ${TABLE}.COGS_CURR ;;
   }
@@ -66,27 +66,27 @@ view: mn_product_dim {
     sql: ${TABLE}.CREATION_DATE_WID ;;
   }
 
-  dimension: custom_cde1 {
+  dimension: custom_code1 {
     type: string
     sql: ${TABLE}.CUSTOM_CDE1 ;;
   }
 
-  dimension: custom_cde2 {
+  dimension: custom_code2 {
     type: string
     sql: ${TABLE}.CUSTOM_CDE2 ;;
   }
 
-  dimension: custom_cde3 {
+  dimension: custom_code3 {
     type: string
     sql: ${TABLE}.CUSTOM_CDE3 ;;
   }
 
-  dimension: custom_cde4 {
+  dimension: custom_code4 {
     type: string
     sql: ${TABLE}.CUSTOM_CDE4 ;;
   }
 
-  dimension: custom_cde5 {
+  dimension: custom_code5 {
     type: string
     sql: ${TABLE}.CUSTOM_CDE5 ;;
   }
@@ -252,7 +252,7 @@ view: mn_product_dim {
     sql: ${TABLE}.NON_CMTY_PHARMA_DRUG_FLAG ;;
   }
 
-  dimension: product_desc {
+  dimension: product_description {
     type: string
     sql: ${TABLE}.PRODUCT_DESC ;;
   }
@@ -264,6 +264,7 @@ view: mn_product_dim {
 
   dimension: product_num {
     type: string
+    label: "Product ID"
     sql: ${TABLE}.PRODUCT_NUM ;;
   }
 
@@ -325,6 +326,7 @@ view: mn_product_dim {
 
   dimension: src_sys_prod_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_PROD_ID ;;
   }
 

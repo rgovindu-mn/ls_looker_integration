@@ -52,6 +52,7 @@ view: mn_customer_cot_dim {
 
   dimension_group: eff_start {
     type: time
+    label: "COT Effective Start"
     timeframes: [
       raw,
       time,
@@ -66,6 +67,7 @@ view: mn_customer_cot_dim {
 
   dimension_group: eff_end {
     type: time
+    label: "COT Effective End"
     timeframes: [
       raw,
       time,

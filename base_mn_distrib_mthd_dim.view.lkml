@@ -3,6 +3,7 @@ view: mn_distrib_mthd_dim {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -17,6 +18,7 @@ view: mn_distrib_mthd_dim {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -31,6 +33,7 @@ view: mn_distrib_mthd_dim {
 
   dimension: dist_method_desc {
     type: string
+    label: "Distribution Method Description"
     sql: ${TABLE}.DIST_METHOD_DESC ;;
   }
 
@@ -61,6 +64,7 @@ view: mn_distrib_mthd_dim {
   }
 
   dimension: src_sys_dist_method_code {
+    hidden: yes
     type: string
     sql: ${TABLE}.SRC_SYS_DIST_METHOD_CODE ;;
   }

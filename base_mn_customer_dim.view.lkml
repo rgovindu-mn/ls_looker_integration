@@ -38,6 +38,7 @@ view: mn_customer_dim {
 
   dimension: cust_domain {
     type: string
+    label: "Customer Domain"
     sql: ${TABLE}.CUST_DOMAIN ;;
   }
 
@@ -48,6 +49,7 @@ view: mn_customer_dim {
 
   dimension: customer_num {
     type: string
+    label: "Customer ID"
     sql: ${TABLE}.CUSTOMER_NUM ;;
   }
 
@@ -126,6 +128,7 @@ view: mn_customer_dim {
 
   dimension: pmt_method {
     type: string
+    label: "Payment Method"
     sql: ${TABLE}.PMT_METHOD ;;
   }
 
@@ -145,27 +148,27 @@ view: mn_customer_dim {
     sql: ${TABLE}.RUN_ID ;;
   }
 
-  dimension: seg_attr1 {
+  dimension: segmentation_attrubute1 {
     type: string
     sql: ${TABLE}.SEG_ATTR1 ;;
   }
 
-  dimension: seg_attr2 {
+  dimension: segmentation_attrubute2 {
     type: string
     sql: ${TABLE}.SEG_ATTR2 ;;
   }
 
-  dimension: seg_attr3 {
+  dimension: segmentation_attrubute3 {
     type: string
     sql: ${TABLE}.SEG_ATTR3 ;;
   }
 
-  dimension: seg_attr4 {
+  dimension: segmentation_attrubute4 {
     type: string
     sql: ${TABLE}.SEG_ATTR4 ;;
   }
 
-  dimension: seg_attr5 {
+  dimension: segmentation_attrubute5 {
     type: string
     sql: ${TABLE}.SEG_ATTR5 ;;
   }
@@ -178,6 +181,7 @@ view: mn_customer_dim {
 
   dimension: src_sys_cust_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_CUST_ID ;;
   }
 
@@ -211,12 +215,13 @@ view: mn_customer_dim {
     sql: ${TABLE}.SRC_SYS_DATE_UPDATED ;;
   }
 
-  dimension: state_prov {
+  dimension: state_province {
     type: string
     sql: ${TABLE}.STATE_PROV ;;
   }
 
   dimension_group: status_eff_end {
+    label: "Status End"
     type: time
     timeframes: [
       raw,
@@ -231,6 +236,7 @@ view: mn_customer_dim {
   }
 
   dimension_group: status_eff_start {
+    label: "Status Start"
     type: time
     timeframes: [
       raw,

@@ -415,6 +415,6 @@ view: mn_discount_bridge_fact {
   measure: total_external_invoice_quantity {
     type: sum
     value_format_name: decimal_0
-    sql: ${external_invoice_qty} ;;
+    sql: TO_NUMBER(${external_invoice_qty}) ;;
   }
 }
