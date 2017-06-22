@@ -20,7 +20,8 @@ view: mn_cmpl_period_fact {
 
   dimension: cmpl_threshold {
     type: string
-    sql: ${TABLE}.CMPL_THRESHOLD ;;
+    label: "Period Compliance Threshold (%)"
+    sql: ${TABLE}.CMPL_THRESHOLD * 100 ;;
   }
 
   dimension: commit_tier {
