@@ -959,7 +959,12 @@ explore: commercial_compliance {
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
-  sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1  ;;
+
+  sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1
+                    and
+                    ${mn_ctrt_type_dim.ctrt_type_name} IN
+                      ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
+                    ;;
 
   join: mn_product_group_dim {
     type: inner
@@ -978,13 +983,9 @@ explore: commercial_compliance {
     from: mn_contract_header_dim
     view_label: "Contract"
     sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
-              AND
-              ${mn_contract_header_dim.latest_flag} = 'Y'
-                  and ${mn_ctrt_type_dim.ctrt_type_name} IN
-                  ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
+              AND ${mn_contract_header_dim.latest_flag} = 'Y'
               ;;
   }
-
 
   join: mn_cmt_type_dim {
     type: left_outer
@@ -1026,7 +1027,6 @@ explore: commercial_compliance {
     from: mn_cmpl_period_fact
     view_label: "Period"
     sql_on: ${mn_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
-            --  AND ${mn_cmpl_commit_fact.commit_status} <> 'Terminated'
               AND ${mn_cmpl_period_fact.hidden_flag} = 'N'
               ;;
   }
