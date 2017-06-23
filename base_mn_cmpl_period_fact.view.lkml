@@ -482,4 +482,36 @@ view: mn_cmpl_period_fact {
     sql: ${expected_amt_to_date} ;;
   }
 
+  measure: review_status_total {
+    type: number
+    drill_fields: []
+    sql: COUNT(${TABLE}.REVIEW_STATUS) ;;
+
+  }
+  measure: review_status_compliant {
+    type: number
+    drill_fields: []
+    group_label: "Compliance Ratio"
+    #view_label: "Compliance Ratio - Compliant"
+    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Compliant' THEN 1 ELSE 0 END) / ${review_status_total} ;;
+  }
+
+  measure: review_status_out_of_compliance {
+    type: number
+    drill_fields: []
+    group_label: "Compliance Ratio"
+    #view_label: "Compliance Ratio - Out of Compliance"
+    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Out of Compliance' THEN 1 ELSE 0 END) / ${review_status_total} ;;
+  }
+
+  measure: review_status_over_compliant {
+    type: number
+    drill_fields: []
+    group_label: "Compliance Ratio"
+    #view_label: "Compliance Ratio - Over Compliant"
+    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Over Compliant' THEN 1 ELSE 0 END) / ${review_status_total} ;;
+  }
+
+
+
 }

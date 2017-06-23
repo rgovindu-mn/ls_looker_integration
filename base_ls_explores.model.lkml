@@ -731,9 +731,9 @@ explore: estimated_rebates_base {
   join: mn_er_product_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_customer_dim
+    from: mn_product_dim
     view_label: "Rebate Benefit Product"
-    sql_on: ${mn_est_rebate_payment_fact.payee_wid} = ${mn_er_product_dim.customer_wid};;
+    sql_on: ${mn_est_rebate_pmt_prod_map.product_wid} = ${mn_er_product_dim.product_wid};;
   }
 
    join: mn_combined_rebate_program_dim {
@@ -793,6 +793,22 @@ explore: historical_rebates_base {
     view_label: "Rebate Product"
     #fields: [full_name]
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
+  }
+
+  join: mn_rl_rebate_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rl_rebate_type_dim.rebate_type_wid};;
+  }
+
+  join: mn_rl_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Rebate Payee"
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_rl_customer_dim.customer_wid};;
   }
 }
 
