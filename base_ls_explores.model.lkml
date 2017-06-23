@@ -792,6 +792,22 @@ explore: historical_rebates_base {
     #fields: [full_name]
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
   }
+
+  join: mn_rl_rebate_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rl_rebate_type_dim.rebate_type_wid};;
+  }
+
+  join: mn_rl_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Rebate Payee"
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_rl_customer_dim.customer_wid};;
+  }
 }
 
 explore: rebate_lines_base {
