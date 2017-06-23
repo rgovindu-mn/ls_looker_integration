@@ -16,7 +16,9 @@ view: mn_contract_header_dim {
 
   dimension: amended_flag {
     type: string
-    sql:  ${TABLE}.AMENDED_FLAG;;
+    sql:  CASE WHEN ${TABLE}.AMENDED_FLAG = 1 THEN 'Yes'
+               WHEN ${TABLE}.AMENDED_FLAG = 0 THEN 'No' ELSE '' END;;
+    label: "Amended?"
   }
 
   dimension: amendment_count {
@@ -276,7 +278,15 @@ view: mn_contract_header_dim {
 
   dimension: latest_flag {
     type: string
-    sql: ${TABLE}.LATEST_FLAG ;;
+     hidden: yes
+    sql: ${TABLE}.LATEST_FLAG;;
+  }
+
+  dimension: is_latest {
+    type: string
+    sql: CASE WHEN ${TABLE}.LATEST_FLAG = 'Y' THEN 'Yes'
+      WHEN ${TABLE}.LATEST_FLAG = 'N' THEN 'No' ELSE '' END;;
+    label: "Is Latest?"
   }
 
   dimension: locale {
@@ -446,11 +456,13 @@ view: mn_contract_header_dim {
 
   dimension: src_sys_contract_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_CONTRACT_ID ;;
   }
 
   dimension_group: src_sys_date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -465,7 +477,7 @@ view: mn_contract_header_dim {
 
   dimension: src_sys_mgr_id {
     type: number
-    hidden:  yes
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_MGR_ID ;;
   }
 

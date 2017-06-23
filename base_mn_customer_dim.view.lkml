@@ -113,6 +113,7 @@ view: mn_customer_dim {
 
   dimension: org_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.ORG_ID ;;
   }
 
