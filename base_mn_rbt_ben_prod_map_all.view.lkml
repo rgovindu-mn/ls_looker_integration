@@ -1,6 +1,14 @@
 view: mn_rbt_ben_prod_map_all {
   sql_table_name: MN_RBT_BEN_PROD_MAP_ALL_VW ;;
 
+# created this key as there is no primary key defined
+  dimension: composite_primary_key {
+    hidden: yes
+    type: string
+    primary_key: yes
+    sql: ${TABLE}.PROGRAM_BEN_WID ||'-'|| ${TABLE}.SRC_SYS_STRUCT_LI_ID ;;
+  }
+
   dimension: basket_wid {
     hidden: yes
     type: number
@@ -200,7 +208,7 @@ view: mn_rbt_ben_prod_map_all {
 
   measure: no_of_benefit_products {
     type: sum
-    sql: CASE WHEN (${TABLE}.PRODUCT_WID) IS NULL OR ${TABLE}.EXCLUDED_FLAG = 'Y') THEN 0 ELSE 1 END ;;
+    sql: CASE WHEN (${TABLE}.PRODUCT_WID IS NULL OR ${TABLE}.EXCLUDED_FLAG = 'Y') THEN 0 ELSE 1 END ;;
     label: "# of Benefit Products"
     drill_fields: [detail*]
   }
