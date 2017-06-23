@@ -565,6 +565,7 @@ view: mn_contract_header_dim {
 
   dimension: days_to_expire_fmt {
     type: number
+    hidden:  yes
     value_format_name: decimal_0
     sql: ${days_to_expire} ;;
     html:  {% if value >0 and value < 60 %}
@@ -578,6 +579,7 @@ view: mn_contract_header_dim {
 
   dimension: days_to_expire_0 {
     type: number
+    hidden:  yes
     sql: CASE WHEN ${TABLE}.eff_end_date < SYSDATE THEN 0 ELSE to_date(to_char(${TABLE}.eff_end_date,'YYYYDDMM'),'YYYYDDMM')  - trunc(sysdate) END ;;
   }
 
