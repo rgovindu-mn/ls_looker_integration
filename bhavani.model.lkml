@@ -1,4 +1,4 @@
-connection: "oracle_rds_ls"
+# connection: "oracle_rds_ls"
 
 include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"

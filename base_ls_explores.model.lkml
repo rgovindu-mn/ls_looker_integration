@@ -686,6 +686,7 @@ explore: estimated_rebates_base {
             mn_payment_package_dim_base]
   hidden: yes
 
+
   join: mn_est_rebate_pmt_prod_map {
     type: left_outer
     view_label: "Estimated Rebate Payment Product Map"
@@ -706,7 +707,7 @@ explore: estimated_rebates_base {
                     Else
                     ${mn_est_rebate_payment_fact.contract_wid}
                     End
-                     ;;
+                    And ${mn_contract_header_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_payment_package_dim {
@@ -780,7 +781,7 @@ explore: historical_rebates_base {
     from: mn_customer_dim
     view_label: "Rebate Bill To Customer"
     #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
+    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_hr_billto_customer_dim.customer_wid};;
   }
 
   join: mn_hr_product_dim {
@@ -851,6 +852,23 @@ explore: rebate_lines_base {
     view_label: "Rebate Benefit Product"
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_rl_product_dim.product_wid};;
   }
+
+  join: mn_rl_rebate_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "Rebate Lines Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rl_rebate_type_dim.rebate_type_wid};;
+  }
+
+  join: mn_rl_customer_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Rebate Lines Payee"
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_rl_customer_dim.customer_wid};;
+  }
+
 }
 
 explore: compl_commitment_fact_base {

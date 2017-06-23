@@ -589,7 +589,7 @@ explore: provider_rebates{
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Rebate Payment Committed Customer"
-    sql_on: ${mn_combined_rebate_program_dim.customer_wid} = ${mn_crp_committed_customer_dim.customer_wid};;
+    sql_on: ${mn_rebate_payment_fact.commited_customer_wid} = ${mn_crp_committed_customer_dim.customer_wid};;
   }
 
   join: mn_erp_payment_fact {
@@ -624,6 +624,14 @@ explore: provider_rebates{
 
   join: rl_sold_to_customer_ids {
     view_label: "Benefit Line Sold To Customer"
+  }
+
+  join: mn_rl_rebate_type_dim {
+    view_label: "Benefit Line Rebate Type"
+  }
+
+  join: mn_rl_customer_dim {
+    view_label: "Benefit Line Payee"
   }
 
   join: mn_ctrt_status_dim {
@@ -684,9 +692,12 @@ explore: provider_estimated_rebates{
   extends: [estimated_rebates_base]
   hidden: no
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y'
-                      and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
-                      and ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional';;
+  sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional';;
+
+  join: mn_ctrt_type_dim {
+    view_label: "Rebate Contract"
+    sql_on: ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
+  }
 
   #This part is for renaming or limitting fields
   join: mn_est_rebate_pmt_prod_map {
@@ -701,9 +712,6 @@ explore: provider_estimated_rebates{
     view_label: "Rebate Contract"
   }
 
-  join: mn_ctrt_type_dim {
-    view_label: "Rebate Contract"
-  }
 
   join: mn_ctrt_sub_type_dim {
     view_label: "Rebate Contract"
@@ -1003,12 +1011,12 @@ explore: commercial_compliance {
 
   }
 
-  join: committed_customer {
+  join: cmpl_committed_customer {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_commit_dim_ext
     view_label: "Commitments"
-    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${cmpl_committed_customer.customer_wid};;
   }
 
   join: mn_cmt_change_reason_dim {
@@ -1022,7 +1030,7 @@ explore: commercial_compliance {
   }
 
   join: mn_cmpl_period_fact {
-    type: left_outer
+    type: inner
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
@@ -1033,4 +1041,70 @@ explore: commercial_compliance {
 
 # use base_mn_product_eff_attr_fact_ext to create multi level label groupping
 
-}
+  join: mn_cmpl_period_pkg_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_cmpl_period_pkg_dim
+    view_label: "Period"
+    fields: [period_pkg_id_num, period_pkg_name, period_pkg_status]
+    sql_on: ${mn_cmpl_period_fact.period_pkg_wid} = ${mn_cmpl_period_pkg_dim.cmpl_period_pkg_wid} ;;
+  }
+
+  join: mn_cmpl_per_lines_fact {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_cmpl_per_lines_fact
+    view_label: "Compliance Bucket Line"
+    sql_on: ${mn_cmpl_period_fact.period_wid} = ${mn_cmpl_per_lines_fact.period_wid} ;;
+  }
+
+  join: cmpl_ship_to_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Compliance Bucket Line - Ship To Customer"
+    sql_on: ${mn_cmpl_per_lines_fact.sale_ship_to_cust_wid} = ${cmpl_ship_to_customer.customer_wid};;
+  }
+
+  join: cmpl_ship_to_customer_ids_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Compliance Bucket Line - Ship To Alternate IDs"
+    sql_on: ${cmpl_ship_to_customer.customer_wid} = ${cmpl_ship_to_customer_ids_dim.customer_wid} ;;
+  }
+
+  join: cmpl_sold_to_customer {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_dim
+    view_label: "Compliance Bucket Line - Sold To Customer"
+    sql_on: ${mn_cmpl_per_lines_fact.sale_sold_to_cust_wid}_to_cust_wid} = ${cmpl_sold_to_customer.customer_wid};;
+  }
+
+  join: cmpl_sold_to_customer_ids_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Compliance Bucket Line - Sold To Alternate IDs"
+    sql_on: ${cmpl_sold_to_customer.customer_wid} = ${cmpl_sold_to_customer_ids_dim.customer_wid} ;;
+  }
+
+  join: cmpl_mn_product_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    fields: [product_num, product_name, gl_account_code, sku, ndc, market_entry_date]
+    sql_on: ${mn_cmpl_per_lines_fact.product_wid} = ${cmpl_mn_product_dim.product_wid} ;;
+  }
+
+  join: cmpl_prod_eff_attr_fact_ext {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_eff_attr_fact_ext
+    view_label: "Product"
+    sql_on: ${mn_cmpl_per_lines_fact.product_wid} = ${cmpl_prod_eff_attr_fact_ext.product_wid} ;;
+  }
+
+} # end of commercial_compliance explore

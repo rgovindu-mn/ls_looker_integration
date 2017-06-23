@@ -72,13 +72,15 @@ view: mn_cmpl_period_pkg_dim {
     sql: ${TABLE}.NOTES ;;
   }
 
-  dimension: per_pkg_id_num {
+  dimension: period_pkg_id_num {
     type: string
+    label: "Period Package Number"
     sql: ${TABLE}.PER_PKG_ID_NUM ;;
   }
 
-  dimension: per_pkg_name {
+  dimension: period_pkg_name {
     type: string
+    label: "Period Package Name"
     sql: ${TABLE}.PER_PKG_NAME ;;
   }
 
@@ -89,6 +91,7 @@ view: mn_cmpl_period_pkg_dim {
 
   dimension: period_pkg_status {
     type: string
+    label: "Period Package Status"
     sql: ${TABLE}.PERIOD_PKG_STATUS ;;
   }
 
@@ -221,6 +224,6 @@ view: mn_cmpl_period_pkg_dim {
 
   measure: count {
     type: count
-    drill_fields: [per_pkg_name]
+    drill_fields: [period_pkg_name]
   }
 }

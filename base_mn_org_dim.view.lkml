@@ -82,6 +82,7 @@ view: mn_org_dim {
 
   dimension: src_sys_org_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_ORG_ID ;;
   }
 
