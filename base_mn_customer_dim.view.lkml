@@ -61,6 +61,7 @@ view: mn_customer_dim {
   }
 
   dimension: customer_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.MEMBER_INFO_TYPE ;;
   }
