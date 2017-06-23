@@ -589,7 +589,7 @@ explore: provider_rebates{
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Rebate Payment Committed Customer"
-    sql_on: ${mn_combined_rebate_program_dim.customer_wid} = ${mn_crp_committed_customer_dim.customer_wid};;
+    sql_on: ${mn_rebate_payment_fact.commited_customer_wid} = ${mn_crp_committed_customer_dim.customer_wid};;
   }
 
   join: mn_erp_payment_fact {
@@ -624,6 +624,14 @@ explore: provider_rebates{
 
   join: rl_sold_to_customer_ids {
     view_label: "Benefit Line Sold To Customer"
+  }
+
+  join: mn_rl_rebate_type_dim {
+    view_label: "Benefit Line Rebate Type"
+  }
+
+  join: mn_rl_customer_dim {
+    view_label: "Benefit Line Payee"
   }
 
   join: mn_ctrt_status_dim {
