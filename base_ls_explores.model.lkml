@@ -22,7 +22,7 @@ include: "base_mn_pmt_mth_type_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_cot_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
-include: "base_mn_pg_tier_basis_dim.view.lkml"
+include: "base_mn_pg_qual_ben_dim.view.lkml"
 include: "base_mn_rbt_qual_mb_prod_map.view.lkml"
 include: "base_mn_product_dim.view.lkml"
 include: "base_mn_market_basket_dim.view.lkml"
@@ -387,9 +387,10 @@ explore: mn_product_group_dim_base {
   join: mn_pg_tier_basis_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_pg_tier_basis_dim
-    view_label: "Pricing Program"
-    sql_on: ${mn_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid};;
+    from: mn_pg_qual_ben_dim
+    view_label: "Pricing Program Tier Basis"
+    sql_on: ${mn_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid}
+     AND  ${mn_pg_tier_basis_dim.is_qual_comp_flag} ='Y';;
   }
 
 }
@@ -425,9 +426,10 @@ explore: mn_combined_product_group_dim_base {
   join: mn_pg_tier_basis_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_pg_tier_basis_dim
-    view_label: "Pricing Program"
-    sql_on: ${mn_combined_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid};;
+    from: mn_pg_qual_ben_dim
+    view_label: "Pricing Program Tier Basis"
+    sql_on: ${mn_combined_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid}
+    AND  ${mn_pg_tier_basis_dim.is_qual_comp_flag} ='Y';;
   }
 
 }
