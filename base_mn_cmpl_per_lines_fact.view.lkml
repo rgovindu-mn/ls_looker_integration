@@ -80,6 +80,7 @@ view: mn_cmpl_per_lines_fact {
 
   dimension: line_ref_num {
     type: number
+    label: "Period Bucket Line Ref Num"
     sql: ${TABLE}.LINE_REF_NUM ;;
   }
 
