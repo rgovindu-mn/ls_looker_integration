@@ -1003,12 +1003,12 @@ explore: commercial_compliance {
 
   }
 
-  join: committed_customer {
+  join: cmpl_committed_customer {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_commit_dim_ext
     view_label: "Commitments"
-    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${committed_customer.customer_wid};;
+    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${cmpl_committed_customer.customer_wid};;
   }
 
   join: mn_cmt_change_reason_dim {
@@ -1080,6 +1080,23 @@ explore: commercial_compliance {
     from: mn_customer_ids_dim
     view_label: "Compliance Bucket Line - Sold To Alternate IDs"
     sql_on: ${cmpl_sold_to_customer.customer_wid} = ${cmpl_sold_to_customer_ids_dim.customer_wid} ;;
+  }
+
+  join: cmpl_mn_product_dim {
+    type: inner
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    fields: [product_num, product_name, gl_account_code, sku, ndc, market_entry_date]
+    sql_on: ${mn_cmpl_per_lines_fact.product_wid} = ${cmpl_mn_product_dim.product_wid} ;;
+  }
+
+  join: cmpl_prod_eff_attr_fact_ext {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_product_eff_attr_fact_ext
+    view_label: "Product"
+    sql_on: ${mn_cmpl_per_lines_fact.product_wid} = ${cmpl_prod_eff_attr_fact_ext.product_wid} ;;
   }
 
 } # end of commercial_compliance explore

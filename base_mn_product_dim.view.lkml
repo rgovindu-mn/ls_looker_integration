@@ -259,6 +259,7 @@ view: mn_product_dim {
 
   dimension: product_name {
     type: string
+    label: "Product Name"
     sql: ${TABLE}.PRODUCT_NAME ;;
   }
 
