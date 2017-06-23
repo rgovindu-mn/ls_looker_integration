@@ -265,7 +265,7 @@ view: mn_product_dim {
 
   dimension: product_num {
     type: string
-    label: "Product ID"
+    label: "Product Number"
     sql: ${TABLE}.PRODUCT_NUM ;;
   }
 
