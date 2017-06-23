@@ -686,6 +686,7 @@ explore: estimated_rebates_base {
             mn_payment_package_dim_base]
   hidden: yes
 
+
   join: mn_est_rebate_pmt_prod_map {
     type: left_outer
     view_label: "Estimated Rebate Payment Product Map"
@@ -706,7 +707,7 @@ explore: estimated_rebates_base {
                     Else
                     ${mn_est_rebate_payment_fact.contract_wid}
                     End
-                     ;;
+                    And ${mn_contract_header_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_payment_package_dim {
@@ -780,7 +781,7 @@ explore: historical_rebates_base {
     from: mn_customer_dim
     view_label: "Rebate Bill To Customer"
     #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
+    sql_on: ${mn_discount_bridge_fact.bill_to_customer_wid} = ${mn_hr_billto_customer_dim.customer_wid};;
   }
 
   join: mn_hr_product_dim {
