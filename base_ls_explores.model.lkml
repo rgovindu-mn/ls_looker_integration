@@ -94,7 +94,7 @@ explore: mn_contract_header_dim_base {
     from: mn_user_dim
     view_label: "Pricing Contract Additional Delegate"
     #fields: [full_name]
-    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_additional_delegate_dim.user_wid};;
+    sql_on: ${mn_contract_header_dim.additional_delegate_wid} = ${mn_additional_delegate_dim.user_wid};;
   }
 
   join: mn_contract_srep_dim {
@@ -274,7 +274,7 @@ explore: mn_rbt_ctrt_header_dim_base {
     from: mn_user_dim
     view_label: "Rebate Contract Additional Delegate"
     #fields: [full_name]
-    sql_on: ${mn_rbt_ctrt_header_dim.author_wid} = ${mn_rbt_ctrt_delegate_dim.user_wid};;
+    sql_on: ${mn_rbt_ctrt_header_dim.additional_delegate_wid} = ${mn_rbt_ctrt_delegate_dim.user_wid};;
   }
 
   join: mn_rbt_ctrt_srep_dim {
@@ -546,7 +546,7 @@ explore: mn_rebate_payment_fact_base {
     relationship: many_to_one
     from: mn_user_dim
     view_label: "Rebate Payment Sales Rep"
-    sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${rpf_sales_rep.user_wid};;
+    sql_on: ${mn_rebate_payment_fact.salesrep_user_wid} = ${rpf_sales_rep.user_wid};;
   }
 
 
