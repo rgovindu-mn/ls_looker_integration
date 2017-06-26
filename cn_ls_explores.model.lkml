@@ -9,17 +9,18 @@ explore: payer_combined {
   extends: [payer_rebate,payer_utilization]
   hidden: no
 
-  join: mn_customer_owner_dim {
-  fields: []
-  }
-
-  join: mn_ch_cust_cot_dim {
-  fields: []
-  }
-
-  join: mn_ch_cot_dim {
-  fields: []
-  }
+# #  Commented by ARKADI to pass validation
+#   join: mn_customer_owner_dim {
+#   fields: []
+#   }
+#
+#   join: mn_ch_cust_cot_dim {
+#   fields: []
+#   }
+#
+#   join: mn_ch_cot_dim {
+#   fields: []
+#   }
 
   join: mn_ctrt_Adtnl_dlgt_dim {
     type: left_outer
@@ -37,25 +38,25 @@ explore: payer_combined {
     view_label: "Utilization lines"
   }
 
-  join: mn_customer_dim_bob {
-    view_label: "Util Book of Business"
-  }
-
-  join: mn_customer_dim_parent_pbm {
-    view_label: "Util PBM"
-  }
-
-  join: mn_customer_dim_plan {
-    fields: []
-  }
-
-  join: mn_contracted_customer_dim {
-    view_label: "Util Contracted Customer"
-  }
-
-  join: mn_contracted_customer_id {
-    view_label: "Util Contracted Customer"
-  }
+#   join: mn_customer_dim_bob {
+#     view_label: "Util Book of Business"
+#   }
+#
+#   join: mn_customer_dim_parent_pbm {
+#     view_label: "Util PBM"
+#   }
+#
+#   join: mn_customer_dim_plan {
+#     fields: []
+#   }
+#
+#   join: mn_contracted_customer_dim {
+#     view_label: "Util Contracted Customer"
+#   }
+#
+#   join: mn_contracted_customer_id {
+#     view_label: "Util Contracted Customer"
+#   }
 
   join: mn_mco_submission_dim {
     view_label: "Util Submission"

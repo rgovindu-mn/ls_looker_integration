@@ -132,10 +132,11 @@ explore: payer_rebate {
     sql_on: ${mn_rebate_payment_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
   }
 
-  join: mn_additional_delegate_dim {
-    view_label: "Rebate Contract Additional Delegate"
-    fields: []
-  }
+#  Commented by ARKADI to pass validation
+#   join: mn_additional_delegate_dim {
+#     view_label: "Rebate Contract Additional Delegate"
+#     fields: []
+#   }
 
   join: mn_rebate_payment_package_dim {
     from: mn_rebate_payment_package_dim

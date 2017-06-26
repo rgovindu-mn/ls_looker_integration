@@ -831,7 +831,7 @@ explore: rebate_lines_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
-    view_label: "Ship to Customer"
+    view_label: "Ship To Customer"
     fields: [id_num, id_type]
     sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${rl_ship_to_customer_ids.customer_wid};;
   }
@@ -849,7 +849,7 @@ explore: rebate_lines_base {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
-    view_label: "Sold to Customer"
+    view_label: "Sold To Customer"
     fields: [id_num, id_type]
     sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${rl_sold_to_customer_ids.customer_wid};;
   }

@@ -530,7 +530,7 @@ explore: provider_rebates{
   label: "Rebates"
   from: mn_contract_header_dim
   view_name: mn_contract_header_dim
-  view_label: "Rebate Contract"
+  view_label: "Contract"
   extends: [mn_contract_header_dim_adhoc_base,
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
@@ -602,89 +602,89 @@ explore: provider_rebates{
 
   ### This Part is to modify views retrieved through extending
 
-  join: mn_rl_product_dim {
-    view_label: "Product"
-  }
-
-  join: rpf_rebate_payment_payee {
-    view_label: "Payee"
-  }
-
-  join: mn_rl_shipto_customer_dim {
-    view_label: "Benefit Line Ship To Customer"
-  }
-
-  join: rl_ship_to_customer_ids {
-    view_label: "Benefit Line Ship To Customer"
-  }
-
-  join: mn_rl_soldto_customer_dim {
-    view_label: "Benefit Line Sold To Customer"
-  }
-
-  join: rl_sold_to_customer_ids {
-    view_label: "Benefit Line Sold To Customer"
-  }
-
-  join: mn_rl_rebate_type_dim {
-    view_label: "Benefit Line Rebate Type"
-  }
-
-  join: mn_rl_customer_dim {
-    view_label: "Benefit Line Payee"
-  }
-
-  join: mn_ctrt_status_dim {
-    view_label: "Rebate Contract"
-  }
-
-  join: mn_ctrt_domain_dim {
-    view_label: "Rebate Contract"
-  }
-
-  join: mn_ctrt_type_dim {
-    view_label: "Rebate Contract"
-  }
-
-  join: mn_ctrt_sub_type_dim {
-    view_label: "Rebate Contract"
-  }
-
-  join: mn_contract_author_dim {
-    view_label: "Rebate Contract Author"
-  }
-
-  join: mn_additional_delegate_dim {
-    view_label: "Rebate Contract Additional Delegate"
-  }
-
-  join: mn_contract_srep_dim {
-    view_label: "Rebate Contract Sales Rep"
-  }
-
-  join: mn_customer_owner_dim {
-    fields: []
-  }
-
-  join: mn_ch_org_dim {
-      fields: []
-  }
-
-  join: mn_ch_cust_cot_dim {
-    fields: []
-  }
-
-  join: mn_ch_cot_dim {
-    fields: []
-  }
-
-  join: mn_parent_contract_header_dim {
-    view_label: "Rebate Contract Parent"
-  }
-
-  join: mn_distrib_mthd_dim {
-    view_label: "Rebate Contract Distribution Method"
-  }
+#   join: mn_rl_product_dim {
+#     view_label: "Product"
+#   }
+#
+#   join: rpf_rebate_payment_payee {
+#     view_label: "Payee"
+#   }
+#
+#   join: mn_rl_shipto_customer_dim {
+#     view_label: "Benefit Line Ship To Customer"
+#   }
+#
+#   join: rl_ship_to_customer_ids {
+#     view_label: "Benefit Line Ship To Customer"
+#   }
+#
+#   join: mn_rl_soldto_customer_dim {
+#     view_label: "Benefit Line Sold To Customer"
+#   }
+#
+#   join: rl_sold_to_customer_ids {
+#     view_label: "Benefit Line Sold To Customer"
+#   }
+#
+#   join: mn_rl_rebate_type_dim {
+#     view_label: "Benefit Line Rebate Type"
+#   }
+#
+#   join: mn_rl_customer_dim {
+#     view_label: "Benefit Line Payee"
+#   }
+#
+#   join: mn_ctrt_status_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#   join: mn_ctrt_domain_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#   join: mn_ctrt_type_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#   join: mn_ctrt_sub_type_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#   join: mn_contract_author_dim {
+#     view_label: "Rebate Contract Author"
+#   }
+#
+#   join: mn_additional_delegate_dim {
+#     view_label: "Rebate Contract Additional Delegate"
+#   }
+#
+#   join: mn_contract_srep_dim {
+#     view_label: "Rebate Contract Sales Rep"
+#   }
+#
+#   join: mn_customer_owner_dim {
+#     fields: []
+#   }
+#
+#   join: mn_ch_org_dim {
+#       fields: []
+#   }
+#
+#   join: mn_ch_cust_cot_dim {
+#     fields: []
+#   }
+#
+#   join: mn_ch_cot_dim {
+#     fields: []
+#   }
+#
+#   join: mn_parent_contract_header_dim {
+#     view_label: "Rebate Contract Parent"
+#   }
+#
+#   join: mn_distrib_mthd_dim {
+#     view_label: "Rebate Contract Distribution Method"
+#   }
 }
 
 explore: provider_estimated_rebates{
@@ -692,83 +692,83 @@ explore: provider_estimated_rebates{
   extends: [estimated_rebates_base]
   hidden: no
 
-  sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional';;
+  sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional' AND ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
 
-  join: mn_ctrt_type_dim {
-    view_label: "Rebate Contract"
-    sql_on: ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
-  }
+#   join: mn_ctrt_type_dim {
+#     view_label: "Contract"
+#     sql_on: ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
+#   }
 
   #This part is for renaming or limitting fields
-  join: mn_est_rebate_pmt_prod_map {
-    view_label: "Estimated Payments Product Map"
-  }
+#   join: mn_est_rebate_pmt_prod_map {
+#     view_label: "Estimated Payments Product Map"
+#   }
 
-  join: mn_ctrt_status_dim {
-    view_label: "Rebate Contract"
-  }
-
-  join: mn_ctrt_domain_dim {
-    view_label: "Rebate Contract"
-  }
-
-
-  join: mn_ctrt_sub_type_dim {
-    view_label: "Rebate Contract"
-  }
-
-  join: mn_contract_author_dim {
-    view_label: "Rebate Contract Author"
-  }
-
-  join: mn_additional_delegate_dim {
-    view_label: "Rebate Contract Additional Delegate"
-  }
-
-  join: mn_contract_srep_dim {
-    view_label: "Rebate Contract Sales Rep"
-  }
-
-  join: mn_customer_owner_dim {
-    fields: []
-  }
-
-  join: mn_ch_org_dim {
-    fields: []
-  }
-
-  join: mn_ch_cust_cot_dim {
-    fields: []
-  }
-
-  join: mn_ch_cot_dim {
-    fields: []
-  }
-
-  join: mn_parent_contract_header_dim {
-    view_label: "Rebate Contract Parent"
-  }
-
-  join: mn_distrib_mthd_dim {
-    view_label: "Rebate Contract Distribution Method"
-  }
-
-  join: mn_er_customer_dim {
-    view_label: "Payee"
-  }
-
-  join: mn_er_product_dim {
-    view_label: "Product"
-  }
-
-  join: mn_payment_package_dim {
-    view_label: "Payment Package"
-  }
-
-
- join: mn_erp_payment_fact {
-   view_label: "ERP Payment"
- }
+#   join: mn_ctrt_status_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#   join: mn_ctrt_domain_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#
+#   join: mn_ctrt_sub_type_dim {
+#     view_label: "Rebate Contract"
+#   }
+#
+#   join: mn_contract_author_dim {
+#     view_label: "Rebate Contract Author"
+#   }
+#
+#   join: mn_additional_delegate_dim {
+#     view_label: "Rebate Contract Additional Delegate"
+#   }
+#
+#   join: mn_contract_srep_dim {
+#     view_label: "Rebate Contract Sales Rep"
+#   }
+#
+#   join: mn_customer_owner_dim {
+#     fields: []
+#   }
+#
+#   join: mn_ch_org_dim {
+#     fields: []
+#   }
+#
+#   join: mn_ch_cust_cot_dim {
+#     fields: []
+#   }
+#
+#   join: mn_ch_cot_dim {
+#     fields: []
+#   }
+#
+#   join: mn_parent_contract_header_dim {
+#     view_label: "Rebate Contract Parent"
+#   }
+#
+#   join: mn_distrib_mthd_dim {
+#     view_label: "Rebate Contract Distribution Method"
+#   }
+#
+#   join: mn_er_customer_dim {
+#     view_label: "Payee"
+#   }
+#
+#   join: mn_er_product_dim {
+#     view_label: "Product"
+#   }
+#
+#   join: mn_payment_package_dim {
+#     view_label: "Payment Package"
+#   }
+#
+#
+#  join: mn_erp_payment_fact {
+#    view_label: "ERP Payment"
+#  }
 
 }
 
@@ -786,7 +786,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Pricing Contract Customer"
+    view_label: "Contract Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${sl_contracted_customer.customer_wid};;
   }
 
@@ -794,7 +794,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
-    view_label: "Pricing Contract Customer"
+    view_label: "Contract Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${sl_contracted_customer_ids.customer_wid};;
   }
 
@@ -881,7 +881,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_contract_header_dim
-    view_label: "Pricing Contract"
+    view_label: "Contract"
     sql_on: ${mn_combined_sale_fact.contract_wid} = ${mn_contract_header_dim.contract_wid};;
   }
 
@@ -921,43 +921,43 @@ explore: mn_combined_sale_fact {
   }
 
   ### This Part is to modify views retrieved through extending
-  join: mn_contract_author_dim {
-    #fields: [mn_contract_author_dim.fname,mn_contract_author_dim.lname]
-    view_label: "Pricing Contract Author"
-  }
+#   join: mn_contract_author_dim {
+#     #fields: [mn_contract_author_dim.fname,mn_contract_author_dim.lname]
+#     view_label: "Pricing Contract Author"
+#   }
+#
+#   join: mn_contract_srep_dim {
+#     view_label: "Pricing Contract Sales Rep"
+#   }
+#
+#   join: mn_ctrt_domain_dim {
+#     view_label: "Pricing Contract Domain"
+#   }
+#
+#   join: mn_additional_delegate_dim  {
+#     fields: []
+#   }
+#
+#   join: mn_customer_owner_dim  {
+#     fields: []
+#   }
 
-  join: mn_contract_srep_dim {
-    view_label: "Pricing Contract Sales Rep"
-  }
+#   join: mn_ctrt_status_dim {
+#     view_label: "Pricing Contract Status"
+#   }
+#
+#   join: mn_ctrt_type_dim {
+#     view_label: "Pricing Contract Type"
+#   }
+#
+#   join: mn_ctrt_sub_type_dim {
+#     view_label: "Pricing Contract Subtype"
+#   }
 
-  join: mn_ctrt_domain_dim {
-    view_label: "Pricing Contract Domain"
-  }
-
-  join: mn_additional_delegate_dim  {
-    fields: []
-  }
-
-  join: mn_customer_owner_dim  {
-    fields: []
-  }
-
-  join: mn_ctrt_status_dim {
-    view_label: "Pricing Contract Status"
-  }
-
-  join: mn_ctrt_type_dim {
-    view_label: "Pricing Contract Type"
-  }
-
-  join: mn_ctrt_sub_type_dim {
-    view_label: "Pricing Contract Subtype"
-  }
-
-  join: mn_cpg_price_list_dim {
-    view_label: "Pricing Program Price List"
-    fields: [price_list_name]
-  }
+#   join: mn_cpg_price_list_dim {
+#     view_label: "Pricing Program Price List"
+#     fields: [price_list_name]
+#   }
 }
 
 # PBC Compliance Commitments model
