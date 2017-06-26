@@ -83,7 +83,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_user_dim
-    view_label: "Contract Author"
+    view_label: "Pricing Contract Author"
     #fields: [full_name]
     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_contract_author_dim.user_wid};;
   }
@@ -92,7 +92,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_user_dim
-    view_label: "Contract Additional Delegate"
+    view_label: "Pricing Contract Additional Delegate"
     #fields: [full_name]
     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_additional_delegate_dim.user_wid};;
   }
@@ -101,7 +101,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_user_dim
-    view_label: "Contract Sales Rep"
+    view_label: "Pricing Contract Sales Rep"
     #fields: [full_name]
     sql_on: ${mn_contract_header_dim.sales_rep_wid} = ${mn_contract_srep_dim.user_wid};;
   }
@@ -111,7 +111,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_status_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_status_wid} = ${mn_ctrt_status_dim.status_wid};;
   }
@@ -120,7 +120,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_domain_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_domain_wid} = ${mn_ctrt_domain_dim.domain_wid};;
   }
@@ -129,7 +129,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_type_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_type_wid} = ${mn_ctrt_type_dim.ctrt_type_wid};;
   }
@@ -138,7 +138,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_ctrt_sub_type_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     #fields: []
     sql_on: ${mn_contract_header_dim.contract_sub_type_wid} = ${mn_ctrt_sub_type_dim.ctrt_sub_type_wid};;
   }
@@ -147,7 +147,7 @@ explore: mn_contract_header_dim_base {
     type: left_outer
       relationship: many_to_one
       from: mn_customer_dim
-      view_label: "Contract Owner Account"
+      view_label: "Pricing Contract Owner Account"
       #fields: []
       sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_customer_owner_dim.customer_wid};;
     }
@@ -167,7 +167,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_org_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_ch_org_dim.org_wid} ;;
   }
 
@@ -175,7 +175,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_many
     from: mn_customer_cot_dim
-    view_label: "Contract Owner COT"
+    view_label: "Pricing Contract Owner COT"
     sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_ch_cust_cot_dim.customer_wid} ;;
   }
 
@@ -183,7 +183,7 @@ explore: mn_contract_header_dim_adhoc_base {
     type: left_outer
     relationship: many_to_one
     from: mn_cot_dim
-    view_label: "Contract Owner COT"
+    view_label: "Pricing Contract Owner COT"
     sql_on: ${mn_ch_cust_cot_dim.cot_wid} = ${mn_ch_cot_dim.cot_wid}
             and ${mn_ch_cust_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
             and ${mn_ch_cust_cot_dim.eff_end_date} >= ${mn_contract_header_dim.implemented_date} ;;
@@ -193,7 +193,7 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_contract_header_dim
     type: left_outer
     relationship: many_to_one
-    view_label: "Contract Parent"
+    view_label: "Pricing Contract Parent"
     fields: [mn_parent_contract_header_dim.contract_number]
     sql_on: ${mn_contract_header_dim.parent_contract_wid} = ${mn_parent_contract_header_dim.contract_wid} ;;
   }
@@ -202,7 +202,7 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_distrib_mthd_dim
     type: left_outer
     relationship: many_to_one
-    view_label: "Contract Distribution Method"
+    view_label: "Pricing Contract Distribution Method"
     sql_on: ${mn_contract_header_dim.distribution_method_wid} = ${mn_distrib_mthd_dim.dist_method_wid} ;;
   }
 
@@ -227,6 +227,28 @@ explore: mn_contract_header_dim_secure_base {
     view_label: "User Access"
     fields: [user_wid]
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
+  }
+}
+
+explore: mn_rbt_ctrt_header_dim_secure_base {
+  extends: [mn_rbt_ctrt_header_dim_base]
+  from:  mn_contract_header_dim_secure
+  view_name: mn_rbt_ctrt_header_dim
+  hidden: yes
+
+
+#  access_filter: {
+#    field: mn_contract_header_dim.access_user_name
+#    user_attribute: rme_access_user_name
+#  }
+
+  join: mn_user_access_ctrt_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_org_map
+    view_label: "User Access"
+    fields: [user_wid]
+    sql_on: ${mn_rbt_ctrt_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
   }
 }
 
@@ -683,7 +705,7 @@ explore: estimated_rebates_base {
   from:  mn_est_rebate_payment_fact
   view_name: mn_est_rebate_payment_fact
   view_label:"Estimated Payments"
-  extends: [mn_contract_header_dim_adhoc_base,
+  extends: [mn_rbt_ctrt_header_dim_base,
             mn_combined_rebate_program_dim_base,
             mn_payment_package_dim_base]
   hidden: yes
@@ -697,19 +719,19 @@ explore: estimated_rebates_base {
     sql_on: ${mn_est_rebate_payment_fact.estimate_pmt_wid} = ${mn_est_rebate_pmt_prod_map.estimate_pmt_wid};;
   }
 
-  join: mn_contract_header_dim {
+  join: mn_rbt_ctrt_header_dim {
     type: left_outer
     view_label: "Rebate Contract"
     relationship: many_to_one
     from: mn_contract_header_dim
-    sql_on: ${mn_contract_header_dim.contract_wid} =
+    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} =
                     Case
                     When ${mn_est_rebate_pmt_prod_map.contract_wid} Is Not Null
                     Then ${mn_est_rebate_pmt_prod_map.contract_wid}
                     Else
                     ${mn_est_rebate_payment_fact.contract_wid}
                     End
-                    And ${mn_contract_header_dim.latest_flag} = 'Y' ;;
+                    And ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' ;;
   }
 
   join: mn_payment_package_dim {

@@ -425,6 +425,75 @@ explore: mn_contract_header_dim {
       AND ${mn_rbt_qual_mb_pg_dim.latest_flag}='Y';;
   }
 
+  ##These just to relabel
+  join: mn_contract_author_dim {
+    from: mn_user_dim
+    view_label: "Contract Author"
+  }
+
+  join: mn_additional_delegate_dim {
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+  }
+
+  join: mn_contract_srep_dim {
+    from: mn_user_dim
+    view_label: "Contract Sales Rep"
+  }
+
+
+  join: mn_ctrt_status_dim {
+    from: mn_ctrt_status_dim
+    view_label: "Contract"
+  }
+
+  join: mn_ctrt_domain_dim {
+    from: mn_ctrt_domain_dim
+    view_label: "Contract"
+  }
+
+  join: mn_ctrt_type_dim {
+    from: mn_ctrt_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_ctrt_sub_type_dim {
+    from: mn_ctrt_sub_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_customer_owner_dim {
+    from: mn_customer_dim
+    view_label: "Contract Owner Account"
+  }
+
+  join: mn_ch_org_dim {
+    from: mn_org_dim
+    view_label: "Contract"
+  }
+
+  join: mn_ch_cust_cot_dim {
+    type: left_outer
+    relationship: many_to_many
+    from: mn_customer_cot_dim
+    view_label: "Contract Owner COT"
+    sql_on: ${mn_contract_header_dim.owner_wid} = ${mn_ch_cust_cot_dim.customer_wid} ;;
+  }
+
+  join: mn_ch_cot_dim {
+    from: mn_cot_dim
+    view_label: "Contract Owner COT"
+  }
+
+  join: mn_parent_contract_header_dim {
+    from: mn_contract_header_dim
+    view_label: "Contract Parent"
+  }
+
+  join: mn_distrib_mthd_dim {
+    from: mn_distrib_mthd_dim
+    view_label: "Contract"
+  }
 }
 
 explore: provider_historical_rebates {
@@ -529,16 +598,16 @@ explore: provider_combined{
 explore: provider_rebates{
   label: "Rebates"
   from: mn_contract_header_dim
-  view_name: mn_contract_header_dim
-  view_label: "Contract"
-  extends: [mn_contract_header_dim_adhoc_base,
+  view_name: mn_rbt_ctrt_header_dim
+  view_label: "Rebate Contract"
+  extends: [mn_rbt_ctrt_header_dim_base,
               mn_combined_rebate_program_dim_base,
               mn_payment_package_dim_base,
               mn_rebate_payment_fact_base,
               rebate_lines_base]
   hidden: no
 
-  sql_always_where: ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
+  sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based') ;;
   always_join: [mn_rebate_payment_fact]
 
   join: mn_combined_rebate_program_dim {
@@ -546,7 +615,7 @@ explore: provider_rebates{
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
-    sql_on: ${mn_contract_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
+    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
     ;;
   }
 
@@ -692,7 +761,7 @@ explore: provider_estimated_rebates{
   extends: [estimated_rebates_base]
   hidden: no
 
-  sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional' AND ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
+  sql_always_where: ${mn_est_rebate_payment_fact.estimate_pmt_type} = 'Institutional' AND ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based');;
 
 #   join: mn_ctrt_type_dim {
 #     view_label: "Contract"
@@ -786,7 +855,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
-    view_label: "Contract Customer"
+    view_label: "Pricing Contract Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${sl_contracted_customer.customer_wid};;
   }
 
@@ -794,7 +863,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
-    view_label: "Contract Customer"
+    view_label: "Pricing Contract Customer"
     sql_on: ${mn_combined_sale_fact.customer_wid} = ${sl_contracted_customer_ids.customer_wid};;
   }
 
@@ -881,7 +950,7 @@ explore: mn_combined_sale_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_contract_header_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     sql_on: ${mn_combined_sale_fact.contract_wid} = ${mn_contract_header_dim.contract_wid};;
   }
 
@@ -989,7 +1058,7 @@ explore: commercial_compliance {
     type: inner
     relationship: many_to_one
     from: mn_contract_header_dim
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
               AND ${mn_contract_header_dim.latest_flag} = 'Y'
               ;;
@@ -1006,7 +1075,7 @@ explore: commercial_compliance {
   }
 
   join: mn_distrib_mthd_dim {
-    view_label: "Contract"
+    view_label: "Pricing Contract"
     fields: [dist_method_name]
 
   }
