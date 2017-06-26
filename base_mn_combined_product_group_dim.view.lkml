@@ -130,7 +130,7 @@ view: mn_combined_product_group_dim {
 
   dimension: pg_name {
     type: string
-    label: "Price Progrma Name"
+    label: "Price Program Name"
     sql: ${TABLE}.PG_NAME ;;
   }
 
