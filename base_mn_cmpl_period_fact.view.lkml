@@ -485,9 +485,11 @@ view: mn_cmpl_period_fact {
   measure: review_status_total {
     type: number
     drill_fields: []
+    hidden: yes
     sql: COUNT(${TABLE}.REVIEW_STATUS) ;;
 
   }
+
   measure: review_status_compliant {
     type: number
     drill_fields: []

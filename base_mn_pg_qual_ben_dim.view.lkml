@@ -278,6 +278,33 @@ view: mn_pg_qual_ben_dim {
     sql: ${TABLE}.VER_START_DATE ;;
   }
 
+# **** Derived dimensions
+
+dimension: component_type_flag {
+  type: string
+  sql: CASE WHEN BASIS_TYPE in
+        (
+              'Free Good Revenue Across Order',
+              'Revenue by Price Program',
+              'Free Goods Revenue Capitation' ,
+              'Step Revenue'
+        ) THEN 'Revenue'
+      ELSE
+        (
+          CASE WHEN BASIS_TYPE in
+            (
+              'Volume by Price Program',
+              'Quantity In Tier Basis',
+              'Quantity By Line Item',
+              'Free Goods Volume Across Order',
+              'Recurring Volume',
+              'Free Goods volume Capitation',
+              'Step Volume',
+              'Volume by line item'
+            ) THEN 'Volume' ELSE null end
+          ) END ;;
+}
+
   measure: count {
     type: count
     drill_fields: [name, component_name]
