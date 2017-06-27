@@ -11,44 +11,44 @@ explore: payer_utilization {
   view_label: "Utilization lines"
   hidden: no
 
-  join: mn_customer_dim_bob {
+  join: mn_util_customer_dim_bob {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Book of Business"
-    sql_on: ${mn_mco_util_fact.bob_wid} = ${mn_customer_dim_bob.customer_wid} ;;
+    sql_on: ${mn_mco_util_fact.bob_wid} = ${mn_util_customer_dim_bob.customer_wid} ;;
   }
 
-  join: mn_customer_dim_parent_pbm {
+  join: mn_util_cust_dim_parent_pbm {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Parent PBM"
-    sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_customer_dim_parent_pbm.customer_wid} ;;
+    sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_util_cust_dim_parent_pbm.customer_wid} ;;
   }
 
-  join: mn_customer_dim_plan {
+  join: mn_util_cust_dim_plan {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Plan"
-    sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_customer_dim_plan.customer_wid} ;;
+    sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_util_cust_dim_plan.customer_wid} ;;
   }
 
-  join: mn_contracted_customer_dim {
+  join: mn_util_ctrt_customer_dim {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Contracted Customer"
-    sql_on: ${mn_mco_util_fact.contract_cust_wid} = ${mn_contracted_customer_dim.customer_wid} ;;
+    sql_on: ${mn_mco_util_fact.contract_cust_wid} = ${mn_util_ctrt_customer_dim.customer_wid} ;;
   }
 
-  join: mn_contracted_customer_id {
+  join: mn_util_ctrt_customer_id {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
     view_label: "Contracted Customer"
-    sql_on: ${mn_contracted_customer_dim.customer_wid} = ${mn_contracted_customer_id.customer_wid} ;;
+    sql_on: ${mn_util_ctrt_customer_dim.customer_wid} = ${mn_util_ctrt_customer_id.customer_wid} ;;
   }
 
   join: mn_mco_submission_dim {
@@ -59,20 +59,20 @@ explore: payer_utilization {
     sql_on: ${mn_mco_util_fact.mco_submission_wid} = ${mn_mco_submission_dim.mco_submission_wid} ;;
   }
 
-  join: mn_product_dim {
+  join: mn_util_product_dim {
     type:  left_outer
     relationship: many_to_one
     from: mn_product_dim
     view_label: "Product"
-    sql_on: ${mn_mco_util_fact.product_wid} = ${mn_product_dim.product_wid} ;;
+    sql_on: ${mn_mco_util_fact.product_wid} = ${mn_util_product_dim.product_wid} ;;
   }
 
-  join: mn_product_map_all_ver {
+  join: mn_util_product_map_all_ver {
     type:  left_outer
     relationship: many_to_one
     from: mn_product_map_all_ver
     view_label: "Product"
-    sql_on: ${mn_product_dim.product_wid} = ${mn_product_map_all_ver.level0_product_wid} ;;
+    sql_on: ${mn_util_product_dim.product_wid} = ${mn_util_product_map_all_ver.level0_product_wid} ;;
   }
 
   join: mn_formulary_dim {
@@ -83,20 +83,20 @@ explore: payer_utilization {
     sql_on: ${mn_mco_util_fact.formulary_wid} = ${mn_formulary_dim.formulary_wid} ;;
   }
 
-  join: mn_org_dim {
+  join: mn_util_org_dim {
     type:  left_outer
     relationship: many_to_one
     from: mn_org_dim
     view_label: "Org"
-    sql_on: ${mn_mco_util_fact.org_wid} = ${mn_org_dim.org_wid} ;;
+    sql_on: ${mn_mco_util_fact.org_wid} = ${mn_util_org_dim.org_wid} ;;
   }
 
-  join: mn_cot_dim {
+  join: mn_util_cot_dim {
     type:  left_outer
     relationship: many_to_one
     from: mn_cot_dim
     view_label: "Class of Trade"
-    sql_on: ${mn_mco_util_fact.cot_wid} = ${mn_cot_dim.cot_wid} ;;
+    sql_on: ${mn_mco_util_fact.cot_wid} = ${mn_util_cot_dim.cot_wid} ;;
   }
 
 }
@@ -146,21 +146,21 @@ explore: payer_rebate {
     sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_rebate_payment_package_dim.pymt_pkg_wid} ;;
   }
 
-  join: mn_product_dim {
+  join: mn_rbt_product_dim {
     from: mn_product_dim
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Product"
-    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_product_dim.product_wid} ;;
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_rbt_product_dim.product_wid} ;;
   }
 
-  join:  mn_plan_dim {
+  join:  mn_rbt_plan_dim {
     from: mn_customer_dim
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Plan"
-    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_plan_dim.customer_wid};;
-    sql_where: Upper(${mn_plan_dim.customer_type}) = 'PLAN' ;;
+    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid};;
+    sql_where: Upper(${mn_rbt_plan_dim.customer_type}) = 'PLAN' ;;
   }
 
   join: mn_combined_rebate_program_dim {
