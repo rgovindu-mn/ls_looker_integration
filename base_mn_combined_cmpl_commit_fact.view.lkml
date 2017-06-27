@@ -16,7 +16,8 @@ view: mn_combined_cmpl_commit_fact {
         CCR.CMT_CHANGE_CODE_NAME,
         CMTT.CMT_TYPE_NAME,
         S.TRACK_START_DATE_WID,
-        S.SRC_SYS_COMMIT_ID
+        S.SRC_SYS_COMMIT_ID,
+        S.DEFINITION_WID
        FROM
       MN_CMPL_COMMIT_FACT_VW S
       LEFT JOIN MN_CMT_CHANGE_REASON_DIM_VW CCR ON CCR.CMT_CHANGE_CODE_WID=S.CMT_CHANGE_CODE_WID
@@ -42,7 +43,8 @@ view: mn_combined_cmpl_commit_fact {
         CCR.CMT_CHANGE_CODE_NAME,
         CMTT.CMT_TYPE_NAME,
         S.TRACK_START_DATE_WID,
-        S.SRC_SYS_COMMIT_ID
+        S.SRC_SYS_COMMIT_ID,
+        null as DEFINITION_WID
       FROM
       MN_PG_COMMIT_FACT_VW S
       LEFT JOIN MN_CMT_CHANGE_REASON_DIM_VW CCR ON CCR.CMT_CHANGE_CODE_WID=S.CMT_CHANGE_CODE_WID
@@ -110,11 +112,13 @@ view: mn_combined_cmpl_commit_fact {
 
   dimension: cmt_change_code_name {
     type: string
+    label: "Change Reason"
     sql: ${TABLE}.CMT_CHANGE_CODE_NAME ;;
   }
 
   dimension: cmt_type_name {
     type: string
+    label: "Commitment Type"
     sql: ${TABLE}.CMT_TYPE_NAME ;;
   }
 
@@ -126,6 +130,11 @@ view: mn_combined_cmpl_commit_fact {
   dimension: src_sys_commit_id {
     type: string
     sql: ${TABLE}.SRC_SYS_COMMIT_ID ;;
+  }
+
+  dimension: definition_wid {
+    type: number
+    sql: ${TABLE}.DEFINITION_WID ;;
   }
 
   set: detail {
