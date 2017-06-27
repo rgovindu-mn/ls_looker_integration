@@ -23,7 +23,7 @@ explore:  payer_combined_new {
     relationship: many_to_one
     from: mn_user_dim
     view_label: "Contract Additional Delegate"
-    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
+    sql_on: ${mn_rbt_ctrt_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
   }
 
 }
@@ -54,7 +54,7 @@ explore: payer_combined {
     relationship: many_to_one
     from: mn_user_dim
     view_label: "Contract Additional Delegate"
-     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
+     sql_on: ${mn_rbt_ctrt_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
   }
 
   join: mn_mco_util_fact {
