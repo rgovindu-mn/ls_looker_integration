@@ -961,7 +961,7 @@ explore: mn_combined_sale_fact {
     view_label: "Sold Product"
     fields: [Product_EDA_Attributes*]
     sql_on: ${mn_combined_sale_fact.product_wid} = ${sl_product_eff_attr_fact.product_wid}
-      AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${sl_product_eff_attr_fact.eff_start_date} AND ${sl_product_eff_attr_fact.eff_end_date});;
+      AND (${mn_combined_sale_fact.invoice_raw} BETWEEN ${sl_product_eff_attr_fact.eff_start_raw} AND ${sl_product_eff_attr_fact.eff_end_raw});;
   }
 
   join: mn_user_access_sale_map {

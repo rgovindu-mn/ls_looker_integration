@@ -44,7 +44,6 @@ include: "base_mn_est_rebate_payment_fact.view.lkml"
 include: "base_mn_est_rebate_pmt_prod_map.view.lkml"
 
 include: "base_mn_customer_ids_dim.view.lkml"
-include: "base_mn_product_eff_attr_fact.view.lkml"
 include: "base_mn_mco_submission_dim.view.lkml"
 include: "base_mn_formulary_dim.view.lkml"
 include: "base_mn_customer_ids_dim.view.lkml"
@@ -185,8 +184,8 @@ explore: mn_contract_header_dim_adhoc_base {
     from: mn_cot_dim
     view_label: "Pricing Contract Owner COT"
     sql_on: ${mn_ch_cust_cot_dim.cot_wid} = ${mn_ch_cot_dim.cot_wid}
-            and ${mn_ch_cust_cot_dim.eff_start_date} <= ${mn_contract_header_dim.implemented_date}
-            and ${mn_ch_cust_cot_dim.eff_end_date} >= ${mn_contract_header_dim.implemented_date} ;;
+            and ${mn_ch_cust_cot_dim.eff_start_raw} <= ${mn_contract_header_dim.implemented_raw}
+            and ${mn_ch_cust_cot_dim.eff_end_raw} >= ${mn_contract_header_dim.implemented_raw} ;;
   }
 
   join: mn_parent_contract_header_dim {
@@ -461,44 +460,44 @@ explore: mn_combined_rebate_program_dim_base {
   view_name: mn_combined_rebate_program_dim
   hidden: yes
 
-  join: mn_rp_accrual_type_dim {
+  join: mn_pm_accrual_type_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_accrual_type_dim
     view_label: "Rebate Program Accrual Type"
-    sql_on: ${mn_combined_rebate_program_dim.accrual_type_wid} = ${mn_rp_accrual_type_dim.accrual_type_wid};;
+    sql_on: ${mn_combined_rebate_program_dim.accrual_type_wid} = ${mn_pm_accrual_type_dim.accrual_type_wid};;
   }
 
-  join: mn_rp_pmt_type_dim {
+  join: mn_pm_pmt_type_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_type_dim
     view_label: "Rebate Program Payment Type"
-    sql_on: ${mn_combined_rebate_program_dim.pmt_type_wid} = ${mn_rp_pmt_type_dim.pmt_type_wid};;
+    sql_on: ${mn_combined_rebate_program_dim.pmt_type_wid} = ${mn_pm_pmt_type_dim.pmt_type_wid};;
   }
 
-  join: mn_rp_program_type_dim {
+  join: mn_pm_program_type_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_program_type_dim
     view_label: "Rebate Program Type"
-    sql_on: ${mn_combined_rebate_program_dim.program_type_wid} = ${mn_rp_program_type_dim.program_type_wid};;
+    sql_on: ${mn_combined_rebate_program_dim.program_type_wid} = ${mn_pm_program_type_dim.program_type_wid};;
   }
 
-  join: mn_rp_pmt_mth_type_dim {
+  join: mn_pm_pmt_mth_type_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_mth_type_dim
     view_label: "Rebate Program Method Type"
-    sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_rp_pmt_mth_type_dim.pmt_mth_type_wid};;
+    sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_pm_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
-  join: mn_rp_customer_dim {
+  join: mn_pm_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Rebate Program Payee"
-    sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_rp_customer_dim.customer_wid};;
+    sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_pm_customer_dim.customer_wid};;
   }
 }
 
@@ -557,12 +556,12 @@ explore: mn_payment_package_dim_base {
   view_name: mn_payment_package_dim
   hidden: yes
 
-  join: mn_pp_pmt_mth_type_dim {
+  join: mn_1pp_pmt_mth_type_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_mth_type_dim
     view_label: "Payment Package Payment Method Type"
-    sql_on: ${mn_payment_package_dim.pymt_method_wid} = ${mn_pp_pmt_mth_type_dim.pmt_mth_type_wid};;
+    sql_on: ${mn_payment_package_dim.pymt_method_wid} = ${mn_1pp_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
   join: pp_payee {
@@ -840,22 +839,22 @@ explore: rebate_lines_base {
   view_label: "Rebate Lines"
   hidden: yes
 
-  join: mn_rl_shipto_customer_dim {
+  join: mn_rl_hipto_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Ship To Customer"
     #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.ship_to_customer_wid} = ${mn_rl_shipto_customer_dim.customer_wid};;
+    sql_on: ${mn_discount_bridge_fact.ship_to_customer_wid} = ${mn_rl_hipto_customer_dim.customer_wid};;
   }
 
-  join: rl_ship_to_customer_ids {
+  join: rl_hip_to_customer_ids {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
     view_label: "Ship To Customer"
     fields: [id_num, id_type]
-    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${rl_ship_to_customer_ids.customer_wid};;
+    sql_on: ${mn_discount_bridge_fact.sold_to_customer_wid}=${rl_hip_to_customer_ids.customer_wid};;
   }
 
   join: mn_rl_soldto_customer_dim {
@@ -882,7 +881,7 @@ explore: rebate_lines_base {
     from: mn_product_eff_attr_fact
     view_label: "Product EDA"
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_rl_product_eff_attr_fact.product_wid}
-      AND (${mn_discount_bridge_fact.inv_date_wid} BETWEEN ${mn_rl_product_eff_attr_fact.eff_start_date} AND ${mn_rl_product_eff_attr_fact.eff_end_date});;
+      AND ( ${mn_discount_bridge_fact.invoice_raw} BETWEEN ${mn_rl_product_eff_attr_fact.eff_start_raw} AND ${mn_rl_product_eff_attr_fact.eff_end_raw});;
   }
 
   join: mn_rl_product_dim {
