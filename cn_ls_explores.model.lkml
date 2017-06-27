@@ -1,7 +1,6 @@
 include: "base_ls_explores.model.lkml"
 include: "bhavani.model.lkml"
 
-
 explore:  payer_combined_new {
   label: "Payer Combined Model New"
   from: mn_mco_util_fact
