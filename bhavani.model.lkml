@@ -121,7 +121,7 @@ explore: payer_rebate {
     type: left_outer
     relationship: many_to_one
     sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
-#     fields: []
+    fields: [rebate_payment_id, start_date,start_week,start_month,start_quarter,start_year, end_date,end_week,end_month,end_quarter,end_year,payment_status,payment_priority,tier_attained,tier_applied,qualification_status, paid_date,paid_week,paid_month,paid_quarter,paid_year,total_net_due_amount,total_rebate_due_amount]
   }
 
   join: mn_rbt_ctrt_header_dim {
@@ -130,6 +130,22 @@ explore: payer_rebate {
     type: left_outer
     relationship: many_to_one
     sql_on: ${mn_rebate_payment_fact.contract_wid} = ${mn_rbt_ctrt_header_dim.contract_wid} ;;
+  }
+
+  join: mn_rbt_analyst_user_dim {
+    from: mn_user_dim
+    view_label: "Rebate Analyst"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${mn_rbt_analyst_user_dim.user_wid} ;;
+  }
+
+  join: mn_rbt_slsrep_user_dim {
+    from: mn_user_dim
+    view_label: "Rebate SalesRep"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${mn_rebate_payment_fact.salesrep_user_wid} = ${mn_rbt_slsrep_user_dim.user_wid} ;;
   }
 
 #  Commented by ARKADI to pass validation
@@ -252,6 +268,6 @@ explore: payer_rebate {
     view_label: "Contract"
   }
 
-  fields: [ALL_FIELDS*, -mn_discount_bridge_fact.cs_line_ref_num]
+  # fields: [ALL_FIELDS*,-cs_line_ref_num,-ds_line_ref_num,-ids_line_ref_num]
 
 }
