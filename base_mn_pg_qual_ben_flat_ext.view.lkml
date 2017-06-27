@@ -25,6 +25,17 @@ view: mn_pg_qual_ben_flat_ext {
     sql: ${mn_cmpl_period_fact.period_wid} ;;
   }
 
+    dimension: pg_tb_wid {
+      primary_key: no
+    }
+
+    dimension: ext_pk_wid {
+       type: string
+      primary_key: yes
+      sql: ${mn_cmpl_period_fact.period_wid}||'-'|| ${pg_tb_wid} ;;
+    }
+
+
   dimension: commit_tier {
     type: number
     sql: ${mn_cmpl_period_fact.commit_tier} ;;
@@ -35,7 +46,7 @@ view: mn_pg_qual_ben_flat_ext {
   dimension: tier_value {
     type: number
     value_format_name: decimal_0
-    sql: CASE   when ${mn_cmpl_period_fact.commit_tier} = 1 then ${tier1_value}
+    sql: CASE /**/  when ${mn_cmpl_period_fact.commit_tier} = 1 then ${tier1_value}
                 when ${mn_cmpl_period_fact.commit_tier} = 2 then ${tier2_value}
                 when ${mn_cmpl_period_fact.commit_tier} = 3 then ${tier3_value}
                 when ${mn_cmpl_period_fact.commit_tier} = 4 then ${tier4_value}
@@ -66,9 +77,10 @@ view: mn_pg_qual_ben_flat_ext {
     ;;
 
     }
-
-  measure: volume_shortfall {
+ # This doe snot work.
+  measure: volume_shortfall_old {
     type: sum
+    hidden: yes
     sql:
     case when ${component_type_flag} = 'Volume' and (${tier_value} > ${mn_cmpl_per_lines_fact.inv_qty})
     then ${tier_value} - ${mn_cmpl_per_lines_fact.inv_qty}
@@ -77,6 +89,26 @@ view: mn_pg_qual_ben_flat_ext {
     ;;
   }
 
+
+  measure: expected_qty_value {
+    type: sum
+    sql:
+    case when ${component_type_flag} = 'Volume'
+      then ${tier_value}
+    end
+
+    ;;
+  }
+
+  measure: volume_shortfall {
+    type: number
+    sql:
+    case when (${expected_qty_value} > ${mn_cmpl_per_lines_fact.actual_qty_value})
+    then ${expected_qty_value} - ${mn_cmpl_per_lines_fact.actual_qty_value}
+    end
+
+    ;;
+  }
 
 
 }

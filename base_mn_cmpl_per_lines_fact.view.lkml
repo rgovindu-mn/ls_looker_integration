@@ -719,4 +719,10 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.INV_AMT_BASE ;;
   }
 
+  measure: actual_qty_value {
+    type: sum
+    sql: ${inv_qty} ;;
+  }
+
+
 }

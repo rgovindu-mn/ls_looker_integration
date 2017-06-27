@@ -1020,7 +1020,7 @@ explore: commercial_compliance {
   from: mn_cmpl_commit_fact
   view_name: mn_cmpl_commit_fact
   view_label: "Commitments"
-
+  hidden:  no
   sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1
                     and
                     ${mn_ctrt_type_dim.ctrt_type_name} IN
