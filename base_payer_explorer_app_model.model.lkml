@@ -23,6 +23,7 @@ explore: mn_payer_contract {
   #  user_attribute: access_user_name
   #}
 
+#   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
 
   join: mn_contract_attr_fact {
@@ -238,6 +239,74 @@ explore: mn_payer_contract {
     sql_on: ${mn_rebate_prog_prod_map_all.product_wid} = ${mn_rebate_prog_prod_dim.product_wid} ;;
     fields: [product_num, product_name]
   }
+
+  #   Below are to relabel the existing labels
+  join: mn_rbt_ctrt_author_dim {
+    from: mn_user_dim
+    view_label: "Contract Author"
+  }
+
+  join: mn_rbt_ctrt_delegate_dim {
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+  }
+
+  join: mn_rbt_ctrt_srep_dim {
+    from: mn_user_dim
+    view_label: "Contract Sales Rep"
+  }
+
+  join: mn_rbt_ctrt_status_dim {
+    from: mn_ctrt_status_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_domain_dim {
+    from: mn_ctrt_domain_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_type_dim {
+    from: mn_ctrt_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_sub_type_dim {
+    from: mn_ctrt_sub_type_dim
+   view_label: "Contract"
+  }
+
+  join: mn_rbt_cust_owner_dim {
+    from: mn_customer_dim
+    view_label: "Contract Owner Account"
+  }
+
+  join: mn_rbt_cust_cot_dim {
+    from: mn_customer_cot_dim
+    view_label: "Contract Customer COT"
+  }
+
+  join: mn_rbt_cot_dim {
+    from: mn_cot_dim
+    view_label: "Contract Customer COT"
+  }
+
+  join: mn_rbt_ctrt_parent_dim {
+    from: mn_contract_header_dim
+    view_label: "Contract Parent"
+  }
+
+  join: mn_rbt_distrib_mthd_dim {
+    from: mn_distrib_mthd_dim
+    view_label: "Contract Distribution Method"
+  }
+
+  join: mn_rbt_org_dim {
+    from: mn_org_dim
+    view_label: "Contract"
+  }
+#   Complete relabel
+
 
 }
 
