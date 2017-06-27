@@ -1176,4 +1176,15 @@ explore: commercial_compliance {
     sql_on: ${mn_cmpl_per_lines_fact.product_wid} = ${cmpl_prod_eff_attr_fact_ext.product_wid} ;;
   }
 
+  join: mn_pg_qual_ben_flat_ext {
+    type: inner
+    relationship: many_to_one
+    from: mn_pg_qual_ben_flat_ext
+    view_label: "Period"
+    sql_on: ${mn_cmpl_period_fact.pg_wid} = ${mn_pg_qual_ben_flat_ext.pg_wid}
+            and
+            ${mn_pg_tier_basis_dim.pg_tb_wid} = ${mn_pg_qual_ben_flat_ext.pg_tb_wid}
+            ;;
+  }
+
 } # end of commercial_compliance explore

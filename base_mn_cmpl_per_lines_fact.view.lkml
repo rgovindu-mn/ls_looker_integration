@@ -63,11 +63,6 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.INV_AMT ;;
   }
 
-  dimension: inv_amt_base {
-    type: number
-    sql: ${TABLE}.INV_AMT_BASE ;;
-  }
-
   dimension: inv_amt_curr {
     type: string
     sql: ${TABLE}.INV_AMT_CURR ;;
@@ -712,9 +707,16 @@ view: mn_cmpl_per_lines_fact {
     drill_fields: []
   }
 
-  measure: inv_qty {
-    type: sum
+  dimension: inv_qty {
+    type: number
+    label: "Actual Volume"
     sql: ${TABLE}.INV_QTY ;;
+  }
+
+  dimension: inv_amt_base {
+    type: number
+    label: "Actual Revenue"
+    sql: ${TABLE}.INV_AMT_BASE ;;
   }
 
 }

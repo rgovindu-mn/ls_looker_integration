@@ -22,8 +22,8 @@ view: mn_pg_qual_ben_flat {
           PGQB.SALE_LINE_TYPE,
           PGQB.PG_WID,
           NVL(PGQB.BASIS_TYPE, PGQSD.BASIS_TYPE) AS BASIS_TYPE,
-              PGQSD.UNITS AS UNITS,
-              PGQSD.UOM AS UOM,
+          PGQSD.UNITS AS UNITS,
+          PGQSD.UOM AS UOM,
           PGQB.BASIS_DESC,
           PGQB.SEPARATE_TB_PROD_FLAG,
           NVL(PGQB.BASIS_UNIT, PGQSD.BASIS_UNIT) AS BASIS_UNIT,
@@ -43,7 +43,29 @@ view: mn_pg_qual_ben_flat {
           PGQB.END_VER_NUM,
           PGQB.VER_START_DATE,
           PGQB.VER_END_DATE,
-          PGQB.RUN_ID
+          PGQB.RUN_ID,
+          CASE WHEN NVL(PGQB.BASIS_TYPE, PGQSD.BASIS_TYPE) in
+                (
+                      'Free Good Revenue Across Order',
+                      'Revenue by Price Program',
+                      'Free Goods Revenue Capitation' ,
+                      'Step Revenue'
+                ) THEN 'Revenue'
+              ELSE
+                (
+                  CASE WHEN NVL(PGQB.BASIS_TYPE, PGQSD.BASIS_TYPE) in
+                    (
+                      'Volume by Price Program',
+                      'Quantity In Tier Basis',
+                      'Quantity By Line Item',
+                      'Free Goods Volume Across Order',
+                      'Recurring Volume',
+                      'Free Goods volume Capitation',
+                      'Step Volume',
+                      'Volume by line item'
+                    ) THEN 'Volume' ELSE null end
+                  ) END AS COMPONENT_TYPE_FLAG
+
           FROM  MN_PG_QUAL_BEN_DIM_VW PGQB
           LEFT JOIN MN_PG_QUAL_BEN_SD_RPT_VW PGQSD ON PGQSD.PG_TB_WID=PGQB.PG_TB_WID AND PGQB.IS_QUAL_COMP_FLAG='Y' AND PGQSD.SPREADSHEET_TYPE<>'GENERIC' AND PGQSD.TIER_FLAG ='N' AND PGQSD.SPREADSHEET_NAME IS NULL
           LEFT JOIN (
@@ -359,27 +381,7 @@ view: mn_pg_qual_ben_flat {
 
   dimension: component_type_flag {
     type: string
-    sql: CASE WHEN BASIS_TYPE in
-        (
-              'Free Good Revenue Across Order',
-              'Revenue by Price Program',
-              'Free Goods Revenue Capitation' ,
-              'Step Revenue'
-        ) THEN 'Revenue'
-      ELSE
-        (
-          CASE WHEN BASIS_TYPE in
-            (
-              'Volume by Price Program',
-              'Quantity In Tier Basis',
-              'Quantity By Line Item',
-              'Free Goods Volume Across Order',
-              'Recurring Volume',
-              'Free Goods volume Capitation',
-              'Step Volume',
-              'Volume by line item'
-            ) THEN 'Volume' ELSE null end
-          ) END ;;
+    sql: ${TABLE}.COMPONENT_TYPE_FLAG ;;
   }
 
   measure: count {
