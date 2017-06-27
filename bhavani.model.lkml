@@ -102,7 +102,7 @@ explore: payer_utilization {
 }
 
 # Adhoc base explore for Discount Bridge fact with all needed joins
-
+#****************************************************************************************************************************************#
 explore: payer_rebate {
   label: "Payer Rebates"
   from: mn_discount_bridge_fact
@@ -187,6 +187,70 @@ explore: payer_rebate {
   #   view_label: "Rebate Program Benefit Product"
   #   sql_on: ${mn_rbt_prg_ben_flat_dim.program_ben_wid} = ${mn_rbt_prog_ben_prod_map.program_ben_wid} ;;
   # }
+  join: mn_rbt_ctrt_author_dim {
+    from: mn_user_dim
+    view_label: "Contract Author"
+  }
+
+  join: mn_rbt_ctrt_delegate_dim {
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+  }
+
+  join: mn_rbt_ctrt_srep_dim {
+    from: mn_user_dim
+    view_label: "Contract Sales Rep"
+  }
+
+  join: mn_rbt_ctrt_status_dim {
+    from: mn_ctrt_status_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_domain_dim {
+    from: mn_ctrt_domain_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_type_dim {
+    from: mn_ctrt_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_sub_type_dim {
+    from: mn_ctrt_sub_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_cust_owner_dim {
+    from: mn_customer_dim
+    view_label: "Contract Owner Account"
+  }
+
+  join: mn_rbt_cust_cot_dim {
+    from: mn_customer_cot_dim
+    view_label: "Contract Customer COT"
+  }
+
+  join: mn_rbt_cot_dim {
+    from: mn_cot_dim
+    view_label: "Contract Customer COT"
+  }
+
+  join: mn_rbt_ctrt_parent_dim {
+    from: mn_contract_header_dim
+    view_label: "Contract Parent"
+  }
+
+  join: mn_rbt_distrib_mthd_dim {
+    from: mn_distrib_mthd_dim
+    view_label: "Contract Distribution Method"
+  }
+
+  join: mn_rbt_org_dim {
+    from: mn_org_dim
+    view_label: "Contract"
+  }
 
   fields: [ALL_FIELDS*, -mn_discount_bridge_fact.cs_line_ref_num]
 
