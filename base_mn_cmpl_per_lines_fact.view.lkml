@@ -73,10 +73,6 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.INV_AMT_CURR ;;
   }
 
-  dimension: inv_qty {
-    type: number
-    sql: ${TABLE}.INV_QTY ;;
-  }
 
   dimension: line_ref_num {
     type: number
@@ -710,8 +706,15 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.UOM ;;
   }
 
+# Measures
   measure: cmpl_reiod_lines_count {
     type: count
     drill_fields: []
   }
+
+  measure: inv_qty {
+    type: sum
+    sql: ${TABLE}.INV_QTY ;;
+  }
+
 }
