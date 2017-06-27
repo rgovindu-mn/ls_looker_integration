@@ -1022,6 +1022,7 @@ explore: commercial_compliance {
   view_name: mn_combined_cmpl_commit_fact
   view_label: "Commitments"
 
+  hidden:  no
   sql_always_where: ${mn_ctrt_type_dim.ctrt_type_name} IN
                       ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
                     ;;
