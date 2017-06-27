@@ -109,7 +109,7 @@ explore: payer_rebate {
   view_name: mn_discount_bridge_fact
   view_label: "Rebate Lines"
 
-  extends: [mn_paid_rebate_lines_base, mn_contract_header_dim_adhoc_base]
+  extends: [mn_paid_rebate_lines_base,mn_rbt_ctrt_header_dim_base]
   hidden: no
 
   sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
@@ -124,12 +124,12 @@ explore: payer_rebate {
 #     fields: []
   }
 
-  join: mn_contract_header_dim {
+  join: mn_rbt_ctrt_header_dim {
     from: mn_contract_header_dim
     view_label: "Contract"
     type: left_outer
     relationship: many_to_one
-    sql_on: ${mn_rebate_payment_fact.contract_wid} = ${mn_contract_header_dim.contract_wid} ;;
+    sql_on: ${mn_rebate_payment_fact.contract_wid} = ${mn_rbt_ctrt_header_dim.contract_wid} ;;
   }
 
 #  Commented by ARKADI to pass validation
