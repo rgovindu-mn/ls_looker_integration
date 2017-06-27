@@ -567,14 +567,6 @@ explore: provider_combined{
     sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
   }
 
-  join: mn_crp_committed_customer_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Rebate Payment Committed Customer"
-    sql_on: ${mn_combined_rebate_program_dim.customer_wid} = ${mn_crp_committed_customer_dim.customer_wid};;
-  }
-
   join: mn_erp_payment_fact {
     type: left_outer
     relationship: many_to_one
@@ -651,14 +643,6 @@ explore: provider_rebates{
     relationship: many_to_one
     from: mn_rbt_prg_ben_flat_dim
     sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
-  }
-
-   join: mn_crp_committed_customer_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Rebate Payment Committed Customer"
-    sql_on: ${mn_rebate_payment_fact.commited_customer_wid} = ${mn_crp_committed_customer_dim.customer_wid};;
   }
 
   join: mn_erp_payment_fact {
@@ -912,21 +896,21 @@ explore: mn_combined_sale_fact {
     sql_on: ${mn_combined_sale_fact.sold_to_customer_wid}=${sl_sold_to_customer_ids.customer_wid};;
   }
 
-  join: sl_ship_to_customer {
+  join: sl_hip_to_customer {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Ship to Customer"
-    sql_on: ${mn_combined_sale_fact.ship_to_customer_wid} = ${sl_ship_to_customer.customer_wid};;
+    sql_on: ${mn_combined_sale_fact.ship_to_customer_wid} = ${sl_hip_to_customer.customer_wid};;
   }
 
-  join: sl_ship_to_customer_ids {
+  join: sl_hip_to_customer_ids {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
     view_label: "Ship to Customer"
     fields: [id_num, id_type]
-    sql_on: ${mn_combined_sale_fact.ship_to_customer_wid}=${sl_ship_to_customer_ids.customer_wid};;
+    sql_on: ${mn_combined_sale_fact.ship_to_customer_wid}=${sl_hip_to_customer_ids.customer_wid};;
   }
 
   join: sl_bill_to_customer {
@@ -977,7 +961,7 @@ explore: mn_combined_sale_fact {
     view_label: "Sold Product"
     fields: [Product_EDA_Attributes*]
     sql_on: ${mn_combined_sale_fact.product_wid} = ${sl_product_eff_attr_fact.product_wid}
-      AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${sl_product_eff_attr_fact.eff_start_date} AND ${sl_product_eff_attr_fact.eff_end_date});;
+      AND (${mn_combined_sale_fact.invoice_raw} BETWEEN ${sl_product_eff_attr_fact.eff_start_raw} AND ${sl_product_eff_attr_fact.eff_end_raw});;
   }
 
   join: mn_user_access_sale_map {

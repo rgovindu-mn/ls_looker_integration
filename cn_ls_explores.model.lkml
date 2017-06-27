@@ -1,91 +1,232 @@
 include: "base_ls_explores.model.lkml"
-include: "bhavani.model.lkml"
-
-explore: payer_combined {
-  label: "Payer Combined Model"
-  from: mn_discount_bridge_fact
-  view_name: mn_discount_bridge_fact
-  view_label: "Rebate Lines"
-  extends: [payer_rebate,payer_utilization]
-  hidden: no
-
-# #  Commented by ARKADI to pass validation
-#   join: mn_customer_owner_dim {
-#   fields: []
+# include: "bhavani.model.lkml"
+#
+# explore:  payer_combined_new {
+#   label: "Payer Combined Model New"
+#   from: mn_mco_util_fact
+#   view_name: mn_mco_util_fact
+#   extends: [payer_rebate, payer_utilization]
+#   view_label: "Utilization Lines"
+#   hidden: no
+#   sql_always_where: 1=1 ;;
+#
+#   join: mn_discount_bridge_fact {
+#     type: left_outer
+#     relationship: one_to_many
+#     from: mn_discount_bridge_fact
+#     sql_on: ${mn_mco_util_fact.pub_util_id} = ${mn_discount_bridge_fact.pub_util_id} ;;
+#     view_label: "Rebate lines"
 #   }
 #
-#   join: mn_ch_cust_cot_dim {
-#   fields: []
+#   join: mn_ctrt_Adtnl_dlgt_dim {
+#     type: left_outer
+#     relationship: many_to_one
+#     from: mn_user_dim
+#     view_label: "Contract Additional Delegate"
+#     sql_on: ${mn_rbt_ctrt_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
 #   }
 #
-#   join: mn_ch_cot_dim {
-#   fields: []
-#   }
-
-  join: mn_ctrt_Adtnl_dlgt_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_user_dim
-    view_label: "Contract Additional Delegate"
-     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
-  }
-
-  join: mn_mco_util_fact {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_mco_util_fact
-    sql_on: ${mn_discount_bridge_fact.pub_util_id} = ${mn_mco_util_fact.pub_util_id} ;;
-    view_label: "Utilization lines"
-  }
-
-#   join: mn_customer_dim_bob {
+#   #   Relabelling the existing labels
+#
+#   join: mn_util_customer_dim_bob {
+#     from: mn_customer_dim
 #     view_label: "Util Book of Business"
 #   }
 #
-#   join: mn_customer_dim_parent_pbm {
+#   join: mn_util_cust_dim_parent_pbm {
+#     from: mn_customer_dim
 #     view_label: "Util PBM"
 #   }
 #
-#   join: mn_customer_dim_plan {
+#   join: mn_util_cust_dim_plan {
+#     from: mn_customer_dim
+#     view_label: "Util Plan"
+#   }
+#
+#   join: mn_util_ctrt_customer_dim {
+#     from: mn_customer_dim
+#     view_label: "Util Contracted Customer"
+#   }
+#
+#   join: mn_util_ctrt_customer_id {
+#     from: mn_customer_ids_dim
+#     view_label: "Util Contracted Customer"
+#   }
+#
+#   join: mn_mco_submission_dim {
+#     from: mn_mco_submission_dim
+#     view_label: "Util Submission"
+#   }
+#
+#   join: mn_util_product_dim {
+#     from: mn_product_dim
+#     view_label: "Util Product"
+#   }
+#   join: mn_util_product_map_all_ver {
+#     from: mn_product_map_all_ver
+#     view_label: "Util Product"
+#   }
+#
+#   join: mn_formulary_dim {
+#     from: mn_formulary_dim
+#     view_label: "Util Formulary"
+#   }
+#
+#   join: mn_util_org_dim {
+#     from: mn_org_dim
+#     view_label: "Util Org"
+#   }
+#
+#   join: mn_util_cot_dim {
+#     from: mn_cot_dim
+#     view_label: "Util COT"
+#   }
+#
+# #  Hiding unwanted joins - from Exended Rebates
+#   join: mn_rbt_cust_owner_dim {
+#     from: mn_customer_dim
 #     fields: []
 #   }
 #
-#   join: mn_contracted_customer_dim {
+#   join: mn_rbt_cust_cot_dim {
+#     from: mn_customer_cot_dim
+#     fields: []
+#   }
+#
+#   join: mn_rbt_cot_dim {
+#     from: mn_cot_dim
+#     fields: []
+#   }
+#
+# #   join: mn_rbt_org_dim {
+# #     from: mn_org_dim
+# #     fields: []
+# #   }
+#
+#
+# #  Hiding unwanted joins - Rebates
+#   join: mn_rbt_product_dim {
+#     from: mn_product_dim
+#     fields: []
+#   }
+#
+#   join:  mn_rbt_plan_dim {
+#     from: mn_customer_dim
+#     fields: []
+#   }
+#
+# }
+#
+# explore: payer_combined {
+#   label: "Payer Combined Model"
+#   from: mn_discount_bridge_fact
+#   view_name: mn_discount_bridge_fact
+#   view_label: "Rebate Lines"
+#   extends: [payer_rebate,payer_utilization]
+#   hidden: no
+#
+#   join: mn_ctrt_Adtnl_dlgt_dim {
+#     type: left_outer
+#     relationship: many_to_one
+#     from: mn_user_dim
+#     view_label: "Contract Additional Delegate"
+#      sql_on: ${mn_rbt_ctrt_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
+#   }
+#
+#   join: mn_mco_util_fact {
+#     type: left_outer
+#     relationship: many_to_one
+#     from: mn_mco_util_fact
+#     sql_on: ${mn_discount_bridge_fact.pub_util_id} = ${mn_mco_util_fact.pub_util_id} ;;
+#     view_label: "Utilization lines"
+#   }
+#
+#   #   Relabelling the existing labels - Utilization
+#
+#   join: mn_util_customer_dim_bob {
+#     from: mn_customer_dim
+#     view_label: "Util Book of Business"
+#   }
+#
+#   join: mn_util_cust_dim_parent_pbm {
+#     from: mn_customer_dim
+#     view_label: "Util PBM"
+#   }
+#
+#   join: mn_util_cust_dim_plan {
+#     from: mn_customer_dim
+#     view_label: "Util Plan"
+#   }
+#
+#   join: mn_util_ctrt_customer_dim {
+#     from: mn_customer_dim
 #     view_label: "Util Contracted Customer"
 #   }
 #
-#   join: mn_contracted_customer_id {
+#   join: mn_util_ctrt_customer_id {
+#     from: mn_customer_ids_dim
 #     view_label: "Util Contracted Customer"
 #   }
-
-  join: mn_mco_submission_dim {
-    view_label: "Util Submission"
-  }
-
-  join: mn_product_dim {
-    view_label: "Util Product"
-  }
-
-  join: mn_product_map_all_ver {
-    view_label: "Util Product"
-    fields: []
-  }
-
-  join: mn_formulary_dim {
-    view_label: "Util Formulary"
-  }
-
-  join: mn_org_dim {
-    view_label: "Util Org"
-  }
-
-  join: mn_cot_dim {
-    view_label: "Util COT"
-  }
-
-
-
-}
+#
+#   join: mn_mco_submission_dim {
+#     from: mn_mco_submission_dim
+#     view_label: "Util Submission"
+#   }
+#
+#   join: mn_util_product_dim {
+#     from: mn_product_dim
+#     view_label: "Util Product"
+#   }
+#   join: mn_util_product_map_all_ver {
+#     from: mn_product_map_all_ver
+#     view_label: "Util Product"
+#   }
+#
+#   join: mn_formulary_dim {
+#     from: mn_formulary_dim
+#     view_label: "Util Formulary"
+#   }
+#
+#   join: mn_util_org_dim {
+#     from: mn_org_dim
+#     view_label: "Util Org"
+#   }
+#
+#   join: mn_util_cot_dim {
+#     from: mn_cot_dim
+#     view_label: "Util COT"
+#   }
+#
+# #  Hiding unwanted joins - Contracts
+#   join: mn_rbt_cust_owner_dim {
+#     from: mn_customer_dim
+#     fields: []
+#   }
+#
+#   join: mn_rbt_cust_cot_dim {
+#     from: mn_customer_cot_dim
+#     fields: []
+#   }
+#
+#   join: mn_rbt_cot_dim {
+#     from: mn_cot_dim
+#     fields: []
+#   }
+#
+# #  Hiding unwanted joins - Rebates
+#   join: mn_rbt_product_dim {
+#     from: mn_product_dim
+#     fields: []
+#   }
+#
+#   join:  mn_rbt_plan_dim {
+#     from: mn_customer_dim
+#     fields: []
+#   }
+#
+#
+#
+# }
 # explore: payer_estimated_rebates{
 #   label: "Estimated Rebates"
 #   from: mn_est_rebate_payment_fact
