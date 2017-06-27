@@ -240,7 +240,7 @@ explore: mn_payer_contract {
     fields: [product_num, product_name]
   }
 
-  #   Below are to relabel the existing labels
+  #   Relabelling the existing labels
   join: mn_rbt_ctrt_author_dim {
     from: mn_user_dim
     view_label: "Contract Author"
