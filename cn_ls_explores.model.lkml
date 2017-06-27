@@ -2,31 +2,31 @@ include: "base_ls_explores.model.lkml"
 include: "bhavani.model.lkml"
 
 
-explore:  payer_combined_new {
-  label: "Payer Combined Model New"
-  from: mn_mco_util_fact
-  view_name: mn_mco_util_fact
-  extends: [payer_rebate,payer_utilization]
-  view_label: "Utilization Lines"
-  hidden: no
-
-  join: mn_discount_bridge_fact {
-    type: left_outer
-    relationship: one_to_many
-    from: mn_discount_bridge_fact
-    sql_on: ${mn_mco_util_fact.pub_util_id} = ${mn_discount_bridge_fact.pub_util_id} ;;
-    view_label: "Rebate lines"
-  }
-
-  join: mn_ctrt_Adtnl_dlgt_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_user_dim
-    view_label: "Contract Additional Delegate"
-    sql_on: ${mn_contract_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
-  }
-
-}
+# explore:  payer_combined_new {
+#   label: "Payer Combined Model New"
+#   from: mn_mco_util_fact
+#   view_name: mn_mco_util_fact
+#   extends: [payer_rebate,payer_utilization]
+#   view_label: "Utilization Lines"
+#   hidden: no
+#
+#   join: mn_discount_bridge_fact {
+#     type: left_outer
+#     relationship: one_to_many
+#     from: mn_discount_bridge_fact
+#     sql_on: ${mn_mco_util_fact.pub_util_id} = ${mn_discount_bridge_fact.pub_util_id} ;;
+#     view_label: "Rebate lines"
+#   }
+#
+#   join: mn_ctrt_Adtnl_dlgt_dim {
+#     type: left_outer
+#     relationship: many_to_one
+#     from: mn_user_dim
+#     view_label: "Contract Additional Delegate"
+#     sql_on: ${mn_contract_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
+#   }
+#
+# }
 
 explore: payer_combined {
   label: "Payer Combined Model"
