@@ -155,9 +155,18 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: strategy_based_flag {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.STRATEGY_BASED_FLAG ;;
+  }
+
+  dimension: strategy_based_yes_no {
+    group_label: "Benefit"
+    label: "Strategy Based ?"
+    type: string
+    sql: CASE WHEN ${TABLE}.STRATEGY_BASED_FLAG = 'Y' THEN 'Yes'
+    WHEN ${TABLE}.STRATEGY_BASED_FLAG = 'N' THEN 'No' ELSE Null END ;;
   }
 
   dimension: eff_start_date {
@@ -239,9 +248,18 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: item_override_flag {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.ITEM_OVERRIDE_FLAG ;;
+  }
+
+  dimension: item_override_yes_no {
+    group_label: "Benefit"
+    label: "Item Override ?"
+    type: string
+    sql: CASE WHEN ${TABLE}.ITEM_OVERRIDE_FLAG = 1 THEN 'Yes'
+    WHEN ${TABLE}.ITEM_OVERRIDE_FLAG = 0THEN 'No' ELSE Null END ;;
   }
 
   dimension: alt_uom {
@@ -446,9 +464,18 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: is_round_qty_flag {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.IS_ROUND_QTY_FLAG ;;
+  }
+
+  dimension: is_round_qty_yes_no {
+    group_label: "Benefit"
+    label: "Is Round Quantity ?"
+    type: string
+    sql: CASE WHEN ${TABLE}.IS_ROUND_QTY_FLAG = 1 THEN 'Yes'
+    WHEN ${TABLE}.IS_ROUND_QTY_FLAG = 0 THEN 'No' ELSE Null END ;;
   }
 
   dimension: manual_baseline_val {
