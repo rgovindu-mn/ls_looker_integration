@@ -961,7 +961,7 @@ explore: mn_combined_sale_fact {
     view_label: "Sold Product"
     fields: [Product_EDA_Attributes*]
     sql_on: ${mn_combined_sale_fact.product_wid} = ${sl_product_eff_attr_fact.product_wid}
-      AND (${mn_combined_sale_fact.invoice_date} BETWEEN ${sl_product_eff_attr_fact.eff_start_date} AND ${sl_product_eff_attr_fact.eff_end_date});;
+      AND (${mn_combined_sale_fact.invoice_raw} BETWEEN ${sl_product_eff_attr_fact.eff_start_raw} AND ${sl_product_eff_attr_fact.eff_end_raw});;
   }
 
   join: mn_user_access_sale_map {
@@ -1017,13 +1017,13 @@ explore: mn_combined_sale_fact {
 explore: commercial_compliance {
   label: "Commercial Compliance"
   extends: [mn_contract_header_dim_adhoc_base, mn_product_group_dim_base]
-  from: mn_cmpl_commit_fact
-  view_name: mn_cmpl_commit_fact
+  #from: mn_cmpl_commit_fact
+  from: mn_combined_cmpl_commit_fact
+  view_name: mn_combined_cmpl_commit_fact
   view_label: "Commitments"
 
-  sql_always_where: ${mn_cmpl_commit_fact.is_access_price_flag} <> 1
-                    and
-                    ${mn_ctrt_type_dim.ctrt_type_name} IN
+  hidden:  no
+  sql_always_where: ${mn_ctrt_type_dim.ctrt_type_name} IN
                       ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
                     ;;
 
@@ -1032,7 +1032,7 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_product_group_dim
     view_label: "Pricing Program"
-    sql_on: ${mn_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
+    sql_on: ${mn_combined_cmpl_commit_fact.pg_wid} = ${mn_product_group_dim.pg_wid}
               AND
               ${mn_product_group_dim.latest_flag} = 'Y'
               ;;
@@ -1043,20 +1043,20 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_contract_header_dim
     view_label: "Pricing Contract"
-    sql_on: ${mn_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
+    sql_on: ${mn_combined_cmpl_commit_fact.contract_wid} = ${mn_contract_header_dim.contract_wid}
               AND ${mn_contract_header_dim.latest_flag} = 'Y'
               ;;
   }
 
-  join: mn_cmt_type_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_cmt_type_dim
-    view_label: "Commitments"
-    sql_on: ${mn_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
-    fields:[cmt_type_name]
-
-  }
+#   join: mn_cmt_type_dim {
+#     type: left_outer
+#     relationship: many_to_one
+#     from: mn_cmt_type_dim
+#     view_label: "Commitments"
+#     sql_on: ${mn_combined_cmpl_commit_fact.commit_type_wid} = ${mn_cmt_type_dim.cmt_type_wid} ;;
+#     fields:[cmt_type_name]
+#
+#   }
 
   join: mn_distrib_mthd_dim {
     view_label: "Pricing Contract"
@@ -1069,25 +1069,25 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_customer_commit_dim_ext
     view_label: "Commitments"
-    sql_on: ${mn_cmpl_commit_fact.customer_wid} = ${cmpl_committed_customer.customer_wid};;
+    sql_on: ${mn_combined_cmpl_commit_fact.customer_wid} = ${cmpl_committed_customer.customer_wid};;
   }
 
-  join: mn_cmt_change_reason_dim {
-    type: left_outer
-    relationship: many_to_one
-    from: mn_cmt_change_reason_dim
-    view_label: "Commitments"
-    fields: [cmt_change_code_name]
-    sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
-
-  }
+#   join: mn_cmt_change_reason_dim {
+#     type: left_outer
+#     relationship: many_to_one
+#     from: mn_cmt_change_reason_dim
+#     view_label: "Commitments"
+#     fields: [cmt_change_code_name]
+#     sql_on: ${mn_cmpl_commit_fact.cmt_change_code_wid} = ${mn_cmt_change_reason_dim.cmt_change_code_wid} ;;
+#
+#   }
 
   join: mn_cmpl_period_fact {
-    type: inner
+    type: left_outer
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
-    sql_on: ${mn_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
+    sql_on: ${mn_combined_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
               AND ${mn_cmpl_period_fact.hidden_flag} = 'N'
               ;;
   }
@@ -1158,6 +1158,17 @@ explore: commercial_compliance {
     from: mn_product_eff_attr_fact_ext
     view_label: "Product"
     sql_on: ${mn_cmpl_per_lines_fact.product_wid} = ${cmpl_prod_eff_attr_fact_ext.product_wid} ;;
+  }
+
+  join: mn_pg_qual_ben_flat_ext {
+    type: inner
+    relationship: many_to_one
+    from: mn_pg_qual_ben_flat_ext
+    view_label: "Period"
+    sql_on: ${mn_cmpl_period_fact.pg_wid} = ${mn_pg_qual_ben_flat_ext.pg_wid}
+            and
+            ${mn_pg_tier_basis_dim.pg_tb_wid} = ${mn_pg_qual_ben_flat_ext.pg_tb_wid}
+            ;;
   }
 
 } # end of commercial_compliance explore
