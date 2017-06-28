@@ -8,6 +8,7 @@ view: mn_rbt_qual_prod_map_all {
   }
 
   dimension: contract_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }

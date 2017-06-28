@@ -359,6 +359,7 @@ view: mn_rbt_prg_qual_flat_dim {
   }
 
   dimension: contract_type {
+    hidden: yes
     group_label: "Qualification"
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;

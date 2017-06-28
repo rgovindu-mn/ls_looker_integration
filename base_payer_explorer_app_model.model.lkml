@@ -12,7 +12,6 @@ explore: mn_payer_contract {
   label: "Payer Contracts"
   from: mn_contract_header_dim
   view_name: mn_rbt_ctrt_header_dim
-
   extends: [mn_rbt_ctrt_header_dim_secure_base,
      mn_combined_rebate_program_dim_base]
 
@@ -27,12 +26,12 @@ explore: mn_payer_contract {
 #   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
 
-  join: mn_contract_attr_fact {
+  join: mn_ctrt_attr_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_contract_attr_fact
     view_label: "Contract"
-    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_contract_attr_fact.contract_wid};;
+    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_ctrt_attr_fact.contract_wid};;
     fields: [eff_start_date, eff_end_date, attr_name, attr_value]
   }
 
@@ -41,7 +40,8 @@ explore: mn_payer_contract {
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
-    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid} ;;
+    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
+    AND ${mn_combined_rebate_program_dim.latest_flag} = 'Y';;
   }
 
   # ****************************** Rebate Program Qualification joins
@@ -58,7 +58,7 @@ explore: mn_payer_contract {
     relationship: many_to_one
     from: mn_rbt_qual_prod_map_all
     view_label: "Rebate Program Qualification Product"
-    sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_qual_prod_map_all.basket_wid}.program_qual_wid} ;;
+    sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_qual_prod_map_all.program_qual_wid} ;;
   }
 
   join: mn_rbt_qual_prod_dim {

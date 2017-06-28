@@ -18,7 +18,7 @@ view: mn_contract_header_dim {
     type: string
     sql:  CASE WHEN ${TABLE}.AMENDED_FLAG = 1 THEN 'Yes'
                WHEN ${TABLE}.AMENDED_FLAG = 0 THEN 'No' ELSE '' END;;
-    label: "Amended?"
+    label: "Amended ?"
   }
 
   dimension: amendment_count {
@@ -286,7 +286,7 @@ view: mn_contract_header_dim {
     type: string
     sql: CASE WHEN ${TABLE}.LATEST_FLAG = 'Y' THEN 'Yes'
       WHEN ${TABLE}.LATEST_FLAG = 'N' THEN 'No' ELSE '' END;;
-    label: "Is Latest?"
+    label: "Is Latest ?"
   }
 
   dimension: locale {
@@ -521,6 +521,7 @@ view: mn_contract_header_dim {
   }
 
   dimension: ver_num {
+    hidden: yes
     type: string
     sql: ${TABLE}.VER_NUM ;;
   }
@@ -541,6 +542,7 @@ view: mn_contract_header_dim {
 
   dimension: version {
     type: string
+    label: "Version Number"
     sql: ${TABLE}.VERSION ;;
   }
 

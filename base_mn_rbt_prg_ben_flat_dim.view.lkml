@@ -485,6 +485,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: contract_type {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;

@@ -32,11 +32,13 @@ view: mn_program_type_dim {
   }
 
   dimension: program_type_desc {
+    group_label: "Program Type"
     type: string
     sql: ${TABLE}.PROGRAM_TYPE_DESC ;;
   }
 
   dimension: program_type_name {
+    group_label: "Program Type"
     type: string
     sql: ${TABLE}.PROGRAM_TYPE_NAME ;;
   }
