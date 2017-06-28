@@ -9,7 +9,7 @@ label: "Payer Explorer"
 
 
 explore: mn_payer_contract {
-  label: "1. Payer Contracts"
+  label: "Payer Contracts"
   from: mn_contract_header_dim
   view_name: mn_rbt_ctrt_header_dim
 
@@ -311,7 +311,7 @@ explore: mn_payer_contract {
 
 # **************************************** Payer Estimated Rebates
 explore: payer_estimated_rebates{
-  label: "4. Payer Estimated Rebates"
+  label: "Payer Estimated Rebates"
   from: mn_est_rebate_payment_fact
   view_name: mn_est_rebate_payment_fact
   extends: [estimated_rebates_base]
@@ -322,7 +322,7 @@ explore: payer_estimated_rebates{
 
 # **************************************** Payer Historical Rebates
 explore: payer_historical_rebates {
-  label: "5. Payer Historical Rebates"
+  label: "Payer Historical Rebates"
   from: mn_discount_bridge_fact
   view_name: mn_discount_bridge_fact
   extends: [historical_rebates_base]
@@ -334,7 +334,7 @@ explore: payer_historical_rebates {
 
 # **************************************** Payer Combined Model
 explore:  payer_combined_new {
-  label: "6. Payer Combined Model"
+  label: "Payer Combined Model"
   from: mn_mco_util_fact
   view_name: mn_mco_util_fact
   extends: [payer_rebate, payer_utilization]
