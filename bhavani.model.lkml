@@ -4,15 +4,7 @@ include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
 
-# include: "base_mn_payment_package_dim_new.view.lkml"
-
-# explore: Pmt_Package {
-#   from: mn_payment_package_dim_new
-#   view_name: mn_payment_package_dim_new
-#   view_label: "Rebate Payment Package"
-
-# }
-
+#************************************Payer Utilization Explore
 explore: payer_utilization {
   label: "Payer Utilization"
   from: mn_mco_util_fact
@@ -110,8 +102,7 @@ explore: payer_utilization {
 
 }
 
-# Adhoc base explore for Discount Bridge fact with all needed joins
-#****************************************************************************************************************************************#
+#************************************Payer Rebate Explore
 explore: payer_rebate {
   label: "Payer Rebates"
   from: mn_discount_bridge_fact
@@ -156,12 +147,6 @@ explore: payer_rebate {
     relationship: many_to_one
     sql_on: ${mn_rebate_payment_fact.salesrep_user_wid} = ${mn_rbt_slsrep_user_dim.user_wid} ;;
   }
-
-#  Commented by ARKADI to pass validation
-#   join: mn_additional_delegate_dim {
-#     view_label: "Rebate Contract Additional Delegate"
-#     fields: []
-#   }
 
   join: mn_payment_package_dim {
     from: mn_payment_package_dim
