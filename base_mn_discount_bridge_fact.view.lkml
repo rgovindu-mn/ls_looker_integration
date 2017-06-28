@@ -166,16 +166,19 @@ view: mn_discount_bridge_fact {
 
   dimension: inv_amt {
     type: number
+    label: "Inv. Amount"
     sql: ${TABLE}.INV_AMT ;;
   }
 
   dimension: inv_amt_base {
     type: number
+    label: "Inv. Amount Base"
     sql: ${TABLE}.INV_AMT_BASE ;;
   }
 
   dimension: inv_amt_curr {
     type: string
+    label: "Inv. Amount Currency"
     sql: ${TABLE}.INV_AMT_CURR ;;
   }
 
@@ -187,6 +190,7 @@ view: mn_discount_bridge_fact {
 
   dimension_group: invoice {
     type: time
+    label: "Inv."
     timeframes: [
       raw,
       time,
@@ -201,12 +205,20 @@ view: mn_discount_bridge_fact {
 
   dimension: inv_qty {
     type: number
+    label: "Inv. Quantity"
     sql: ${TABLE}.INV_QTY ;;
   }
 
   dimension: is_historical_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.IS_HISTORICAL_FLAG ;;
+  }
+
+  dimension: is_historical {
+    type: string
+    label: "Is Historical ?"
+    sql: case when nvl(${TABLE}.IS_HISTORICAL_FLAG,'N') = 'N' then 'No' else 'Yes' end ;;
   }
 
   dimension: mcd_claim_wid {
@@ -227,7 +239,9 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: mco_line_ref_num {
+    hidden: yes
     type: string
+    label: "Util Line Ref Num"
     sql: ${TABLE}.MCO_LINE_REF_NUM ;;
   }
 
@@ -281,6 +295,7 @@ view: mn_discount_bridge_fact {
 
   dimension_group: payment_end {
     type: time
+    label: "Rebate Pmt End"
     timeframes: [
       raw,
       time,
@@ -295,6 +310,7 @@ view: mn_discount_bridge_fact {
 
   dimension_group: payment_start {
     type: time
+    label: "Rebate Pmt Start"
     timeframes: [
       raw,
       time,
@@ -325,6 +341,7 @@ view: mn_discount_bridge_fact {
   }
 
   dimension: rebate_module_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.REBATE_MODULE_TYPE ;;
   }
@@ -388,8 +405,9 @@ view: mn_discount_bridge_fact {
     sql: ${TABLE}.SRC_SYS_EST_PLAN_ID ;;
   }
 
-  dimension: wac_amt {
+  dimension: WAC_amt {
     type: string
+    label: "WAC Amount"
     sql: ${TABLE}.WAC_AMT ;;
   }
 

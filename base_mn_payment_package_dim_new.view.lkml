@@ -1,4 +1,4 @@
-view: mn_payment_package_dim {
+view: mn_payment_package_dim_new {
   sql_table_name: MN_PAYMENT_PACKAGE_DIM_VW ;;
 
   dimension: analyst_wid {

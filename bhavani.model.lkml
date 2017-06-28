@@ -4,6 +4,15 @@ include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
 
+# include: "base_mn_payment_package_dim_new.view.lkml"
+
+# explore: Pmt_Package {
+#   from: mn_payment_package_dim_new
+#   view_name: mn_payment_package_dim_new
+#   view_label: "Rebate Payment Package"
+
+# }
+
 explore: payer_utilization {
   label: "Payer Utilization"
   from: mn_mco_util_fact
@@ -121,7 +130,7 @@ explore: payer_rebate {
     type: left_outer
     relationship: many_to_one
     sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
-    fields: [rebate_payment_id, start_date,start_week,start_month,start_quarter,start_year, end_date,end_week,end_month,end_quarter,end_year,payment_status,payment_priority,tier_attained,tier_applied,qualification_status, paid_date,paid_week,paid_month,paid_quarter,paid_year,total_net_due_amount,total_rebate_due_amount]
+    fields: [rebate_payment_id, start_date,start_month,start_quarter,start_year, end_date,end_month,end_quarter,end_year,payment_status,payment_priority,tier_attained,tier_applied,qualification_status, paid_date,paid_month,paid_quarter,paid_year,total_net_due_amount,total_rebate_due_amount]
   }
 
   join: mn_rbt_ctrt_header_dim {
@@ -154,12 +163,12 @@ explore: payer_rebate {
 #     fields: []
 #   }
 
-  join: mn_rebate_payment_package_dim {
-    from: mn_rebate_payment_package_dim
+  join: mn_payment_package_dim {
+    from: mn_payment_package_dim
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Payment Package"
-    sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_rebate_payment_package_dim.pymt_pkg_wid} ;;
+    sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid} ;;
   }
 
   join: mn_rbt_product_dim {
@@ -268,6 +277,9 @@ explore: payer_rebate {
     view_label: "Contract"
   }
 
-  # fields: [ALL_FIELDS*,-cs_line_ref_num,-ds_line_ref_num,-ids_line_ref_num]
+  fields: [ALL_FIELDS*,-mn_discount_bridge_fact.cs_line_ref_num,-mn_discount_bridge_fact.ids_line_ref_num,
+    -mn_discount_bridge_fact.ds_line_ref_num,-mn_discount_bridge_fact.mcd_claim_wid,-mn_discount_bridge_fact.mcd_line_ref_num,
+    -mn_discount_bridge_fact.mcd_payment_wid,-mn_discount_bridge_fact.pub_util_id,-mn_discount_bridge_fact.estimate_pmt_flag,
+    -mn_discount_bridge_fact.estimate_qty,-mn_discount_bridge_fact.inv_amt_base,-mn_discount_bridge_fact.paid_amt_base]
 
 }
