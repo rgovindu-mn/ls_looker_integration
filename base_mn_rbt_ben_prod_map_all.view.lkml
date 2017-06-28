@@ -99,33 +99,43 @@ view: mn_rbt_ben_prod_map_all {
   }
 
   dimension: excluded_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.EXCLUDED_FLAG ;;
   }
 
+  dimension: excluded_flag_yes_no {
+    hidden: yes
+    type: string
+    label: "Is Excluded ?"
+    sql: CASE WHEN ${TABLE}.EXCLUDED_FLAG = 'Y' THEN 'Yes' ELSE 'No' END ;;
+  }
+
   dimension: included_from_ctrt_flag {
     type: string
+    label: "Is Included From Contract?"
     sql: ${TABLE}.INCLUDED_FROM_CTRT_FLAG ;;
   }
 
   dimension: included_from_pg_flag {
     type: string
+    label: "Is Included From Price Program?"
     sql: ${TABLE}.INCLUDED_FROM_PG_FLAG ;;
   }
 
   dimension: mco_pp_cap_perc {
     type: string
-    sql: ${TABLE}.MCO_PP_CAP_PERC ;;
+    sql: ${TABLE}.MCO_PP_CAP_PERC*100 ;;
   }
 
   dimension: mco_pp_threshold_perc {
     type: string
-    sql: ${TABLE}.MCO_PP_THRESHOLD_PERC ;;
+    sql: ${TABLE}.MCO_PP_THRESHOLD_PERC*100 ;;
   }
 
   dimension: mco_pp_total_disc_cap_perc {
     type: string
-    sql: ${TABLE}.MCO_PP_TOTAL_DISC_CAP_PERC ;;
+    sql: ${TABLE}.MCO_PP_TOTAL_DISC_CAP_PERC*100 ;;
   }
 
   dimension: override_flag {

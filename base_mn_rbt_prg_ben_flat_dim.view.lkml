@@ -270,30 +270,35 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pmon_calc_price_basis {
     group_label: "Benefit"
+    label: "PMON Calc Price Basis"
     type: string
     sql: ${TABLE}.PMON_CALC_PRICE_BASIS ;;
   }
 
   dimension: pmon_benefit_type {
     group_label: "Benefit"
+    label: "PMON Benefit Type"
     type: string
     sql: ${TABLE}.PMON_BENEFIT_TYPE ;;
   }
 
   dimension: pmon_price_res_method {
     group_label: "Benefit"
+    label: "PMON Price Resolution Method"
     type: string
     sql: ${TABLE}.PMON_PRICE_RES_METHOD ;;
   }
 
   dimension: pmon_alt_uom {
     group_label: "Benefit"
+    label: "PMON Alternate UOM"
     type: string
     sql: ${TABLE}.PMON_ALT_UOM ;;
   }
 
   dimension: pmon_estimated_val {
     group_label: "Benefit"
+    label: "PMON Estimated Value"
     type: string
     sql: ${TABLE}.PMON_ESTIMATED_VAL ;;
   }
@@ -306,6 +311,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pmon_mco_vol_basis {
     group_label: "Benefit"
+    label: "PMON MCO Volume Basis"
     type: string
     sql: ${TABLE}.PMON_MCO_VOL_BASIS ;;
   }
@@ -319,6 +325,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pmon_pl_type {
     group_label: "Benefit"
+    label: "PMON Price List Type"
     type: string
     sql: ${TABLE}.PMON_PL_TYPE ;;
   }
@@ -494,7 +501,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: pp_threshold {
     group_label: "Benefit"
     type: string
-    sql: ${TABLE}.PP_THRESHOLD ;;
+    sql: ${TABLE}.PP_THRESHOLD*100 ;;
   }
 
   dimension: adhoc_date {
@@ -536,7 +543,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: cap_percent {
     group_label: "Benefit"
     type: string
-    sql: ${TABLE}.CAP_PERCENT ;;
+    sql: ${TABLE}.CAP_PERCENT*100 ;;
   }
 
   dimension: enable_bep_calc {
@@ -560,7 +567,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: total_disc_cap_percent {
     group_label: "Benefit"
     type: string
-    sql: ${TABLE}.TOTAL_DISC_CAP_PERCENT ;;
+    sql: ${TABLE}.TOTAL_DISC_CAP_PERCENT*100 ;;
   }
 
   dimension: tier_flag {
