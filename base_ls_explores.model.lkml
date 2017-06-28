@@ -765,13 +765,13 @@ explore: estimated_rebates_base {
      sql_on: ${mn_est_rebate_pmt_prod_map.program_wid} = ${mn_combined_rebate_program_dim.program_wid};;
    }
 
-   join: mn_rbt_prg_ben_flat_dim {
-       type: left_outer
-       view_label: "Rebate Program Benefit"
-       relationship: many_to_one
-       from: mn_rbt_prg_ben_flat_dim
-       sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
-   }
+#    join: mn_rbt_prg_ben_flat_dim {
+#        type: left_outer
+#        view_label: "Rebate Program Benefit"
+#        relationship: many_to_one
+#        from: mn_rbt_prg_ben_flat_dim
+#        sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
+#    }
 
    join: mn_erp_payment_fact {
      type: left_outer
