@@ -155,9 +155,18 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: strategy_based_flag {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.STRATEGY_BASED_FLAG ;;
+  }
+
+  dimension: strategy_based_yes_no {
+    group_label: "Benefit"
+    label: "Strategy Based ?"
+    type: string
+    sql: CASE WHEN ${TABLE}.STRATEGY_BASED_FLAG = 'Y' THEN 'Yes'
+    WHEN ${TABLE}.STRATEGY_BASED_FLAG = 'N' THEN 'No' ELSE Null END ;;
   }
 
   dimension: eff_start_date {
@@ -239,9 +248,18 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: item_override_flag {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.ITEM_OVERRIDE_FLAG ;;
+  }
+
+  dimension: item_override_yes_no {
+    group_label: "Benefit"
+    label: "Item Override ?"
+    type: string
+    sql: CASE WHEN ${TABLE}.ITEM_OVERRIDE_FLAG = 1 THEN 'Yes'
+    WHEN ${TABLE}.ITEM_OVERRIDE_FLAG = 0THEN 'No' ELSE Null END ;;
   }
 
   dimension: alt_uom {
@@ -270,30 +288,35 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pmon_calc_price_basis {
     group_label: "Benefit"
+    label: "PMON Calc Price Basis"
     type: string
     sql: ${TABLE}.PMON_CALC_PRICE_BASIS ;;
   }
 
   dimension: pmon_benefit_type {
     group_label: "Benefit"
+    label: "PMON Benefit Type"
     type: string
     sql: ${TABLE}.PMON_BENEFIT_TYPE ;;
   }
 
   dimension: pmon_price_res_method {
     group_label: "Benefit"
+    label: "PMON Price Resolution Method"
     type: string
     sql: ${TABLE}.PMON_PRICE_RES_METHOD ;;
   }
 
   dimension: pmon_alt_uom {
     group_label: "Benefit"
+    label: "PMON Alternate UOM"
     type: string
     sql: ${TABLE}.PMON_ALT_UOM ;;
   }
 
   dimension: pmon_estimated_val {
     group_label: "Benefit"
+    label: "PMON Estimated Value"
     type: string
     sql: ${TABLE}.PMON_ESTIMATED_VAL ;;
   }
@@ -306,6 +329,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pmon_mco_vol_basis {
     group_label: "Benefit"
+    label: "PMON MCO Volume Basis"
     type: string
     sql: ${TABLE}.PMON_MCO_VOL_BASIS ;;
   }
@@ -319,6 +343,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pmon_pl_type {
     group_label: "Benefit"
+    label: "PMON Price List Type"
     type: string
     sql: ${TABLE}.PMON_PL_TYPE ;;
   }
@@ -439,9 +464,18 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: is_round_qty_flag {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.IS_ROUND_QTY_FLAG ;;
+  }
+
+  dimension: is_round_qty_yes_no {
+    group_label: "Benefit"
+    label: "Is Round Quantity ?"
+    type: string
+    sql: CASE WHEN ${TABLE}.IS_ROUND_QTY_FLAG = 1 THEN 'Yes'
+    WHEN ${TABLE}.IS_ROUND_QTY_FLAG = 0 THEN 'No' ELSE Null END ;;
   }
 
   dimension: manual_baseline_val {
@@ -485,6 +519,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   }
 
   dimension: contract_type {
+    hidden: yes
     group_label: "Benefit"
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;
@@ -493,7 +528,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: pp_threshold {
     group_label: "Benefit"
     type: string
-    sql: ${TABLE}.PP_THRESHOLD ;;
+    sql: ${TABLE}.PP_THRESHOLD*100 ;;
   }
 
   dimension: adhoc_date {
@@ -535,7 +570,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: cap_percent {
     group_label: "Benefit"
     type: string
-    sql: ${TABLE}.CAP_PERCENT ;;
+    sql: ${TABLE}.CAP_PERCENT*100 ;;
   }
 
   dimension: enable_bep_calc {
@@ -559,7 +594,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: total_disc_cap_percent {
     group_label: "Benefit"
     type: string
-    sql: ${TABLE}.TOTAL_DISC_CAP_PERCENT ;;
+    sql: ${TABLE}.TOTAL_DISC_CAP_PERCENT*100 ;;
   }
 
   dimension: tier_flag {

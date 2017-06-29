@@ -4,6 +4,7 @@ view: mn_org_dim {
   dimension: currency {
     type: string
     group_label: "Org"
+    label: "Org Currency"
     sql: ${TABLE}.CURRENCY ;;
   }
 
@@ -40,6 +41,7 @@ view: mn_org_dim {
   dimension: description {
     group_label: "Org"
     type: string
+    label: "Org Description"
     sql: ${TABLE}.DESCRIPTION ;;
   }
 
