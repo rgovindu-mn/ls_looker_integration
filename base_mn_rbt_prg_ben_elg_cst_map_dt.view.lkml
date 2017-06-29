@@ -63,25 +63,30 @@ view: mn_rbt_prg_ben_elg_cst_map_dt {
       year
     ]
     sql: ${TABLE}.ELIG_START_DATE ;;
+    label: "Eligibility Start"
   }
 
   dimension: eligible_customer_num {
     type: string
+    label: "Eligible Plan Id"
     sql: ${TABLE}.ELIG_CUSTOMER_NUM ;;
   }
 
   dimension: eligible_customer_name {
     type: string
+    label: "Eligible Plan Name"
     sql: ${TABLE}.ELIG_CUSTOMER_NAME ;;
   }
 
   dimension: eligible_customer_type {
     type: string
+    label: "Eligible Customer Type"
     sql: ${TABLE}.ELIG_CUSTOMER_TYPE ;;
   }
 
   dimension: eligible_plan_type {
     type: string
+    label: "Plan Type"
     sql: ${TABLE}.ELIG_PLAN_TYPE ;;
   }
 
@@ -97,21 +102,25 @@ view: mn_rbt_prg_ben_elg_cst_map_dt {
       year
     ]
     sql: ${TABLE}.ELIG_END_DATE ;;
+    label: "Eligibility End"
   }
 
   dimension: plan_class_of_trade {
     type: string
     sql: ${TABLE}.PLAN_CLASS_OF_TRADE ;;
+    label: "Eligible Plan COT"
   }
 
   dimension: plan_cot_description {
     type: string
     sql: ${TABLE}.PLAN_COT_DESCRIPTION ;;
+    label: "Eligible Plan COT Description"
   }
 
   dimension: plan_domain {
     type: string
     sql: ${TABLE}.PLAN_DOMAIN ;;
+    label: "Eligible Customer Domain"
   }
 
   dimension_group: plan_cot_effective {
@@ -126,6 +135,7 @@ view: mn_rbt_prg_ben_elg_cst_map_dt {
       year
     ]
     sql: ${TABLE}.PLAN_COT_EFFECTIVE_DATE ;;
+    label: "COT Effective"
   }
 
   dimension: plan_customer_wid {
@@ -137,16 +147,19 @@ view: mn_rbt_prg_ben_elg_cst_map_dt {
   dimension: plan_customer_num {
     type: string
     sql: ${TABLE}.PLAN_CUSTOMER_NUM ;;
+    label: "Plan Customer Id"
   }
 
   dimension: plan_customer_name {
     type: string
     sql: ${TABLE}.PLAN_CUSTOMER_NAME ;;
+    label: "Plan Customer Name"
   }
 
   dimension: plan_number_of_lives {
     type: string
     sql: ${TABLE}.PLAN_NUMBER_OF_LIVES ;;
+    label: "Plan Number of Lives"
   }
 
   dimension: contract_type {

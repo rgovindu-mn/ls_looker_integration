@@ -137,9 +137,18 @@ view: mn_rbt_prg_qual_flat_dim {
   }
 
   dimension: strategy_based_flag {
+    hidden: yes
     group_label: "Qualification"
     type: string
     sql: ${TABLE}.STRATEGY_BASED_FLAG ;;
+  }
+
+  dimension: strategy_based_yes_no {
+    group_label: "Qualification"
+    label: "Is Strategy Based ?"
+    type: string
+    sql: CASE WHEN ${strategy_based_flag} = 'Y' THEN 'Yes'
+      WHEN ${strategy_based_flag} = 'N' THEN 'No' ELSE Null END ;;
   }
 
   dimension: num_tiers {
@@ -155,9 +164,18 @@ view: mn_rbt_prg_qual_flat_dim {
   }
 
   dimension: item_override_flag {
+    hidden: yes
     group_label: "Qualification"
     type: string
     sql: ${TABLE}.ITEM_OVERRIDE_FLAG ;;
+  }
+
+  dimension: item_override_yes_no {
+    group_label: "Qualification"
+    label: "Is Item Override ?"
+    type: string
+    sql: CASE WHEN ${item_override_flag} = 1 THEN 'Yes'
+      WHEN ${item_override_flag} = 0 THEN 'No' ELSE Null END ;;
   }
 
   dimension: alt_uom {
@@ -313,9 +331,18 @@ view: mn_rbt_prg_qual_flat_dim {
   }
 
   dimension: is_round_qty_flag {
+    hidden: yes
     group_label: "Qualification"
     type: string
     sql: ${TABLE}.IS_ROUND_QTY_FLAG ;;
+  }
+
+  dimension: is_round_qty_yes_no {
+    group_label: "Qualification"
+    label: "Is Round Quantity ?"
+    type: string
+    sql: CASE WHEN ${is_round_qty_flag} = 1 THEN 'Yes'
+      WHEN ${is_round_qty_flag} = 0 THEN 'No' ELSE Null END ;;
   }
 
   dimension: manual_baseline_val {

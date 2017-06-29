@@ -3,6 +3,7 @@
 include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
+include: "base_mn_plan_dim_ext.view.lkml"
 
 #************************************Payer Utilization Explore
 explore: payer_utilization {
@@ -28,12 +29,12 @@ explore: payer_utilization {
     sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_util_cust_dim_parent_pbm.customer_wid} ;;
   }
 
-  join: mn_util_cust_dim_plan {
+  join: mn_util_plan_dim {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Plan"
-    sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_util_cust_dim_plan.customer_wid} ;;
+    sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_util_plan_dim.customer_wid} ;;
   }
 
   join: mn_util_ctrt_customer_dim {
@@ -169,8 +170,7 @@ explore: payer_rebate {
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Plan"
-    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid};;
-    sql_where: Upper(${mn_rbt_plan_dim.customer_type}) = 'PLAN' ;;
+    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid} and Upper(${mn_rbt_plan_dim.member_info_type}) = 'PLAN' ;;
   }
 
   join: mn_combined_rebate_program_dim {

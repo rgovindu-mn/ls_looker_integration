@@ -68,11 +68,13 @@ view: mn_formulary_prod_map {
   dimension: line_sev {
     type: string
     sql: ${TABLE}.LINE_SEV ;;
+    label: "Line Severity"
   }
 
   dimension: ndc_lock {
     type: string
-    sql: ${TABLE}.NDC_LOCK ;;
+    sql: CASE WHEN ${TABLE}.NDC_LOCK = 0 THEN 'No' ELSE 'Yes' END ;;
+    label: "NDC Lock ?"
   }
 
   dimension: notes {
@@ -82,12 +84,14 @@ view: mn_formulary_prod_map {
 
   dimension: other_rest {
     type: string
-    sql: ${TABLE}.OTHER_REST ;;
+    sql: CASE WHEN ${TABLE}.OTHER_REST = 0 THEN 'No' ELSE 'Yes' END ;;
+    label: "Other Restriction ?"
   }
 
   dimension: prior_auth {
     type: string
-    sql: ${TABLE}.PRIOR_AUTH ;;
+    sql: CASE WHEN ${TABLE}.PRIOR_AUTH = 0 THEN 'No' ELSE 'Yes' END ;;
+    label: "Prior Authorization ?"
   }
 
   dimension: product_wid {
@@ -98,7 +102,8 @@ view: mn_formulary_prod_map {
 
   dimension: qty_limit {
     type: string
-    sql: ${TABLE}.QTY_LIMIT ;;
+    sql: CASE WHEN ${TABLE}.QTY_LIMIT = 0 THEN 'No' ELSE 'Yes' END ;;
+    label: "Quantity Limit ?"
   }
 
   dimension: run_id {
@@ -115,17 +120,19 @@ view: mn_formulary_prod_map {
 
   dimension: step_edit {
     type: string
-    sql: ${TABLE}.STEP_EDIT ;;
+    sql: CASE WHEN ${TABLE}.STEP_EDIT = 0 THEN 'No' ELSE 'Yes' END ;;
   }
 
   dimension: tier_num {
     type: string
     sql: ${TABLE}.TIER_NUM ;;
+    label: "Formulary Line Tier"
   }
 
   dimension: tier_on_off {
     type: string
-    sql: ${TABLE}.TIER_ON_OFF ;;
+    sql: CASE WHEN ${TABLE}.TIER_ON_OFF = 0 THEN 'No' ELSE 'Yes' END ;;
+    label: "Tier On ?"
   }
 
 #   measure: count {
