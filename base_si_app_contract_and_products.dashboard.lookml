@@ -144,7 +144,7 @@
       title: Revenue at risk
       type: single_value
       model: base_sales_intelligence_app_model
-      explore: mn_contract_header_dim
+      explore: mn_pg_product_pricing_fact
       measures: [mn_contract_header_dim.contract_value]
       filters:
         mn_contract_header_dim.days_to_expire: "[1, 30]"

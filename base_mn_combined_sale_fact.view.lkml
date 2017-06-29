@@ -361,7 +361,7 @@ view: mn_combined_sale_fact {
 
   dimension: line_list_revenue {
     type: number
-    label: "Invoice Revenue"
+    label: "On-Invoice Revenue"
     sql: ${inv_qty} *NVL( ${list_price}, ${inv_amt}) ;;
   }
 
