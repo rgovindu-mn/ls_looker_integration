@@ -87,4 +87,8 @@ include: "base_mn_rbt_qual_mb_prod_map_all.view.lkml"
       sql: ${mn_rbt_qual_mb_pg_dim.pg_name};;
     }
 
+    dimension: excluded_flag {
+      hidden: yes
+    }
+
   }
