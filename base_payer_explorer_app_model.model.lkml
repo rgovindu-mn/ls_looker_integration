@@ -133,7 +133,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_rbt_qual_mb_prod_map_all
-    view_label: "Rebate Program Qualification MB"
+    view_label: "Rebate Program Qualification MB Product"
     sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_qual_mb_prod_map_all.program_qual_wid} ;;
   }
 
@@ -141,7 +141,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_market_basket_dim
-    view_label: "Rebate Program Qualification MB"
+    view_label: "Rebate Program Qualification MB Product"
     sql_on: ${mn_rbt_qual_mb_prod_map_all.basket_wid} = ${mn_rbt_qual_mb_dim.market_basket_wid} ;;
   }
 
