@@ -318,6 +318,7 @@ view: mn_mco_util_fact {
   }
 
   dimension: pub_util_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.PUB_UTIL_ID ;;
   }
@@ -326,9 +327,11 @@ view: mn_mco_util_fact {
     type: string
     primary_key: yes
     sql: ${TABLE}.REF_LINE_ID ;;
+    label: "Util Line Ref No."
   }
 
   dimension: run_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.RUN_ID ;;
   }
@@ -344,6 +347,7 @@ view: mn_mco_util_fact {
   }
 
   dimension: source_system_id {
+    hidden: yes
     type: string
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
@@ -378,7 +382,7 @@ view: mn_mco_util_fact {
 
   measure: Total_Gross_Revenue {
     type: sum
-    value_format_name: decimal_0
+    value_format_name: usd
     sql: ${list_price} * ${ndc_quantity} ;;
   }
 
