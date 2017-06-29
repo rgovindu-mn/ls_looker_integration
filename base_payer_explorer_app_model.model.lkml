@@ -370,7 +370,7 @@ explore:  payer_combined_new {
     view_label: "Util PBM"
   }
 
-  join: mn_util_cust_dim_plan {
+  join: mn_util_plan_dim {
     from: mn_customer_dim
     view_label: "Util Plan"
   }
