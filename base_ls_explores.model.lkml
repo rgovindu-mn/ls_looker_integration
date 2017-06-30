@@ -69,6 +69,7 @@ include: "base_mn_mco_util_fact.view.lkml"
 
 include: "base_mn_rbt_prg_ben_flat_dim.view.lkml"
 include: "base_mn_erp_payment_fact.view.lkml"
+include: "base_mn_customer_dim_reuse.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
