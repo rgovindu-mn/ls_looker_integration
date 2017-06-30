@@ -28,7 +28,7 @@
        type: field_filter
        model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact
-       default_value: Mercy Hospital South
+       default_value:
        field: mn_customer_cmpl_dim.customer_name
        listens_to_filters: [contract_name, contract_number, pg_name, year_month, year, rolling_12_months]
 
@@ -37,7 +37,7 @@
        type: field_filter
        model: base_sales_intelligence_app_model
        explore: mn_cmpl_period_fact
-       default_value: BSC - Mercy Health System
+       default_value:
        field: mn_contract_header_dim.contract_name
        listens_to_filters: [customer_name, contract_number, pg_name, year_month, year, rolling_12_months]
 

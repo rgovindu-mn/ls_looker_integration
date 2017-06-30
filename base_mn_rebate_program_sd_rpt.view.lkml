@@ -22,17 +22,6 @@ view: mn_rebate_program_sd_rpt {
     sql: ${TABLE}.ACCRUAL_RATE ;;
   }
 
-  dimension: accrual_type_wid {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.ACCRU_TYPE_WID ;;
-  }
-
-  dimension: contract_wid {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.CONTRACT_WID ;;
-  }
 
   dimension: customer_wid {
     type: number
@@ -51,23 +40,12 @@ view: mn_rebate_program_sd_rpt {
     sql: ${TABLE}.PAYEE_CUSTOMER_WID ;;
   }
 
-  dimension: payment_type_wid {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.PAYMENT_TYPE_WID ;;
-  }
-
   dimension: pmt_mth_type_wid {
     type: number
     hidden: yes
     sql: ${TABLE}.PMT_MTH_TYPE_WID ;;
   }
 
-  dimension: program_type_wid {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.PROGRAM_TYPE_WID ;;
-  }
 
   dimension: program_wid {
     type: number

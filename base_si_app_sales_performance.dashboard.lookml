@@ -21,7 +21,7 @@
     type: field_filter
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    default_value: Drug Aid Pharmacy,50 Plus Pharmacy
+    default_value:
     field: mn_1shipto_customer_dim.customer_name
     listens_to_filters: [customer, contract_name, contract_number, sale_type, product_cat_name, sku, channel, invoice_year]
 
