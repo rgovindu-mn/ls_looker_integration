@@ -84,6 +84,8 @@ view: mn_pg_prc_fact_flat {
 #               WHERE  pa1.TIER_IDX=2
       sql:
           select PG_WID,
+                 PRODUCT_WID,
+                 START_DATE,
                   MAX(CASE WHEN TIER_IDX = 2 THEN  ADJ_LOW ELSE NULL END) AS TIER2_ADJUSTMENT_LOW,
                   MAX(CASE WHEN TIER_IDX = 2 THEN  ADJ_HIGH ELSE NULL END) AS TIER2_ADJUSTMENT,
                   MAX(CASE WHEN TIER_IDX = 2 THEN  PRC_HIGH ELSE NULL END) AS TIER2_PRICE,
@@ -92,7 +94,7 @@ view: mn_pg_prc_fact_flat {
                   MAX(CASE WHEN TIER_IDX = 2 THEN  HANDLING ELSE NULL END) AS TIER2_HANDLING,
                   MAX(CASE WHEN TIER_IDX = 2 THEN  PAYMENT_CODE ELSE NULL END) AS TIER2_PAYMENT_CODE,
                   MAX(CASE WHEN TIER_IDX = 2 THEN  SURCHARGE ELSE NULL END) AS TIER2_SURCHARGE,
-                  MAX(CASE WHEN TIER_IDX = 1 THEN  TIER_VOLUME ELSE NULL END) AS TIER2_TIER_VOLUME,
+                  MAX(CASE WHEN TIER_IDX = 2 THEN  TIER_VOLUME ELSE NULL END) AS TIER2_TIER_VOLUME,
                   MAX(CASE WHEN TIER_IDX = 3 THEN ADJ_LOW ELSE NULL END) AS TIER3_ADJUSTMENT_LOW,
                   MAX(CASE WHEN TIER_IDX = 3 THEN ADJ_HIGH ELSE NULL END) AS TIER3_ADJUSTMENT,
                   MAX(CASE WHEN TIER_IDX = 3 THEN PRC_HIGH ELSE NULL END) AS TIER3_PRICE,
@@ -158,18 +160,34 @@ view: mn_pg_prc_fact_flat {
                   MAX(CASE WHEN TIER_IDX = 9 THEN TIER_VOLUME ELSE NULL END) AS TIER9_TIER_VOLUME
              FROM MN_PG_PRODUCT_PRICING_FACT_VW
             WHERE TIER_IDX BETWEEN 2 AND 9
-            GROUP BY PG_WID
+            GROUP BY PG_WID, PRODUCT_WID, START_DATE
       ;;
-    }
-
-    measure: count {
-      type: count
-      drill_fields: [detail*]
     }
 
     dimension: pg_wid {
       type: number
+      hidden: yes
       sql: ${TABLE}.PG_WID ;;
+    }
+
+  dimension: product_wid {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.PRODUCT_WID ;;
+  }
+
+    dimension_group: start {
+      type: time
+      timeframes: [
+        raw,
+        time,
+        date,
+        week,
+        month,
+        quarter,
+        year
+      ]
+      sql: ${TABLE}.START_DATE ;;
     }
 
     dimension: tier2_adjustment_low {
@@ -532,81 +550,4 @@ view: mn_pg_prc_fact_flat {
       sql: ${TABLE}.TIER9_TIER_VOLUME ;;
     }
 
-    set: detail {
-      fields: [
-        pg_wid,
-        tier2_adjustment_low,
-        tier2_adjustment,
-        tier2_price,
-        tier2_effective_adjust,
-        tier2_freight_code,
-        tier2_handling,
-        tier2_payment_code,
-        tier2_surcharge,
-        tier2_tier_volume,
-        tier3_adjustment_low,
-        tier3_adjustment,
-        tier3_price,
-        tier3_effective_adjust,
-        tier3_freight_code,
-        tier3_handling,
-        tier3_payment_code,
-        tier3_surcharge,
-        tier3_tier_volume,
-        tier4_adjustment_low,
-        tier4_adjustment,
-        tier4_price,
-        tier4_effective_adjust,
-        tier4_freight_code,
-        tier4_handling,
-        tier4_payment_code,
-        tier4_surcharge,
-        tier4_tier_volume,
-        tier5_adjustment_low,
-        tier5_adjustment,
-        tier5_price,
-        tier5_effective_adjust,
-        tier5_freight_code,
-        tier5_handling,
-        tier5_payment_code,
-        tier5_surcharge,
-        tier5_tier_volume,
-        tier6_adjustment_low,
-        tier6_adjustment,
-        tier6_price,
-        tier6_effective_adjust,
-        tier6_freight_code,
-        tier6_handling,
-        tier6_payment_code,
-        tier6_surcharge,
-        tier6_tier_volume,
-        tier7_adjustment_low,
-        tier7_adjustment,
-        tier7_price,
-        tier7_effective_adjust,
-        tier7_freight_code,
-        tier7_handling,
-        tier7_payment_code,
-        tier7_surcharge,
-        tier7_tier_volume,
-        tier8_adjustment_low,
-        tier8_adjustment,
-        tier8_price,
-        tier8_effective_adjust,
-        tier8_freight_code,
-        tier8_handling,
-        tier8_payment_code,
-        tier8_surcharge,
-        tier8_tier_volume,
-        tier9_adjustment_low,
-        tier9_adjustment,
-        tier9_price,
-        tier9_effective_adjust,
-        tier9_freight_code,
-        tier9_handling,
-        tier9_payment_code,
-        tier9_surcharge,
-        tier9_tier_volume
-      ]
-    }
   }

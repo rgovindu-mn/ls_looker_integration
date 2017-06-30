@@ -248,7 +248,9 @@ explore: mn_contract_header_dim {
     from: mn_pg_prc_fact_flat
     view_label: "Pricing Program Products and Pricing"
     #fields: [channel_name]
-    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid};;
+    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid}
+    AND ${mn_pg_prc_adhoc_fact.product_wid} = ${mn_pg_pg_prc_fact_flat.product_wid}
+    AND ${mn_pg_prc_adhoc_fact.start_raw} = ${mn_pg_pg_prc_fact_flat.start_raw};;
   }
 
 
