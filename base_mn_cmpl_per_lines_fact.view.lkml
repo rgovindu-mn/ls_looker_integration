@@ -226,5 +226,9 @@ view: mn_cmpl_per_lines_fact {
     sql: ${inv_qty} ;;
   }
 
+  measure: actual_revenue {
+    type: sum
+    sql: ${inv_amt_base} ;;
+  }
 
 }

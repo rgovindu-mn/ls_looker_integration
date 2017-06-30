@@ -73,7 +73,7 @@ view: mn_pg_qual_ben_flat_ext {
   }
 
 
-  measure: expected_qty_value {
+  measure: expected_qty_value_volume {
     type: sum
     sql:
     case when ${component_type_flag} = 'Volume'
@@ -83,15 +83,57 @@ view: mn_pg_qual_ben_flat_ext {
     ;;
   }
 
-  measure: volume_shortfall {
-    type: number
+  measure: expected_qty_value_revenue {
+    type: sum
     sql:
-    case when (${expected_qty_value} > ${mn_cmpl_per_lines_fact.actual_qty_value})
-    then ${expected_qty_value} - ${mn_cmpl_per_lines_fact.actual_qty_value}
+    case when ${component_type_flag} = 'Revenue'
+      then ${tier_value}
     end
 
     ;;
   }
+
+  measure: volume_shortfall {
+    type: number
+    sql:
+    case when (${expected_qty_value_volume} > ${mn_cmpl_per_lines_fact.actual_qty_value})
+    then ${expected_qty_value_volume} - ${mn_cmpl_per_lines_fact.actual_qty_value}
+    end
+
+    ;;
+  }
+
+  measure: revenue_shortfall {
+    type: number
+    sql:
+    case when (${expected_qty_value_revenue} > ${mn_cmpl_per_lines_fact.actual_qty_value})
+    then ${expected_qty_value_revenue} - ${mn_cmpl_per_lines_fact.actual_qty_value}
+    end
+
+    ;;
+  }
+
+  measure: volume_surplus {
+    type: number
+    sql:
+    case when (${expected_qty_value_volume} < ${mn_cmpl_per_lines_fact.actual_qty_value})
+    then  ${mn_cmpl_per_lines_fact.actual_qty_value} - ${expected_qty_value_volume}
+    end
+
+    ;;
+  }
+
+  measure: revenue_surplus {
+    type: number
+    sql:
+    case when (${expected_qty_value_revenue} < ${mn_cmpl_per_lines_fact.actual_qty_value})
+    then ${mn_cmpl_per_lines_fact.actual_qty_value} - ${expected_qty_value_revenue}
+    end
+
+    ;;
+  }
+
+
 
 
 }
