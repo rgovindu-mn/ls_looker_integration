@@ -434,9 +434,9 @@ explore:  payer_combined_new {
     fields: []
   }
 
-  # join:  mn_rbt_plan_dim {
-  #   from: mn_customer_dim_reuse
-  #   fields: []
-  # }
+  join:  mn_rbt_plan_dim {
+    from: mn_customer_dim_reuse
+    fields: [-mn_rbt_plan_dim.plan_set*]
+  }
 
 }

@@ -176,9 +176,8 @@ explore: payer_rebate {
     relationship: many_to_one
     view_label: "Rebate Plan"
     sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid}
-    and Upper(${mn_rbt_plan_dim.member_info_type}) = 'PLAN'
-    ;;
-    fields: [mn_rbt_plan_dim.plan_set*]
+    and Upper(${mn_rbt_plan_dim.member_info_type}) = 'PLAN' ;;
+     fields: [mn_rbt_plan_dim.plan_set*]
   }
 
   join: mn_combined_rebate_program_dim {
