@@ -204,7 +204,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_formulary_prod_map
-    view_label: "Rebate Program Elig Plan Formulary Product"
+    view_label: "Rebate Program Eligible Plan Formulary Product"
     sql_on: ${mn_plan_formulary_map.formulary_wid} = ${mn_formulary_prod_map.formulary_wid} ;;
   }
 
@@ -212,7 +212,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_product_dim
-    view_label: "Rebate Program Elig Plan Formulary Product"
+    view_label: "Rebate Program Eligible Plan Formulary Product"
     sql_on: ${mn_formulary_prod_map.product_wid} = ${mn_formulary_product_dim.product_wid} ;;
     fields: [ndc, product_num, product_name]
   }
@@ -310,8 +310,8 @@ explore: payer_utilization {
   label: "Payer Utilization"
   from: mn_mco_util_fact
   view_name: mn_mco_util_fact
-  view_label: "Utilization lines"
-  hidden: no
+  view_label: "Utilization Lines"
+  # hidden: no
 
   join: mn_util_customer_dim_bob {
     type:  left_outer
@@ -335,7 +335,7 @@ explore: payer_utilization {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim_reuse
-    view_label: "Util Plan"
+    view_label: "Plan"
     sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_util_plan_dim.customer_wid} ;;
     fields: [mn_util_plan_dim.plan_set*]
   }
@@ -393,7 +393,7 @@ explore: payer_utilization {
     type:  left_outer
     relationship: many_to_one
     from: mn_org_dim
-    view_label: "Utilization lines"
+    view_label: "Utilization Lines"
     sql_on: ${mn_mco_util_fact.org_wid} = ${mn_util_org_dim.org_wid} ;;
   }
 
@@ -566,6 +566,7 @@ explore: payer_rebate {
   }
   # Complete relable
 
+   #  ************************** Hiding unwanted joins
   join: mn_rbt_ctrt_delegate_dim {
     from: mn_user_dim
     view_label: "Contract Additional Delegate"
@@ -617,7 +618,7 @@ explore:  payer_combined_new {
     relationship: one_to_many
     from: mn_discount_bridge_fact
     sql_on: ${mn_mco_util_fact.pub_util_id} = ${mn_discount_bridge_fact.pub_util_id} ;;
-    view_label: "Rebate lines"
+    view_label: "Rebate Lines"
   }
 
   join: mn_ctrt_Adtnl_dlgt_dim {
@@ -673,10 +674,10 @@ explore:  payer_combined_new {
     view_label: "Util Formulary"
   }
 
-  join: mn_util_org_dim {
-    from: mn_org_dim
-    view_label: "Util Org"
-  }
+  # join: mn_util_org_dim {
+  #   from: mn_org_dim
+  #   view_label: "Util Org"
+  # }
 
   join: mn_util_cot_dim {
     from: mn_cot_dim
