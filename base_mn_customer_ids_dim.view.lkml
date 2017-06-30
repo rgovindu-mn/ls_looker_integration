@@ -150,6 +150,7 @@ view: mn_customer_ids_dim {
   }
 
   measure: customer_ids_count {
+    hidden: yes
     type: count
     drill_fields: []
   }

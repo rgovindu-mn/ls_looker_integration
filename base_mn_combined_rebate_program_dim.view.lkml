@@ -241,7 +241,7 @@ view: mn_combined_rebate_program_dim {
   dimension: latest_flag_yes_no {
     type: string
     label: "Is Latest ?"
-    sql: CASE WHEN ${TABLE}.LATEST_FLAG = 'Y' THEN 'Yes' ELSE 'No' END ;;
+    sql: CASE WHEN ${latest_flag} = 'Y' THEN 'Yes' ELSE 'No' END ;;
   }
 
   dimension: late_date_lag {
@@ -345,8 +345,8 @@ view: mn_combined_rebate_program_dim {
   }
 
   dimension: src_strategy_num {
-    hidden: yes
     type: string
+    label: "Strategy Number"
     sql: ${TABLE}.SRC_STRATEGY_NUM ;;
   }
 
@@ -377,7 +377,7 @@ view: mn_combined_rebate_program_dim {
   dimension: strgy_based_flag_yes_no {
     type: string
     label: "Strategy Based ?"
-    sql: CASE WHEN ${TABLE}.STRATEGY_BASED_FLAG = 'Y' THEN 'Yes' ELSE 'No' END;;
+    sql: CASE WHEN ${strategy_based_flag} = 'Y' THEN 'Yes' ELSE 'No' END;;
   }
 
   dimension: system_accrue {

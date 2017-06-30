@@ -4,21 +4,25 @@ view: mn_mco_util_fact {
 
   dimension: access_rebate_amount {
     type: string
+    label: "Access Rbt Amount"
     sql: ${TABLE}.ACCESS_RBT_AMT ;;
   }
 
   dimension: access_rebate_amount_base {
     type: string
+    hidden: yes
     sql: ${TABLE}.ACCESS_RBT_AMT_BASE ;;
   }
 
   dimension: base_rebate_amount {
     type: string
+    label: "Base Rbt Amount"
     sql: ${TABLE}.BASE_RBT_AMT ;;
   }
 
   dimension: base_rebate_amount_base {
     type: string
+    hidden: yes
     sql: ${TABLE}.BASE_RBT_AMT_BASE ;;
   }
 
@@ -30,6 +34,7 @@ view: mn_mco_util_fact {
 
   dimension: calculate_rebate_flag {
     type: string
+    label: "Calculate Rbt Flag"
     sql: ${TABLE}.CALCULATE_REBATE_FLAG ;;
   }
 
@@ -49,6 +54,7 @@ view: mn_mco_util_fact {
 
   dimension: cms_quantity {
     type: string
+    label: "CMS Quantity"
     sql: ${TABLE}.CMS_QTY ;;
   }
 
@@ -122,18 +128,20 @@ view: mn_mco_util_fact {
   }
 
   dimension: ext_flex_var12 {
-    hidden: yes
     type: string
+    hidden: yes
     sql: ${TABLE}.EXT_FLEX_VAR12 ;;
   }
 
   dimension: flex_num11 {
     type: string
+    hidden: yes
     sql: ${TABLE}.FLEX_NUM11 ;;
   }
 
   dimension: flex_num12 {
     type: string
+    hidden: yes
     sql: ${TABLE}.FLEX_NUM12 ;;
   }
 
@@ -190,6 +198,7 @@ view: mn_mco_util_fact {
 
   dimension: list_price_base {
     type: string
+    hidden: yes
     sql: ${TABLE}.LIST_PRICE_BASE ;;
   }
 
@@ -207,13 +216,15 @@ view: mn_mco_util_fact {
     sql: to_date(${TABLE}.LOAD_DATE_WID,'yyyymmdd') ;;
   }
 
-  dimension: mail_ord_rebate_amount {
+  dimension: mail_ord_rbt_amt {
     type: string
+    label: "Mail Order Rbt Amount"
     sql: ${TABLE}.MAIL_ORD_RBT_AMT ;;
   }
 
-  dimension: mail_order_rebate_amount_base {
+  dimension: mail_ord_rbt_amt_base {
     type: string
+    hidden: yes
     sql: ${TABLE}.MAIL_ORD_RBT_AMT_BASE ;;
   }
 
@@ -225,11 +236,13 @@ view: mn_mco_util_fact {
 
   dimension: admin_fee_amount {
     type: string
+    label: "Admin Fee Amount"
     sql: ${TABLE}.MC_ADMIN_FEE_AMT ;;
   }
 
   dimension: admin_fee_amount_base {
     type: string
+    hidden: yes
     sql: ${TABLE}.MC_ADMIN_FEE_AMT_BASE ;;
   }
 
@@ -263,11 +276,13 @@ view: mn_mco_util_fact {
 
   dimension: perf_rebate_amount {
     type: number
+    label: "Performance Rbt Amount"
     sql: ${TABLE}.PERF_RBT_AMT ;;
   }
 
   dimension: perf_rebate_amount_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.PERF_RBT_AMT_BASE ;;
   }
 
@@ -333,11 +348,14 @@ view: mn_mco_util_fact {
   dimension: run_id {
     hidden: yes
     type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: rx_quantity {
     type: number
+    hidden: yes
+    label: "Rx Quantity"
     sql: ${TABLE}.RX_QTY ;;
   }
 
@@ -349,6 +367,7 @@ view: mn_mco_util_fact {
   dimension: source_system_id {
     hidden: yes
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
@@ -365,17 +384,20 @@ view: mn_mco_util_fact {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: [ref_line_id]
   }
 
   measure: Total_NDC_Unit {
     type: sum
+    label: "Total NDC Qty"
     value_format_name: decimal_0
     sql: ${ndc_quantity} ;;
   }
 
   measure: Total_Rx_Quantity {
     type: sum
+    label: "Total Rx Qty"
     value_format_name: decimal_0
     sql: ${rx_quantity} ;;
   }
@@ -390,6 +412,18 @@ view: mn_mco_util_fact {
     type: sum
     value_format_name: decimal_0
     sql: ${cms_quantity} ;;
+  }
+
+  measure: Total_Flex_Num11 {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${flex_num11} ;;
+  }
+
+  measure: Total_Flex_Num12 {
+    type: sum
+    value_format_name: decimal_0
+    sql: ${flex_num12} ;;
   }
 
 }
