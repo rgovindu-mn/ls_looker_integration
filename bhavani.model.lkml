@@ -3,7 +3,7 @@
 include: "base_ls_explores.model.lkml"
 include: "base_mn_mco_util_fact.view.lkml"
 include: "base_mn_product_map_all_vers.view.lkml"
-include: "base_mn_plan_dim_ext.view.lkml"
+include: "base_mn_customer_dim_reuse.view.lkml"
 
 #************************************Payer Utilization Explore
 explore: payer_utilization {
@@ -16,33 +16,37 @@ explore: payer_utilization {
   join: mn_util_customer_dim_bob {
     type:  left_outer
     relationship: many_to_one
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Book of Business"
     sql_on: ${mn_mco_util_fact.bob_wid} = ${mn_util_customer_dim_bob.customer_wid} ;;
+    fields: [mn_util_customer_dim_bob.bob_set*]
   }
 
   join: mn_util_cust_dim_parent_pbm {
     type:  left_outer
     relationship: many_to_one
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Parent PBM"
     sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_util_cust_dim_parent_pbm.customer_wid} ;;
+    fields: [mn_util_cust_dim_parent_pbm.parent_pbm_set*]
   }
 
   join: mn_util_plan_dim {
     type:  left_outer
     relationship: many_to_one
-    from: mn_customer_dim
-    view_label: "Plan"
+    from: mn_customer_dim_reuse
+    view_label: "Util Plan"
     sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_util_plan_dim.customer_wid} ;;
+    fields: [mn_util_plan_dim.plan_set*]
   }
 
   join: mn_util_ctrt_customer_dim {
     type:  left_outer
     relationship: many_to_one
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Contracted Customer"
     sql_on: ${mn_mco_util_fact.contract_cust_wid} = ${mn_util_ctrt_customer_dim.customer_wid} ;;
+    fields: [mn_util_ctrt_customer_dim.customer*]
   }
 
   join: mn_util_ctrt_customer_id {
@@ -89,7 +93,7 @@ explore: payer_utilization {
     type:  left_outer
     relationship: many_to_one
     from: mn_org_dim
-    view_label: "Org"
+    view_label: "Utilization lines"
     sql_on: ${mn_mco_util_fact.org_wid} = ${mn_util_org_dim.org_wid} ;;
   }
 
@@ -99,6 +103,7 @@ explore: payer_utilization {
     from: mn_cot_dim
     view_label: "Class of Trade"
     sql_on: ${mn_mco_util_fact.cot_wid} = ${mn_util_cot_dim.cot_wid} ;;
+#     fields: [mn_util]
   }
 
 }
@@ -166,11 +171,14 @@ explore: payer_rebate {
   }
 
   join:  mn_rbt_plan_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Plan"
-    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid} and Upper(${mn_rbt_plan_dim.member_info_type}) = 'PLAN' ;;
+    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid}
+    and Upper(${mn_rbt_plan_dim.member_info_type}) = 'PLAN'
+    ;;
+    fields: [mn_rbt_plan_dim.plan_set*]
   }
 
   join: mn_combined_rebate_program_dim {
@@ -197,6 +205,7 @@ explore: payer_rebate {
   #   view_label: "Rebate Program Benefit Product"
   #   sql_on: ${mn_rbt_prg_ben_flat_dim.program_ben_wid} = ${mn_rbt_prog_ben_prod_map.program_ben_wid} ;;
   # }
+
   join: mn_rbt_ctrt_author_dim {
     from: mn_user_dim
     view_label: "Contract Author"

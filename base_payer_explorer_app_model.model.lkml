@@ -361,22 +361,22 @@ explore:  payer_combined_new {
   #   Relabelling the existing labels
 
   join: mn_util_customer_dim_bob {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Util Book of Business"
   }
 
   join: mn_util_cust_dim_parent_pbm {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Util PBM"
   }
 
   join: mn_util_plan_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Util Plan"
   }
 
   join: mn_util_ctrt_customer_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Util Contracted Customer"
   }
 
@@ -435,9 +435,9 @@ explore:  payer_combined_new {
     fields: []
   }
 
-  join:  mn_rbt_plan_dim {
-    from: mn_customer_dim
-    fields: []
-  }
+  # join:  mn_rbt_plan_dim {
+  #   from: mn_customer_dim_reuse
+  #   fields: []
+  # }
 
 }

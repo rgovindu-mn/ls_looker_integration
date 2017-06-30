@@ -8,6 +8,7 @@ view: mn_cot_dim {
 
   dimension: cot_type {
     type: string
+    hidden: yes
     label: "COT Type"
     sql: ${TABLE}.COT_TYPE ;;
   }
@@ -51,24 +52,26 @@ view: mn_cot_dim {
 
   dimension: description {
     type: string
-    label: "COT Description"
+    label: "Description"
     sql: ${TABLE}.DESCRIPTION ;;
   }
 
   dimension: domain {
     type: string
-    label: "COT Domain"
+    label: "Domain"
     sql: ${TABLE}.DOMAIN ;;
   }
 
   dimension: domain_cot {
     type: string
-    label: "Domain.COT"
+    hidden: yes
+    label: "Domain COT"
     sql: ${TABLE}.DOMAIN_COT ;;
   }
 
   dimension: cot_domain_description {
     type: string
+    hidden: yes
     label: "COT Domain Description"
     sql: ${TABLE}.DOMAIN_DESCRIPTION ;;
   }
