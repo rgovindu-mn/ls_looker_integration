@@ -1,22 +1,22 @@
 include: "base_ls_explores.model.lkml"
 
-explore:  test {
-  from: mn_contract_header_dim
-  view_name: mn_contract_header_dim
-  view_label: "Contracts"
-  fields: [mn_contract_header_dim.contract_number,mn_contract_header_dim.contract_name]
+# explore:  test {
+#   from: mn_contract_header_dim
+#   view_name: mn_contract_header_dim
+#   view_label: "Contracts"
+#   fields: [mn_contract_header_dim.contract_number,mn_contract_header_dim.contract_name]
 
-  join: mn_ctrt_org_dim {
-    from: mn_org_dim
-    type: left_outer
-    relationship: many_to_many
-    sql_on: ${mn_contract_header_dim.org_wid} = ${mn_ctrt_org_dim.org_wid} ;;
-    fields: [mn_ctrt_org_dim.org_name,mn_ctrt_org_dim.description]
-    view_label: "Contracts"
-  }
+#   join: mn_ctrt_org_dim {
+#     from: mn_org_dim
+#     type: left_outer
+#     relationship: many_to_many
+#     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_ctrt_org_dim.org_wid} ;;
+#     fields: [mn_ctrt_org_dim.org_name,mn_ctrt_org_dim.description]
+#     view_label: "Contracts"
+#   }
 
-  fields: [ALL_FIELDS*]
-}
+#   fields: [ALL_FIELDS*]
+# }
 # include: "bhavani.model.lkml"
 #
 # explore:  payer_combined_new {
