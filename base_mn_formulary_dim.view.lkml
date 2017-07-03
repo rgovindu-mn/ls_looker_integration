@@ -27,6 +27,7 @@ view: mn_formulary_dim {
 
   dimension: national_flag {
     type: string
+    label: "National ?"
     sql: case when ${TABLE}.NATIONAL_FLAG = 1 then 'Yes' else 'No' end ;;
   }
 
@@ -48,7 +49,6 @@ view: mn_formulary_dim {
   }
 
   dimension_group: eff_start {
-    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -63,7 +63,6 @@ view: mn_formulary_dim {
   }
 
   dimension_group: eff_end {
-    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -79,11 +78,11 @@ view: mn_formulary_dim {
 
   dimension: default_flag {
     type: string
+    label: "Is Default ?"
     sql: case when ${TABLE}.DEFAULT_FLAG = 1 then 'Yes' else 'No' end  ;;
   }
 
   dimension_group: date_updated {
-    hidden: yes
     type: time
     timeframes: [
       raw,

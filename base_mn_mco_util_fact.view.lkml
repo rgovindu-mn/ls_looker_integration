@@ -122,14 +122,12 @@ view: mn_mco_util_fact {
   }
 
   dimension: ext_flex_var11 {
-    hidden: yes
     type: string
     sql: ${TABLE}.EXT_FLEX_VAR11 ;;
   }
 
   dimension: ext_flex_var12 {
     type: string
-    hidden: yes
     sql: ${TABLE}.EXT_FLEX_VAR12 ;;
   }
 
@@ -342,7 +340,7 @@ view: mn_mco_util_fact {
     type: string
     primary_key: yes
     sql: ${TABLE}.REF_LINE_ID ;;
-    label: "Util Line Ref No."
+    label: "Util Line Ref Number"
   }
 
   dimension: run_id {
@@ -418,6 +416,7 @@ view: mn_mco_util_fact {
     type: sum
     value_format_name: decimal_0
     sql: ${flex_num11} ;;
+
   }
 
   measure: Total_Flex_Num12 {
