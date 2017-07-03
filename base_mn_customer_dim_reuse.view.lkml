@@ -258,16 +258,16 @@ view: mn_customer_dim_reuse {
   }
 
   #*************Plan Aliasing
-  dimension: plan_member_info_type {
+  dimension: plan_plan_type {
     type: string
     label: "Type"
-    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+    sql: ${plan_type} ;;
   }
 
   dimension: plan_num {
     type: string
     label: "ID"
-    sql: ${TABLE}.CUSTOMER_NUM ;;
+    sql: ${customer_num} ;;
   }
 
   dimension: plan_name {
@@ -280,13 +280,13 @@ view: mn_customer_dim_reuse {
   dimension: pbm_member_info_type {
     type: string
     label: "Type"
-    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+    sql: ${member_info_type} ;;
   }
 
   dimension: pbm_num {
     type: string
     label: "ID"
-    sql: ${TABLE}.CUSTOMER_NUM ;;
+    sql: ${customer_num} ;;
   }
 
   dimension: pbm_name {
@@ -299,13 +299,13 @@ view: mn_customer_dim_reuse {
   dimension: bob_member_info_type {
     type: string
     label: "Type"
-    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+    sql: ${member_info_type} ;;
   }
 
   dimension: bob_num {
     type: string
     label: "ID"
-    sql: ${TABLE}.CUSTOMER_NUM ;;
+    sql: ${customer_num} ;;
   }
 
   dimension: bob_name {
@@ -331,7 +331,7 @@ view: mn_customer_dim_reuse {
 
 #*************Plan Field Set
   set: plan_set {
-    fields: [plan_member_info_type,plan_num,plan_name]
+    fields: [plan_plan_type,plan_num,plan_name]
   }
 
 #*************BOB Field Set
