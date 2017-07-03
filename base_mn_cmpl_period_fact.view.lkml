@@ -496,7 +496,7 @@ view: mn_cmpl_period_fact {
     group_label: "Compliance Ratio"
     value_format_name: percent_2
     #view_label: "Compliance Ratio - Compliant"
-    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Compliant' THEN 1 ELSE 0 END) / ${review_status_total} ;;
+    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Compliant' THEN 1 ELSE 0 END) / NULLIF(${review_status_total}, 0) ;;
   }
 
   measure: review_status_out_of_compliance {
@@ -505,7 +505,7 @@ view: mn_cmpl_period_fact {
     group_label: "Compliance Ratio"
     value_format_name: percent_2
     #view_label: "Compliance Ratio - Out of Compliance"
-    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Out of Compliance' THEN 1 ELSE 0 END) / ${review_status_total} ;;
+    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Out of Compliance' THEN 1 ELSE 0 END) / NULLIF(${review_status_total}, 0) ;;
   }
 
   measure: review_status_over_compliant {
@@ -514,7 +514,7 @@ view: mn_cmpl_period_fact {
     group_label: "Compliance Ratio"
     value_format_name: percent_2
     #view_label: "Compliance Ratio - Over Compliant"
-    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Over Compliant' THEN 1 ELSE 0 END) / ${review_status_total} ;;
+    sql: SUM(CASE WHEN  ${TABLE}.REVIEW_STATUS = 'Over Compliant' THEN 1 ELSE 0 END) / NULLIF(${review_status_total}, 0) ;;
   }
 
 

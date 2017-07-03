@@ -1089,7 +1089,7 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
-    sql_on: ${mn_combined_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
+    sql_on: ${mn_combined_cmpl_commit_fact.src_sys_commit_id} = ${mn_cmpl_period_fact.src_sys_commit_id}
               AND ${mn_cmpl_period_fact.hidden_flag} = 'N'
               ;;
   }
@@ -1108,7 +1108,7 @@ explore: commercial_compliance {
   join: mn_cmpl_per_lines_fact {
     type: left_outer
     relationship: many_to_one
-    from: mn_cmpl_per_lines_fact
+    from: mn_cmpl_per_lines_fact_dist
     view_label: "Compliance Bucket Line"
     sql_on: ${mn_cmpl_period_fact.period_wid} = ${mn_cmpl_per_lines_fact.period_wid} ;;
   }
