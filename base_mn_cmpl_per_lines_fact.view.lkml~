@@ -94,45 +94,47 @@ view: mn_cmpl_per_lines_fact {
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
-  # dimension: report_market_share {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_MARKET_SHARE ;;
-  # }
 
-  # dimension: report_tier_attained {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TIER_ATTAINED ;;
-  # }
 
-  # dimension: report_total_comp_revenue {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TOTAL_COMP_REVENUE ;;
-  # }
+  dimension: report_market_share {
+    type: string
+    sql: ${TABLE}.REPORT_MARKET_SHARE ;;
+  }
 
-  # dimension: report_total_comp_volume {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TOTAL_COMP_VOLUME ;;
-  # }
+  dimension: report_tier_attained {
+    type: string
+    sql: ${TABLE}.REPORT_TIER_ATTAINED ;;
+  }
 
-  # dimension: report_total_int_revenue {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TOTAL_INT_REVENUE ;;
-  # }
+  dimension: report_total_comp_revenue {
+    type: string
+    sql: ${TABLE}.REPORT_TOTAL_COMP_REVENUE ;;
+  }
 
-  # dimension: report_total_int_volume {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TOTAL_INT_VOLUME ;;
-  # }
+  dimension: report_total_comp_volume {
+    type: string
+    sql: ${TABLE}.REPORT_TOTAL_COMP_VOLUME ;;
+  }
 
-  # dimension: report_total_num_revenue {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TOTAL_NUM_REVENUE ;;
-  # }
+  dimension: report_total_int_revenue {
+    type: string
+    sql: ${TABLE}.REPORT_TOTAL_INT_REVENUE ;;
+  }
 
-  # dimension: report_total_num_volume {
-  #   type: string
-  #   sql: ${TABLE}.REPORT_TOTAL_NUM_VOLUME ;;
-  # }
+  dimension: report_total_int_volume {
+    type: string
+    sql: ${TABLE}.REPORT_TOTAL_INT_VOLUME ;;
+  }
+
+  dimension: report_total_num_revenue {
+    type: string
+    sql: ${TABLE}.REPORT_TOTAL_NUM_REVENUE ;;
+  }
+
+  dimension: report_total_num_volume {
+    type: string
+    sql: ${TABLE}.REPORT_TOTAL_NUM_VOLUME ;;
+  }
 
   dimension: run_id {
     hidden: yes

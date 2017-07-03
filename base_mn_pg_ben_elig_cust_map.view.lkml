@@ -88,11 +88,6 @@ view: mn_pg_ben_elig_cust_map {
     sql: ${TABLE}.ELIG_START_DATE_WID ;;
   }
 
-  dimension: inc_flag {
-    type: string
-    sql: ${TABLE}.INC_FLAG ;;
-  }
-
   dimension: is_access_price_flag {
     type: string
     sql: ${TABLE}.IS_ACCESS_PRICE_FLAG ;;
