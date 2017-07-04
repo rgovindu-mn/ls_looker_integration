@@ -31,6 +31,11 @@ view: mn_product_dim {
     sql: ${TABLE}.CATALOG_TYPE ;;
   }
 
+  dimension: catalog_type_name {
+    type: string
+    sql: ${TABLE}.CATALOG_TYPE_NAME ;;
+  }
+
   dimension: cogs {
     type: string
     sql: ${TABLE}.COGS ;;

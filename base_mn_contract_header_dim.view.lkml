@@ -610,7 +610,7 @@ view: mn_contract_header_dim {
 
   measure: no_of_contracted_customers {
     type: sum
-    sql: CASE WHEN ${TABLE}.OWNER_WID IS NULL THEN 0 ELSE 1 ;;
+    sql: CASE WHEN ${TABLE}.OWNER_WID IS NULL THEN 0 ELSE 1 END ;;
     label: "# of Contracted Customers"
   }
 }
