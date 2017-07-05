@@ -395,7 +395,7 @@ view: mn_mco_util_fact {
 
   measure: Total_Rx_Quantity {
     type: sum
-    label: "Total Rx Qty"
+    label: "Total Rx Count"
     value_format_name: decimal_0
     sql: ${rx_quantity} ;;
   }

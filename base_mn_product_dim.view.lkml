@@ -316,6 +316,7 @@ view: mn_product_dim {
   }
 
   dimension: product_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.PRODUCT_TYPE ;;
   }

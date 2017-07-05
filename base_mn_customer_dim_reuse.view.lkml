@@ -317,7 +317,7 @@ view: mn_customer_dim_reuse {
 #*************Customer Field Set
   set: customer {
     fields: [account_size,address,address_type,city,country,credit_rebill_regexp_criteria,currency,
-      cust_domain,customer_name,external_segment,member_info_type,pbm_member_info_type,
+      cust_domain,customer_name,external_segment,member_info_type,
       member_status,org_id_type,plan_type,pmt_method,postal_zip,purchase_method,segmentation_attrubute1,
       segmentation_attrubute2,segmentation_attrubute3,segmentation_attrubute4,segmentation_attrubute5,
       state_province,status_eff_end_date,status_eff_end_month,status_eff_end_quarter,status_eff_end_year,
@@ -325,7 +325,7 @@ view: mn_customer_dim_reuse {
   }
 
 #*************PBM Field Set
-  set: parent_pbm_set {
+  set: pbm_set {
     fields: [pbm_member_info_type,pbm_num,pbm_name]
   }
 
