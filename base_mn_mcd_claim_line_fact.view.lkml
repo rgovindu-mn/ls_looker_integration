@@ -1,4 +1,4 @@
-view: base_mn_mcd_claim_line_fact {
+view: mn_mcd_claim_line_fact {
   sql_table_name: MN_MCD_CLAIM_LINE_FACT_VW ;;
 
   dimension: adjust_type {

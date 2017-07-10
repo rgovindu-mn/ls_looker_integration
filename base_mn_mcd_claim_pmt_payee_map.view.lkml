@@ -1,4 +1,4 @@
-view: base_mn_mcd_claim_pmt_payee_map {
+view: mn_mcd_claim_pmt_payee_map {
 
 sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 

@@ -1,4 +1,4 @@
-view: base_mn_mcd_claim_dim {
+view: mn_mcd_claim_dim {
 
 sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
@@ -47,6 +47,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
   dimension: claim_wid {
     type: number
     hidden: yes
+    primary_key: yes
     sql: ${TABLE}.CLAIM_WID ;;
   }
 

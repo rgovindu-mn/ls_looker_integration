@@ -1,5 +1,36 @@
 include: "base_ls_explores.model.lkml"
 
+include: "base_mn_mcd_claim_line_fact.view.lkml"
+include: "base_mn_mcd_claim_dim.view.lkml"
+include: "base_mn_mcd_claim_pmt_payee_map.view.lkml"
+
+explore: mn_mcd_claim_line {
+  from: mn_mcd_claim_line_fact
+  view_name: mn_mcd_claim_line_fact
+  label: "Governament Explorer"
+  view_label: "MCD Claim Lines"
+
+sql_always_where: ${row_deleted_flag} = 'N' ;;
+
+  join: mn_mcd_claim_dim {
+    from: mn_mcd_claim_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim"
+    sql_on: ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_claim_dim.claim_wid} ;;
+  }
+
+  join: mn_mcd_claim_pmt_payee_map {
+    from: mn_mcd_claim_pmt_payee_map
+    type: left_outer
+    relationship: many_to_many
+    view_label: "Claim Payment"
+    sql_on: ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_claim_pmt_payee_map.mcd_claim_wid} ;;
+  }
+
+}
+
+
 # explore:  test {
 #   from: mn_contract_header_dim
 #   view_name: mn_contract_header_dim
