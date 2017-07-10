@@ -1,4 +1,4 @@
-view: base_mn_mcd_payment_fact {
+view: mn_mcd_payment_fact {
   sql_table_name: MN_MCD_PAYMENT_FACT_VW ;;
 
   dimension: approved_by_wid {

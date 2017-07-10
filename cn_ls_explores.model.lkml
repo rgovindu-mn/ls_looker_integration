@@ -3,11 +3,14 @@ include: "base_ls_explores.model.lkml"
 include: "base_mn_mcd_claim_line_fact.view.lkml"
 include: "base_mn_mcd_claim_dim.view.lkml"
 include: "base_mn_mcd_claim_pmt_payee_map.view.lkml"
+include: "base_mn_mcd_payment_fact.view.lkml"
+include: "base_mn_user_dim.view.lkml"
+include: "base_mn_price_list_dim.view.lkml"
 
 explore: mn_mcd_claim_line {
   from: mn_mcd_claim_line_fact
   view_name: mn_mcd_claim_line_fact
-  label: "Governament Explorer"
+  label: "Government Explore"
   view_label: "MCD Claim Lines"
 
 sql_always_where: ${row_deleted_flag} = 'N' ;;
@@ -27,6 +30,30 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     view_label: "Claim Payment"
     sql_on: ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_claim_pmt_payee_map.mcd_claim_wid} ;;
   }
+
+  join: mn_mcd_payment_fact {
+    from: mn_mcd_payment_fact
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Payment"
+    sql_on: ${mn_mcd_claim_pmt_payee_map.mcd_payment_wid} = ${mn_mcd_payment_fact.mcd_payment_wid} ;;
+}
+  join: mn_claim_owner_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Ownwer"
+    sql_on: ${mn_mcd_claim_dim.claim_owner_wid} = ${mn_claim_owner_dim.user_wid} ;;
+  }
+
+  join: mn_price_list_dim {
+    from: mn_price_list_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Price List"
+    sql_on: ${mn_mcd_claim_line_fact.ura_price_list_wid} = ${mn_price_list_dim.price_list_wid} ;;
+  }
+
 
 }
 
