@@ -93,6 +93,7 @@ view: mn_cmpl_per_lines_fact_dist {
 
   measure: actual_qty_value {
     type: sum
+    label: "Actual Volume"
     sql: ${inv_qty} ;;
   }
 
