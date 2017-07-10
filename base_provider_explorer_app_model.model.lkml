@@ -248,7 +248,9 @@ explore: mn_contract_header_dim {
     from: mn_pg_prc_fact_flat
     view_label: "Pricing Program Products and Pricing"
     #fields: [channel_name]
-    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid};;
+    sql_on: ${mn_pg_prc_adhoc_fact.pg_wid} = ${mn_pg_pg_prc_fact_flat.pg_wid}
+    AND ${mn_pg_prc_adhoc_fact.product_wid} = ${mn_pg_pg_prc_fact_flat.product_wid}
+    AND ${mn_pg_prc_adhoc_fact.start_raw} = ${mn_pg_pg_prc_fact_flat.start_raw};;
   }
 
 
@@ -1087,7 +1089,7 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_cmpl_period_fact
     view_label: "Period"
-    sql_on: ${mn_combined_cmpl_commit_fact.definition_wid} = ${mn_cmpl_period_fact.definition_wid}
+    sql_on: ${mn_combined_cmpl_commit_fact.src_sys_commit_id} = ${mn_cmpl_period_fact.src_sys_commit_id}
               AND ${mn_cmpl_period_fact.hidden_flag} = 'N'
               ;;
   }
@@ -1106,25 +1108,25 @@ explore: commercial_compliance {
   join: mn_cmpl_per_lines_fact {
     type: left_outer
     relationship: many_to_one
-    from: mn_cmpl_per_lines_fact
+    from: mn_cmpl_per_lines_fact_dist
     view_label: "Compliance Bucket Line"
     sql_on: ${mn_cmpl_period_fact.period_wid} = ${mn_cmpl_per_lines_fact.period_wid} ;;
   }
 
-  join: cmpl_ship_to_customer {
+  join: cmpl_hip_to_customer {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Compliance Bucket Line - Ship To Customer"
-    sql_on: ${mn_cmpl_per_lines_fact.sale_ship_to_cust_wid} = ${cmpl_ship_to_customer.customer_wid};;
+    sql_on: ${mn_cmpl_per_lines_fact.sale_ship_to_cust_wid} = ${cmpl_hip_to_customer.customer_wid};;
   }
 
-  join: cmpl_ship_to_customer_ids_dim {
+  join: cmpl_hip_to_customer_ids_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_ids_dim
     view_label: "Compliance Bucket Line - Ship To Alternate IDs"
-    sql_on: ${cmpl_ship_to_customer.customer_wid} = ${cmpl_ship_to_customer_ids_dim.customer_wid} ;;
+    sql_on: ${cmpl_hip_to_customer.customer_wid} = ${cmpl_hip_to_customer_ids_dim.customer_wid} ;;
   }
 
   join: cmpl_sold_to_customer {
@@ -1132,7 +1134,7 @@ explore: commercial_compliance {
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Compliance Bucket Line - Sold To Customer"
-    sql_on: ${mn_cmpl_per_lines_fact.sale_sold_to_cust_wid}_to_cust_wid} = ${cmpl_sold_to_customer.customer_wid};;
+    sql_on: ${mn_cmpl_per_lines_fact.sale_sold_to_cust_wid} = ${cmpl_sold_to_customer.customer_wid};;
   }
 
   join: cmpl_sold_to_customer_ids_dim {

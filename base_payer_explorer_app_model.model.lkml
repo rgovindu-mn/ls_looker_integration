@@ -1,18 +1,14 @@
 include: "base_ls_explores.model.lkml"
-include: "bhavani.model.lkml"
 
 # include: "*.view.lkml"         # include all views in this project
 # include: "*.dashboard.lookml"  # include all dashboards in this project
 
-
 label: "Payer Explorer"
-
 
 explore: mn_payer_contract {
   label: "Payer Contracts"
   from: mn_contract_header_dim
   view_name: mn_rbt_ctrt_header_dim
-
   extends: [mn_rbt_ctrt_header_dim_secure_base,
      mn_combined_rebate_program_dim_base]
 
@@ -24,15 +20,14 @@ explore: mn_payer_contract {
   #  user_attribute: access_user_name
   #}
 
-#   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
 
-  join: mn_contract_attr_fact {
+  join: mn_ctrt_attr_fact {
     type: left_outer
     relationship: many_to_one
     from: mn_contract_attr_fact
     view_label: "Contract"
-    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_contract_attr_fact.contract_wid};;
+    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_ctrt_attr_fact.contract_wid};;
     fields: [eff_start_date, eff_end_date, attr_name, attr_value]
   }
 
@@ -41,7 +36,8 @@ explore: mn_payer_contract {
     view_label: "Rebate Program"
     relationship: many_to_one
     from: mn_combined_rebate_program_dim
-    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid} ;;
+    sql_on: ${mn_rbt_ctrt_header_dim.contract_wid} = ${mn_combined_rebate_program_dim.contract_wid}
+    AND ${mn_combined_rebate_program_dim.latest_flag} = 'Y';;
   }
 
   # ****************************** Rebate Program Qualification joins
@@ -58,7 +54,7 @@ explore: mn_payer_contract {
     relationship: many_to_one
     from: mn_rbt_qual_prod_map_all
     view_label: "Rebate Program Qualification Product"
-    sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_qual_prod_map_all.basket_wid}.program_qual_wid} ;;
+    sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_qual_prod_map_all.program_qual_wid} ;;
   }
 
   join: mn_rbt_qual_prod_dim {
@@ -85,7 +81,6 @@ explore: mn_payer_contract {
     view_label: "Rebate Program Qualification Product EDA"
     sql_on: ${mn_rbt_qual_prod_map_all.product_wid} = ${mn_rbt_qual_prod_eda.product_wid} ;;
   }
-
 
   # ******************** Rebate Program Benefit joins
   join: mn_rbt_prog_ben_dim {
@@ -134,7 +129,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_rbt_qual_mb_prod_map_all
-    view_label: "Rebate Program Qualification MB"
+    view_label: "Rebate Program Qualification MB Product"
     sql_on: ${mn_rbt_prog_qual_flat_dim.program_qual_wid} = ${mn_rbt_qual_mb_prod_map_all.program_qual_wid} ;;
   }
 
@@ -142,7 +137,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_market_basket_dim
-    view_label: "Rebate Program Qualification MB"
+    view_label: "Rebate Program Qualification MB Product"
     sql_on: ${mn_rbt_qual_mb_prod_map_all.basket_wid} = ${mn_rbt_qual_mb_dim.market_basket_wid} ;;
   }
 
@@ -209,7 +204,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_formulary_prod_map
-    view_label: "Rebate Program Elig Plan Formulary Product"
+    view_label: "Rebate Program Eligible Plan Formulary Product"
     sql_on: ${mn_plan_formulary_map.formulary_wid} = ${mn_formulary_prod_map.formulary_wid} ;;
   }
 
@@ -217,7 +212,7 @@ explore: mn_payer_contract {
     type: left_outer
     relationship: many_to_one
     from: mn_product_dim
-    view_label: "Rebate Program Elig Plan Formulary Product"
+    view_label: "Rebate Program Eligible Plan Formulary Product"
     sql_on: ${mn_formulary_prod_map.product_wid} = ${mn_formulary_product_dim.product_wid} ;;
     fields: [ndc, product_num, product_name]
   }
@@ -306,7 +301,291 @@ explore: mn_payer_contract {
     from: mn_org_dim
     view_label: "Contract"
   }
-#   Complete relabel
+  #   Complete relabel
+}
+
+
+# **************************************** Payer Utilization
+explore: payer_utilization {
+  label: "Payer Utilization"
+  from: mn_mco_util_fact
+  view_name: mn_mco_util_fact
+  view_label: "Utilization Lines"
+  # hidden: no
+
+  join: mn_util_customer_dim_bob {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim_reuse
+    view_label: "Book of Business"
+    sql_on: ${mn_mco_util_fact.bob_wid} = ${mn_util_customer_dim_bob.customer_wid} ;;
+    fields: [mn_util_customer_dim_bob.bob_set*]
+  }
+
+  # join: mn_util_cust_dim_parent_pbm {
+  #   type:  left_outer
+  #   relationship: many_to_one
+  #   from: mn_customer_dim_reuse
+  #   view_label: "Parent PBM"
+  #   sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_util_cust_dim_parent_pbm.customer_wid} ;;
+  #   fields: [mn_util_cust_dim_parent_pbm.parent_pbm_set*]
+  # }
+
+  join: mn_util_pbm_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim_reuse
+    view_label: "PBM"
+    sql_on: ${mn_mco_util_fact.pbm_wid} = ${mn_util_pbm_dim.customer_wid} ;;
+    fields: [mn_util_pbm_dim.pbm_set*]
+  }
+  join: mn_util_plan_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim_reuse
+    view_label: "Plan"
+    sql_on: ${mn_mco_util_fact.plan_wid} = ${mn_util_plan_dim.customer_wid} ;;
+    fields: [mn_util_plan_dim.plan_set*]
+  }
+
+  join: mn_util_ctrt_customer_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_dim_reuse
+    view_label: "Contracted Customer"
+    sql_on: ${mn_mco_util_fact.contract_cust_wid} = ${mn_util_ctrt_customer_dim.customer_wid} ;;
+    fields: [mn_util_ctrt_customer_dim.customer*]
+  }
+
+  join: mn_util_ctrt_customer_id {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_customer_ids_dim
+    view_label: "Contracted Customer"
+    sql_on: ${mn_util_ctrt_customer_dim.customer_wid} = ${mn_util_ctrt_customer_id.customer_wid} ;;
+  }
+
+  join: mn_mco_submission_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_mco_submission_dim
+    view_label: "Submissions"
+    sql_on: ${mn_mco_util_fact.mco_submission_wid} = ${mn_mco_submission_dim.mco_submission_wid} ;;
+  }
+
+  join: mn_util_product_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_product_dim
+    view_label: "Product"
+    sql_on: ${mn_mco_util_fact.product_wid} = ${mn_util_product_dim.product_wid} ;;
+  }
+
+  join: mn_util_product_map_all_ver {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_product_map_all_ver
+    view_label: "Product"
+    sql_on: ${mn_util_product_dim.product_wid} = ${mn_util_product_map_all_ver.level0_product_wid} ;;
+  }
+
+  join: mn_formulary_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_formulary_dim
+    view_label: "Formulary"
+    sql_on: ${mn_mco_util_fact.formulary_wid} = ${mn_formulary_dim.formulary_wid} ;;
+  }
+
+  join: mn_util_org_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_org_dim
+    view_label: "Utilization Lines"
+    sql_on: ${mn_mco_util_fact.org_wid} = ${mn_util_org_dim.org_wid} ;;
+  }
+
+  join: mn_util_cot_dim {
+    type:  left_outer
+    relationship: many_to_one
+    from: mn_cot_dim
+    view_label: "Class of Trade"
+    sql_on: ${mn_mco_util_fact.cot_wid} = ${mn_util_cot_dim.cot_wid} ;;
+  }
+
+}
+
+# **************************************** Payer Rebates
+explore: payer_rebate {
+  label: "Payer Rebates"
+  from: mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  view_label: "Rebate Lines"
+
+  extends: [mn_paid_rebate_lines_base,mn_rbt_ctrt_header_dim_base]
+  hidden: no
+
+  sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
+    upper(${mn_discount_bridge_fact.rebate_module_type}) = 'MCO') ;;
+
+  join: mn_rebate_payment_fact {
+    from: mn_rebate_payment_fact
+    view_label: "Rebate Payment"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${mn_rebate_payment_fact.rebate_pmt_wid} = ${mn_discount_bridge_fact.rebate_pmt_wid}  ;;
+    fields: [rebate_payment_id, start_date,start_month,start_quarter,start_year, end_date,end_month,end_quarter,end_year,payment_status,payment_priority,tier_attained,tier_applied,qualification_status, paid_date,paid_month,paid_quarter,paid_year,total_net_due_amount,total_rebate_due_amount]
+  }
+
+  join: mn_rbt_ctrt_header_dim {
+    from: mn_contract_header_dim
+    view_label: "Contract"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${mn_rebate_payment_fact.contract_wid} = ${mn_rbt_ctrt_header_dim.contract_wid} ;;
+  }
+
+  join: mn_rbt_analyst_user_dim {
+    from: mn_user_dim
+    view_label: "Rebate Analyst"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${mn_rebate_payment_fact.analyst_user_wid} = ${mn_rbt_analyst_user_dim.user_wid} ;;
+  }
+
+  join: mn_rbt_slsrep_user_dim {
+    from: mn_user_dim
+    view_label: "Rebate SalesRep"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${mn_rebate_payment_fact.salesrep_user_wid} = ${mn_rbt_slsrep_user_dim.user_wid} ;;
+  }
+
+  join: mn_payment_package_dim {
+    from: mn_payment_package_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Payment Package"
+    sql_on: ${mn_rebate_payment_fact.pymt_pkg_wid} = ${mn_payment_package_dim.pymt_pkg_wid} ;;
+  }
+
+  join: mn_rbt_product_dim {
+    from: mn_product_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Product"
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_rbt_product_dim.product_wid} ;;
+  }
+
+  join:  mn_rbt_plan_dim {
+    from: mn_customer_dim_reuse
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Plan"
+    sql_on: ${mn_discount_bridge_fact.plan_wid} = ${mn_rbt_plan_dim.customer_wid}
+      and Upper(${mn_rbt_plan_dim.member_info_type}) = 'PLAN' ;;
+    fields: [mn_rbt_plan_dim.plan_set*]
+  }
+
+  join: mn_combined_rebate_program_dim {
+    from: mn_combined_rebate_program_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Rebate Program"
+    sql_on: ${mn_rebate_payment_fact.rebate_program_wid} = ${mn_combined_rebate_program_dim.program_wid} ;;
+  }
+
+  # join: mn_rbt_prg_ben_flat_dim {
+  #   type: left_outer
+  #   relationship: many_to_one
+  #   from: mn_rbt_prg_ben_flat_dim
+  #   view_label: "Rebate Program Benefit"
+  #   sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid} ;;
+  # }
+
+
+  # join: mn_rbt_prog_ben_prod_map {
+  #   type: left_outer
+  #   relationship: many_to_one
+  #   from: mn_rbt_prog_ben_prod_map
+  #   view_label: "Rebate Program Benefit Product"
+  #   sql_on: ${mn_rbt_prg_ben_flat_dim.program_ben_wid} = ${mn_rbt_prog_ben_prod_map.program_ben_wid} ;;
+  # }
+
+  #   Relabelling the existing labels
+  join: mn_rbt_ctrt_author_dim {
+    from: mn_user_dim
+    view_label: "Contract Author"
+  }
+
+  join: mn_rbt_ctrt_srep_dim {
+    from: mn_user_dim
+    view_label: "Contract Sales Rep"
+  }
+
+  join: mn_rbt_ctrt_status_dim {
+    from: mn_ctrt_status_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_domain_dim {
+    from: mn_ctrt_domain_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_type_dim {
+    from: mn_ctrt_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_ctrt_sub_type_dim {
+    from: mn_ctrt_sub_type_dim
+    view_label: "Contract"
+  }
+
+  join: mn_rbt_cust_owner_dim {
+    from: mn_customer_dim
+    view_label: "Contract Owner Account"
+  }
+
+  join: mn_rbt_cust_cot_dim {
+    from: mn_customer_cot_dim
+    view_label: "Contract Customer COT"
+  }
+
+  join: mn_rbt_cot_dim {
+    from: mn_cot_dim
+    view_label: "Contract Customer COT"
+  }
+
+  join: mn_rbt_ctrt_parent_dim {
+    from: mn_contract_header_dim
+    view_label: "Contract Parent"
+  }
+
+  join: mn_rbt_distrib_mthd_dim {
+    from: mn_distrib_mthd_dim
+    view_label: "Contract Distribution Method"
+  }
+
+  join: mn_rbt_org_dim {
+    from: mn_org_dim
+    view_label: "Contract"
+  }
+  # Complete relable
+
+   #  ************************** Hiding unwanted joins
+  join: mn_rbt_ctrt_delegate_dim {
+    from: mn_user_dim
+    view_label: "Contract Additional Delegate"
+    fields: []
+  }
+
+  fields: [ALL_FIELDS*,-mn_discount_bridge_fact.cs_line_ref_num,-mn_discount_bridge_fact.ids_line_ref_num,
+    -mn_discount_bridge_fact.ds_line_ref_num,-mn_discount_bridge_fact.mcd_claim_wid,-mn_discount_bridge_fact.mcd_line_ref_num,
+    -mn_discount_bridge_fact.mcd_payment_wid,-mn_discount_bridge_fact.pub_util_id,-mn_discount_bridge_fact.estimate_pmt_flag,
+    -mn_discount_bridge_fact.estimate_qty,-mn_discount_bridge_fact.inv_amt_base,-mn_discount_bridge_fact.paid_amt_base]
+
 }
 
 # **************************************** Payer Estimated Rebates
@@ -347,7 +626,7 @@ explore:  payer_combined_new {
     relationship: one_to_many
     from: mn_discount_bridge_fact
     sql_on: ${mn_mco_util_fact.pub_util_id} = ${mn_discount_bridge_fact.pub_util_id} ;;
-    view_label: "Rebate lines"
+    view_label: "Rebate Lines"
   }
 
   join: mn_ctrt_Adtnl_dlgt_dim {
@@ -358,25 +637,24 @@ explore:  payer_combined_new {
     sql_on: ${mn_rbt_ctrt_header_dim.author_wid} = ${mn_ctrt_Adtnl_dlgt_dim.user_wid};;
   }
 
-  #   Relabelling the existing labels
-
+  #  ******************************** Relabelling the existing labels
   join: mn_util_customer_dim_bob {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Util Book of Business"
   }
 
-  join: mn_util_cust_dim_parent_pbm {
-    from: mn_customer_dim
+  join: mn_util_pbm_dim {
+    from: mn_customer_dim_reuse
     view_label: "Util PBM"
   }
 
-  join: mn_util_cust_dim_plan {
-    from: mn_customer_dim
+  join: mn_util_plan_dim {
+    from: mn_customer_dim_reuse
     view_label: "Util Plan"
   }
 
   join: mn_util_ctrt_customer_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     view_label: "Util Contracted Customer"
   }
 
@@ -404,17 +682,18 @@ explore:  payer_combined_new {
     view_label: "Util Formulary"
   }
 
-  join: mn_util_org_dim {
-    from: mn_org_dim
-    view_label: "Util Org"
-  }
+  # join: mn_util_org_dim {
+  #   from: mn_org_dim
+  #   view_label: "Util Org"
+  # }
 
   join: mn_util_cot_dim {
     from: mn_cot_dim
     view_label: "Util COT"
   }
+  # Complete relabel
 
-#  Hiding unwanted joins - from Exended Rebates
+  #  ************************** Hiding unwanted joins - from Exended Rebates
   join: mn_rbt_cust_owner_dim {
     from: mn_customer_dim
     fields: []
@@ -436,8 +715,8 @@ explore:  payer_combined_new {
   }
 
   join:  mn_rbt_plan_dim {
-    from: mn_customer_dim
-    fields: []
+    from: mn_customer_dim_reuse
+    fields: [-mn_rbt_plan_dim.plan_set*]
   }
 
 }

@@ -8,6 +8,7 @@ view: mn_rbt_qual_prod_map_all {
   }
 
   dimension: contract_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }
@@ -50,7 +51,6 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension_group: eff_end {
     type: time
-    hidden: yes
     timeframes: [
       raw,
       time,
@@ -71,7 +71,6 @@ view: mn_rbt_qual_prod_map_all {
 
   dimension_group: eff_start {
     type: time
-    hidden: yes
     timeframes: [
       raw,
       time,
@@ -91,25 +90,56 @@ view: mn_rbt_qual_prod_map_all {
   }
 
   dimension: excluded_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.EXCLUDED_FLAG ;;
   }
 
+  dimension: excluded_flag_yes_no {
+    type: string
+    label: "Is Excluded ?"
+    sql: CASE WHEN ${excluded_flag} = 'Y' THEN 'Yes'
+      WHEN ${excluded_flag} = 'N' THEN 'No' ELSE Null END ;;
+  }
+
   dimension: included_from_ctrt_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.INCLUDED_FROM_CTRT_FLAG ;;
   }
 
+  dimension: included_from_ctrt_yes_no {
+    type: string
+    label: "Is Included From Contract ?"
+    sql: CASE WHEN ${included_from_ctrt_flag} = 'Y' THEN 'Yes'
+      WHEN ${included_from_ctrt_flag} = 'N' THEN 'No' ELSE Null END ;;
+  }
+
   dimension: included_from_pg_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.INCLUDED_FROM_PG_FLAG ;;
   }
 
+  dimension: included_from_pg_yes_no {
+    type: string
+    label: "Is Included From Price Program ?"
+    sql: CASE WHEN ${included_from_pg_flag} = 'Y' THEN 'Yes'
+      WHEN ${included_from_pg_flag} = 'N' THEN 'No' ELSE Null END ;;
+  }
+
   dimension: override_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.OVERRIDE_FLAG ;;
   }
 
+  dimension: override_yes_no {
+    type: string
+    sql: CASE WHEN ${override_flag} = 'Y' THEN 'Yes'
+      WHEN ${override_flag} = 'N' THEN 'No' ELSE Null END ;;
+    label: "Is Override ?"
+  }
   dimension: product_type {
     type: string
     sql: ${TABLE}.PRODUCT_TYPE ;;
@@ -121,7 +151,7 @@ view: mn_rbt_qual_prod_map_all {
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
-  dimension_group: prod_added_date {
+  dimension_group: prod_added {
     type: time
     timeframes: [
       raw,
@@ -194,7 +224,7 @@ view: mn_rbt_qual_prod_map_all {
       override_flag,
       product_type,
       product_wid,
-      prod_added_date_time
+      prod_added_time
     ]
   }
 }

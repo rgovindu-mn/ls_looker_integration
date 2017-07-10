@@ -1,7 +1,7 @@
-include: "base_mn_rbt_prog_ben_prod_map.view.lkml"
+include: "base_mn_rbt_ben_prod_map_all.view.lkml"
 
 view: mn_rbt_prog_ben_prod_map_adhoc_ext {
-  extends: [mn_rbt_prog_ben_prod_map]
+  extends: [mn_rbt_ben_prod_map_all]
 
 
   dimension: mco_pp_cap_perc {

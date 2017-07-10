@@ -15,7 +15,7 @@
     type: field_filter
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    default_value: Bryn Mawr Clinic,Paoli Clinic,Paoli Dialysis Center,Pilgrim Group
+    default_value:
     field: mn_customer_account_dim.customer_name
     listens_to_filters: [product, product_cat_name, invoice_year, invoice_month. sale_type]
 
@@ -24,7 +24,7 @@
     type: field_filter
     model: base_sales_intelligence_app_model
     explore: mn_combined_sale_fact
-    default_value: Apollo
+    default_value:
     field: mn_category_dim.product_name
     listens_to_filters: [account, product, invoice_year, invoice_month. sale_type]
 

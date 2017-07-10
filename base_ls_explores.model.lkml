@@ -69,6 +69,7 @@ include: "base_mn_mco_util_fact.view.lkml"
 
 include: "base_mn_rbt_prg_ben_flat_dim.view.lkml"
 include: "base_mn_erp_payment_fact.view.lkml"
+include: "base_mn_customer_dim_reuse.view.lkml"
 
 
 explore: mn_contract_header_dim_base {
@@ -346,7 +347,7 @@ explore: mn_rbt_ctrt_header_dim_base {
     view_label: "Rebate Contract Customer COT"
     sql_on: ${mn_rbt_cust_cot_dim.cot_wid} = ${mn_rbt_cot_dim.cot_wid}
             and ${mn_rbt_cust_cot_dim.eff_start_date} <= ${mn_rbt_ctrt_header_dim.implemented_date}
-            and ${mn_rbt_cust_cot_dim.eff_end_date} <= ${mn_rbt_ctrt_header_dim.implemented_date} ;;
+            and ${mn_rbt_cust_cot_dim.eff_end_date} >= ${mn_rbt_ctrt_header_dim.implemented_date} ;;
   }
 
   join: mn_rbt_ctrt_parent_dim {
@@ -372,7 +373,7 @@ explore: mn_rbt_ctrt_header_dim_base {
     relationship: many_to_one
     from: mn_org_dim
     view_label: "Rebate Contract"
-    fields: [org_name]
+    fields: [org_name,description,currency]
     sql_on: ${mn_rbt_ctrt_header_dim.org_wid} = ${mn_rbt_org_dim.org_wid} ;;
   }
 
@@ -464,7 +465,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_accrual_type_dim
-    view_label: "Rebate Program Accrual Type"
+    view_label: "Rebate Program"
     sql_on: ${mn_combined_rebate_program_dim.accrual_type_wid} = ${mn_pm_accrual_type_dim.accrual_type_wid};;
   }
 
@@ -472,7 +473,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_type_dim
-    view_label: "Rebate Program Payment Type"
+    view_label: "Rebate Program"
     sql_on: ${mn_combined_rebate_program_dim.pmt_type_wid} = ${mn_pm_pmt_type_dim.pmt_type_wid};;
   }
 
@@ -480,7 +481,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_program_type_dim
-    view_label: "Rebate Program Type"
+    view_label: "Rebate Program"
     sql_on: ${mn_combined_rebate_program_dim.program_type_wid} = ${mn_pm_program_type_dim.program_type_wid};;
   }
 
@@ -488,7 +489,7 @@ explore: mn_combined_rebate_program_dim_base {
     type: left_outer
     relationship: many_to_one
     from: mn_pmt_mth_type_dim
-    view_label: "Rebate Program Method Type"
+    view_label: "Rebate Program"
     sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_pm_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
@@ -765,13 +766,13 @@ explore: estimated_rebates_base {
      sql_on: ${mn_est_rebate_pmt_prod_map.program_wid} = ${mn_combined_rebate_program_dim.program_wid};;
    }
 
-   join: mn_rbt_prg_ben_flat_dim {
-       type: left_outer
-       view_label: "Rebate Program Benefit"
-       relationship: many_to_one
-       from: mn_rbt_prg_ben_flat_dim
-       sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
-   }
+#    join: mn_rbt_prg_ben_flat_dim {
+#        type: left_outer
+#        view_label: "Rebate Program Benefit"
+#        relationship: many_to_one
+#        from: mn_rbt_prg_ben_flat_dim
+#        sql_on: ${mn_combined_rebate_program_dim.program_wid} = ${mn_rbt_prg_ben_flat_dim.program_wid};;
+#    }
 
    join: mn_erp_payment_fact {
      type: left_outer
@@ -816,13 +817,13 @@ explore: historical_rebates_base {
     sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
   }
 
-  # join: mn_rl_rebate_type_dim {
-  #   type: left_outer
-  #   relationship: many_to_one
-  #   from: mn_rebate_type_dim
-  #   view_label: "Rebate Type"
-  #   sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rl_rebate_type_dim.rebate_type_wid};;
-  # }
+  join: mn_rl_rebate_type_dim {
+    type: left_outer
+    relationship: many_to_one
+    from: mn_rebate_type_dim
+    view_label: "Rebate Type"
+    sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_rl_rebate_type_dim.rebate_type_wid};;
+  }
 
   # join: mn_rl_customer_dim {
   #   type: left_outer

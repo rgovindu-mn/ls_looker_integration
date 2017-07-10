@@ -228,12 +228,20 @@ view: mn_combined_rebate_program_dim {
 
   dimension: grp_name {
     type: string
+    label: "Group Name"
     sql: ${TABLE}.GRP_NAME ;;
   }
 
   dimension: latest_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.LATEST_FLAG ;;
+  }
+
+  dimension: latest_flag_yes_no {
+    type: string
+    label: "Is Latest ?"
+    sql: CASE WHEN ${latest_flag} = 'Y' THEN 'Yes' ELSE 'No' END ;;
   }
 
   dimension: late_date_lag {
@@ -263,16 +271,19 @@ view: mn_combined_rebate_program_dim {
 
   dimension: payment_cust_type {
     type: string
+    label: "Payment Customer Type"
     sql: ${TABLE}.PAYMENT_CUST_TYPE ;;
   }
 
   dimension: payment_freq {
     type: string
+    label: "Payment Frequency"
     sql: ${TABLE}.PAYMENT_FREQ ;;
   }
 
   dimension: payment_grace_freq {
     type: string
+    label: "Payment Grace Frequency"
     sql: ${TABLE}.PAYMENT_GRACE_FREQ ;;
   }
 
@@ -303,6 +314,7 @@ view: mn_combined_rebate_program_dim {
 
   dimension: qual_method {
     type: string
+    label: "Qualification Method"
     sql: ${TABLE}.QUAL_METHOD ;;
   }
 
@@ -328,20 +340,24 @@ view: mn_combined_rebate_program_dim {
 
   dimension: src_strategy_name {
     type: string
+    label: "Strategy Name"
     sql: ${TABLE}.SRC_STRATEGY_NAME ;;
   }
 
   dimension: src_strategy_num {
     type: string
+    label: "Strategy Number"
     sql: ${TABLE}.SRC_STRATEGY_NUM ;;
   }
 
   dimension: src_strategy_type {
     type: string
+    label: "Strategy Type"
     sql: ${TABLE}.SRC_STRATEGY_TYPE ;;
   }
 
   dimension: src_strategy_ver_num {
+    hidden: yes
     type: string
     sql: ${TABLE}.SRC_STRATEGY_VER_NUM ;;
   }
@@ -353,8 +369,15 @@ view: mn_combined_rebate_program_dim {
   }
 
   dimension: strategy_based_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.STRATEGY_BASED_FLAG ;;
+  }
+
+  dimension: strgy_based_flag_yes_no {
+    type: string
+    label: "Strategy Based ?"
+    sql: CASE WHEN ${strategy_based_flag} = 'Y' THEN 'Yes' ELSE 'No' END;;
   }
 
   dimension: system_accrue {
@@ -379,20 +402,24 @@ view: mn_combined_rebate_program_dim {
 
   dimension_group: ver_end_date {
     type: time
+    label: "Version End Date"
     sql: ${TABLE}.VER_END_DATE ;;
   }
 
   dimension: ver_num {
     type: string
+    label: "Version Number"
     sql: ${TABLE}.VER_NUM ;;
   }
 
   dimension_group: ver_start_date {
     type: time
+    label: "Version Start Date"
     sql: ${TABLE}.VER_START_DATE ;;
   }
 
   dimension: contract_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.CONTRACT_TYPE ;;
   }

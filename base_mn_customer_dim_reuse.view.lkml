@@ -1,4 +1,4 @@
-view: mn_customer_dim {
+view: mn_customer_dim_reuse {
   sql_table_name: MN_CUSTOMER_DIM_VW ;;
 
   dimension: account_size {
@@ -52,7 +52,6 @@ view: mn_customer_dim {
     label: "Customer ID"
     sql: ${TABLE}.CUSTOMER_NUM ;;
   }
-
   dimension: customer_wid {
     hidden: yes
     type: number
@@ -109,13 +108,12 @@ view: mn_customer_dim {
 
   dimension: member_status {
     type: string
-    label: "Customer Status"
     sql: ${TABLE}.MEMBER_STATUS ;;
   }
 
   dimension: org_id {
     type: string
-    label: "Customer Org Id"
+    hidden: yes
     sql: ${TABLE}.ORG_ID ;;
   }
 
@@ -258,4 +256,87 @@ view: mn_customer_dim {
     type: count
     drill_fields: [customer_name]
   }
+
+  #*************Plan Aliasing
+  dimension: plan_plan_type {
+    type: string
+    label: "Type"
+    sql: ${plan_type} ;;
+  }
+
+  dimension: plan_num {
+    type: string
+    label: "ID"
+    sql: ${customer_num} ;;
+  }
+
+  dimension: plan_name {
+    type: string
+    label: "Name"
+    sql: ${customer_name} ;;
+  }
+
+  #*************PBM Aliasing
+  dimension: pbm_member_info_type {
+    type: string
+    label: "Type"
+    sql: ${member_info_type} ;;
+  }
+
+  dimension: pbm_num {
+    type: string
+    label: "ID"
+    sql: ${customer_num} ;;
+  }
+
+  dimension: pbm_name {
+    type: string
+    label: "Name"
+    sql: ${customer_name} ;;
+  }
+
+  #*************BOB Aliasing
+  dimension: bob_member_info_type {
+    type: string
+    label: "Type"
+    sql: ${member_info_type} ;;
+  }
+
+  dimension: bob_num {
+    type: string
+    label: "ID"
+    sql: ${customer_num} ;;
+  }
+
+  dimension: bob_name {
+    type: string
+    label: "Name"
+    sql: ${customer_name} ;;
+  }
+
+#*************Customer Field Set
+  set: customer {
+    fields: [account_size,address,address_type,city,country,credit_rebill_regexp_criteria,currency,
+      cust_domain,customer_name,external_segment,member_info_type,
+      member_status,org_id_type,plan_type,pmt_method,postal_zip,purchase_method,segmentation_attrubute1,
+      segmentation_attrubute2,segmentation_attrubute3,segmentation_attrubute4,segmentation_attrubute5,
+      state_province,status_eff_end_date,status_eff_end_month,status_eff_end_quarter,status_eff_end_year,
+      status_eff_start_date,status_eff_start_month,status_eff_start_quarter,status_eff_start_year]
+  }
+
+#*************PBM Field Set
+  set: pbm_set {
+    fields: [pbm_member_info_type,pbm_num,pbm_name]
+  }
+
+#*************Plan Field Set
+  set: plan_set {
+    fields: [plan_plan_type,plan_num,plan_name]
+  }
+
+#*************BOB Field Set
+  set: bob_set {
+    fields: [bob_member_info_type,bob_num,bob_name]
+  }
+
 }

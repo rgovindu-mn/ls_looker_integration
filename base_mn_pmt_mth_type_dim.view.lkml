@@ -34,12 +34,14 @@ view: mn_pmt_mth_type_dim {
   dimension: pmt_mth_type_desc {
     type: string
     label: "Payment Method Type"
+    group_label: "Payment Method Type"
     sql: ${TABLE}.PMT_MTH_TYPE_DESC ;;
   }
 
   dimension: pmt_mth_type_name {
     type: string
-    label: "PAyment Method Type Description"
+    label: "Payment Method Type Description"
+    group_label: "Payment Method Type"
     sql: ${TABLE}.PMT_MTH_TYPE_NAME ;;
   }
 

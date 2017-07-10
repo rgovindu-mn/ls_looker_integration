@@ -32,11 +32,15 @@ view: mn_pmt_type_dim {
   }
 
   dimension: pmt_type_desc {
+    label: "Payment Type Description"
+    group_label: "Payment Type"
     type: string
     sql: ${TABLE}.PMT_TYPE_DESC ;;
   }
 
   dimension: pmt_type_name {
+    label: "Payment Type Name"
+    group_label: "Payment Type"
     type: string
     sql: ${TABLE}.PMT_TYPE_NAME ;;
   }
