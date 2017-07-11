@@ -1,4 +1,4 @@
-view: base_mn_mcd_program_dim {
+view: mn_mcd_program_dim {
   sql_table_name: MN_MCD_PROGRAM_DIM_VW ;;
 
   dimension: amended_by_wid {

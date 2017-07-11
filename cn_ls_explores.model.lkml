@@ -6,6 +6,11 @@ include: "base_mn_mcd_claim_pmt_payee_map.view.lkml"
 include: "base_mn_mcd_payment_fact.view.lkml"
 include: "base_mn_user_dim.view.lkml"
 include: "base_mn_price_list_dim.view.lkml"
+include: "base_mn_mcd_util_fact.view.lkml"
+include: "base_mn_mcd_program_state_map.view.lkml"
+include: "base_mn_mcd_program_product_map.view.lkml"
+include: "base_mn_mcd_program_dim.view.lkml"
+include: "base_mn_mcd_claim_payment_map.view.lkml"
 
 explore: mn_mcd_claim_line {
   from: mn_mcd_claim_line_fact
@@ -22,7 +27,14 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     view_label: "Claim"
     sql_on: ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_claim_dim.claim_wid} ;;
   }
+  join:  mn_mcd_util_fact{
+    from: mn_mcd_util_fact
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Util"
+    sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_util_fact.product_wid} and ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_util_fact.claim_wid} ;;
 
+  }
   join: mn_mcd_claim_pmt_payee_map {
     from: mn_mcd_claim_pmt_payee_map
     type: left_outer
@@ -38,6 +50,32 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     view_label: "Claim Payment"
     sql_on: ${mn_mcd_claim_pmt_payee_map.mcd_payment_wid} = ${mn_mcd_payment_fact.mcd_payment_wid} ;;
 }
+
+  join: mn_mcd_claim_payment_map {
+    from: mn_mcd_claim_payment_map
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Payment"
+    sql_on:${mn_mcd_claim_pmt_payee_map.mcd_payment_wid} = ${mn_mcd_claim_payment_map.mcd_payment_wid}   ;;
+
+  }
+  join: mn_payment_approver_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Payment"
+     # fields: [Full NAme should come here]
+    sql_on: ${mn_mcd_payment_fact.approved_by_wid} = ${mn_payment_approver_dim.user_wid} ;;
+  }
+
+  join: mn_mcd_claim_state {
+    from: mn_customer_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim State"
+    sql_on: ${mn_mcd_claim_pmt_payee_map.claim_state_wid} = ${mn_mcd_claim_state.customer_wid} and  ${mn_mcd_claim_state.member_info_type} = 'Medicaid State';;
+  }
+
   join: mn_claim_owner_dim {
     from: mn_user_dim
     type: left_outer
@@ -54,8 +92,74 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     sql_on: ${mn_mcd_claim_line_fact.ura_price_list_wid} = ${mn_price_list_dim.price_list_wid} ;;
   }
 
+  join: mn_mcd_program_state_map {
+    from: mn_mcd_program_state_map
+    type: left_outer
+    relationship: many_to_many
+    view_label: "Program Info"
+    sql_on: ${mn_mcd_claim_line_fact.mcd_program_wid} = ${mn_mcd_program_state_map.mcd_program_wid} and ${mn_mcd_claim_dim.state} = ${mn_mcd_program_state_map.mcd_state_short_desc} ;;
+  }
 
+  join:  mn_mcd_program_product_map{
+    from: mn_mcd_program_product_map
+    type: left_outer
+    relationship: many_to_many
+    view_label: "Product Map"
+    sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_program_product_map.product_wid} ;;
+  }
+  join: mn_mcd_product_dim {
+    from: mn_product_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Products"
+    sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_product_dim.product_wid} ;;
+  }
+
+  join: mn_mcd_program_dim {
+    from: mn_mcd_program_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Mcd Program"
+    sql_on: ${mn_mcd_program_state_map.mcd_program_wid} = ${mn_mcd_program_dim.program_wid} ;;
+  }
+
+  join: mn_mfr_contact_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+   # fields: [Full NAme should come here]
+    sql_on: ${mn_mcd_program_state_map.mfr_contact_wid} = ${mn_mfr_contact_dim.user_wid} ;;
+  }
+
+  join: mn_recipient_name_dim {
+    from: mn_customer_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    # fields: [customer nAme should come here]
+    sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_recipient_name_dim.customer_wid} ;;
+  }
+
+  join: mn_analyst_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    # fields: [Full NAme should come here]
+    sql_on: ${mn_mcd_program_state_map.mfr_contact_wid} = ${mn_analyst_dim.user_wid} ;;
+  }
+
+  join: mn_payee_dim {
+    from: mn_customer_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Payee Details"
+    sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_payee_dim.customer_wid} and  ${mn_payee_dim.member_info_type} = 'Medicaid Payee'  ;;
+
+  }
 }
+
 
 
 # explore:  test {

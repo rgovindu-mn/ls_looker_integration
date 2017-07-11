@@ -1,4 +1,4 @@
-view: base_mn_mcd_program_state_map {
+view: mn_mcd_program_state_map {
  sql_table_name: MN_MCD_PROGRAM_STATE_MAP_VW ;;
 
   dimension: adjust_line_type {

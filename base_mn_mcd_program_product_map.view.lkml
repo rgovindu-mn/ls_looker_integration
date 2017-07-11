@@ -1,4 +1,4 @@
-view: base_mn_mcd_program_product_map {
+view: mn_mcd_program_product_map {
 
   sql_table_name: MN_MCD_PROGRAM_PRODUCT_MAP_VW ;;
 

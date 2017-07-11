@@ -1,4 +1,4 @@
-view: base_mn_mcd_util_fact {
+view: mn_mcd_util_fact {
   sql_table_name: MN_MCD_UTIL_FACT_VW ;;
 
   dimension: calculate_rebate_flag {
