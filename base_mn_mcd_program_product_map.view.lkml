@@ -1,4 +1,4 @@
-view: base_mn_mcd_program_product_map {
+view: mn_mcd_program_product_map {
 
   sql_table_name: MN_MCD_PROGRAM_PRODUCT_MAP_VW ;;
 
@@ -60,21 +60,25 @@ view: base_mn_mcd_program_product_map {
 
   dimension: mcd_program_wid {
     type: string
+    hidden: yes
     sql: ${TABLE}.MCD_PROGRAM_WID ;;
   }
 
   dimension: product_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
   dimension: run_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 

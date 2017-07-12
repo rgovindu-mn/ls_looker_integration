@@ -1,4 +1,4 @@
-view: base_mn_mcd_program_state_map {
+view: mn_mcd_program_state_map {
  sql_table_name: MN_MCD_PROGRAM_STATE_MAP_VW ;;
 
   dimension: adjust_line_type {
@@ -13,6 +13,7 @@ view: base_mn_mcd_program_state_map {
 
   dimension: analyst_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.ANALYST_WID ;;
   }
 
@@ -82,6 +83,7 @@ view: base_mn_mcd_program_state_map {
 
   dimension: mcd_program_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.MCD_PROGRAM_WID ;;
   }
 
@@ -92,16 +94,19 @@ view: base_mn_mcd_program_state_map {
 
   dimension: mcd_state_cust_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.MCD_STATE_CUST_WID ;;
   }
 
   dimension: mcd_state_short_desc {
     type: string
+    hidden: yes
     sql: ${TABLE}.MCD_STATE_SHORT_DESC ;;
   }
 
   dimension: mfr_contact_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.MFR_CONTACT_WID ;;
   }
 
@@ -112,21 +117,25 @@ view: base_mn_mcd_program_state_map {
 
   dimension: payee_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.PAYEE_WID ;;
   }
 
   dimension: run_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
   dimension: src_sys_mcd_program_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_MCD_PROGRAM_ID ;;
   }
 

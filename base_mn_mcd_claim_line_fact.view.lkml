@@ -13,6 +13,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: amp_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.AMP_PRICE_BASE ;;
   }
 
@@ -23,6 +24,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: asp_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.ASP_PRICE_BASE ;;
   }
 
@@ -33,6 +35,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: bp_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.BP_PRICE_BASE ;;
   }
 
@@ -43,6 +46,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: calc_ura_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CALC_URA_BASE ;;
   }
 
@@ -113,6 +117,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: end_qtr_awp_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.END_QTR_AWP_PRICE_BASE ;;
   }
 
@@ -123,6 +128,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: end_qtr_wac_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.END_QTR_WAC_PRICE_BASE ;;
   }
 
@@ -153,6 +159,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: inv_rebate_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.INV_REBATE_AMT_BASE ;;
   }
 
@@ -163,6 +170,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: inv_reimburse_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.INV_REIMBURSE_AMT_BASE ;;
   }
 
@@ -178,6 +186,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: inv_tpl_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.INV_TPL_AMT_BASE ;;
   }
 
@@ -193,13 +202,13 @@ view: mn_mcd_claim_line_fact {
 
   dimension: inv_ura_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.INV_URA_BASE ;;
   }
 
   dimension: mcd_claim_line_wid {
     type: number
     primary_key: yes
-    hidden: yes
     sql: ${TABLE}.MCD_CLAIM_LINE_WID ;;
   }
 
@@ -237,6 +246,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: override_ura_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.OVERRIDE_URA_BASE ;;
   }
 
@@ -366,6 +376,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: rebate_due_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.REBATE_DUE_AMT_BASE ;;
   }
 
@@ -376,7 +387,6 @@ view: mn_mcd_claim_line_fact {
 
   dimension: record_id {
     type: string
-    hidden: yes
     sql: ${TABLE}.RECORD_ID ;;
   }
 
@@ -420,6 +430,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: start_qtr_awp_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.START_QTR_AWP_PRICE_BASE ;;
   }
 
@@ -430,6 +441,7 @@ view: mn_mcd_claim_line_fact {
 
   dimension: start_qtr_wac_price_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.START_QTR_WAC_PRICE_BASE ;;
   }
 

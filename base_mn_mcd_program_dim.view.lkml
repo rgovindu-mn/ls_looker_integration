@@ -1,4 +1,4 @@
-view: base_mn_mcd_program_dim {
+view: mn_mcd_program_dim {
   sql_table_name: MN_MCD_PROGRAM_DIM_VW ;;
 
   dimension: amended_by_wid {
@@ -9,7 +9,6 @@ view: base_mn_mcd_program_dim {
 
   dimension_group: amended_on {
     type: time
-    hidden: yes
     timeframes: [
       raw,
       time,
@@ -80,6 +79,7 @@ view: base_mn_mcd_program_dim {
 
   dimension: last_updated_by_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.LAST_UPDATED_BY_WID ;;
   }
 
