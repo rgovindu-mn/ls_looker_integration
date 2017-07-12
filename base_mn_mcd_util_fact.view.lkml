@@ -215,6 +215,20 @@ view: mn_mcd_util_fact {
     sql: ${TABLE}.PAID_DATE_WID ;;
   }
 
+  dimension_group: paid {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: to_date(${paid_date_wid},'yyyymmdd') ;;
+  }
+
   dimension: paid_units {
     type: number
     sql: ${TABLE}.PAID_UNITS ;;

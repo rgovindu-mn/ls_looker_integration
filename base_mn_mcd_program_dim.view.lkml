@@ -9,7 +9,6 @@ view: mn_mcd_program_dim {
 
   dimension_group: amended_on {
     type: time
-    hidden: yes
     timeframes: [
       raw,
       time,
@@ -80,6 +79,7 @@ view: mn_mcd_program_dim {
 
   dimension: last_updated_by_wid {
     type: number
+    hidden: yes
     sql: ${TABLE}.LAST_UPDATED_BY_WID ;;
   }
 
