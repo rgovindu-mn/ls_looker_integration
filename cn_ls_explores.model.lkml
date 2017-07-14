@@ -11,6 +11,11 @@ include: "base_mn_mcd_program_state_map.view.lkml"
 include: "base_mn_mcd_program_product_map.view.lkml"
 include: "base_mn_mcd_program_dim.view.lkml"
 include: "base_mn_mcd_claim_payment_map.view.lkml"
+include: "base_mn_mcd_dispute_code_dim.view.lkml"
+include: "base_mn_mcd_adjust_type_dim.view.lkml"
+include: "base_mn_mcd_dispute_code_dim_dt.view.lkml"
+include: "mn_mcd_adjust_type_dim_dt.view.lkml"
+
 
 explore: mn_mcd_claim_line {
   from: mn_mcd_claim_line_fact
@@ -104,7 +109,7 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
 
   join:  mn_mcd_program_product_map{
     from: mn_mcd_program_product_map
-    type: left_outer
+    type: full_outer
     relationship: many_to_many
     view_label: "Program"
     sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_program_product_map.product_wid} ;;
@@ -123,7 +128,7 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     type: left_outer
     relationship: many_to_one
     view_label: "Product"
-    sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_product_dim.product_wid} ;;
+    sql_on: ${mn_mcd_program_product_map.product_wid} = ${mn_mcd_product_dim.product_wid} ;;
   }
 
   join: mn_mcd_program_dim {
@@ -195,6 +200,50 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     view_label: "Program"
     fields: [mn_program_createdby_dim.full_name]
     sql_on: ${mn_mcd_program_dim.created_by_wid} = ${mn_program_createdby_dim.user_wid} ;;
+  }
+
+  join: mn_mcd_adjust_code_dim_dt {
+    from: mn_mcd_dispute_code_dim_dt
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Lines"
+    fields: []
+    sql_on: ${mn_mcd_claim_line_fact.inf_corr_codes} = ${mn_mcd_adjust_code_dim_dt.src_sys_dispute_code_code} ;;
+  }
+
+  join: mn_mcd_adjust_code_dim{
+    from: mn_mcd_dispute_code_dim
+    type: full_outer
+    relationship: one_to_many
+    view_label: "Claim Lines"
+    sql_on: ${mn_mcd_adjust_code_dim_dt.dispute_code_name} = ${mn_mcd_adjust_code_dim.dispute_code_name} ;;
+  }
+
+  join: mn_mcd_adjust_type_dim_dt {
+    from: mn_mcd_adjust_type_dim_dt
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Lines"
+    fields: []
+    sql_on: ${mn_mcd_claim_line_fact.adjust_type} = ${mn_mcd_adjust_type_dim_dt.src_sys_adjust_type_code} ;;
+  }
+
+  join: mn_mcd_adjust_type_dim{
+    from: mn_mcd_adjust_type_dim
+    type: full_outer
+    relationship: one_to_many
+    view_label: "Claim Lines"
+    sql_on: ${mn_mcd_adjust_type_dim_dt.adjust_type_name} = ${mn_mcd_adjust_type_dim.adjust_type_name} ;;
+  }
+
+  join: mn_mcd_dispute_code_dim {
+    from: mn_mcd_dispute_code_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Lines"
+    fields: [mn_mcd_dispute_code_dim.dispute_code_name]
+    sql_on: ${mn_mcd_claim_line_fact.disp_codes} = ${mn_mcd_dispute_code_dim.src_sys_dispute_code_code} ;;
+
   }
 
 }

@@ -1,4 +1,4 @@
-view: base_mn_mcd_adjust_type_dim {
+view: mn_mcd_adjust_type_dim {
 
 sql_table_name: MN_MCD_ADJUST_TYPE_DIM_VW ;;
 

@@ -1,4 +1,4 @@
-view: base_mn_mcd_dispute_code_dim {
+view: mn_mcd_dispute_code_dim {
 
   sql_table_name: MN_MCD_DISPUTE_CODE_DIM_VW ;;
 

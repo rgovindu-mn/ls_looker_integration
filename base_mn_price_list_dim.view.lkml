@@ -134,6 +134,7 @@ view: mn_price_list_dim {
 
   dimension: src_sys_price_list_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_PRICE_LIST_ID ;;
   }
 
