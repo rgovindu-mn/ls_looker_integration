@@ -3,19 +3,24 @@ view: mn_cmpl_per_lines_fact_dist {
     sql:
         Select
           DISTINCT
-          LINE_REF_NUM,
-          PERIOD_WID,
-          SALE_INV_DATE_WID,
-          INV_QTY,
-          INV_AMT_BASE,
-          PRODUCT_WID,
-          DATE_UPDATED,
-          SALE_TYPE,
-          UOM,
-          SALE_SHIP_TO_CUST_WID,
-          SALE_SOLD_TO_CUST_WID
+          S.LINE_REF_NUM,
+          S.PERIOD_WID,
+          S.SALE_INV_DATE_WID,
+          S.INV_QTY,
+          S.INV_AMT_BASE,
+          S.PRODUCT_WID,
+          S.DATE_UPDATED,
+          S.SALE_TYPE,
+          B.SRC_SYS_TB_ID,
+          S.UOM,
+          S.SALE_SHIP_TO_CUST_WID,
+          S.SALE_SOLD_TO_CUST_WID,
+          PGQB.PG_TB_WID
         FROM
-            MN_CMPL_PER_LINES_FACT_VW
+        MN_CMPL_PER_LINES_FACT_VW S
+        LEFT JOIN MN_CMPL_BUCKET_FACT_VW B ON S.BUCKET_WID=B.BUCKET_WID
+        LEFT JOIN MN_PG_QUAL_BEN_DIM_VW PGQB ON
+          (CASE WHEN PGQB.STRATEGY_BASED_FLAG='Y' THEN PGQB.SRC_SYS_COMPONENT_ID ELSE PGQB.SRC_SYS_TB_ID END) = B.SRC_SYS_TB_ID
        ;;
   }
 
@@ -93,12 +98,13 @@ view: mn_cmpl_per_lines_fact_dist {
 
   measure: actual_qty_value {
     type: sum
-    label: "Actual Volume"
+    label: "Period Actual Volume"
     sql: ${inv_qty} ;;
   }
 
   measure: actual_revenue {
     type: sum
+    label: "Period Actual Revenue"
     sql: ${inv_amt_base} ;;
   }
 
