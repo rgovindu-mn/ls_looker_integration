@@ -723,7 +723,7 @@ explore: estimated_rebates_base {
   join: mn_est_rebate_pmt_prod_map {
     type: left_outer
     view_label: "Estimated Rebate Payment Product Map"
-    relationship: many_to_one
+    relationship: one_to_many
     from: mn_est_rebate_pmt_prod_map
     sql_on: ${mn_est_rebate_payment_fact.estimate_pmt_wid} = ${mn_est_rebate_pmt_prod_map.estimate_pmt_wid};;
   }
