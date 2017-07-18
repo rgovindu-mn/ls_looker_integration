@@ -17,11 +17,247 @@ include: "base_mn_mcd_dispute_code_dim_dt.view.lkml"
 include: "mn_mcd_adjust_type_dim_dt.view.lkml"
 
 
+explore: government_explore {
+  from: mn_mcd_program_state_map
+  view_name: mn_mcd_program_state_map
+  label: "Government Explore New"
+  view_label: "Program"
+
+  join: mn_mcd_program_product_map {
+    from: mn_mcd_program_product_map
+    type: full_outer
+    relationship: many_to_many
+    view_label: "Program"
+    sql_on: ${mn_mcd_program_state_map.mcd_program_wid} = ${mn_mcd_program_product_map.mcd_program_wid}  ;;
+  }
+
+  join: mn_mcd_claim_line_fact {
+    from: mn_mcd_claim_line_fact
+    type: left_outer
+    relationship: one_to_many
+    view_label: "Claim Line"
+    sql_on: ${mn_mcd_program_state_map.mcd_program_wid} = ${mn_mcd_claim_line_fact.mcd_program_wid} and ${mn_mcd_program_product_map.product_wid} = ${mn_mcd_claim_line_fact.product_wid} and ${mn_mcd_claim_line_fact.row_deleted_flag} = 'N';;
+  }
+
+  join: mn_mcd_claim_dim {
+    from: mn_mcd_claim_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim"
+    sql_on: ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_claim_dim.claim_wid} ;;
+    sql_where: ${mn_mcd_claim_dim.state_short_desc} = ${mn_mcd_program_state_map.mcd_state_short_desc} ;;
+  }
+  join:  mn_mcd_util_fact{
+    from: mn_mcd_util_fact
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Util"
+    fields: [inv_req_rebate_amt,mn_mcd_util_fact.paid_date,mn_mcd_util_fact.paid_month,mn_mcd_util_fact.paid_quarter,mn_mcd_util_fact.paid_time,mn_mcd_util_fact.paid_week,mn_mcd_util_fact.paid_year]
+    sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_util_fact.product_wid} and ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_util_fact.claim_wid} ;;
+
+  }
+  join: mn_mcd_claim_pmt_payee_map {
+    from: mn_mcd_claim_pmt_payee_map
+    type: left_outer
+    relationship: many_to_many
+    view_label: "Payment"
+    sql_on: ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_claim_pmt_payee_map.mcd_claim_wid} ;;
+  }
+
+  join: mn_mcd_payment_fact {
+    from: mn_mcd_payment_fact
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Payment"
+    sql_on: ${mn_mcd_claim_pmt_payee_map.mcd_payment_wid} = ${mn_mcd_payment_fact.mcd_payment_wid} ;;
+  }
+
+  join: mn_mcd_claim_payment_map {
+    from: mn_mcd_claim_payment_map
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Payment"
+    sql_on:${mn_mcd_claim_pmt_payee_map.mcd_payment_wid} = ${mn_mcd_claim_payment_map.mcd_payment_wid}   ;;
+
+  }
+  join: mn_payment_approver_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Payment"
+    fields: [mn_payment_approver_dim.full_name]
+    sql_on: ${mn_mcd_payment_fact.approved_by_wid} = ${mn_payment_approver_dim.user_wid} ;;
+  }
+
+  join: mn_claim_owner_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim"
+    fields: [mn_claim_owner_dim.full_name,mn_claim_owner_dim.member_name]
+    sql_on: ${mn_mcd_claim_dim.claim_owner_wid} = ${mn_claim_owner_dim.user_wid} ;;
+  }
+
+  join: mn_price_list_dim {
+    from: mn_price_list_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Price List"
+    sql_on: ${mn_mcd_claim_line_fact.ura_price_list_wid} = ${mn_price_list_dim.price_list_wid} ;;
+  }
+
+  # join: mn_mcd_program_state_map {
+  #   from: mn_mcd_program_state_map
+  #   type: left_outer
+  #   relationship: many_to_many
+  #   view_label: "Program"
+  #   sql_on: ${mn_mcd_claim_line_fact.mcd_program_wid} = ${mn_mcd_program_state_map.mcd_program_wid} and ${mn_mcd_claim_dim.state_short_desc} = ${mn_mcd_program_state_map.mcd_state_short_desc} ;;
+  # }
+
+  join: mn_payee_dim {
+    from: mn_customer_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Payee"
+    sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_payee_dim.customer_wid};;
+  }
+
+  join: mn_mcd_product_dim {
+    from: mn_product_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Product"
+    sql_on: ${mn_mcd_program_product_map.product_wid} = ${mn_mcd_product_dim.product_wid} ;;
+  }
+
+  join: mn_mcd_program_dim {
+    from: mn_mcd_program_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    sql_on: ${mn_mcd_program_state_map.mcd_program_wid} = ${mn_mcd_program_dim.program_wid} ;;
+  }
+
+  join: mn_mfr_contact_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_mfr_contact_dim.full_name]
+    sql_on: ${mn_mcd_program_state_map.mfr_contact_wid} = ${mn_mfr_contact_dim.user_wid} ;;
+  }
+
+  join: mn_recipient_name_dim {
+    from: mn_customer_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_recipient_name_dim.customer_name]
+    sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_recipient_name_dim.customer_wid} ;;
+  }
+
+  join: mn_analyst_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_analyst_dim.full_name]
+    sql_on: ${mn_mcd_program_state_map.mfr_contact_wid} = ${mn_analyst_dim.user_wid} ;;
+  }
+
+  join: mn_amended_by_name_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_amended_by_name_dim.full_name]
+    sql_on: ${mn_mcd_program_dim.amended_by_wid} = ${mn_amended_by_name_dim.user_wid} ;;
+  }
+
+  join: mn_program_owner_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_program_owner_dim.full_name]
+    sql_on: ${mn_mcd_program_dim.owner_wid} = ${mn_program_owner_dim.user_wid} ;;
+  }
+
+  join: mn_program_lastupdatedby_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_program_lastupdatedby_dim.full_name]
+    sql_on: ${mn_mcd_program_dim.last_updated_by_wid} = ${mn_program_lastupdatedby_dim.user_wid} ;;
+  }
+
+  join: mn_program_createdby_dim {
+    from: mn_user_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Program"
+    fields: [mn_program_createdby_dim.full_name]
+    sql_on: ${mn_mcd_program_dim.created_by_wid} = ${mn_program_createdby_dim.user_wid} ;;
+  }
+
+  join: mn_mcd_adjust_code_dim_dt {
+    from: mn_mcd_dispute_code_dim_dt
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Line"
+    fields: []
+    sql_on: ${mn_mcd_claim_line_fact.inf_corr_codes} = ${mn_mcd_adjust_code_dim_dt.src_sys_dispute_code_code} ;;
+  }
+
+  join: mn_mcd_adjust_code_dim{
+    from: mn_mcd_dispute_code_dim
+    type: full_outer
+    relationship: one_to_many
+    view_label: "Claim Line"
+    sql_on: ${mn_mcd_adjust_code_dim_dt.dispute_code_name} = ${mn_mcd_adjust_code_dim.dispute_code_name} ;;
+  }
+
+  join: mn_mcd_adjust_type_dim_dt {
+    from: mn_mcd_adjust_type_dim_dt
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Line"
+    fields: []
+    sql_on: ${mn_mcd_claim_line_fact.adjust_type} = ${mn_mcd_adjust_type_dim_dt.src_sys_adjust_type_code} ;;
+  }
+
+  join: mn_mcd_adjust_type_dim{
+    from: mn_mcd_adjust_type_dim
+    type: full_outer
+    relationship: one_to_many
+    view_label: "Claim Line"
+    sql_on: ${mn_mcd_adjust_type_dim_dt.adjust_type_name} = ${mn_mcd_adjust_type_dim.adjust_type_name} ;;
+  }
+
+  join: mn_mcd_dispute_code_dim {
+    from: mn_mcd_dispute_code_dim
+    type: left_outer
+    relationship: many_to_one
+    view_label: "Claim Line"
+    fields: [mn_mcd_dispute_code_dim.dispute_code_name]
+    sql_on: ${mn_mcd_claim_line_fact.disp_codes} = ${mn_mcd_dispute_code_dim.src_sys_dispute_code_code} ;;
+
+  }
+
+}
+
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------#
+# -----------------------------------------------------------------------------------------------------------------------------------------#
+# -----------------------------------------------------------------------------------------------------------------------------------------#
+
 explore: mn_mcd_claim_line {
   from: mn_mcd_claim_line_fact
   view_name: mn_mcd_claim_line_fact
   label: "Government Explore"
-  view_label: "Claim Lines"
+  view_label: "Claim Lines Old"
 
 sql_always_where: ${row_deleted_flag} = 'N' ;;
 
@@ -224,7 +460,7 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
     type: left_outer
     relationship: many_to_one
     view_label: "Claim Lines"
-    fields: []
+#     fields: []
     sql_on: ${mn_mcd_claim_line_fact.adjust_type} = ${mn_mcd_adjust_type_dim_dt.src_sys_adjust_type_code} ;;
   }
 
@@ -247,6 +483,10 @@ sql_always_where: ${row_deleted_flag} = 'N' ;;
   }
 
 }
+
+
+
+
 
 
 
