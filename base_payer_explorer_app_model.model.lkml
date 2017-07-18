@@ -422,7 +422,7 @@ explore: payer_rebate {
   view_name: mn_discount_bridge_fact
   view_label: "Rebate Lines"
 
-  extends: [mn_paid_rebate_lines_base,mn_rbt_ctrt_header_dim_base]
+  extends: [mn_paid_rebate_lines_base,mn_rbt_ctrt_header_dim_base,mn_combined_rebate_program_dim_base]
   hidden: no
 
   sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
