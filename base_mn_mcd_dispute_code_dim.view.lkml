@@ -36,6 +36,7 @@ view: mn_mcd_dispute_code_dim {
 
   dimension: dispute_code_desc {
     type: string
+    hidden: yes
     sql: ${TABLE}.DISPUTE_CODE_DESC ;;
   }
 
@@ -65,6 +66,7 @@ view: mn_mcd_dispute_code_dim {
 
   dimension: src_sys_dispute_code_code {
     type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_DISPUTE_CODE_CODE ;;
   }
 

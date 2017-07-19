@@ -74,6 +74,7 @@ view: mn_mcd_program_dim {
 
   dimension: def_claim_line_util_type {
     type: string
+    label: "Default Record ID"
     sql: ${TABLE}.DEF_CLAIM_LINE_UTIL_TYPE ;;
   }
 
@@ -119,11 +120,13 @@ view: mn_mcd_program_dim {
 
   dimension: program_end_qtr_str {
     type: string
+    hidden: yes
     sql: ${TABLE}.PROGRAM_END_QTR_STR ;;
   }
 
   dimension: program_id_num {
     type: string
+    label: "Program Id Number"
     sql: ${TABLE}.PROGRAM_ID_NUM ;;
   }
 
@@ -153,6 +156,7 @@ view: mn_mcd_program_dim {
 
   dimension: program_start_qtr_str {
     type: string
+    hidden: yes
     sql: ${TABLE}.PROGRAM_START_QTR_STR ;;
   }
 

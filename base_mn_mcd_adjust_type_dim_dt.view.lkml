@@ -6,24 +6,29 @@ view: mn_mcd_adjust_type_dim_dt {
  ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+
 
   dimension: adjust_type {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.ADJUST_TYPE ;;
   }
 
   dimension: src_sys_adjust_type_code {
-    type: string
+    type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_ADJUST_TYPE_CODE ;;
   }
 
   dimension: adjust_type_name {
     type: string
+    label: "Adjustment Type"
     sql: ${TABLE}.ADJUST_TYPE_NAME ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
   set: detail {

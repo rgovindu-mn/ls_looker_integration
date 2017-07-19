@@ -15,7 +15,7 @@ include: "base_mn_mcd_claim_payment_map.view.lkml"
 include: "base_mn_mcd_dispute_code_dim.view.lkml"
 include: "base_mn_mcd_adjust_type_dim.view.lkml"
 include: "base_mn_mcd_dispute_code_dim_dt.view.lkml"
-include: "mn_mcd_adjust_type_dim_dt.view.lkml"
+include: "base_mn_mcd_adjust_type_dim_dt.view.lkml"
 
 
 explore: government_explore {

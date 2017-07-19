@@ -1,9 +1,9 @@
 view: mn_mcd_claim_dim {
 
-sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
+  sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
 
-  dimension_group: claim_created_date {
+  dimension_group: claim_created {
     type: time
     timeframes: [
       raw,
@@ -25,6 +25,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   dimension: claim_num {
     type: string
+    label: "Claim Number"
     sql: ${TABLE}.CLAIM_NUM ;;
   }
 
@@ -81,7 +82,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
     sql: ${TABLE}.DATE_UPDATED ;;
   }
 
-  dimension_group: due_date {
+  dimension_group: due {
     type: time
     timeframes: [
       raw,
@@ -101,7 +102,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
     sql: ${TABLE}.DUE_DATE_WID ;;
   }
 
-  dimension_group: invoice_date {
+  dimension_group: invoice {
     type: time
     timeframes: [
       raw,
@@ -117,11 +118,13 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   dimension: labeler {
     type: string
+    label: "Labeler Code"
     sql: ${TABLE}.LABELER ;;
   }
 
   dimension_group: original_qtr {
     type: time
+    label: "Original Quarter"
     timeframes: [
       raw,
       time,
@@ -142,10 +145,11 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   dimension: original_qtr_str {
     type: string
+    hidden: yes
     sql: ${TABLE}.ORIGINAL_QTR_STR ;;
   }
 
-  dimension_group: postmark_date {
+  dimension_group: postmark {
     type: time
     timeframes: [
       raw,
@@ -167,20 +171,23 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   dimension: rebate_due_amt {
     type: number
+    hidden: yes
     sql: ${TABLE}.REBATE_DUE_AMT ;;
   }
 
   dimension: rebate_due_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.REBATE_DUE_AMT_BASE ;;
   }
 
   dimension: rebate_due_amt_curr {
     type: string
+    hidden: yes
     sql: ${TABLE}.REBATE_DUE_AMT_CURR ;;
   }
 
-  dimension_group: receipt_date {
+  dimension_group: receipt {
     type: time
     timeframes: [
       raw,
@@ -196,6 +203,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   dimension: rev_num {
     type: number
+    label: "Claim Revision Number"
     sql: ${TABLE}.REV_NUM ;;
   }
 
@@ -218,6 +226,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   dimension: spap_qualified {
     type: string
+    label: "SPAP Qualified"
     sql: ${TABLE}.SPAP_QUALIFIED ;;
   }
 
@@ -258,7 +267,7 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
 
   set: detail {
     fields: [
-      claim_created_date_time,
+      claim_created_time,
       claim_created_date_wid,
       claim_num,
       claim_owner_wid,
@@ -267,19 +276,19 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
       claim_wid,
       date_created_time,
       date_updated_time,
-      due_date_time,
+      due_time,
       due_date_wid,
-      invoice_date_time,
+      invoice_time,
       labeler,
       original_qtr_time,
       original_qtr_date_wid,
       original_qtr_str,
-      postmark_date_time,
+      postmark_time,
       program_wid,
       rebate_due_amt,
       rebate_due_amt_base,
       rebate_due_amt_curr,
-      receipt_date_time,
+      receipt_time,
       rev_num,
       row_deleted_flag,
       run_id,

@@ -4,12 +4,14 @@ sql_table_name: MN_MCD_ADJUST_TYPE_DIM_VW ;;
 
   dimension: adjust_type_desc {
     type: string
+    hidden: yes
     sql: ${TABLE}.ADJUST_TYPE_DESC ;;
   }
 
   dimension: adjust_type_name {
     type: string
     primary_key: yes
+    label: "Adjustment Type"
     sql: ${TABLE}.ADJUST_TYPE_NAME ;;
   }
 
@@ -63,6 +65,7 @@ sql_table_name: MN_MCD_ADJUST_TYPE_DIM_VW ;;
 
   dimension: src_sys_adjust_type_code {
     type: number
+    hidden: yes
     sql: ${TABLE}.SRC_SYS_ADJUST_TYPE_CODE ;;
   }
 
