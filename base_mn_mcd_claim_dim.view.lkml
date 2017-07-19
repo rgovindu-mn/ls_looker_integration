@@ -244,12 +244,12 @@ sql_table_name: MN_MCD_CLAIM_DIM_VW ;;
     sql: ${TABLE}.STATE ;;
   }
 
-  dimension: state_short_desc {
-    type: string
-    label: "Claim State Short Description"
-    hidden: yes
-    sql: SUBSTR(${TABLE}.state,1,2) ;;
-  }
+#   dimension: state_short_desc {
+#     type: string
+#     label: "Claim State Short Description"
+#     hidden: yes
+#     sql: SUBSTR(${TABLE}.state,1,2) ;;
+#   }
 
   measure: count {
     type: count
