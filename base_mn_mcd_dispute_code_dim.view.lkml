@@ -70,10 +70,10 @@ view: mn_mcd_dispute_code_dim {
     sql: ${TABLE}.SRC_SYS_DISPUTE_CODE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

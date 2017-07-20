@@ -95,9 +95,44 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
     sql: ${TABLE}.MCD_PAYMENT_WID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
+
+  measure: claim_credit_applied {
+    type: sum
+    label: "Claim Credit Applied"
+    value_format_name: usd
+    sql: ${claim_applied_credit_amt} ;;
+  }
+
+  measure: claim_calculated_interest_amount {
+    type: sum
+    label: "Claim Calculated Interest Amount"
+    value_format_name: usd
+    sql: ${claim_interest_amt} ;;
+  }
+
+  measure: claim_applied_interest {
+    type: sum
+    label: "Claim Applied Interest"
+    value_format_name: usd
+    sql: ${claim_interest_amt} ;;
+  }
+
+  measure: claim_additional_interest {
+    type: sum
+    label: "Claim Additional Interest"
+    value_format_name: usd
+    sql: ${claim_addtl_int_amt} ;;
+  }
+
+  measure: claim_interest_on_additional_interest {
+    type: sum
+    label: "Claim Interest on Additional Interest"
+    value_format_name: usd
+    sql: ${claim_int_addtl_int_amt} ;;
   }
 
   set: detail {

@@ -393,4 +393,11 @@ view: mn_product_dim {
     type: count
     drill_fields: [product_name, drug_category_name, thera_code_name]
   }
+
+  measure: number_of_product_SKUs_with_claims {
+    type: count_distinct
+    label: "# of Product SKUs with claims"
+    value_format_name: decimal_0
+    sql: ${sku} ;;
+  }
 }

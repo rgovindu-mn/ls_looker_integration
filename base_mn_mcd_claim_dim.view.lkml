@@ -259,10 +259,25 @@ view: mn_mcd_claim_dim {
 #     hidden: yes
 #     sql: SUBSTR(${TABLE}.state,1,2) ;;
 #   }
+#
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+
+  measure: Claim_Amount_Due {
+    type: sum
+    label: "Claim Amount Due"
+    value_format_name: decimal_0
+    sql: ${rebate_due_amt} ;;
+  }
+
+  measure: number_of_claims {
+    type: count_distinct
+    label: "# of Claims"
+    value_format_name: decimal_0
+    sql: ${claim_wid} ;;
   }
 
   set: detail {

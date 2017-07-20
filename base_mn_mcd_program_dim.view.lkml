@@ -207,10 +207,10 @@ view: mn_mcd_program_dim {
     sql: ${TABLE}.SRC_SYS_PROGRAM_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

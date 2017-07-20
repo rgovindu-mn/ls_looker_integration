@@ -6,10 +6,10 @@ view: mn_mcd_dispute_code_dim_dt {
        ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   dimension: dispute_code_name {
     type: string

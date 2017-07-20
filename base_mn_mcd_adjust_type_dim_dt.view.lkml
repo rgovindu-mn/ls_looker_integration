@@ -26,10 +26,10 @@ view: mn_mcd_adjust_type_dim_dt {
     sql: ${TABLE}.ADJUST_TYPE_NAME ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [adjust_type, src_sys_adjust_type_code, adjust_type_name]

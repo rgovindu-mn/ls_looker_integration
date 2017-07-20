@@ -210,7 +210,32 @@ view: mn_mcd_payment_fact {
     sql: ${TABLE}.SRC_SYS_PK_ID ;;
   }
 
-  measure: count {
-    type: count
+  measure: number_of_payments {
+    type: count_distinct
+    label: "# of Payments"
+    value_format_name: decimal_0
+    sql: ${payment_num} ;;
   }
+
+  measure: payment_subtotal_Amount {
+    type: sum
+    label: "Payment Sub-Total Amount"
+    value_format_name: usd
+    sql: ${payment_rebate_amt} ;;
+  }
+
+  measure: payment_interest {
+    type: sum
+    label: "Payment Interest"
+    value_format_name: usd
+    sql: ${payment_interest_amt} ;;
+  }
+
+  measure: payment_total_amount {
+    type: sum
+    label: "Payment Total Amount"
+    value_format_name: usd
+    sql: ${payment_total_amt} ;;
+  }
+
 }

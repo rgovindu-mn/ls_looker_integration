@@ -69,10 +69,10 @@ sql_table_name: MN_MCD_ADJUST_TYPE_DIM_VW ;;
     sql: ${TABLE}.SRC_SYS_ADJUST_TYPE_CODE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [

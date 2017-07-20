@@ -484,9 +484,222 @@ view: mn_mcd_claim_line_fact_dt {
     sql: SUBSTR(${TABLE}.state,1,2) ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
+
+  measure: claimed_units {
+    type: sum
+    label: "Claimed Units"
+    value_format_name: decimal_0
+    sql: ${inv_units} ;;
+  }
+
+  measure: claimed_rebate {
+    type: sum
+    label: "Claimed Rebate"
+    value_format_name: usd
+    sql: ${inv_rebate_amt} ;;
+  }
+
+  measure: invoiced_number_of_scripts {
+    type: sum
+    label: "Invoiced Number of Scripts"
+    value_format_name: decimal_0
+    sql: ${inv_scripts_num} ;;
+  }
+
+  measure: reimbursed_amount {
+    type: sum
+    label: "Reimbursed Amount"
+    value_format_name: usd
+    sql: ${inv_reimburse_amt} ;;
+  }
+
+  measure: tpl_amount {
+    type: sum
+    label: "Tpl Amount"
+    value_format_name: usd
+    sql: ${inv_tpl_amt} ;;
+  }
+
+  measure: recommended_dispute_units {
+    type: sum
+    label: "Recommended Dispute Units"
+    value_format_name: decimal_0
+    sql: ${recom_disp_units} ;;
+  }
+
+  measure: pay_units {
+    type: sum
+    label: "Pay Units"
+    value_format_name: decimal_0
+    sql: ${paid_units} ;;
+  }
+
+  measure: rebate_due {
+    type: sum
+    label: "Rebate Due"
+    value_format_name: usd
+    sql: ${rebate_due_amt} ;;
+  }
+
+
+  measure: incremental_units {
+    type: sum
+    label: "Incremental Units"
+    value_format_name: decimal_0
+    sql: ${incr_units} ;;
+  }
+
+  measure: disputed_units {
+    type: sum
+    label: "Disputed Units"
+    value_format_name: decimal_0
+    sql: ${disp_units} ;;
+  }
+
+  measure: dismissed_units {
+    type: sum
+    label: "Dismissed Units"
+    value_format_name: decimal_0
+    sql: ${dism_units} ;;
+  }
+
+  measure: resolved_units {
+    type: sum
+    label: "Resolved Units"
+    value_format_name: decimal_0
+    sql: ${resv_units} ;;
+  }
+
+  measure: previous_invoiced_units {
+    type: sum
+    label: "Previous Invoiced Units"
+    value_format_name: decimal_0
+    sql: ${prev_inv_units} ;;
+  }
+
+  measure: previous_paid_units {
+    type: sum
+    label: "Previous Paid Units"
+    value_format_name: decimal_0
+    sql: ${prev_paid_units} ;;
+  }
+
+  measure: previous_dispute_units {
+    type: sum
+    label: "Previous Dispute Units"
+    value_format_name: decimal_0
+    sql: ${prev_disp_units} ;;
+  }
+
+#   measure: Disputed_Units_%_of_Claimed {
+#     type: sum
+#     label: "Disputed Units % of Claimed"
+#     value_format_name: decimal_0
+#     sql: ${disp_units} ;;   inv_units
+#   }
+
+#   measure: Resolved_Units_%_of_Disputed {
+#     type: sum
+#     label: "Resolved Units % of Disputed"
+#     value_format_name: decimal_0
+#     sql: ${resv_units} ;;    Sum(ResolvedUnits)/Sum(DisputeUnits)
+#   }
+
+
+  measure: Number_of_Claim_Lines {
+    type: count_distinct
+    label: "# of Claim Lines"
+    value_format_name: decimal_0
+    sql: ${mcd_claim_line_wid} ;;
+  }
+
+  measure: corrected_amount {
+    type: sum
+    label: "Corrected Amount"
+    value_format_name: usd
+    sql: ${inf_corr_req_rebate_amt} ;;
+  }
+
+  measure: total_corrected_units {
+    type: sum
+    label: "Corrected Units"
+    value_format_name: decimal_0
+    sql: ${inf_corr_units} ;;
+  }
+
+  measure: total_disputed_amount {
+    type: sum
+    label: "Disputed Amount"
+    value_format_name: usd
+    sql: ${disputed_amount} ;;
+  }
+
+  measure: total_dismissed_amount {
+    type: sum
+    label: "Dismissed Amount"
+    value_format_name: usd
+    sql: ${dismissed_amount} ;;
+  }
+
+  measure: total_resolved_amount {
+    type: sum
+    label: "Resolved Amount"
+    value_format_name: usd
+    sql: ${resolved_amount} ;;
+  }
+
+  measure: pending_amount_to_be_paid {
+    type: sum
+    label: "Pending Amount to be Paid"
+    value_format_name: usd
+    sql: ${pending_amount} ;;
+  }
+
+  measure: pending_units_to_be_paid {
+    type: sum
+    label: "Pending Units to be Paid"
+    value_format_name: decimal_0
+    sql: ${pending_units} ;;
+  }
+
+  measure: total_open_dispute_amount {
+    type: sum
+    label: "Open Dispute Amount"
+    value_format_name: usd
+    sql: ${open_dispute_amt} ;;
+  }
+
+  measure: total_open_dispute_units {
+    type: sum
+    label: "Open Dispute Units"
+    value_format_name: decimal_0
+    sql: ${open_dispute_units} ;;
+  }
+
+
+  measure: cumulative_paid_amount {
+    type: sum
+    label: "Cumulative Paid Amount"
+    value_format_name: usd
+    sql: ${total_paid_amt} ;;
+  }
+
+  measure: amount_prior_to_correction {
+    type: sum
+    label: "Amount Prior to Correction"
+    value_format_name: usd
+    sql: ${original_corrected_amt} ;;
+  }
+
+  measure: invoiced_units {
+    type: sum
+    label: "Invoiced Units"
+    value_format_name: decimal_0
+    sql: ${original_corrected_amt} ;;
   }
 
   set: detail {

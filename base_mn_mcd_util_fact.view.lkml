@@ -306,7 +306,10 @@ view: mn_mcd_util_fact {
   }
 
 
-  measure: count {
-    type: count
+  measure: Original_Invoiced_Amount {
+    type: sum
+    label: "Original Invoiced Amount"
+    value_format_name: usd
+    sql: ${inv_req_rebate_amt} ;;
   }
 }

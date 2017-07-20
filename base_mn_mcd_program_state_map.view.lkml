@@ -158,10 +158,10 @@ view: mn_mcd_program_state_map {
     sql: ${TABLE}.START_DATE ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
 
   set: detail {
     fields: [
