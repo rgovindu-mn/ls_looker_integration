@@ -144,9 +144,16 @@ view: mn_mcd_claim_payment_map {
     sql: ${TABLE}.SRC_SYS_MCD_PAYMENT_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+#   measure: count {
+#     type: count
+#     drill_fields: [detail*]
+#   }
+
+  measure: total_carry_forward_amount {
+    type: sum
+    label: "Carry Forward Amount"
+    value_format_name: usd
+    sql: ${carry_forward_amount} ;;
   }
 
   set: detail {

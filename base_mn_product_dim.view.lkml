@@ -232,6 +232,7 @@ view: mn_product_dim {
     type: string
     label: "GL Account Code"
     sql: ${TABLE}.GL_ACCOUNT_CODE ;;
+    label: "GL Account Code"
   }
 
   dimension_group: manu_term {
@@ -352,6 +353,7 @@ view: mn_product_dim {
       year
     ]
     sql: ${TABLE}.SHELF_LIFE_EXP_DATE ;;
+    label: "Shelf Life Expiration"
   }
 
   dimension: shelf_life_exp_date_wid {
@@ -392,5 +394,12 @@ view: mn_product_dim {
     hidden: yes
     type: count
     drill_fields: [product_name, drug_category_name, thera_code_name]
+  }
+
+  measure: number_of_product_SKUs_with_claims {
+    type: count_distinct
+    label: "# of Product SKUs with claims"
+    value_format_name: decimal_0
+    sql: ${sku} ;;
   }
 }

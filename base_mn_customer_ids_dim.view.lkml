@@ -62,6 +62,7 @@ view: mn_customer_ids_dim {
       year
     ]
     sql: ${TABLE}.EFF_END_DATE ;;
+    label: "Effective End"
   }
 
   dimension_group: eff_start {
@@ -76,6 +77,7 @@ view: mn_customer_ids_dim {
       year
     ]
     sql: ${TABLE}.EFF_START_DATE ;;
+    label: "Effective Start"
   }
 
   dimension: id_num {

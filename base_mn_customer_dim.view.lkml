@@ -154,26 +154,31 @@ view: mn_customer_dim {
   dimension: segmentation_attrubute1 {
     type: string
     sql: ${TABLE}.SEG_ATTR1 ;;
+    label: "Segmentation Attribute1"
   }
 
   dimension: segmentation_attrubute2 {
     type: string
     sql: ${TABLE}.SEG_ATTR2 ;;
+    label: "Segmentation Attribute2"
   }
 
   dimension: segmentation_attrubute3 {
     type: string
     sql: ${TABLE}.SEG_ATTR3 ;;
+    label: "Segmentation Attribute3"
   }
 
   dimension: segmentation_attrubute4 {
     type: string
     sql: ${TABLE}.SEG_ATTR4 ;;
+    label: "Segmentation Attribute4"
   }
 
   dimension: segmentation_attrubute5 {
     type: string
     sql: ${TABLE}.SEG_ATTR5 ;;
+    label: "Segmentation Attribute5"
   }
 
   dimension: source_system_id {

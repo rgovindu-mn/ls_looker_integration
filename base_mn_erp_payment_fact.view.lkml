@@ -32,7 +32,7 @@ view: mn_erp_payment_fact {
   }
 
   dimension_group: erp_pmt {
-    label: "ERP Payment Date"
+    label: "ERP Payment"
     type: time
     timeframes: [
       raw,
@@ -66,7 +66,7 @@ view: mn_erp_payment_fact {
 
   dimension: erp_pmt_type {
     type: string
-    label: "ERP Payment type"
+    label: "ERP Payment Type"
     sql: ${TABLE}.ERP_PMT_TYPE ;;
   }
 
@@ -78,7 +78,7 @@ view: mn_erp_payment_fact {
   }
 
   dimension_group: erp_process {
-    label: "ERP Process Date"
+    label: "ERP Process"
     type: time
     timeframes: [
       raw,

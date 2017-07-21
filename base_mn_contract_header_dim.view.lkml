@@ -17,8 +17,8 @@ view: mn_contract_header_dim {
   dimension: amended_flag {
     type: string
     sql:  CASE WHEN ${TABLE}.AMENDED_FLAG = 1 THEN 'Yes'
-               WHEN ${TABLE}.AMENDED_FLAG = 0 THEN 'No' ELSE '' END;;
-    label: "Amended ?"
+               WHEN ${TABLE}.AMENDED_FLAG = 0 THEN 'No' ELSE NULL END;;
+    label: " Is Amended ?"
   }
 
   dimension: amendment_count {
@@ -142,6 +142,7 @@ view: mn_contract_header_dim {
   dimension: cust_amendment_num {
     type: string
     sql: ${TABLE}.CUST_AMENDMENT_NUM ;;
+    label: "Customer Amendment Number"
   }
 
   dimension: customer_contract_id {
@@ -197,6 +198,7 @@ view: mn_contract_header_dim {
       year
     ]
     sql: ${TABLE}.EFF_END_DATE ;;
+    label: "Effective End"
   }
 
   dimension_group: eff_start {
@@ -211,6 +213,7 @@ view: mn_contract_header_dim {
       year
     ]
     sql: ${TABLE}.EFF_START_DATE ;;
+    label: "Effective Start"
   }
 
   dimension: eligibility_membership {
@@ -221,6 +224,7 @@ view: mn_contract_header_dim {
   dimension: end_ver_num {
     type: string
     sql: ${TABLE}.END_VER_NUM ;;
+    label: "End Version Number"
   }
 
   dimension: evergreen_flag {
@@ -231,6 +235,7 @@ view: mn_contract_header_dim {
   dimension: ext_notes {
     type: string
     sql: ${TABLE}.EXT_NOTES ;;
+    label: "External Notes"
   }
 
   dimension: filter_applied_to {
@@ -297,21 +302,25 @@ view: mn_contract_header_dim {
   dimension: min_order_amt {
     type: string
     sql: ${TABLE}.MIN_ORDER_AMT ;;
+    label: "Minimum Order Amount"
   }
 
   dimension: min_order_block {
     type: string
     sql: ${TABLE}.MIN_ORDER_BLOCK ;;
+    label: "Minimum Order Block"
   }
 
   dimension: min_order_penalty {
     type: string
     sql: ${TABLE}.MIN_ORDER_PENALTY ;;
+    label: "Minimum Order Penalty"
   }
 
   dimension: min_order_qty {
     type: string
     sql: ${TABLE}.MIN_ORDER_QTY ;;
+    label: "Minimum Order Quantity"
   }
 
   dimension_group: offer {
@@ -354,6 +363,7 @@ view: mn_contract_header_dim {
   dimension: program_only {
     type: string
     sql: CASE WHEN ${TABLE}.PROGRAM_ONLY = 1 THEN 'Yes' ELSE 'No' END ;;
+    label: "Is Program Only ?"
   }
 
   dimension_group: rejection {
@@ -436,6 +446,7 @@ view: mn_contract_header_dim {
       year
     ]
     sql: ${TABLE}.SIGNED_DOC_RCVD_DATE ;;
+    label: "Signed Document Received"
   }
 
   dimension: signed_ind_type {

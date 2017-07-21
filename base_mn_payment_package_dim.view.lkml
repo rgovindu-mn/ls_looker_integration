@@ -129,6 +129,7 @@ view: mn_payment_package_dim {
       year
     ]
     sql: ${TABLE}.PYMT_ISSUED_DATE ;;
+    label: "Payment Issued"
   }
 
   dimension: pymt_issued_date_wid {
@@ -155,6 +156,7 @@ view: mn_payment_package_dim {
       year
     ]
     sql: ${TABLE}.PYMT_NEEDED_BY_DATE ;;
+    label: "Payment Needed By"
   }
 
   dimension: pymt_needed_by_date_wid {
@@ -166,26 +168,31 @@ view: mn_payment_package_dim {
   dimension: pymt_number {
     type: string
     sql: ${TABLE}.PYMT_NUMBER ;;
+    label: "Payment Number"
   }
 
   dimension: pymt_pkg_id {
     type: string
     sql: ${TABLE}.PYMT_PKG_ID_NUM ;;
+    label: "Payment Package ID"
   }
 
   dimension: pymt_pkg_name {
     type: string
     sql: ${TABLE}.PYMT_PKG_NAME ;;
+    label: "Payment Package Name"
   }
 
   dimension: pymt_pkg_status {
     type: string
     sql: ${TABLE}.PYMT_PKG_STATUS ;;
+    label: "Payment Package Status"
   }
 
   dimension: pymt_pkg_type {
     type: string
     sql: ${TABLE}.PYMT_PKG_TYPE ;;
+    label: "Payment Package Type"
   }
 
   dimension: pymt_pkg_wid {
@@ -207,6 +214,7 @@ view: mn_payment_package_dim {
       year
     ]
     sql: ${TABLE}.PYMT_RQST_SENT_ON_DATE ;;
+    label: "Payment Request Sent On"
   }
 
   dimension: pymt_rqst_sent_on_date_wid {
@@ -233,6 +241,7 @@ view: mn_payment_package_dim {
       year
     ]
     sql: ${TABLE}.RELEASED_DATE ;;
+    label: "Released"
   }
 
   dimension: run_id {
@@ -255,6 +264,7 @@ view: mn_payment_package_dim {
   dimension: src_sys_pymt_pkg_id {
     type: string
     sql: ${TABLE}.SRC_SYS_PYMT_PKG_ID ;;
+    label: "Source System Payment Package ID"
   }
 
   dimension: total_est_pmt_amt {
@@ -265,7 +275,7 @@ view: mn_payment_package_dim {
 
   dimension: total_est_pmt_amt_curr {
     type: string
-    label: "Est Pymt Currency"
+    label: "Estimated Payment Currency"
     sql: ${TABLE}.TOTAL_ESTIMATED_PMT_AMT_CURR ;;
   }
 
@@ -277,7 +287,7 @@ view: mn_payment_package_dim {
 
   dimension: total_pmt_amt_curr {
     type: string
-    label: "Pymt Currency"
+    label: "Payment Currency"
     sql: ${TABLE}.TOTAL_PMT_AMT_CURR ;;
   }
 
@@ -289,14 +299,14 @@ view: mn_payment_package_dim {
 
   measure: pymt_amt {
     type: sum
-    label: "Total Pymt Amount"
+    label: "Total Payment Amount"
     value_format_name: decimal_0
     sql: ${total_pmt_amt} ;;
   }
 
   measure: est_pmt_amt {
     type: sum
-    label: "Total Est Pymt Amount"
+    label: "Total Estimated Payment Amount"
     value_format_name: decimal_0
     sql: ${total_est_pmt_amt} ;;
   }

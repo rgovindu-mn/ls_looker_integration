@@ -42,31 +42,37 @@ view: mn_rebate_type_dim {
   dimension: rbt_sub_type {
     type: string
     sql: ${TABLE}.RBT_SUB_TYPE ;;
+    label: "Rebate Sub Type"
   }
 
   dimension: rbt_sub_type_name {
     type: string
     sql: ${TABLE}.RBT_SUB_TYPE_NAME ;;
+    label: "Rebate Sub Type Name"
   }
 
   dimension: rbt_sub_type_shortname {
     type: string
     sql: ${TABLE}.RBT_SUB_TYPE_SHORTNAME ;;
+    label: "Rebate Sub Type Shortname"
   }
 
   dimension: rbt_type {
     type: string
     sql: ${TABLE}.RBT_TYPE ;;
+    label: "Rebate Type"
   }
 
   dimension: rbt_type_name {
     type: string
     sql: ${TABLE}.RBT_TYPE_NAME ;;
+    label: "Rebate Type Name"
   }
 
   dimension: rbt_type_shortname {
     type: string
     sql: ${TABLE}.RBT_TYPE_SHORTNAME ;;
+    label: "Rebate Type Shortname"
   }
 
   dimension: rebate_type_wid {

@@ -219,6 +219,7 @@ view: mn_combined_rebate_program_dim {
   dimension: end_ver_num {
     type: string
     sql: ${TABLE}.END_VER_NUM ;;
+    label: "End Version Number"
   }
 
   dimension: flat_program {
@@ -257,16 +258,19 @@ view: mn_combined_rebate_program_dim {
   dimension: non_std_program {
     type: string
     sql: ${TABLE}.NON_STD_PROGRAM ;;
+    label: "Non Standard Program"
   }
 
   dimension: num_tiers {
     type: string
     sql: ${TABLE}.NUM_TIERS ;;
+    label: "Number Of Tiers"
   }
 
   dimension: order_idx {
     type: string
     sql: ${TABLE}.ORDER_IDX ;;
+    label: "Order Index"
   }
 
   dimension: payment_cust_type {
@@ -374,9 +378,9 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.STRATEGY_BASED_FLAG ;;
   }
 
-  dimension: strgy_based_flag_yes_no {
+  dimension: strgy_based_yes_no {
     type: string
-    label: "Strategy Based ?"
+    label: "Is Strategy Based ?"
     sql: CASE WHEN ${strategy_based_flag} = 'Y' THEN 'Yes' ELSE 'No' END;;
   }
 
@@ -388,21 +392,24 @@ view: mn_combined_rebate_program_dim {
   dimension: tb_calc_rule {
     type: string
     sql: ${TABLE}.TB_CALC_RULE ;;
+    label: "Tier Basis Calc Rule"
   }
 
   dimension: tier_mgmt_type {
     type: string
     sql: ${TABLE}.TIER_MGMT_TYPE ;;
+    label: "Tier Management Type"
   }
 
   dimension: util_type {
     type: string
     sql: ${TABLE}.UTIL_TYPE ;;
+    label: "Utilization Type"
   }
 
   dimension_group: ver_end_date {
     type: time
-    label: "Version End Date"
+    label: "Version End"
     sql: ${TABLE}.VER_END_DATE ;;
   }
 
@@ -412,9 +419,12 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.VER_NUM ;;
   }
 
-  dimension_group: ver_start_date {
+  dimension_group: ver_start {
     type: time
-    label: "Version Start Date"
+    timeframes: [
+      date
+    ]
+    label: "Version Start"
     sql: ${TABLE}.VER_START_DATE ;;
   }
 
@@ -483,7 +493,7 @@ view: mn_combined_rebate_program_dim {
       util_type,
       ver_end_date_time,
       ver_num,
-      ver_start_date_time,
+      ver_start_date,
       contract_type,
     ]
   }
