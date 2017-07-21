@@ -32,11 +32,13 @@ view: mn_est_rebate_payment_fact {
   dimension: calculated_pmt_amt {
     type: string
     sql: ${TABLE}.CALCULATED_PMT_AMT ;;
+    label: "Calculated Payment Amount"
   }
 
   dimension: calculated_pmt_amt_base {
     type: string
     sql: ${TABLE}.CALCULATED_PMT_AMT_BASE ;;
+    label: "Calculated Payment Amount Base"
   }
 
   dimension: calculation_method_name {
@@ -168,26 +170,31 @@ view: mn_est_rebate_payment_fact {
   dimension: estimate_amt {
     type: string
     sql: ${TABLE}.ESTIMATE_AMT ;;
+    label: "Estimated Amount"
   }
 
   dimension: estimate_amt_base {
     type: string
     sql: ${TABLE}.ESTIMATE_AMT_BASE ;;
+    label: "Estimated Amount Base"
   }
 
   dimension: estimate_pmt_amount {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_AMOUNT ;;
+    label: "Estimated Payment Amount"
   }
 
   dimension: estimate_pmt_amount_base {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_AMOUNT_BASE ;;
+    label: "Estimated Payment Amount Base"
   }
 
   dimension: estimate_pmt_id_num {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_ID_NUM ;;
+    label: "Estimate Payment ID"
   }
 
   dimension_group: estimate_pmt_issued {
@@ -202,16 +209,19 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.ESTIMATE_PMT_ISSUED_DATE ;;
+    label: "Estimate Payment Issued"
   }
 
   dimension: estimate_pmt_method {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_METHOD ;;
+    label: "Estimate Payment Method"
   }
 
   dimension: estimate_pmt_name {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_NAME ;;
+    label: "Estimate Payment Name"
   }
 
   dimension_group: estimate_pmt_needed_by {
@@ -226,11 +236,13 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.ESTIMATE_PMT_NEEDED_BY_DATE ;;
+    label: "Estimate Payment Needed By"
   }
 
   dimension: estimate_pmt_number {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_NUMBER ;;
+    label: "Estimate Payment Number"
   }
 
   dimension: estimate_pmt_pct {
@@ -241,6 +253,7 @@ view: mn_est_rebate_payment_fact {
   dimension: estimate_pmt_rate {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_RATE ;;
+    label: "Estimate Payment Rate"
   }
 
   dimension_group: estimate_pmt_request_sent {
@@ -255,21 +268,25 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.ESTIMATE_PMT_REQUEST_SENT_DATE ;;
+    label: "Estimate Payment Request Sent"
   }
 
   dimension: estimate_pmt_status {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_STATUS ;;
+    label: "Estimate Payment Status"
   }
 
   dimension: estimate_pmt_sub_type {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_SUB_TYPE ;;
+    label: "Estimate Payment Sub Type"
   }
 
   dimension: estimate_pmt_type {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_TYPE ;;
+    label: "Estimate Payment Type"
   }
 
   dimension: estimate_pmt_wid {
@@ -315,6 +332,7 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.INVOICE_RCVD_DATE ;;
+    label: "Invoice Received"
   }
 
   dimension: org_wid {
@@ -326,11 +344,13 @@ view: mn_est_rebate_payment_fact {
   dimension: overridden_pmt_amt {
     type: string
     sql: ${TABLE}.OVERRIDDEN_PMT_AMT ;;
+    label: "Overridden Payment Amount"
   }
 
   dimension: overridden_pmt_amt_base {
     type: string
     sql: ${TABLE}.OVERRIDDEN_PMT_AMT_BASE ;;
+    label: "Overridden Payment Amount Base"
   }
 
   dimension_group: paid {
@@ -410,11 +430,13 @@ view: mn_est_rebate_payment_fact {
   dimension: requested_amt {
     type: string
     sql: ${TABLE}.REQUESTED_AMT ;;
+    label: "Requested Amount"
   }
 
   dimension: requested_amt_base {
     type: string
     sql: ${TABLE}.REQUESTED_AMT_BASE ;;
+    label: "Requested Amount Base"
   }
 
   dimension: rev_est_pmt_fk {

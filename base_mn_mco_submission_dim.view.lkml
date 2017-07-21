@@ -127,6 +127,7 @@ view: mn_mco_submission_dim {
       year
     ]
     sql:  to_date(${TABLE}.PAID_DATE_WID,'yyyymmdd') ;;
+    label: "Paid"
   }
 
   dimension: pbm_wid {
@@ -192,6 +193,7 @@ view: mn_mco_submission_dim {
   dimension: src_sys_claim_id {
     type: string
     sql: ${TABLE}.SRC_SYS_CLAIM_ID ;;
+    label: "Source System CLaim ID"
   }
 
   dimension_group: src_sys_date_updated {
@@ -212,6 +214,7 @@ view: mn_mco_submission_dim {
   dimension: src_sys_submission_id {
     type: string
     sql: ${TABLE}.SRC_SYS_SUBMISSION_ID ;;
+    label: "Source System Submission ID"
   }
 
   dimension: status_name {
@@ -258,6 +261,7 @@ view: mn_mco_submission_dim {
   dimension: util_type_name {
     type: string
     sql: ${TABLE}.UTIL_TYPE_NAME ;;
+    label: "Utilization Type Name"
   }
 
   measure: count {
