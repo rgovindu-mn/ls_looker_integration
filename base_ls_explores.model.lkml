@@ -823,7 +823,7 @@ explore: historical_rebates_base {
     from: mn_product_dim
     view_label: "Rebate Product"
     #fields: [full_name]
-    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_hr_soldto_customer_dim.customer_wid};;
+    sql_on: ${mn_discount_bridge_fact.product_wid} = ${mn_hr_product_dim.product_wid};;
   }
 
   join: mn_rl_rebate_type_dim {
