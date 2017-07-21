@@ -31,6 +31,11 @@ view: mn_product_dim {
     sql: ${TABLE}.CATALOG_TYPE ;;
   }
 
+  dimension: catalog_type_name {
+    type: string
+    sql: ${TABLE}.CATALOG_TYPE_NAME ;;
+  }
+
   dimension: cogs {
     type: string
     sql: ${TABLE}.COGS ;;
@@ -152,23 +157,55 @@ view: mn_product_dim {
   }
 
   dimension: eligible_asp_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.ELIGIBLE_ASP_FLAG ;;
   }
 
+  dimension: eligible_asp_flag_yes_no {
+    type: string
+    label: "Is Eligible ASP ?"
+    sql: CASE WHEN ${eligible_asp_flag} = 'Y' THEN 'Yes'
+          WHEN ${eligible_asp_flag} = 'N' THEN 'No' ELSE Null END ;;
+  }
+
   dimension: eligible_medicaid_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.ELIGIBLE_MEDICAID_FLAG ;;
   }
 
+  dimension: elig_medicaid_flag_yes_no {
+    type: string
+    label: "Is Eligible Medicaid ?"
+    sql: CASE WHEN ${eligible_medicaid_flag} = 'Y' THEN 'Yes'
+      WHEN ${eligible_medicaid_flag} = 'N' THEN 'No' ELSE Null END ;;
+  }
+
   dimension: eligible_phs_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.ELIGIBLE_PHS_FLAG ;;
   }
 
+  dimension: eligible_phs_flag_yes_no {
+    type: string
+    label: "Is Eligible PHS ?"
+    sql: CASE WHEN ${eligible_phs_flag} = 'Y' THEN 'Yes'
+      WHEN ${eligible_phs_flag} = 'N' THEN 'No' ELSE Null END ;;
+  }
+
   dimension: eligible_va_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.ELIGIBLE_VA_FLAG ;;
+  }
+
+  dimension: eligible_va_flag_yes_no {
+    type: string
+    label: "Is Eligible VA ?"
+    sql: CASE WHEN ${eligible_va_flag} = 'Y' THEN 'Yes'
+      WHEN ${eligible_va_flag} = 'N' THEN 'No' ELSE Null END ;;
   }
 
   dimension_group: first_sales {
@@ -193,6 +230,7 @@ view: mn_product_dim {
 
   dimension: gl_account_code {
     type: string
+    label: "GL Account Code"
     sql: ${TABLE}.GL_ACCOUNT_CODE ;;
     label: "GL Account Code"
   }
@@ -249,8 +287,16 @@ view: mn_product_dim {
   }
 
   dimension: non_cmty_pharma_drug_flag {
+    hidden: yes
     type: string
     sql: ${TABLE}.NON_CMTY_PHARMA_DRUG_FLAG ;;
+  }
+
+  dimension: non_cmty_pharma_drug_yes_no {
+    type: string
+    label: "Is Non Community Pharma Drug ?"
+    sql: CASE WHEN ${non_cmty_pharma_drug_flag} = 'Y' THEN 'Yes'
+    WHEN ${non_cmty_pharma_drug_flag} = 'N' THEN 'No' ELSE Null END ;;
   }
 
   dimension: product_description {
@@ -271,6 +317,7 @@ view: mn_product_dim {
   }
 
   dimension: product_type {
+    hidden: yes
     type: string
     sql: ${TABLE}.PRODUCT_TYPE ;;
   }
@@ -347,5 +394,12 @@ view: mn_product_dim {
     hidden: yes
     type: count
     drill_fields: [product_name, drug_category_name, thera_code_name]
+  }
+
+  measure: number_of_product_SKUs_with_claims {
+    type: count_distinct
+    label: "# of Product SKUs with claims"
+    value_format_name: decimal_0
+    sql: ${sku} ;;
   }
 }

@@ -109,12 +109,13 @@ view: mn_customer_dim {
 
   dimension: member_status {
     type: string
+    label: "Customer Status"
     sql: ${TABLE}.MEMBER_STATUS ;;
   }
 
   dimension: org_id {
     type: string
-    hidden: yes
+    label: "Customer Org Id"
     sql: ${TABLE}.ORG_ID ;;
   }
 

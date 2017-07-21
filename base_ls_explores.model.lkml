@@ -22,7 +22,12 @@ include: "base_mn_pmt_mth_type_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
 include: "base_mn_cot_dim.view.lkml"
 include: "base_mn_ctrt_elig_cot_map.view.lkml"
+
 include: "base_mn_pg_qual_ben_flat.view.lkml"
+#include: "base_mn_pg_qual_ben_flat_lkr.view.lkml"
+#include: "base_mn_pg_qual_ben_unflat_lkr.view.lkml"
+#include: "base_mn_pg_qual_ben_unflat.view.lkml"
+
 include: "base_mn_rbt_qual_mb_prod_map.view.lkml"
 include: "base_mn_product_dim.view.lkml"
 include: "base_mn_market_basket_dim.view.lkml"
@@ -378,6 +383,7 @@ explore: mn_rbt_ctrt_header_dim_base {
   }
 
 }
+
 explore: mn_product_group_dim_base {
   from:  mn_product_group_dim
   view_name: mn_product_group_dim
@@ -406,6 +412,7 @@ explore: mn_product_group_dim_base {
     view_label: "Pricing Program"
     sql_on: ${mn_product_group_dim.bus_seg_wid} = ${mn_pg_bus_segment_dim.bus_seg_wid};;
   }
+
   join: mn_pg_tier_basis_dim {
     type: left_outer
     relationship: many_to_one
@@ -445,10 +452,12 @@ explore: mn_combined_product_group_dim_base {
     view_label: "Pricing Program"
     sql_on: ${mn_combined_product_group_dim.bus_seg_wid} = ${mn_cpg_bus_segment_dim.bus_seg_wid};;
   }
+
   join: mn_pg_tier_basis_dim {
     type: left_outer
     relationship: many_to_one
-    from: mn_pg_qual_ben_flat
+   # from: mn_pg_qual_ben_unflat
+   from: mn_pg_qual_ben_flat
     view_label: "Pricing Program Tier Basis"
     sql_on: ${mn_combined_product_group_dim.pg_wid} = ${mn_pg_tier_basis_dim.pg_wid}
     AND  ${mn_pg_tier_basis_dim.is_qual_comp_flag} ='Y';;
@@ -714,7 +723,7 @@ explore: estimated_rebates_base {
   join: mn_est_rebate_pmt_prod_map {
     type: left_outer
     view_label: "Estimated Rebate Payment Product Map"
-    relationship: many_to_one
+    relationship: one_to_many
     from: mn_est_rebate_pmt_prod_map
     sql_on: ${mn_est_rebate_payment_fact.estimate_pmt_wid} = ${mn_est_rebate_pmt_prod_map.estimate_pmt_wid};;
   }

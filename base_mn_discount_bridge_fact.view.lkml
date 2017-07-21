@@ -440,14 +440,14 @@ view: mn_discount_bridge_fact {
 
   measure: external_invoive_amount {
     type: sum
-    label: "Total Rebate Invoice Amount"
+    label: "Total Hist. Rebate Invoice Amount"
     value_format_name: decimal_0
     sql: ${external_inv_amt} ;;
   }
 
   measure: total_external_invoice_quantity {
     type: sum
-    label: "Total Rebate Invoice Quantity"
+    label: "Total Hist. Rebate Invoice Quantity"
     value_format_name: decimal_0
     sql: TO_NUMBER(${external_invoice_qty}) ;;
   }

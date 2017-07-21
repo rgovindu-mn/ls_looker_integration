@@ -322,15 +322,23 @@ explore: payer_utilization {
     fields: [mn_util_customer_dim_bob.bob_set*]
   }
 
-  join: mn_util_cust_dim_parent_pbm {
+  # join: mn_util_cust_dim_parent_pbm {
+  #   type:  left_outer
+  #   relationship: many_to_one
+  #   from: mn_customer_dim_reuse
+  #   view_label: "Parent PBM"
+  #   sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_util_cust_dim_parent_pbm.customer_wid} ;;
+  #   fields: [mn_util_cust_dim_parent_pbm.parent_pbm_set*]
+  # }
+
+  join: mn_util_pbm_dim {
     type:  left_outer
     relationship: many_to_one
     from: mn_customer_dim_reuse
-    view_label: "Parent PBM"
-    sql_on: ${mn_mco_util_fact.parent_pbm_wid} = ${mn_util_cust_dim_parent_pbm.customer_wid} ;;
-    fields: [mn_util_cust_dim_parent_pbm.parent_pbm_set*]
+    view_label: "PBM"
+    sql_on: ${mn_mco_util_fact.pbm_wid} = ${mn_util_pbm_dim.customer_wid} ;;
+    fields: [mn_util_pbm_dim.pbm_set*]
   }
-
   join: mn_util_plan_dim {
     type:  left_outer
     relationship: many_to_one
@@ -414,7 +422,7 @@ explore: payer_rebate {
   view_name: mn_discount_bridge_fact
   view_label: "Rebate Lines"
 
-  extends: [mn_paid_rebate_lines_base,mn_rbt_ctrt_header_dim_base]
+  extends: [mn_paid_rebate_lines_base,mn_rbt_ctrt_header_dim_base,mn_combined_rebate_program_dim_base]
   hidden: no
 
   sql_always_where: (${mn_discount_bridge_fact.mco_line_ref_num} is not null or
@@ -635,7 +643,7 @@ explore:  payer_combined_new {
     view_label: "Util Book of Business"
   }
 
-  join: mn_util_cust_dim_parent_pbm {
+  join: mn_util_pbm_dim {
     from: mn_customer_dim_reuse
     view_label: "Util PBM"
   }

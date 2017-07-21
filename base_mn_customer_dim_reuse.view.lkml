@@ -258,16 +258,16 @@ view: mn_customer_dim_reuse {
   }
 
   #*************Plan Aliasing
-  dimension: plan_member_info_type {
+  dimension: plan_plan_type {
     type: string
     label: "Type"
-    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+    sql: ${plan_type} ;;
   }
 
   dimension: plan_num {
     type: string
     label: "ID"
-    sql: ${TABLE}.CUSTOMER_NUM ;;
+    sql: ${customer_num} ;;
   }
 
   dimension: plan_name {
@@ -280,13 +280,13 @@ view: mn_customer_dim_reuse {
   dimension: pbm_member_info_type {
     type: string
     label: "Type"
-    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+    sql: ${member_info_type} ;;
   }
 
   dimension: pbm_num {
     type: string
     label: "ID"
-    sql: ${TABLE}.CUSTOMER_NUM ;;
+    sql: ${customer_num} ;;
   }
 
   dimension: pbm_name {
@@ -299,13 +299,13 @@ view: mn_customer_dim_reuse {
   dimension: bob_member_info_type {
     type: string
     label: "Type"
-    sql: ${TABLE}.MEMBER_INFO_TYPE ;;
+    sql: ${member_info_type} ;;
   }
 
   dimension: bob_num {
     type: string
     label: "ID"
-    sql: ${TABLE}.CUSTOMER_NUM ;;
+    sql: ${customer_num} ;;
   }
 
   dimension: bob_name {
@@ -317,7 +317,7 @@ view: mn_customer_dim_reuse {
 #*************Customer Field Set
   set: customer {
     fields: [account_size,address,address_type,city,country,credit_rebill_regexp_criteria,currency,
-      cust_domain,customer_name,external_segment,member_info_type,pbm_member_info_type,
+      cust_domain,customer_name,external_segment,member_info_type,
       member_status,org_id_type,plan_type,pmt_method,postal_zip,purchase_method,segmentation_attrubute1,
       segmentation_attrubute2,segmentation_attrubute3,segmentation_attrubute4,segmentation_attrubute5,
       state_province,status_eff_end_date,status_eff_end_month,status_eff_end_quarter,status_eff_end_year,
@@ -325,13 +325,13 @@ view: mn_customer_dim_reuse {
   }
 
 #*************PBM Field Set
-  set: parent_pbm_set {
+  set: pbm_set {
     fields: [pbm_member_info_type,pbm_num,pbm_name]
   }
 
 #*************Plan Field Set
   set: plan_set {
-    fields: [plan_member_info_type,plan_num,plan_name]
+    fields: [plan_plan_type,plan_num,plan_name]
   }
 
 #*************BOB Field Set
