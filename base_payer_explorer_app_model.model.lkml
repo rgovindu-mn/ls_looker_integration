@@ -492,7 +492,8 @@ explore: payer_rebate {
     type: left_outer
     relationship: many_to_one
     view_label: "Rebate Program"
-    sql_on: ${mn_rebate_payment_fact.rebate_program_wid} = ${mn_combined_rebate_program_dim.program_wid} ;;
+    sql_on: ${mn_rebate_payment_fact.rebate_program_wid} = ${mn_combined_rebate_program_dim.program_wid}
+    AND ${mn_combined_rebate_program_dim.latest_flag} = 'Y' ;;
   }
 
   # join: mn_rbt_prg_ben_flat_dim {
