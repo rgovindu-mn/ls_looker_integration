@@ -254,6 +254,7 @@ view: mn_mco_util_fact {
   dimension: ndc_quantity {
     type: string
     sql: ${TABLE}.NDC_QTY ;;
+    label: "NDC Quantity"
   }
 
   dimension: org_wid {
@@ -380,6 +381,7 @@ view: mn_mco_util_fact {
   dimension: util_type {
     type: string
     sql: ${TABLE}.UTIL_TYPE ;;
+    label: " Utilization Type"
   }
 
   measure: count {

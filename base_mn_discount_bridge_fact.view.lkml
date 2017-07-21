@@ -50,11 +50,13 @@ view: mn_discount_bridge_fact {
   dimension: estimate_pmt_flag {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_FLAG ;;
+    label: "Estimate Payment Flag"
   }
 
   dimension: estimate_qty {
     type: number
     sql: ${TABLE}.ESTIMATE_QTY ;;
+    label: "Estimate Quantity"
   }
 
   dimension: exchange_rate {
@@ -82,21 +84,25 @@ view: mn_discount_bridge_fact {
   dimension: external_inv_amt {
     type: number
     sql: ${TABLE}.EXTERNAL_INV_AMT ;;
+    label: "External Invoice Amount"
   }
 
   dimension: external_inv_uom {
     type: string
     sql: ${TABLE}.EXTERNAL_INV_UOM ;;
+    label: "External Invoice UOM"
   }
 
   dimension: external_invoice_qty {
     type: string
     sql: ${TABLE}.EXTERNAL_INVOICE_QTY ;;
+    label: "External Invoice Quantity"
   }
 
   dimension: external_line_ref_id {
     type: string
     sql: ${TABLE}.EXTERNAL_LINE_REF_ID ;;
+    label: "External Line Reference ID"
   }
 
   dimension: external_line_type {
@@ -132,6 +138,7 @@ view: mn_discount_bridge_fact {
   dimension: external_ref_id {
     type: string
     sql: ${TABLE}.EXTERNAL_REF_ID ;;
+    label: "External Reference ID"
   }
 
   dimension_group: extraction {
@@ -248,31 +255,37 @@ view: mn_discount_bridge_fact {
   dimension: orig_ref_num {
     type: string
     sql: ${TABLE}.ORIG_REF_NUM ;;
+    label: "Original Reference Number"
   }
 
   dimension: original_inv_qty {
     type: number
     sql: ${TABLE}.ORIGINAL_INV_QTY ;;
+    label: "Original Invoice Quantity"
   }
 
   dimension: original_inv_uom {
     type: string
     sql: ${TABLE}.ORIGINAL_INV_UOM ;;
+    label: "Original Invoice UOM"
   }
 
   dimension: paid_amt {
     type: number
     sql: ${TABLE}.PAID_AMT ;;
+    label: "Paid Amount"
   }
 
   dimension: paid_amt_base {
     type: string
     sql: ${TABLE}.PAID_AMT_BASE ;;
+    label: "Paid Amount Base"
   }
 
   dimension: paid_amt_curr {
     type: number
     sql: ${TABLE}.PAID_AMT_CURR ;;
+    label: "Paid Amount Currency"
   }
 
   dimension: paid_date_wid {
@@ -295,7 +308,7 @@ view: mn_discount_bridge_fact {
 
   dimension_group: payment_end {
     type: time
-    label: "Rebate Pmt End"
+    label: "Rebate Payment End"
     timeframes: [
       raw,
       time,
@@ -310,7 +323,7 @@ view: mn_discount_bridge_fact {
 
   dimension_group: payment_start {
     type: time
-    label: "Rebate Pmt Start"
+    label: "Rebate Payment Start"
     timeframes: [
       raw,
       time,
@@ -338,6 +351,7 @@ view: mn_discount_bridge_fact {
     type: number
     primary_key: yes
     sql: ${TABLE}.REBATE_LINE_REF_NUM ;;
+    label: "Rebate Line Reference Number"
   }
 
   dimension: rebate_module_type {

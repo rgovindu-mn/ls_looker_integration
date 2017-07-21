@@ -194,6 +194,7 @@ view: mn_product_dim {
   dimension: gl_account_code {
     type: string
     sql: ${TABLE}.GL_ACCOUNT_CODE ;;
+    label: "GL Account Code"
   }
 
   dimension_group: manu_term {
@@ -305,6 +306,7 @@ view: mn_product_dim {
       year
     ]
     sql: ${TABLE}.SHELF_LIFE_EXP_DATE ;;
+    label: "Shelf Life Expiration"
   }
 
   dimension: shelf_life_exp_date_wid {
