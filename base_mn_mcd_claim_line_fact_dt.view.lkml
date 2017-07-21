@@ -595,19 +595,19 @@ view: mn_mcd_claim_line_fact_dt {
     sql: ${prev_disp_units} ;;
   }
 
-#   measure: Disputed_Units_%_of_Claimed {
-#     type: sum
-#     label: "Disputed Units % of Claimed"
-#     value_format_name: decimal_0
-#     sql: ${disp_units} ;;   inv_units
-#   }
+  measure: disputed_units_perc_of_claimed {
+    type: number
+    label: "Disputed Units % of Claimed"
+    value_format_name: decimal_0
+    sql: ${disputed_units} / ${claimed_units} ;;
+  }
 
-#   measure: Resolved_Units_%_of_Disputed {
-#     type: sum
-#     label: "Resolved Units % of Disputed"
-#     value_format_name: decimal_0
-#     sql: ${resv_units} ;;    Sum(ResolvedUnits)/Sum(DisputeUnits)
-#   }
+  measure: resolved_units_perc_of_disputed {
+    type: number
+    label: "Resolved Units % of Disputed"
+    value_format_name: decimal_0
+    sql: ${resolved_units}/${disputed_units} ;;
+  }
 
 
   measure: Number_of_Claim_Lines {
