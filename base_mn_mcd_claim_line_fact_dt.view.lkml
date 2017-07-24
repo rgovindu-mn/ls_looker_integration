@@ -227,6 +227,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_start_qtr {
     type: string
+    hidden: yes
     sql: ${TABLE}.PROGRAM_PROD_START_QTR ;;
   }
 
@@ -252,6 +253,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_end_qtr {
     type: string
+    hidden: yes
     sql: ${TABLE}.PROGRAM_PROD_END_QTR ;;
   }
 

@@ -209,6 +209,7 @@ view: mn_mcd_claim_dim {
 
   dimension: row_deleted_flag {
     type: string
+    hidden: yes
     sql: ${TABLE}.ROW_DELETED_FLAG ;;
   }
 
