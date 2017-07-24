@@ -97,11 +97,11 @@ explore: government_explore {
 
   }
   join: mn_payment_approver_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Payment"
-    fields: [mn_payment_approver_dim.full_name]
+    fields: [mn_payment_approver_dim.payment_approver_set*]
     sql_on: ${mn_mcd_payment_fact.approved_by_wid} = ${mn_payment_approver_dim.user_wid} ;;
   }
 
@@ -131,10 +131,11 @@ explore: government_explore {
   # }
 
   join: mn_payee_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Payee"
+    fields: [mn_payee_dim.governmentpayee_set*]
     sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_payee_dim.customer_wid};;
   }
 

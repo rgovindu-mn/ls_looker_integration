@@ -349,4 +349,8 @@ view: mn_customer_dim_reuse {
     fields: [payment_recipient]
   }
 
+  set: governmentpayee_set {
+    fields: [customer_name,customer_num,address,city,state_province,postal_zip,country]
+  }
+
 }

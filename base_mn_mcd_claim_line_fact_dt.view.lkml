@@ -50,6 +50,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: calc_ura {
     type: number
+    label: "Calculated URA"
     sql: ${TABLE}.CALC_URA ;;
   }
 
@@ -67,7 +68,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: override_ura {
     type: number
-    hidden: yes
+    label: "Override URA"
     sql: ${TABLE}.OVERRIDE_URA ;;
   }
 
@@ -95,6 +96,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: inv_ura {
     type: number
+    label: "Invoiced URA"
     sql: ${TABLE}.INV_URA ;;
   }
 

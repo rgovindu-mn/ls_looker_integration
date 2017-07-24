@@ -219,6 +219,12 @@ view: mn_user_dim_reuse {
     sql: ${TABLE}.MEMBER_NAME ;;
   }
 
+  dimension: payment_approver {
+    type: string
+    label: "Approver Name"
+    sql: ${TABLE}.FNAME ||' '||${TABLE}.LNAME;;
+  }
+
   set: mn_user_all_visible_fields  {
     fields: [full_address,
       city,
@@ -269,5 +275,10 @@ view: mn_user_dim_reuse {
 # Medicaid Claim owner Name set
   set: claimowner_set {
     fields: [claim_owner_name,claim_owner_id]
+  }
+
+# Medicaid payment approver Name set
+  set: payment_approver_set {
+    fields: [payment_approver]
   }
 }
