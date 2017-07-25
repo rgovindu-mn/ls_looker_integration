@@ -2,6 +2,7 @@ view: mn_mcd_claim_line_fact_dt {
   derived_table: {
     sql: SELECT MCDCLF.*,CLMD.STATE FROM MN_MCD_CLAIM_LINE_FACT_VW MCDCLF
           JOIN MN_MCD_CLAIM_DIM_VW CLMD ON CLMD.CLAIM_WID = MCDCLF.MCD_CLAIM_WID
+          WHERE MCDCLF.ROW_DELETED_FLAG = 'N'
        ;;
   }
 
@@ -215,6 +216,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension_group: program_prod_start {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -241,6 +243,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension_group: program_prod_end {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -402,6 +405,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: row_deleted_flag {
     type: string
+    hidden: yes
     sql: ${TABLE}.ROW_DELETED_FLAG ;;
   }
 

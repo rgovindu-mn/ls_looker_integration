@@ -105,6 +105,7 @@ view: mn_mcd_program_dim {
 
   dimension_group: program_end_qtr {
     type: time
+    label: "Program End Quarter"
     timeframes: [
       raw,
       time,
@@ -141,6 +142,7 @@ view: mn_mcd_program_dim {
 
   dimension_group: program_start_qtr {
     type: time
+    label: "Program Start Quarter"
     timeframes: [
       raw,
       time,
