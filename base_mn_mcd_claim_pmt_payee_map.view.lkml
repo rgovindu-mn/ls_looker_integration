@@ -2,6 +2,14 @@ view: mn_mcd_claim_pmt_payee_map {
 
 sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
+  dimension: mcd_claim_payment_key {
+    type: string
+    label: "MCD Claim Payment Key"
+    primary_key: yes
+    hidden: yes
+    sql: ${mcd_claim_wid} ||'-'||${mcd_payment_wid};;
+  }
+
   dimension: claim_addtl_int_amt {
     type: number
     sql: ${TABLE}.CLAIM_ADDTL_INT_AMT ;;
@@ -93,14 +101,6 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
     type: number
     hidden: yes
     sql: ${TABLE}.MCD_PAYMENT_WID ;;
-  }
-
-  dimension: mcd_claim_payment_key {
-    type: string
-    label: "MCD Claim Payment Key"
-    primary_key: yes
-    hidden: yes
-    sql: ${TABLE}.mcd_claim_wid ||' '||${TABLE}.mcd_payment_wid;;
   }
 
 #   measure: count {

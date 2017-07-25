@@ -33,9 +33,9 @@ view: mn_mcd_program_product_map {
     sql: ${TABLE}.DATE_UPDATED ;;
   }
 
-  dimension_group: end_date {
+  dimension_group: end {
     type: time
-
+    label: "Product End"
     timeframes: [
       raw,
       time,
@@ -84,9 +84,9 @@ view: mn_mcd_program_product_map {
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
-  dimension_group: start_date {
+  dimension_group: start {
     type: time
-
+    label: "Product Start"
     timeframes: [
       raw,
       time,
@@ -116,14 +116,14 @@ view: mn_mcd_program_product_map {
     fields: [
       date_created_time,
       date_updated_time,
-      end_date_time,
+      end_time,
       formula_def,
       formula_type,
       mcd_program_wid,
       product_wid,
       run_id,
       source_system_id,
-      start_date_time
+      start_time
     ]
   }
 }

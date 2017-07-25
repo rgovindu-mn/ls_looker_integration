@@ -54,11 +54,13 @@ view: mn_mcd_program_state_map {
 
   dimension: end_cal_qtr {
     type: string
+    hidden: yes
     sql: ${TABLE}.END_CAL_QTR ;;
   }
 
   dimension_group: end {
     type: time
+    label: "State End Quarter"
      timeframes: [
       raw,
       time,
@@ -141,11 +143,13 @@ view: mn_mcd_program_state_map {
 
   dimension: start_cal_qtr {
     type: string
+    hidden: yes
     sql: ${TABLE}.START_CAL_QTR ;;
   }
 
   dimension_group: start {
     type: time
+    label: "State Start Quarter"
     timeframes: [
       raw,
       time,
