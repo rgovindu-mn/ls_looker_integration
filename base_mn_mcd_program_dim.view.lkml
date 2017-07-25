@@ -29,7 +29,6 @@ view: mn_mcd_program_dim {
 
   dimension_group: created_on {
     type: time
-    hidden: yes
     timeframes: [
       raw,
       time,

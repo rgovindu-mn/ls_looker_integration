@@ -50,6 +50,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: calc_ura {
     type: number
+    label: "Calculated URA"
     sql: ${TABLE}.CALC_URA ;;
   }
 
@@ -67,7 +68,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: override_ura {
     type: number
-    hidden: yes
+    label: "Override URA"
     sql: ${TABLE}.OVERRIDE_URA ;;
   }
 
@@ -95,6 +96,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: inv_ura {
     type: number
+    label: "Invoiced URA"
     sql: ${TABLE}.INV_URA ;;
   }
 
@@ -227,6 +229,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_start_qtr {
     type: string
+    hidden: yes
     sql: ${TABLE}.PROGRAM_PROD_START_QTR ;;
   }
 
@@ -252,6 +255,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_end_qtr {
     type: string
+    hidden: yes
     sql: ${TABLE}.PROGRAM_PROD_END_QTR ;;
   }
 
@@ -595,19 +599,19 @@ view: mn_mcd_claim_line_fact_dt {
     sql: ${prev_disp_units} ;;
   }
 
-#   measure: Disputed_Units_%_of_Claimed {
-#     type: sum
-#     label: "Disputed Units % of Claimed"
-#     value_format_name: decimal_0
-#     sql: ${disp_units} ;;   inv_units
-#   }
+  measure: disputed_units_perc_of_claimed {
+    type: number
+    label: "Disputed Units % of Claimed"
+    value_format_name: decimal_0
+    sql: ${disputed_units} / ${claimed_units} ;;
+  }
 
-#   measure: Resolved_Units_%_of_Disputed {
-#     type: sum
-#     label: "Resolved Units % of Disputed"
-#     value_format_name: decimal_0
-#     sql: ${resv_units} ;;    Sum(ResolvedUnits)/Sum(DisputeUnits)
-#   }
+  measure: resolved_units_perc_of_disputed {
+    type: number
+    label: "Resolved Units % of Disputed"
+    value_format_name: decimal_0
+    sql: ${resolved_units}/${disputed_units} ;;
+  }
 
 
   measure: Number_of_Claim_Lines {

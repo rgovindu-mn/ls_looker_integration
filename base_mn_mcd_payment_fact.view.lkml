@@ -7,7 +7,7 @@ view: mn_mcd_payment_fact {
     sql: ${TABLE}.APPROVED_BY_WID ;;
   }
 
-  dimension_group: approved_date {
+  dimension_group: approved {
     type: time
     timeframes: [
       raw,
@@ -66,6 +66,7 @@ view: mn_mcd_payment_fact {
 
   dimension_group: payment_check {
     type: time
+    label: "Check"
     timeframes: [
       raw,
       time,
@@ -86,6 +87,7 @@ view: mn_mcd_payment_fact {
 
   dimension_group: payment_check_mailed {
     type: time
+    label: "Check Mailed"
     timeframes: [
       raw,
       time,
@@ -106,11 +108,13 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_check_num {
     type: string
+    label: "Check #"
     sql: ${TABLE}.PAYMENT_CHECK_NUM ;;
   }
 
   dimension_group: payment_check_request {
     type: time
+    label: "Check Request Sent"
     timeframes: [
       raw,
       time,
@@ -141,6 +145,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_num {
     type: string
+    label: "Payment Number"
     sql: ${TABLE}.PAYMENT_NUM ;;
   }
 
@@ -171,6 +176,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_ver_num {
     type: number
+    label: "Payment Version"
     sql: ${TABLE}.PAYMENT_VER_NUM ;;
   }
 

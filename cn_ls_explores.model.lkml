@@ -16,6 +16,7 @@ include: "base_mn_mcd_dispute_code_dim.view.lkml"
 include: "base_mn_mcd_adjust_type_dim.view.lkml"
 include: "base_mn_mcd_dispute_code_dim_dt.view.lkml"
 include: "base_mn_mcd_adjust_type_dim_dt.view.lkml"
+include: "base_mn_user_dim_reuse.view.lkml"
 
 
 explore: government_explore {
@@ -96,20 +97,20 @@ explore: government_explore {
 
   }
   join: mn_payment_approver_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Payment"
-    fields: [mn_payment_approver_dim.full_name]
+    fields: [mn_payment_approver_dim.payment_approver_set*]
     sql_on: ${mn_mcd_payment_fact.approved_by_wid} = ${mn_payment_approver_dim.user_wid} ;;
   }
 
   join: mn_claim_owner_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Claim"
-    fields: [mn_claim_owner_dim.full_name,mn_claim_owner_dim.member_name]
+    fields: [mn_claim_owner_dim.claimowner_set*]
     sql_on: ${mn_mcd_claim_dim.claim_owner_wid} = ${mn_claim_owner_dim.user_wid} ;;
   }
 
@@ -130,10 +131,11 @@ explore: government_explore {
   # }
 
   join: mn_payee_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Payee"
+    fields: [mn_payee_dim.governmentpayee_set*]
     sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_payee_dim.customer_wid};;
   }
 
@@ -154,65 +156,65 @@ explore: government_explore {
   }
 
   join: mn_mfr_contact_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_mfr_contact_dim.full_name]
+    fields: [mn_mfr_contact_dim.mfrcontactname_set*]
     sql_on: ${mn_mcd_program_state_map.mfr_contact_wid} = ${mn_mfr_contact_dim.user_wid} ;;
   }
 
   join: mn_recipient_name_dim {
-    from: mn_customer_dim
+    from: mn_customer_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_recipient_name_dim.customer_name]
+    fields: [mn_recipient_name_dim.payment_recipient_name_set*]
     sql_on: ${mn_mcd_program_state_map.payee_wid} = ${mn_recipient_name_dim.customer_wid} ;;
   }
 
   join: mn_analyst_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_analyst_dim.full_name]
-    sql_on: ${mn_mcd_program_state_map.mfr_contact_wid} = ${mn_analyst_dim.user_wid} ;;
+    fields: [mn_analyst_dim.defaultanalyst_set*]
+    sql_on: ${mn_mcd_program_state_map.analyst_wid} = ${mn_analyst_dim.user_wid} ;;
   }
 
   join: mn_amended_by_name_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_amended_by_name_dim.full_name]
+    fields: [mn_amended_by_name_dim.amemdedby_set*]
     sql_on: ${mn_mcd_program_dim.amended_by_wid} = ${mn_amended_by_name_dim.user_wid} ;;
   }
 
   join: mn_program_owner_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_program_owner_dim.full_name]
+    fields: [mn_program_owner_dim.programowner_set*]
     sql_on: ${mn_mcd_program_dim.owner_wid} = ${mn_program_owner_dim.user_wid} ;;
   }
 
   join: mn_program_lastupdatedby_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_program_lastupdatedby_dim.full_name]
+    fields: [mn_program_lastupdatedby_dim.lastupdatedby_set*]
     sql_on: ${mn_mcd_program_dim.last_updated_by_wid} = ${mn_program_lastupdatedby_dim.user_wid} ;;
   }
 
   join: mn_program_createdby_dim {
-    from: mn_user_dim
+    from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_program_createdby_dim.full_name]
+    fields: [mn_program_createdby_dim.createdby_set*]
     sql_on: ${mn_mcd_program_dim.created_by_wid} = ${mn_program_createdby_dim.user_wid} ;;
   }
 

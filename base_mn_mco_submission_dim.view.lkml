@@ -266,6 +266,6 @@ view: mn_mco_submission_dim {
 
   measure: count {
     type: count
-    drill_fields: [mco_submission_wid]
+    drill_fields: [submission_name,submission_number,claim_name,claim_number,period_start_date,period_end_date,mn_util_pbm_dim.pbm_name]
   }
 }

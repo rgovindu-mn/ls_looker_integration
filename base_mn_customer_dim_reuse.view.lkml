@@ -314,6 +314,11 @@ view: mn_customer_dim_reuse {
     sql: ${customer_name} ;;
   }
 
+  dimension: payment_recipient {
+    type: string
+    sql: ${TABLE}.CUSTOMER_NAME ;;
+  }
+
 #*************Customer Field Set
   set: customer {
     fields: [account_size,address,address_type,city,country,credit_rebill_regexp_criteria,currency,
@@ -337,6 +342,15 @@ view: mn_customer_dim_reuse {
 #*************BOB Field Set
   set: bob_set {
     fields: [bob_member_info_type,bob_num,bob_name]
+  }
+
+#*************Medicaid Payment Recipient Name Field Set
+  set: payment_recipient_name_set {
+    fields: [payment_recipient]
+  }
+
+  set: governmentpayee_set {
+    fields: [customer_name,customer_num,address,city,state_province,postal_zip,country]
   }
 
 }
