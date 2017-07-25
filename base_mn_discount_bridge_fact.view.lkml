@@ -173,19 +173,19 @@ view: mn_discount_bridge_fact {
 
   dimension: inv_amt {
     type: number
-    label: "Inv. Amount"
+    label: "Invoice Amount"
     sql: ${TABLE}.INV_AMT ;;
   }
 
   dimension: inv_amt_base {
     type: number
-    label: "Inv. Amount Base"
+    label: "Invoice Amount Base"
     sql: ${TABLE}.INV_AMT_BASE ;;
   }
 
   dimension: inv_amt_curr {
     type: string
-    label: "Inv. Amount Currency"
+    label: "Invoice Amount Currency"
     sql: ${TABLE}.INV_AMT_CURR ;;
   }
 
@@ -197,7 +197,7 @@ view: mn_discount_bridge_fact {
 
   dimension_group: invoice {
     type: time
-    label: "Inv."
+    label: "Invoice"
     timeframes: [
       raw,
       time,
@@ -212,7 +212,7 @@ view: mn_discount_bridge_fact {
 
   dimension: inv_qty {
     type: number
-    label: "Inv. Quantity"
+    label: "Invoice Quantity"
     sql: ${TABLE}.INV_QTY ;;
   }
 
@@ -440,14 +440,14 @@ view: mn_discount_bridge_fact {
 
   measure: external_invoive_amount {
     type: sum
-    label: "Total Hist. Rebate Invoice Amount"
+    label: "Total Historical Rebate Invoice Amount"
     value_format_name: decimal_0
     sql: ${external_inv_amt} ;;
   }
 
   measure: total_external_invoice_quantity {
     type: sum
-    label: "Total Hist. Rebate Invoice Quantity"
+    label: "Total Historical Rebate Invoice Quantity"
     value_format_name: decimal_0
     sql: TO_NUMBER(${external_invoice_qty}) ;;
   }

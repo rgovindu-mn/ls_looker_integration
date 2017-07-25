@@ -50,6 +50,7 @@ view: mn_formulary_dim {
 
   dimension_group: eff_start {
     type: time
+    label: "Effective Start"
     timeframes: [
       raw,
       time,
@@ -64,6 +65,7 @@ view: mn_formulary_dim {
 
   dimension_group: eff_end {
     type: time
+    label: "Effective End"
     timeframes: [
       raw,
       time,
@@ -82,7 +84,7 @@ view: mn_formulary_dim {
     sql: case when ${TABLE}.DEFAULT_FLAG = 1 then 'Yes' else 'No' end  ;;
   }
 
-  dimension_group: date_updated {
+  dimension_group: updated {
     type: time
     timeframes: [
       raw,

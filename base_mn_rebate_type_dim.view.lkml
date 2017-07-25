@@ -3,6 +3,7 @@ view: mn_rebate_type_dim {
 
   dimension_group: date_created {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -17,6 +18,7 @@ view: mn_rebate_type_dim {
 
   dimension_group: date_updated {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -77,17 +79,20 @@ view: mn_rebate_type_dim {
 
   dimension: rebate_type_wid {
     type: number
+    hidden: yes
     primary_key: yes
     sql: ${TABLE}.REBATE_TYPE_WID ;;
   }
 
   dimension: run_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.RUN_ID ;;
   }
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
