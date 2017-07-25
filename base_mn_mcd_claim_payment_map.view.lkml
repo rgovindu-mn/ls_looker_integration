@@ -98,6 +98,7 @@ view: mn_mcd_claim_payment_map {
 
   dimension: mcd_claim_payment_wid {
     type: number
+    primary_key: yes
     hidden: yes
     sql: ${TABLE}.MCD_CLAIM_PAYMENT_WID ;;
   }

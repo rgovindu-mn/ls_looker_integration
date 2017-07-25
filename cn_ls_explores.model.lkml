@@ -25,7 +25,6 @@ explore: government_explore {
   label: "Government Explore New"
   view_label: "Program"
 
-  # always_join: [mn_mcd_claim_state_map_dim]
 
   join: mn_mcd_program_product_map {
     from: mn_mcd_program_product_map
@@ -66,8 +65,8 @@ explore: government_explore {
     from: mn_mcd_util_fact
     type: left_outer
     relationship: many_to_one
-    view_label: "Util"
-    fields: []
+    view_label: "Claim Line"
+    fields: [mn_mcd_util_fact.Original_Invoiced_Amount,mn_mcd_util_fact.inv_req_rebate_amt]
 #     fields: [inv_req_rebate_amt,mn_mcd_util_fact.paid_date,mn_mcd_util_fact.paid_month,mn_mcd_util_fact.paid_quarter,mn_mcd_util_fact.paid_time,mn_mcd_util_fact.paid_week,mn_mcd_util_fact.paid_year]
     sql_on: ${mn_mcd_claim_line_fact.product_wid} = ${mn_mcd_util_fact.product_wid} and ${mn_mcd_claim_line_fact.mcd_claim_wid} = ${mn_mcd_util_fact.claim_wid} ;;
 

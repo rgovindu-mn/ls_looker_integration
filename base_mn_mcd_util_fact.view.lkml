@@ -305,6 +305,14 @@ view: mn_mcd_util_fact {
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
+  dimension: mcd_claim_program_product_key {
+    type: string
+    label: "MCD Claim Program Product Key"
+    primary_key: yes
+#     hidden: yes
+    sql: ${TABLE}.claim_wid ||' '||${TABLE}.program_wid ||' '||${TABLE}.product_wid;;
+  }
+
 
   measure: Original_Invoiced_Amount {
     type: sum

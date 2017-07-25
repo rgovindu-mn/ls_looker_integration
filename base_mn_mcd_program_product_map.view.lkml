@@ -99,6 +99,14 @@ view: mn_mcd_program_product_map {
     sql: ${TABLE}.START_DATE ;;
   }
 
+  dimension: mcd_program_product_key {
+    type: string
+    label: "MCD Program Product Key"
+    primary_key: yes
+    hidden: yes
+    sql: ${TABLE}.mcd_program_wid ||' '||${TABLE}.product_wid;;
+  }
+
 #   measure: count {
 #     type: count
 #     drill_fields: [detail*]

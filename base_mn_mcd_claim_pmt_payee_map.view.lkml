@@ -95,6 +95,14 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
     sql: ${TABLE}.MCD_PAYMENT_WID ;;
   }
 
+  dimension: mcd_claim_payment_key {
+    type: string
+    label: "MCD Claim Payment Key"
+    primary_key: yes
+    hidden: yes
+    sql: ${TABLE}.mcd_claim_wid ||' '||${TABLE}.mcd_payment_wid;;
+  }
+
 #   measure: count {
 #     type: count
 #     drill_fields: [detail*]
@@ -118,7 +126,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
     type: sum
     label: "Claim Applied Interest"
     value_format_name: usd
-    sql: ${claim_interest_amt} ;;
+    sql: ${claim_applied_int_amt} ;;
   }
 
   measure: claim_additional_interest {

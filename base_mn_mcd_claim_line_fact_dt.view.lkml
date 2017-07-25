@@ -599,19 +599,7 @@ view: mn_mcd_claim_line_fact_dt {
     sql: ${prev_disp_units} ;;
   }
 
-  measure: disputed_units_perc_of_claimed {
-    type: number
-    label: "Disputed Units % of Claimed"
-    value_format_name: decimal_0
-    sql: ${disputed_units} / ${claimed_units} ;;
-  }
 
-  measure: resolved_units_perc_of_disputed {
-    type: number
-    label: "Resolved Units % of Disputed"
-    value_format_name: decimal_0
-    sql: ${resolved_units}/${disputed_units} ;;
-  }
 
 
   measure: Number_of_Claim_Lines {
@@ -703,7 +691,22 @@ view: mn_mcd_claim_line_fact_dt {
     type: sum
     label: "Invoiced Units"
     value_format_name: decimal_0
-    sql: ${original_corrected_amt} ;;
+    sql: ${inv_units} ;;
+  }
+
+  measure: disputed_units_perc_of_claimed {
+    type: number
+    label: "Disputed Units % of Claimed"
+    value_format_name: decimal_0
+    sql: ${disputed_units}/${invoiced_units} ;;
+#      Sum(DisputeUnits)/Sum(InvUnits)
+  }
+
+  measure: resolved_units_perc_of_disputed {
+    type: number
+    label: "Resolved Units % of Disputed"
+    value_format_name: decimal_0
+    sql: ${resolved_units}/${disputed_units} ;;
   }
 
   set: detail {
