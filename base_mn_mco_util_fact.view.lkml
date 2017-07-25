@@ -4,7 +4,7 @@ view: mn_mco_util_fact {
 
   dimension: access_rebate_amount {
     type: string
-    label: "Access Rbt Amount"
+    label: "Access Rebate Amount"
     sql: ${TABLE}.ACCESS_RBT_AMT ;;
   }
 
@@ -16,7 +16,7 @@ view: mn_mco_util_fact {
 
   dimension: base_rebate_amount {
     type: string
-    label: "Base Rbt Amount"
+    label: "Base Rebate Amount"
     sql: ${TABLE}.BASE_RBT_AMT ;;
   }
 
@@ -34,7 +34,7 @@ view: mn_mco_util_fact {
 
   dimension: calculate_rebate_flag {
     type: string
-    label: "Calculate Rbt Flag"
+    label: "Calculate Rebate Flag"
     sql: ${TABLE}.CALCULATE_REBATE_FLAG ;;
   }
 
@@ -216,7 +216,7 @@ view: mn_mco_util_fact {
 
   dimension: mail_ord_rbt_amt {
     type: string
-    label: "Mail Order Rbt Amount"
+    label: "Mail Order Rebate Amount"
     sql: ${TABLE}.MAIL_ORD_RBT_AMT ;;
   }
 
@@ -275,7 +275,7 @@ view: mn_mco_util_fact {
 
   dimension: perf_rebate_amount {
     type: number
-    label: "Performance Rbt Amount"
+    label: "Performance Rebate Amount"
     sql: ${TABLE}.PERF_RBT_AMT ;;
   }
 
@@ -339,9 +339,9 @@ view: mn_mco_util_fact {
 
   dimension: ref_line_id {
     type: string
+    label: "Utilization Line ID"
     primary_key: yes
     sql: ${TABLE}.REF_LINE_ID ;;
-    label: "Util Line Ref Number"
   }
 
   dimension: run_id {
@@ -390,14 +390,14 @@ view: mn_mco_util_fact {
 
   measure: Total_NDC_Unit {
     type: sum
-    label: "Total NDC Qty"
+    label: "Total NDC Quantity"
     value_format_name: decimal_0
     sql: ${ndc_quantity} ;;
   }
 
   measure: Total_Rx_Quantity {
     type: sum
-    label: "Total Rx Count"
+    label: "Total Rx Quantity"
     value_format_name: decimal_0
     sql: ${rx_quantity} ;;
   }

@@ -52,6 +52,7 @@ view: mn_customer_dim_reuse {
     label: "Customer ID"
     sql: ${TABLE}.CUSTOMER_NUM ;;
   }
+
   dimension: customer_wid {
     hidden: yes
     type: number
@@ -113,7 +114,6 @@ view: mn_customer_dim_reuse {
 
   dimension: org_id {
     type: string
-    hidden: yes
     sql: ${TABLE}.ORG_ID ;;
   }
 
@@ -322,8 +322,8 @@ view: mn_customer_dim_reuse {
 #*************Customer Field Set
   set: customer {
     fields: [account_size,address,address_type,city,country,credit_rebill_regexp_criteria,currency,
-      cust_domain,customer_name,external_segment,member_info_type,
-      member_status,org_id_type,plan_type,pmt_method,postal_zip,purchase_method,segmentation_attrubute1,
+      cust_domain,customer_name,customer_num,external_segment,member_info_type,
+      member_status,org_id,org_id_type,plan_type,pmt_method,postal_zip,purchase_method,segmentation_attrubute1,
       segmentation_attrubute2,segmentation_attrubute3,segmentation_attrubute4,segmentation_attrubute5,
       state_province,status_eff_end_date,status_eff_end_month,status_eff_end_quarter,status_eff_end_year,
       status_eff_start_date,status_eff_start_month,status_eff_start_quarter,status_eff_start_year]
