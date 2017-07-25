@@ -27,7 +27,7 @@ view: mn_formulary_dim {
 
   dimension: national_flag {
     type: string
-    label: "National ?"
+    label: "Is National ?"
     sql: case when ${TABLE}.NATIONAL_FLAG = 1 then 'Yes' else 'No' end ;;
   }
 

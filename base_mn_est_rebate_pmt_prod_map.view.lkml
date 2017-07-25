@@ -264,6 +264,7 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension_group: src_sys_date_created {
     type: time
+    label: "Created"
     timeframes: [
       raw,
       time,
@@ -278,6 +279,7 @@ view: mn_est_rebate_pmt_prod_map {
 
   dimension_group: src_sys_date_updated {
     type: time
+    label: "Updated"
     timeframes: [
       raw,
       time,

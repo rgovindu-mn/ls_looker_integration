@@ -38,16 +38,19 @@ view: mn_product_dim {
 
   dimension: cogs {
     type: string
+    label: "COGS"
     sql: ${TABLE}.COGS ;;
   }
 
   dimension: cogs_base {
     type: string
+    label: "COGS Base"
     sql: ${TABLE}.COGS_BASE ;;
   }
 
   dimension: cogs_currency {
     type: string
+    label: "COGS Currency"
     sql: ${TABLE}.COGS_CURR ;;
   }
 
@@ -73,26 +76,31 @@ view: mn_product_dim {
 
   dimension: custom_code1 {
     type: string
+    label: "Custom Code 1"
     sql: ${TABLE}.CUSTOM_CDE1 ;;
   }
 
   dimension: custom_code2 {
     type: string
+    label: "Custom Code 2"
     sql: ${TABLE}.CUSTOM_CDE2 ;;
   }
 
   dimension: custom_code3 {
     type: string
+    label: "Custom Code 3"
     sql: ${TABLE}.CUSTOM_CDE3 ;;
   }
 
   dimension: custom_code4 {
     type: string
+    label: "Custom Code 4"
     sql: ${TABLE}.CUSTOM_CDE4 ;;
   }
 
   dimension: custom_code5 {
     type: string
+    label: "Custom Code 5"
     sql: ${TABLE}.CUSTOM_CDE5 ;;
   }
 

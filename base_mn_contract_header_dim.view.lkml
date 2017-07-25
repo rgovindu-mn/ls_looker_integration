@@ -278,6 +278,7 @@ view: mn_contract_header_dim {
 
   dimension: is_340_b_eligible {
     type: string
+    label: "Is 340B Eligible ?"
     sql: ${TABLE}.IS_340B_ELIGIBLE ;;
   }
 
@@ -451,6 +452,7 @@ view: mn_contract_header_dim {
 
   dimension: signed_ind_type {
     type: string
+    label: "Signed/Unsigned Indicator"
     sql: ${TABLE}.SIGNED_IND_TYPE ;;
   }
 

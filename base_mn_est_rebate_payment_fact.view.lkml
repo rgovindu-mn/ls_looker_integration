@@ -164,6 +164,7 @@ view: mn_est_rebate_payment_fact {
 
   dimension: erp_notes {
     type: string
+    label: "ERP Notes"
     sql: ${TABLE}.ERP_NOTES ;;
   }
 
@@ -247,6 +248,7 @@ view: mn_est_rebate_payment_fact {
 
   dimension: estimate_pmt_pct {
     type: string
+    label: "Estimate Payment Percent"
     sql: ${TABLE}.ESTIMATE_PMT_PCT ;;
   }
 
@@ -298,6 +300,7 @@ view: mn_est_rebate_payment_fact {
 
   dimension: ext_pmt_type {
     type: string
+    label: "External Payment Type"
     sql: ${TABLE}.EXT_PMT_TYPE ;;
   }
 
@@ -441,6 +444,7 @@ view: mn_est_rebate_payment_fact {
 
   dimension: rev_est_pmt_fk {
     type: string
+    label: "Reversed Estimate Payment ID"
     sql: ${TABLE}.REV_EST_PMT_FK ;;
   }
 

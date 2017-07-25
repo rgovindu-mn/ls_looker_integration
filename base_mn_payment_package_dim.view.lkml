@@ -50,8 +50,11 @@ view: mn_payment_package_dim {
     sql: ${TABLE}.CURRENCY ;;
   }
 
-  dimension_group: date_created {
+  dimension_group: created {
     type: time
+    timeframes: [
+      date
+    ]
     sql: ${TABLE}.DATE_CREATED ;;
   }
 

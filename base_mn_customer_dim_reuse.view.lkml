@@ -151,26 +151,31 @@ view: mn_customer_dim_reuse {
 
   dimension: segmentation_attrubute1 {
     type: string
+    label: "Segmentation Attribute 1"
     sql: ${TABLE}.SEG_ATTR1 ;;
   }
 
   dimension: segmentation_attrubute2 {
     type: string
+    label: "Segmentation Attribute 2"
     sql: ${TABLE}.SEG_ATTR2 ;;
   }
 
   dimension: segmentation_attrubute3 {
     type: string
+    label: "Segmentation Attribute 3"
     sql: ${TABLE}.SEG_ATTR3 ;;
   }
 
   dimension: segmentation_attrubute4 {
     type: string
+    label: "Segmentation Attribute 4"
     sql: ${TABLE}.SEG_ATTR4 ;;
   }
 
   dimension: segmentation_attrubute5 {
     type: string
+    label: "Segmentation Attribute 5"
     sql: ${TABLE}.SEG_ATTR5 ;;
   }
 

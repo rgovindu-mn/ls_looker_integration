@@ -9,6 +9,7 @@ view: mn_discount_bridge_fact {
 
   dimension: cs_line_ref_num {
     type: string
+    label: "Custom Sale Line Reference Number"
     sql: ${TABLE}.CS_LINE_REF_NUM ;;
   }
 

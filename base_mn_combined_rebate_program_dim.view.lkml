@@ -203,16 +203,19 @@ view: mn_combined_rebate_program_dim {
 
   dimension: effective_timezone_gmt {
     type: string
+    label: "Timezone"
     sql: ${TABLE}.EFFECTIVE_TIMEZONE_GMT ;;
   }
 
   dimension: doc_tz_eff_end_date {
     type: date
+    label: "Effective End Date"
     sql: ${TABLE}.DOC_TZ_EFF_END_DATE ;;
   }
 
   dimension: doc_tz_eff_start_date {
     type: date
+    label: "Effective Start Date"
     sql: ${TABLE}.DOC_TZ_EFF_START_DATE ;;
   }
 
@@ -407,9 +410,12 @@ view: mn_combined_rebate_program_dim {
     label: "Utilization Type"
   }
 
-  dimension_group: ver_end_date {
+  dimension_group: ver_end {
     type: time
     label: "Version End"
+    timeframes: [
+      date
+    ]
     sql: ${TABLE}.VER_END_DATE ;;
   }
 
@@ -491,7 +497,7 @@ view: mn_combined_rebate_program_dim {
       tb_calc_rule,
       tier_mgmt_type,
       util_type,
-      ver_end_date_time,
+      ver_end_date,
       ver_num,
       ver_start_date,
       contract_type,

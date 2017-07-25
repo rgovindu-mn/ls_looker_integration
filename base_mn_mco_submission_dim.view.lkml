@@ -89,6 +89,7 @@ view: mn_mco_submission_dim {
 
   dimension: effective_timezone {
     type: string
+    label: "Time Zone"
     sql: ${TABLE}.EFFECTIVE_TIMEZONE ;;
   }
 
@@ -193,7 +194,7 @@ view: mn_mco_submission_dim {
   dimension: src_sys_claim_id {
     type: string
     sql: ${TABLE}.SRC_SYS_CLAIM_ID ;;
-    label: "Source System CLaim ID"
+    label: "Source System Claim ID"
   }
 
   dimension_group: src_sys_date_updated {
