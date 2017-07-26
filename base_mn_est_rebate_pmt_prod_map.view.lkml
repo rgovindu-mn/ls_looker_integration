@@ -58,25 +58,25 @@ view: mn_est_rebate_pmt_prod_map {
   dimension: est_uom {
     type: string
     sql: ${TABLE}.EST_UOM ;;
-    label: "Estimate UOM"
+    label: "Estimated UOM"
   }
 
   dimension: estimate_payment_amt_curr {
     type: string
     sql: ${TABLE}.ESTIMATE_PAYMENT_AMT_CURR ;;
-    label: "Estimate Payment Amount Currency"
+    label: "Estimated Payment Amount Currency"
   }
 
   dimension: estimate_pmt {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT ;;
-    label: "Estimate Payment"
+    label: "Estimated Payment"
   }
 
   dimension: estimate_pmt_base {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_BASE ;;
-    label: "Estimate Payment Base"
+    label: "Estimated Payment Base"
   }
 
   dimension: estimate_pmt_li_wid {
@@ -95,7 +95,7 @@ view: mn_est_rebate_pmt_prod_map {
   dimension: estimate_qty {
     type: string
     sql: ${TABLE}.ESTIMATE_QTY ;;
-    label: "Estimate Quantity"
+    label: "Estimated Quantity"
   }
 
   dimension: ext_cms_qty {

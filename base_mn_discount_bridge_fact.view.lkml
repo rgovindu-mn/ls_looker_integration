@@ -45,19 +45,27 @@ view: mn_discount_bridge_fact {
 
   dimension: ds_line_ref_num {
     type: string
+    label: "Direct Sale Line Reference Number"
     sql: ${TABLE}.DS_LINE_REF_NUM ;;
   }
 
   dimension: estimate_pmt_flag {
     type: string
+    hidden: yes
     sql: ${TABLE}.ESTIMATE_PMT_FLAG ;;
-    label: "Estimate Payment Flag"
+  }
+
+  dimension: estimate_pmt_yes_no {
+    type: string
+    sql: CASE WHEN ${estimate_pmt_flag} = 1 THEN 'Yes'
+              WHEN ${estimate_pmt_flag} = 0 THEN 'No' ELSE NULL END ;;
+    label: "Is Estimated Payment ?"
   }
 
   dimension: estimate_qty {
     type: number
     sql: ${TABLE}.ESTIMATE_QTY ;;
-    label: "Estimate Quantity"
+    label: "Estimated Quantity"
   }
 
   dimension: exchange_rate {
@@ -103,7 +111,7 @@ view: mn_discount_bridge_fact {
   dimension: external_line_ref_id {
     type: string
     sql: ${TABLE}.EXTERNAL_LINE_REF_ID ;;
-    label: "External Line Reference ID"
+    label: "External Line Reference Number"
   }
 
   dimension: external_line_type {
@@ -139,7 +147,7 @@ view: mn_discount_bridge_fact {
   dimension: external_ref_id {
     type: string
     sql: ${TABLE}.EXTERNAL_REF_ID ;;
-    label: "External Reference ID"
+    label: "External Reference Number"
   }
 
   dimension_group: extraction {
@@ -164,6 +172,7 @@ view: mn_discount_bridge_fact {
 
   dimension: ids_line_ref_num {
     type: string
+    label: "Indirect Sale Line Reference Number"
     sql: ${TABLE}.IDS_LINE_REF_NUM ;;
   }
 
@@ -223,10 +232,10 @@ view: mn_discount_bridge_fact {
     sql: ${TABLE}.IS_HISTORICAL_FLAG ;;
   }
 
-  dimension: is_historical {
+  dimension: historical_yes_no {
     type: string
     label: "Is Historical ?"
-    sql: case when nvl(${TABLE}.IS_HISTORICAL_FLAG,'N') = 'N' then 'No' else 'Yes' end ;;
+    sql: CASE WHEN NVL(${is_historical_flag},'N') = 'N' THEN 'No' ELSE 'Yes' END ;;
   }
 
   dimension: mcd_claim_wid {
@@ -237,6 +246,7 @@ view: mn_discount_bridge_fact {
 
   dimension: mcd_line_ref_num {
     type: string
+    label: "Medicaid Line Reference Number"
     sql: ${TABLE}.MCD_LINE_REF_NUM ;;
   }
 
@@ -345,6 +355,7 @@ view: mn_discount_bridge_fact {
 
   dimension: pub_util_id {
     type: number
+    label: "Published Utilization ID"
     sql: ${TABLE}.PUB_UTIL_ID ;;
   }
 

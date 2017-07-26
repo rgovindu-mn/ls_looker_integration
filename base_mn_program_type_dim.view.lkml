@@ -33,6 +33,7 @@ view: mn_program_type_dim {
 
   dimension: program_type_desc {
     group_label: "Program Type"
+    label: "Program Type Description"
     type: string
     sql: ${TABLE}.PROGRAM_TYPE_DESC ;;
   }

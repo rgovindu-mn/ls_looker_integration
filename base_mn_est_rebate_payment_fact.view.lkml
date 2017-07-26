@@ -159,6 +159,7 @@ view: mn_est_rebate_payment_fact {
 
   dimension: effective_timezone {
     type: string
+    label: "Time Zone"
     sql: ${TABLE}.EFFECTIVE_TIMEZONE ;;
   }
 
@@ -195,7 +196,7 @@ view: mn_est_rebate_payment_fact {
   dimension: estimate_pmt_id_num {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_ID_NUM ;;
-    label: "Estimate Payment ID"
+    label: "Estimated Payment ID"
   }
 
   dimension_group: estimate_pmt_issued {
@@ -210,19 +211,19 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.ESTIMATE_PMT_ISSUED_DATE ;;
-    label: "Estimate Payment Issued"
+    label: "Estimated Payment Issued"
   }
 
   dimension: estimate_pmt_method {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_METHOD ;;
-    label: "Estimate Payment Method"
+    label: "Estimated Payment Method"
   }
 
   dimension: estimate_pmt_name {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_NAME ;;
-    label: "Estimate Payment Name"
+    label: "Estimated Payment Name"
   }
 
   dimension_group: estimate_pmt_needed_by {
@@ -237,25 +238,25 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.ESTIMATE_PMT_NEEDED_BY_DATE ;;
-    label: "Estimate Payment Needed By"
+    label: "Estimated Payment Needed By"
   }
 
   dimension: estimate_pmt_number {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_NUMBER ;;
-    label: "Estimate Payment Number"
+    label: "Estimated Payment Number"
   }
 
   dimension: estimate_pmt_pct {
     type: string
-    label: "Estimate Payment Percent"
+    label: "Estimated Payment Percent"
     sql: ${TABLE}.ESTIMATE_PMT_PCT ;;
   }
 
   dimension: estimate_pmt_rate {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_RATE ;;
-    label: "Estimate Payment Rate"
+    label: "Estimated Payment Rate"
   }
 
   dimension_group: estimate_pmt_request_sent {
@@ -270,25 +271,25 @@ view: mn_est_rebate_payment_fact {
       year
     ]
     sql: ${TABLE}.ESTIMATE_PMT_REQUEST_SENT_DATE ;;
-    label: "Estimate Payment Request Sent"
+    label: "Estimated Payment Request Sent"
   }
 
   dimension: estimate_pmt_status {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_STATUS ;;
-    label: "Estimate Payment Status"
+    label: "Estimated Payment Status"
   }
 
   dimension: estimate_pmt_sub_type {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_SUB_TYPE ;;
-    label: "Estimate Payment Sub Type"
+    label: "Estimated Payment Sub Type"
   }
 
   dimension: estimate_pmt_type {
     type: string
     sql: ${TABLE}.ESTIMATE_PMT_TYPE ;;
-    label: "Estimate Payment Type"
+    label: "Estimated Payment Type"
   }
 
   dimension: estimate_pmt_wid {
@@ -444,12 +445,13 @@ view: mn_est_rebate_payment_fact {
 
   dimension: rev_est_pmt_fk {
     type: string
-    label: "Reversed Estimate Payment ID"
+    label: "Reversed Estimated Payment ID"
     sql: ${TABLE}.REV_EST_PMT_FK ;;
   }
 
   dimension_group: rev_published {
     type: time
+    label: "Reversal Published"
     timeframes: [
       raw,
       time,

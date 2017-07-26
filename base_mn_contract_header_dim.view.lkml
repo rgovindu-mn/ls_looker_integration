@@ -16,9 +16,15 @@ view: mn_contract_header_dim {
 
   dimension: amended_flag {
     type: string
-    sql:  CASE WHEN ${TABLE}.AMENDED_FLAG = 1 THEN 'Yes'
-               WHEN ${TABLE}.AMENDED_FLAG = 0 THEN 'No' ELSE NULL END;;
-    label: " Is Amended ?"
+    hidden: yes
+    sql: ${TABLE}.AMENDED_FLAG ;;
+  }
+
+  dimension: amended_yes_no {
+    type: string
+    sql:  CASE WHEN ${amended_flag} = 1 THEN 'Yes'
+               WHEN ${amended_flag} = 0 THEN 'No' ELSE NULL END ;;
+    label: "Is Amended ?"
   }
 
   dimension: amendment_count {
@@ -67,7 +73,15 @@ view: mn_contract_header_dim {
 
   dimension: contract_54_56_flag {
     type: string
+    hidden: yes
     sql: ${TABLE}.CONTRACT_54_56_FLAG ;;
+  }
+
+  dimension: contract_54_56_yes_no {
+    type: string
+    label: "Is 54/56 Contract ?"
+    sql: CASE WHEN ${contract_54_56_flag} = 'Y' THEN 'Yes'
+              WHEN ${contract_54_56_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: contract_domain_wid {
@@ -229,7 +243,15 @@ view: mn_contract_header_dim {
 
   dimension: evergreen_flag {
     type: string
+    hidden: yes
     sql: ${TABLE}.EVERGREEN_FLAG ;;
+  }
+
+  dimension: evergreen_yes_no {
+    type: string
+    label: "Is Evergreen ?"
+    sql: CASE WHEN ${evergreen_flag} = 1 THEN 'Yes'
+              WHEN ${evergreen_flag} = 0 THEN 'No' ELSE NULL END ;;
   }
 
   dimension: ext_notes {
@@ -278,8 +300,15 @@ view: mn_contract_header_dim {
 
   dimension: is_340_b_eligible {
     type: string
-    label: "Is 340B Eligible ?"
+    hidden: yes
     sql: ${TABLE}.IS_340B_ELIGIBLE ;;
+  }
+
+  dimension: 340_b_eligible_yes_no {
+    type: string
+    label: "Is 340B Eligible ?"
+    sql: CASE WHEN ${is_340_b_eligible} = 1 THEN 'Yes'
+              WHEN ${is_340_b_eligible} = 0 THEN 'No' ELSE NULL END ;;
   }
 
   dimension: latest_flag {
@@ -288,10 +317,10 @@ view: mn_contract_header_dim {
     sql: ${TABLE}.LATEST_FLAG;;
   }
 
-  dimension: is_latest {
+  dimension: latest_yes_no {
     type: string
-    sql: CASE WHEN ${TABLE}.LATEST_FLAG = 'Y' THEN 'Yes'
-      WHEN ${TABLE}.LATEST_FLAG = 'N' THEN 'No' ELSE '' END;;
+    sql: CASE WHEN ${latest_flag} = 'Y' THEN 'Yes'
+              WHEN ${latest_flag} = 'N' THEN 'No' ELSE NULL END ;;
     label: "Is Latest ?"
   }
 
@@ -363,7 +392,14 @@ view: mn_contract_header_dim {
 
   dimension: program_only {
     type: string
-    sql: CASE WHEN ${TABLE}.PROGRAM_ONLY = 1 THEN 'Yes' ELSE 'No' END ;;
+    hidden: yes
+    sql: ${TABLE}.PROGRAM_ONLY ;;
+  }
+
+  dimension: program_only_yes_no {
+    type: string
+    sql: CASE WHEN ${program_only} = 1 THEN 'Yes'
+              WHEN ${program_only} = 0 THEN 'No' ELSE NULL END ;;
     label: "Is Program Only ?"
   }
 
@@ -510,6 +546,7 @@ view: mn_contract_header_dim {
 
   dimension: timezone {
     type: string
+    label: "Time Zone"
     sql: ${TABLE}.TIMEZONE ;;
   }
 

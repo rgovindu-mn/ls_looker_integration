@@ -34,8 +34,15 @@ view: mn_mco_util_fact {
 
   dimension: calculate_rebate_flag {
     type: string
-    label: "Calculate Rebate Flag"
+    hidden: yes
     sql: ${TABLE}.CALCULATE_REBATE_FLAG ;;
+  }
+
+  dimension: calculate_rebate_yes_no {
+    type: string
+    label: "Is Rebate Calculated ?"
+    sql: CASE WHEN ${calculate_rebate_flag} = 1 THEN 'Yes'
+              WHEN ${calculate_rebate_flag} = 0 THEN 'No' ELSE NULL END ;;
   }
 
   dimension_group: closed {

@@ -170,11 +170,11 @@ view: mn_product_dim {
     sql: ${TABLE}.ELIGIBLE_ASP_FLAG ;;
   }
 
-  dimension: eligible_asp_flag_yes_no {
+  dimension: eligible_asp_yes_no {
     type: string
     label: "Is Eligible ASP ?"
     sql: CASE WHEN ${eligible_asp_flag} = 'Y' THEN 'Yes'
-          WHEN ${eligible_asp_flag} = 'N' THEN 'No' ELSE Null END ;;
+              WHEN ${eligible_asp_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: eligible_medicaid_flag {
@@ -183,11 +183,11 @@ view: mn_product_dim {
     sql: ${TABLE}.ELIGIBLE_MEDICAID_FLAG ;;
   }
 
-  dimension: elig_medicaid_flag_yes_no {
+  dimension: elig_medicaid_yes_no {
     type: string
     label: "Is Eligible Medicaid ?"
     sql: CASE WHEN ${eligible_medicaid_flag} = 'Y' THEN 'Yes'
-      WHEN ${eligible_medicaid_flag} = 'N' THEN 'No' ELSE Null END ;;
+              WHEN ${eligible_medicaid_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: eligible_phs_flag {
@@ -196,11 +196,11 @@ view: mn_product_dim {
     sql: ${TABLE}.ELIGIBLE_PHS_FLAG ;;
   }
 
-  dimension: eligible_phs_flag_yes_no {
+  dimension: eligible_phs_yes_no {
     type: string
     label: "Is Eligible PHS ?"
     sql: CASE WHEN ${eligible_phs_flag} = 'Y' THEN 'Yes'
-      WHEN ${eligible_phs_flag} = 'N' THEN 'No' ELSE Null END ;;
+              WHEN ${eligible_phs_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: eligible_va_flag {
@@ -209,11 +209,11 @@ view: mn_product_dim {
     sql: ${TABLE}.ELIGIBLE_VA_FLAG ;;
   }
 
-  dimension: eligible_va_flag_yes_no {
+  dimension: eligible_va_yes_no {
     type: string
     label: "Is Eligible VA ?"
     sql: CASE WHEN ${eligible_va_flag} = 'Y' THEN 'Yes'
-      WHEN ${eligible_va_flag} = 'N' THEN 'No' ELSE Null END ;;
+              WHEN ${eligible_va_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension_group: first_sales {
@@ -304,7 +304,7 @@ view: mn_product_dim {
     type: string
     label: "Is Non Community Pharma Drug ?"
     sql: CASE WHEN ${non_cmty_pharma_drug_flag} = 'Y' THEN 'Yes'
-    WHEN ${non_cmty_pharma_drug_flag} = 'N' THEN 'No' ELSE Null END ;;
+              WHEN ${non_cmty_pharma_drug_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: product_description {

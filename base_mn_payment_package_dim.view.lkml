@@ -255,6 +255,7 @@ view: mn_payment_package_dim {
 
   dimension: source_system_id {
     type: string
+    hidden: yes
     sql: ${TABLE}.SOURCE_SYSTEM_ID ;;
   }
 
