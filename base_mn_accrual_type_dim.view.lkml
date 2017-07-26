@@ -3,6 +3,7 @@ view: mn_accrual_type_dim {
 
   dimension: accrual_type_desc {
     type: string
+    label: "Accrual Type Description"
     group_label: "Accrual Type"
     sql: ${TABLE}.ACCRUAL_TYPE_DESC ;;
   }

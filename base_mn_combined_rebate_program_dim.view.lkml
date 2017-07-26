@@ -198,12 +198,13 @@ view: mn_combined_rebate_program_dim {
 
   dimension: calc_level {
     type: string
+    label: "Calculation Level"
     sql: ${TABLE}.CALC_LEVEL ;;
   }
 
   dimension: effective_timezone_gmt {
     type: string
-    label: "Timezone"
+    label: "Time Zone"
     sql: ${TABLE}.EFFECTIVE_TIMEZONE_GMT ;;
   }
 
@@ -227,7 +228,15 @@ view: mn_combined_rebate_program_dim {
 
   dimension: flat_program {
     type: string
+    hidden: yes
     sql: ${TABLE}.FLAT_PROGRAM ;;
+  }
+
+  dimension: flat_program_yes_no {
+    type: string
+    label: "Is Flat Program ?"
+    sql: CASE WHEN ${flat_program} = 1 THEN 'Yes'
+              WHEN ${flat_program} = 0 THEN 'No' ELSE NULL END ;;
   }
 
   dimension: grp_name {
@@ -242,10 +251,11 @@ view: mn_combined_rebate_program_dim {
     sql: ${TABLE}.LATEST_FLAG ;;
   }
 
-  dimension: latest_flag_yes_no {
+  dimension: latest_yes_no {
     type: string
     label: "Is Latest ?"
-    sql: CASE WHEN ${latest_flag} = 'Y' THEN 'Yes' ELSE 'No' END ;;
+    sql: CASE WHEN ${latest_flag} = 'Y' THEN 'Yes'
+              WHEN ${latest_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: late_date_lag {
@@ -260,8 +270,15 @@ view: mn_combined_rebate_program_dim {
 
   dimension: non_std_program {
     type: string
+    hidden: yes
     sql: ${TABLE}.NON_STD_PROGRAM ;;
-    label: "Non Standard Program"
+  }
+
+  dimension: non_std_program_yes_no {
+    type: string
+    label: "Is Non Standard Program ?"
+    sql: CASE WHEN ${non_std_program} = 1 THEN 'Yes'
+              WHEN ${non_std_program} = 0 THEN 'No' ELSE NULL END ;;
   }
 
   dimension: num_tiers {
@@ -384,7 +401,8 @@ view: mn_combined_rebate_program_dim {
   dimension: strgy_based_yes_no {
     type: string
     label: "Is Strategy Based ?"
-    sql: CASE WHEN ${strategy_based_flag} = 'Y' THEN 'Yes' ELSE 'No' END;;
+    sql: CASE WHEN ${strategy_based_flag} = 'Y' THEN 'Yes'
+              WHEN ${strategy_based_flag} = 'N' THEN 'No' ELSE NULL END ;;
   }
 
   dimension: system_accrue {
@@ -467,12 +485,12 @@ view: mn_combined_rebate_program_dim {
       doc_tz_eff_end_date,
       doc_tz_eff_start_date,
       end_ver_num,
-      flat_program,
+      flat_program_yes_no,
       grp_name,
-      latest_flag,
+      latest_yes_no,
       late_date_lag,
       market_basket_type,
-      non_std_program,
+      non_std_program_yes_no,
       num_tiers,
       order_idx,
       payment_cust_type,
@@ -492,7 +510,7 @@ view: mn_combined_rebate_program_dim {
       src_strategy_num,
       src_strategy_type,
       src_strategy_ver_num,
-      strategy_based_flag,
+      strgy_based_yes_no,
       system_accrue,
       tb_calc_rule,
       tier_mgmt_type,

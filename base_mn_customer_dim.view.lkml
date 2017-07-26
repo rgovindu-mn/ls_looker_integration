@@ -115,7 +115,7 @@ view: mn_customer_dim {
 
   dimension: org_id {
     type: string
-    label: "Customer Org Id"
+    label: "Customer Org ID"
     sql: ${TABLE}.ORG_ID ;;
   }
 
