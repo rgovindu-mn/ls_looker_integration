@@ -138,8 +138,8 @@ view: mn_price_list_dim {
     sql: ${TABLE}.SRC_SYS_PRICE_LIST_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [price_list_name, price_list_type_name]
-  }
+  # measure: count {
+  #   type: count
+  #   drill_fields: [price_list_name, price_list_type_name]
+  # }
 }

@@ -44,7 +44,7 @@ explore: government_explore {
 
   join: mn_mcd_claim_dim {
     from: mn_mcd_claim_dim
-    type: left_outer
+    type: full_outer
     relationship: many_to_one
     view_label: "Claim"
     sql_on: ${mn_mcd_claim_line_fact_dt.mcd_claim_wid} = ${mn_mcd_claim_dim.claim_wid} ;;
