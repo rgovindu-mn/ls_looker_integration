@@ -17,6 +17,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_addtl_int_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_ADDTL_INT_AMT_BASE ;;
   }
 
@@ -27,6 +28,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_applied_credit_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_APPLIED_CREDIT_AMT_BASE ;;
   }
 
@@ -37,6 +39,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_applied_int_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_APPLIED_INT_AMT_BASE ;;
   }
 
@@ -47,6 +50,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_interest_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_INTEREST_AMT_BASE ;;
   }
 
@@ -57,6 +61,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_int_addtl_int_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_INT_ADDTL_INT_AMT_BASE ;;
   }
 

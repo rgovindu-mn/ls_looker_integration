@@ -8,61 +8,73 @@ view: mn_mcd_claim_payment_map {
 
   dimension: claim_addtl_int_amt {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_ADDTL_INT_AMT ;;
   }
 
   dimension: claim_addtl_int_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_ADDTL_INT_AMT_BASE ;;
   }
 
   dimension: claim_applied_credit_amt {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_APPLIED_CREDIT_AMT ;;
   }
 
   dimension: claim_applied_credit_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_APPLIED_CREDIT_AMT_BASE ;;
   }
 
   dimension: claim_applied_int_amt {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_APPLIED_INT_AMT ;;
   }
 
   dimension: claim_applied_int_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_APPLIED_INT_AMT_BASE ;;
   }
 
   dimension: claim_int_addtl_int_amt {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_INT_ADDTL_INT_AMT ;;
   }
 
   dimension: claim_int_addtl_int_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_INT_ADDTL_INT_AMT_BASE ;;
   }
 
   dimension: claim_interest_amt {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_INTEREST_AMT ;;
   }
 
   dimension: claim_interest_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.CLAIM_INTEREST_AMT_BASE ;;
   }
 
   dimension: claim_payment_curr {
     type: string
+    hidden: yes
     sql: ${TABLE}.CLAIM_PAYMENT_CURR ;;
   }
 
   dimension: claim_payment_type {
     type: string
+    hidden: yes
     sql: ${TABLE}.CLAIM_PAYMENT_TYPE ;;
   }
 

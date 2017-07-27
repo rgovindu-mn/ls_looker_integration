@@ -140,6 +140,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_interest_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.PAYMENT_INTEREST_AMT_BASE ;;
   }
 
@@ -156,6 +157,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_rebate_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.PAYMENT_REBATE_AMT_BASE ;;
   }
 
@@ -171,6 +173,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_total_amt_base {
     type: number
+    hidden: yes
     sql: ${TABLE}.PAYMENT_TOTAL_AMT_BASE ;;
   }
 
