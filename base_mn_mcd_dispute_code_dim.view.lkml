@@ -70,10 +70,20 @@ view: mn_mcd_dispute_code_dim {
     sql: ${TABLE}.SRC_SYS_DISPUTE_CODE_CODE ;;
   }
 
+  dimension: adjust_code_name {
+    type: string
+    label: "Adjust Code Name"
+    sql: ${TABLE}.DISPUTE_CODE_NAME ;;
+  }
+
 #   measure: count {
 #     type: count
 #     drill_fields: [detail*]
 #   }
+
+  set: adjustcode_set {
+    fields: [adjust_code_name]
+  }
 
   set: detail {
     fields: [

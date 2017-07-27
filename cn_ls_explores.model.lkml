@@ -212,6 +212,7 @@ explore: government_explore {
     relationship: one_to_many
     view_label: "Claim Line"
     sql_on: ${mn_mcd_adjust_code_dim_dt.dispute_code_name} = ${mn_mcd_adjust_code_dim.dispute_code_name} ;;
+    fields: [mn_mcd_adjust_code_dim.adjustcode_set*]
   }
 
   join: mn_mcd_adjust_type_dim_dt {
