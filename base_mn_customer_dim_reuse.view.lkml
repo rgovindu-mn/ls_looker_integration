@@ -321,8 +321,21 @@ view: mn_customer_dim_reuse {
 
   dimension: payment_recipient {
     type: string
-    sql: ${TABLE}.CUSTOMER_NAME ;;
+    sql: ${customer_name} ;;
   }
+
+  dimension: mcd_customer_name {
+    type: string
+    label: "Name"
+    sql: ${customer_name} ;;
+  }
+
+  dimension: mcd_customer_num {
+    type: string
+    label: "Number"
+    sql: ${customer_num} ;;
+  }
+
 
 #*************Customer Field Set
   set: customer {
@@ -355,7 +368,7 @@ view: mn_customer_dim_reuse {
   }
 
   set: governmentpayee_set {
-    fields: [customer_name,customer_num,address,city,state_province,postal_zip,country]
+    fields: [mcd_customer_name,mcd_customer_num,address,city,state_province,postal_zip,country]
   }
 
 }

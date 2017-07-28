@@ -216,6 +216,7 @@ view: mn_user_dim_reuse {
 
   dimension: claim_owner_id {
     type: string
+    label: "Claim Owner Id"
     sql: ${TABLE}.MEMBER_NAME ;;
   }
 

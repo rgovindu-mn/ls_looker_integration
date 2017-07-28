@@ -135,6 +135,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_interest_amt {
     type: number
+    label: "Payment Interest Amount"
     sql: ${TABLE}.PAYMENT_INTEREST_AMT ;;
   }
 
@@ -152,6 +153,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_rebate_amt {
     type: number
+    label: "Payment Rebate Amount"
     sql: ${TABLE}.PAYMENT_REBATE_AMT ;;
   }
 
@@ -168,6 +170,7 @@ view: mn_mcd_payment_fact {
 
   dimension: payment_total_amt {
     type: number
+    label: "Payment Total Amount"
     sql: ${TABLE}.PAYMENT_TOTAL_AMT ;;
   }
 

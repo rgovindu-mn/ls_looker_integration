@@ -12,6 +12,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_addtl_int_amt {
     type: number
+    label: "Claim Additional Interest"
     sql: ${TABLE}.CLAIM_ADDTL_INT_AMT ;;
   }
 
@@ -23,6 +24,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_applied_credit_amt {
     type: number
+    label: "Claim Credit Applied"
     sql: ${TABLE}.CLAIM_APPLIED_CREDIT_AMT ;;
   }
 
@@ -34,6 +36,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_applied_int_amt {
     type: number
+    label: "Claim Applied Interest"
     sql: ${TABLE}.CLAIM_APPLIED_INT_AMT ;;
   }
 
@@ -45,6 +48,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_interest_amt {
     type: number
+    label:"Claim Calculated Interest Amount"
     sql: ${TABLE}.CLAIM_INTEREST_AMT ;;
   }
 
@@ -56,6 +60,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_int_addtl_int_amt {
     type: number
+    label: "Claim Interest Additional Amount"
     sql: ${TABLE}.CLAIM_INT_ADDTL_INT_AMT ;;
   }
 
@@ -67,6 +72,7 @@ sql_table_name: MN_MCD_CLAIM_PMT_PAYEE_MAP_VW ;;
 
   dimension: claim_payment_curr {
     type: string
+    hidden: yes
     sql: ${TABLE}.CLAIM_PAYMENT_CURR ;;
   }
 

@@ -73,7 +73,7 @@ view: mn_mcd_program_dim {
 
   dimension: def_claim_line_util_type {
     type: string
-    label: "Default Record ID"
+    label: "Default Record Id"
     sql: ${TABLE}.DEF_CLAIM_LINE_UTIL_TYPE ;;
   }
 

@@ -150,6 +150,7 @@ view: mn_mcd_util_fact {
 
   dimension: inv_req_rebate_amt {
     type: number
+    label: "Original Invoiced Amount"
     sql: ${TABLE}.INV_REQ_REBATE_AMT ;;
   }
 

@@ -81,11 +81,13 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: inv_units {
     type: number
-        sql: ${TABLE}.INV_UNITS ;;
+    label: "Invoiced Units"
+    sql: ${TABLE}.INV_UNITS ;;
   }
 
   dimension: inv_rebate_amt {
     type: number
+    label: "Invoiced Rebate Amount"
     sql: ${TABLE}.INV_REBATE_AMT ;;
   }
 
@@ -109,11 +111,13 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: inv_scripts_num {
     type: number
+    label: "Invoiced Scripts Number"
     sql: ${TABLE}.INV_SCRIPTS_NUM ;;
   }
 
   dimension: inv_reimburse_amt {
     type: number
+    label: "Invoiced Reimburse Amount"
     sql: ${TABLE}.INV_REIMBURSE_AMT ;;
   }
 
@@ -125,6 +129,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: inv_tpl_amt {
     type: number
+    label: "Invoiced Tpl Amount"
     sql: ${TABLE}.INV_TPL_AMT ;;
   }
 
@@ -136,11 +141,13 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: recom_disp_units {
     type: number
+    label: "Recommended Disputed Units"
     sql: ${TABLE}.RECOM_DISP_UNITS ;;
   }
 
   dimension: paid_units {
     type: number
+    label: "Paid Units"
     sql: ${TABLE}.PAID_UNITS ;;
   }
 
@@ -175,36 +182,43 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: incr_units {
     type: number
+    label: "Incremental Units"
     sql: ${TABLE}.INCR_UNITS ;;
   }
 
   dimension: disp_units {
     type: number
+    label: "Disputed Units"
     sql: ${TABLE}.DISP_UNITS ;;
   }
 
   dimension: dism_units {
     type: number
+    label: "Dismissed Units"
     sql: ${TABLE}.DISM_UNITS ;;
   }
 
   dimension: resv_units {
     type: number
+    label: "Resolved Units"
     sql: ${TABLE}.RESV_UNITS ;;
   }
 
   dimension: prev_inv_units {
     type: number
+    label: "Previous Invoiced Units"
     sql: ${TABLE}.PREV_INV_UNITS ;;
   }
 
   dimension: prev_paid_units {
     type: number
+    label: "Previous Paid Units"
     sql: ${TABLE}.PREV_PAID_UNITS ;;
   }
 
   dimension: prev_disp_units {
     type: number
+    label: "Previous Disputed Units"
     sql: ${TABLE}.PREV_DISP_UNITS ;;
   }
 
@@ -264,11 +278,13 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_formula_type {
     type: string
+    label: "Product Formula Type"
     sql: ${TABLE}.PROGRAM_PROD_FORMULA_TYPE ;;
   }
 
   dimension: program_prod_formula_def {
     type: string
+    label: "Product Formula Definition"
     sql: ${TABLE}.PROGRAM_PROD_FORMULA_DEF ;;
   }
 
@@ -358,6 +374,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: record_id {
     type: number
+    label: "Record Id"
     sql: ${TABLE}.RECORD_ID ;;
   }
 
@@ -426,21 +443,25 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: inf_corr_req_rebate_amt {
     type: number
+    label: "Info Corrected Required Rebate Amount"
     sql: ${TABLE}.INF_CORR_REQ_REBATE_AMT ;;
   }
 
   dimension: inf_corr_units {
     type: number
+    label: "Info Corrected Units"
     sql: ${TABLE}.INF_CORR_UNITS ;;
   }
 
   dimension: total_paid_amt {
     type: number
+    label: "Total Paid Amount"
     sql: ${TABLE}.TOTAL_PAID_AMT ;;
   }
 
   dimension: original_corrected_amt {
     type: number
+    label: "Original Corrected Amount"
     sql: ${TABLE}.ORIGINAL_CORRECTED_AMT ;;
   }
 
@@ -451,6 +472,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: open_dispute_amt {
     type: number
+    label: "Open Dispute Amount"
     sql: ${TABLE}.OPEN_DISPUTE_AMT ;;
   }
 
@@ -466,16 +488,19 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_formula_name {
     type: string
+    label: "Product Formula Name"
     sql: ${TABLE}.PROGRAM_PROD_FORMULA_NAME ;;
   }
 
   dimension: prev_ura {
     type: number
+    label: "Previous URA"
     sql: ${TABLE}.PREV_URA ;;
   }
 
   dimension: prev_ura_curr {
     type: string
+    hidden: yes
     sql: ${TABLE}.PREV_URA_CURR ;;
   }
 
