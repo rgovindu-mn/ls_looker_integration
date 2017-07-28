@@ -3,6 +3,7 @@ view: mn_mcd_program_state_map {
 
   dimension: adjust_line_type {
     type: string
+    label: "State Adjustments Rule"
     sql: ${TABLE}.ADJUST_LINE_TYPE ;;
   }
 

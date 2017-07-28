@@ -179,13 +179,13 @@ explore: government_explore {
     sql_on: ${mn_mcd_program_dim.owner_wid} = ${mn_mcd_program_owner_dim.user_wid} ;;
   }
 
-  join: mn_mcd_program_lastupdatedby_dim {
+  join: mn_mcd_prog_lastupdby_dim {
     from: mn_user_dim_reuse
     type: left_outer
     relationship: many_to_one
     view_label: "Program"
-    fields: [mn_mcd_program_lastupdatedby_dim.lastupdatedby_set*]
-    sql_on: ${mn_mcd_program_dim.last_updated_by_wid} = ${mn_mcd_program_lastupdatedby_dim.user_wid} ;;
+    fields: [mn_mcd_prog_lastupdby_dim.lastupdatedby_set*]
+    sql_on: ${mn_mcd_program_dim.last_updated_by_wid} = ${mn_mcd_prog_lastupdby_dim.user_wid} ;;
   }
 
   join: mn_mcd_program_createdby_dim {
@@ -203,7 +203,7 @@ explore: government_explore {
     relationship: many_to_one
     view_label: "Claim Line"
     fields: []
-    sql_on: ${mn_mcd_claim_line_fact_dt.inf_corr_codes} = ${mn_mcd_adjust_code_dim_dt.src_sys_dispute_code_code} ;;
+    sql_on: ${mn_mcd_claim_line_fact_dt.inf_corr_codes} = ${mn_mcd_adjust_code_dim_dt.inf_corr_codes} ;;
   }
 
   join: mn_mcd_adjust_code_dim{
@@ -221,7 +221,7 @@ explore: government_explore {
     relationship: many_to_one
     view_label: "Claim Line"
     fields: []
-    sql_on: ${mn_mcd_claim_line_fact_dt.adjust_type} = ${mn_mcd_adjust_type_dim_dt.src_sys_adjust_type_code} ;;
+    sql_on: ${mn_mcd_claim_line_fact_dt.adjust_type} = ${mn_mcd_adjust_type_dim_dt.adjust_type} ;;
   }
 
   join: mn_mcd_adjust_type_dim{
