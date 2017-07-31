@@ -727,15 +727,14 @@ view: mn_mcd_claim_line_fact_dt {
     type: number
     label: "Disputed Units % of Claimed"
     value_format_name: percent_2
-    sql: ${disputed_units}/${invoiced_units} ;;
-#      Sum(DisputeUnits)/Sum(InvUnits)
+    sql: ${disputed_units}/nullif(${invoiced_units},0) ;;
   }
 
   measure: resolved_units_perc_of_disputed {
     type: number
     label: "Resolved Units % of Disputed"
     value_format_name: percent_2
-    sql: ${resolved_units}/${disputed_units} ;;
+    sql: ${resolved_units}/nullif(${disputed_units},0) ;;
   }
 
   set: detail {
