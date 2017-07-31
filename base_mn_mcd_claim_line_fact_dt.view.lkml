@@ -153,6 +153,7 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: rebate_due_amt {
     type: number
+    label: "Rebate Due Amount"
     sql: ${TABLE}.REBATE_DUE_AMT ;;
   }
 
@@ -278,12 +279,14 @@ view: mn_mcd_claim_line_fact_dt {
 
   dimension: program_prod_formula_type {
     type: string
+    hidden: yes
     label: "Product Formula Type"
     sql: ${TABLE}.PROGRAM_PROD_FORMULA_TYPE ;;
   }
 
   dimension: program_prod_formula_def {
     type: string
+    hidden: yes
     label: "Product Formula Definition"
     sql: ${TABLE}.PROGRAM_PROD_FORMULA_DEF ;;
   }
@@ -373,7 +376,7 @@ view: mn_mcd_claim_line_fact_dt {
   }
 
   dimension: record_id {
-    type: number
+    type: string
     label: "Record Id"
     sql: ${TABLE}.RECORD_ID ;;
   }

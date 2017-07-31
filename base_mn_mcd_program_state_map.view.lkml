@@ -81,6 +81,7 @@ view: mn_mcd_program_state_map {
 
   dimension: max_num_days {
     type: number
+    label: "State Max Number of Days"
     sql: ${TABLE}.MAX_NUM_DAYS ;;
   }
 
@@ -92,6 +93,7 @@ view: mn_mcd_program_state_map {
 
   dimension: mcd_state {
     type: string
+    label: "State"
     sql: ${TABLE}.MCD_STATE ;;
   }
 

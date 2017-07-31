@@ -9,6 +9,7 @@ view: mn_mcd_program_dim {
 
   dimension_group: amended_on {
     type: time
+    label: "Amended"
     timeframes: [
       raw,
       time,
@@ -29,6 +30,7 @@ view: mn_mcd_program_dim {
 
   dimension_group: created_on {
     type: time
+    label: "Created"
     timeframes: [
       raw,
       time,
@@ -85,6 +87,7 @@ view: mn_mcd_program_dim {
 
   dimension_group: last_updated_on {
     type: time
+    label: "Last Updated"
     timeframes: [
       raw,
       time,

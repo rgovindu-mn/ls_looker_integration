@@ -50,13 +50,13 @@ view: mn_mcd_program_product_map {
 
   dimension: formula_def {
     type: string
-    hidden: yes
+    label: "Product Formula Definition"
     sql: ${TABLE}.FORMULA_DEF ;;
   }
 
   dimension: formula_type {
     type: string
-    hidden: yes
+    label: "Product Formula Type"
     sql: ${TABLE}.FORMULA_TYPE ;;
   }
 

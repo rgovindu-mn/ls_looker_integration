@@ -72,7 +72,7 @@ view: mn_mcd_dispute_code_dim {
 
   dimension: adjust_code_name {
     type: string
-    label: "Adjust Code Name"
+    label: "Adjustment Code Name"
     sql: ${TABLE}.DISPUTE_CODE_NAME ;;
   }
 
