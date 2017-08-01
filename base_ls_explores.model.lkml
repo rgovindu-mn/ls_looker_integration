@@ -77,6 +77,27 @@ include: "base_mn_erp_payment_fact.view.lkml"
 include: "base_mn_customer_dim_reuse.view.lkml"
 
 
+# Governmenmt explorer view
+
+include: "base_mn_mcd_claim_line_fact.view.lkml"
+include: "base_mn_mcd_claim_line_fact_dt.view.lkml"
+include: "base_mn_mcd_claim_dim.view.lkml"
+include: "base_mn_mcd_claim_pmt_payee_map.view.lkml"
+include: "base_mn_mcd_payment_fact.view.lkml"
+include: "base_mn_user_dim.view.lkml"
+include: "base_mn_price_list_dim.view.lkml"
+include: "base_mn_mcd_util_fact.view.lkml"
+include: "base_mn_mcd_program_state_map.view.lkml"
+include: "base_mn_mcd_program_product_map.view.lkml"
+include: "base_mn_mcd_program_dim.view.lkml"
+include: "base_mn_mcd_claim_payment_map.view.lkml"
+include: "base_mn_mcd_dispute_code_dim.view.lkml"
+include: "base_mn_mcd_adjust_type_dim.view.lkml"
+include: "base_mn_mcd_dispute_code_dim_dt.view.lkml"
+include: "base_mn_mcd_adjust_type_dim_dt.view.lkml"
+include: "base_mn_user_dim_reuse.view.lkml"
+
+
 explore: mn_contract_header_dim_base {
 
   from:  mn_contract_header_dim
