@@ -36,15 +36,7 @@ view: mn_mcd_program_product_map {
   dimension_group: end {
     type: time
     label: "Product End"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [quarter]
     sql: ${TABLE}.END_DATE ;;
   }
 
@@ -87,15 +79,7 @@ view: mn_mcd_program_product_map {
   dimension_group: start {
     type: time
     label: "Product Start"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [quarter]
     sql: ${TABLE}.START_DATE ;;
   }
 
@@ -116,14 +100,14 @@ view: mn_mcd_program_product_map {
     fields: [
       date_created_time,
       date_updated_time,
-      end_time,
+      end_quarter,
       formula_def,
       formula_type,
       mcd_program_wid,
       product_wid,
       run_id,
       source_system_id,
-      start_time
+      start_quarter
     ]
   }
 }

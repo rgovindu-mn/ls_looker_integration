@@ -108,16 +108,8 @@ view: mn_mcd_program_dim {
 
   dimension_group: program_end_qtr {
     type: time
-    label: "Program End Quarter"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    label: "Program End"
+    timeframes: [quarter]
     sql: ${TABLE}.PROGRAM_END_QTR ;;
   }
 
@@ -145,16 +137,8 @@ view: mn_mcd_program_dim {
 
   dimension_group: program_start_qtr {
     type: time
-    label: "Program Start Quarter"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    label: "Program Start"
+    timeframes: [quarter]
     sql: ${TABLE}.PROGRAM_START_QTR ;;
   }
 
@@ -228,12 +212,12 @@ view: mn_mcd_program_dim {
       last_updated_by_wid,
       last_updated_on_time,
       owner_wid,
-      program_end_qtr_time,
+      program_end_qtr_quarter,
       program_end_qtr_str,
       program_id_num,
       program_name,
       program_short_name,
-      program_start_qtr_time,
+      program_start_qtr_quarter,
       program_start_qtr_str,
       program_status,
       program_type,

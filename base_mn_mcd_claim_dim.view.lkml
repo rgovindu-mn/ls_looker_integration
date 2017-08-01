@@ -124,16 +124,8 @@ view: mn_mcd_claim_dim {
 
   dimension_group: original_qtr {
     type: time
-    label: "Original Quarter"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    label: "Original"
+    timeframes: [quarter]
     sql: ${TABLE}.ORIGINAL_QTR ;;
   }
 
@@ -270,7 +262,7 @@ view: mn_mcd_claim_dim {
   measure: Claim_Amount_Due {
     type: sum
     label: "Claim Amount Due"
-    value_format_name: decimal_0
+    value_format_name: usd
     sql: ${rebate_due_amt} ;;
   }
 
@@ -296,7 +288,7 @@ view: mn_mcd_claim_dim {
       due_date_wid,
       invoice_time,
       labeler,
-      original_qtr_time,
+      original_qtr_quarter,
       original_qtr_date_wid,
       original_qtr_str,
       postmark_time,

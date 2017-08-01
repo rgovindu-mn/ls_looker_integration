@@ -61,16 +61,8 @@ view: mn_mcd_program_state_map {
 
   dimension_group: end {
     type: time
-    label: "State End Quarter"
-     timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    label: "State End"
+     timeframes: [quarter]
     sql: ${TABLE}.END_DATE ;;
   }
 
@@ -152,16 +144,8 @@ view: mn_mcd_program_state_map {
 
   dimension_group: start {
     type: time
-    label: "State Start Quarter"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    label: "State Start"
+    timeframes: [quarter]
     sql: ${TABLE}.START_DATE ;;
   }
 
@@ -179,7 +163,7 @@ view: mn_mcd_program_state_map {
       date_updated_time,
       dispute_units_rule,
       end_cal_qtr,
-      end_time,
+      end_quarter,
       interest_paying,
       max_num_days,
       mcd_program_wid,
@@ -193,7 +177,7 @@ view: mn_mcd_program_state_map {
       source_system_id,
       src_sys_mcd_program_id,
       start_cal_qtr,
-      start_time
+      start_quarter
     ]
   }
 }
