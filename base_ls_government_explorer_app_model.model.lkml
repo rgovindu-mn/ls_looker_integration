@@ -226,3 +226,16 @@ explore: government_explore {
   }
 
 }
+
+
+# **************************************** government Historical Rebates
+explore: government_historical_rebates {
+  label: "Government Historical Rebates"
+  from: mn_discount_bridge_fact
+  view_name: mn_discount_bridge_fact
+  extends: [historical_rebates_base]
+  hidden: no
+
+  sql_always_where: ${mn_discount_bridge_fact.is_historical_flag}='Y'
+    AND (${mn_discount_bridge_fact.mcd_line_ref_num} IS NOT NULL OR ${mn_discount_bridge_fact.rebate_module_type} = 'MCD') ;;
+}
