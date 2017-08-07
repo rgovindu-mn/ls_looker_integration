@@ -446,14 +446,14 @@ view: mn_discount_bridge_fact {
   measure: total_rebate_paid_amount {
     type: sum
     label: "Total Rebate Paid Amount"
-    value_format_name: decimal_0
+    value_format_name: usd
     sql: ${paid_amt} ;;
   }
 
   measure: external_invoive_amount {
     type: sum
     label: "Total Historical Rebate Invoice Amount"
-    value_format_name: decimal_0
+    value_format_name: usd
     sql: ${external_inv_amt} ;;
   }
 
