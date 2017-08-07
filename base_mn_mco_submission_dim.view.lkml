@@ -116,7 +116,7 @@ view: mn_mco_submission_dim {
     sql: ${TABLE}.ORG_WID ;;
   }
 
-  dimension_group: paid_date {
+  dimension_group: paid {
     type: time
     timeframes: [
       raw,
@@ -128,7 +128,6 @@ view: mn_mco_submission_dim {
       year
     ]
     sql:  to_date(${TABLE}.PAID_DATE_WID,'yyyymmdd') ;;
-    label: "Paid"
   }
 
   dimension: pbm_wid {

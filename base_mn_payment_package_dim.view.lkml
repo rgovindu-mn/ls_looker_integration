@@ -232,7 +232,7 @@ view: mn_payment_package_dim {
     sql: ${TABLE}.REBATE_PERIOD_END_DATE_WID ;;
   }
 
-  dimension_group: released_date {
+  dimension_group: released {
     type: time
     timeframes: [
       raw,
@@ -244,7 +244,6 @@ view: mn_payment_package_dim {
       year
     ]
     sql: ${TABLE}.RELEASED_DATE ;;
-    label: "Released"
   }
 
   dimension: run_id {
