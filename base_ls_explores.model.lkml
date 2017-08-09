@@ -523,12 +523,12 @@ explore: mn_combined_rebate_program_dim_base {
     sql_on: ${mn_combined_rebate_program_dim.pmt_method_wid} = ${mn_pm_pmt_mth_type_dim.pmt_mth_type_wid};;
   }
 
-  join: mn_pm_customer_dim {
+  join: mn_crp_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Rebate Program Payee"
-    sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_pm_customer_dim.customer_wid};;
+    sql_on: ${mn_combined_rebate_program_dim.payee_customer_wid} = ${mn_crp_customer_dim.customer_wid};;
   }
 }
 
@@ -722,12 +722,12 @@ explore: mn_paid_rebate_lines_base {
     sql_on: ${mn_discount_bridge_fact.rebate_type_wid} = ${mn_pr_rebate_type_dim.rebate_type_wid};;
   }
 
-  join: mn_pr_customer_dim {
+  join: mn_dbf_customer_dim {
     type: left_outer
     relationship: many_to_one
     from: mn_customer_dim
     view_label: "Rebate Lines Payee"
-    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_pr_customer_dim.customer_wid};;
+    sql_on: ${mn_discount_bridge_fact.payee_wid} = ${mn_dbf_customer_dim.customer_wid};;
   }
 }
 
