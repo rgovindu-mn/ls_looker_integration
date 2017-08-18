@@ -502,7 +502,7 @@ view: mn_combined_sale_fact {
     sql: ${TABLE}.PRODUCT_WID ;;
   }
 
-  dimension_group: received_date {
+  dimension_group: received {
     type: time
     timeframes: [
       raw,

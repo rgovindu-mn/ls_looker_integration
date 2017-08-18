@@ -129,8 +129,11 @@ view: mn_rbt_prg_qual_elg_cst_map_dt {
     label: "Eligible Customer Domain"
   }
 
-  dimension_group: plan_cot_effective_date {
+  dimension_group: plan_cot_effective {
     type: time
+    timeframes: [
+      date
+    ]
     sql: ${TABLE}.PLAN_COT_EFFECTIVE_DATE ;;
     label: "COT Effective"
   }

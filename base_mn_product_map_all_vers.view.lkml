@@ -188,7 +188,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L2_PRODUCT_NUM ;;
   }
 
-  dimension_group: level2_product_start_date {
+  dimension_group: level2_product_start {
     type: time
     label: "Level 2 Product Start"
     timeframes: [
@@ -203,7 +203,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L2_START_DATE ;;
   }
 
-  dimension_group: level2_product_end_date {
+  dimension_group: level2_product_end {
     type: time
     label: "Level 2 Product End"
     timeframes: [
@@ -284,7 +284,7 @@ view: mn_product_map_all_ver {
     label: "Level 4 Product Number"
   }
 
-  dimension_group: level4_product_start_date {
+  dimension_group: level4_product_start {
     type: time
     label: "Level 4 Product Start"
     timeframes: [
@@ -299,7 +299,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L4_START_DATE ;;
   }
 
-  dimension_group: level4_product_end_date {
+  dimension_group: level4_product_end {
     type: time
     label: "Level 4 Product End"
     timeframes: [
@@ -332,7 +332,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L5_PRODUCT_NUM ;;
   }
 
-  dimension_group: level5_product_start_date {
+  dimension_group: level5_product_start {
     type: time
     label: "Level 5 Product Start"
     timeframes: [
@@ -347,7 +347,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L5_START_DATE ;;
   }
 
-  dimension_group: level5_product_end_date {
+  dimension_group: level5_product_end {
     type: time
     label: "Level 5 Product End"
     timeframes: [
@@ -380,7 +380,7 @@ view: mn_product_map_all_ver {
     label: "Level 6 Product Number"
   }
 
-  dimension_group: level6_product_start_date {
+  dimension_group: level6_product_start {
     type: time
     label: "Level 6 Product Start"
     timeframes: [
@@ -395,7 +395,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L6_START_DATE ;;
   }
 
-  dimension_group: level6_product_end_date {
+  dimension_group: level6_product_end {
     type: time
     label: "Level 6 Product End"
     timeframes: [
@@ -428,7 +428,7 @@ view: mn_product_map_all_ver {
     label: "Level 7 Product Number"
   }
 
-  dimension_group: level7_product_start_date {
+  dimension_group: level7_product_start {
     type: time
     label: "Level 7 Product Start"
     timeframes: [
@@ -443,7 +443,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L7_START_DATE ;;
   }
 
-  dimension_group: level7_product_end_date {
+  dimension_group: level7_product_end {
     type: time
     label: "Level 7 Product End"
     timeframes: [
@@ -476,7 +476,7 @@ view: mn_product_map_all_ver {
     label: "Level 8 Product Number"
   }
 
-  dimension_group: level8_product_start_date {
+  dimension_group: level8_product_start {
     type: time
     label: "Level 8 Product Start"
     timeframes: [
@@ -491,7 +491,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L8_START_DATE ;;
   }
 
-  dimension_group: level8_product_end_date {
+  dimension_group: level8_product_end {
     type: time
     label: "Level 8 Product End"
     timeframes: [
@@ -524,7 +524,7 @@ view: mn_product_map_all_ver {
     label: "Level 9 Product Number"
   }
 
-  dimension_group: level9_product_start_date {
+  dimension_group: level9_product_start {
     type: time
     label: "Level 9 Product Start"
     timeframes: [
@@ -539,7 +539,7 @@ view: mn_product_map_all_ver {
     sql: ${TABLE}.P_L9_START_DATE ;;
   }
 
-  dimension_group: level9_product_end_date {
+  dimension_group: level9_product_end {
     type: time
     label: "Level 9 Product End"
     timeframes: [
