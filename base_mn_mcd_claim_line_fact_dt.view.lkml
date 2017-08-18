@@ -52,6 +52,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: calc_ura {
     type: number
     label: "Calculated URA"
+    value_format_name: usd
     sql: ${TABLE}.CALC_URA ;;
   }
 
@@ -70,6 +71,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: override_ura {
     type: number
     label: "Override URA"
+    value_format_name: usd
     sql: ${TABLE}.OVERRIDE_URA ;;
   }
 
@@ -82,12 +84,14 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: inv_units {
     type: number
     label: "Invoiced Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.INV_UNITS ;;
   }
 
   dimension: inv_rebate_amt {
     type: number
     label: "Invoiced Rebate Amount"
+    value_format_name: usd
     sql: ${TABLE}.INV_REBATE_AMT ;;
   }
 
@@ -100,6 +104,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: inv_ura {
     type: number
     label: "Invoiced URA"
+    value_format_name: usd
     sql: ${TABLE}.INV_URA ;;
   }
 
@@ -112,12 +117,14 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: inv_scripts_num {
     type: number
     label: "Invoiced Scripts Number"
+    value_format_name: decimal_0
     sql: ${TABLE}.INV_SCRIPTS_NUM ;;
   }
 
   dimension: inv_reimburse_amt {
     type: number
     label: "Invoiced Reimburse Amount"
+    value_format_name: usd
     sql: ${TABLE}.INV_REIMBURSE_AMT ;;
   }
 
@@ -130,6 +137,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: inv_tpl_amt {
     type: number
     label: "Invoiced Tpl Amount"
+    value_format_name: usd
     sql: ${TABLE}.INV_TPL_AMT ;;
   }
 
@@ -142,18 +150,21 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: recom_disp_units {
     type: number
     label: "Recommended Disputed Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.RECOM_DISP_UNITS ;;
   }
 
   dimension: paid_units {
     type: number
     label: "Paid Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.PAID_UNITS ;;
   }
 
   dimension: rebate_due_amt {
     type: number
     label: "Rebate Due Amount"
+    value_format_name: usd
     sql: ${TABLE}.REBATE_DUE_AMT ;;
   }
 
@@ -184,42 +195,49 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: incr_units {
     type: number
     label: "Incremental Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.INCR_UNITS ;;
   }
 
   dimension: disp_units {
     type: number
     label: "Disputed Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.DISP_UNITS ;;
   }
 
   dimension: dism_units {
     type: number
     label: "Dismissed Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.DISM_UNITS ;;
   }
 
   dimension: resv_units {
     type: number
     label: "Resolved Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.RESV_UNITS ;;
   }
 
   dimension: prev_inv_units {
     type: number
     label: "Previous Invoiced Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.PREV_INV_UNITS ;;
   }
 
   dimension: prev_paid_units {
     type: number
     label: "Previous Paid Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.PREV_PAID_UNITS ;;
   }
 
   dimension: prev_disp_units {
     type: number
     label: "Previous Disputed Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.PREV_DISP_UNITS ;;
   }
 
@@ -294,6 +312,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: amp_price {
     type: number
     label: "Average Manufacturer Price"
+    value_format_name: usd
     sql: ${TABLE}.AMP_PRICE ;;
   }
 
@@ -306,6 +325,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: bp_price {
     type: number
     label: "Base Price"
+    value_format_name: usd
     sql: ${TABLE}.BP_PRICE ;;
   }
 
@@ -318,6 +338,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: asp_price {
     type: number
     label: "Average Selling Price"
+    value_format_name: usd
     sql: ${TABLE}.ASP_PRICE ;;
   }
 
@@ -330,6 +351,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: start_qtr_wac_price {
     type: number
     label: "WAC Price (start of quarter)"
+    value_format_name: usd
     sql: ${TABLE}.START_QTR_WAC_PRICE ;;
   }
 
@@ -342,6 +364,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: end_qtr_wac_price {
     type: number
     label: "WAC Price (end of quarter)"
+    value_format_name: usd
     sql: ${TABLE}.END_QTR_WAC_PRICE ;;
   }
 
@@ -354,6 +377,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: start_qtr_awp_price {
     type: number
     label: "AWP Price (start of quarter)"
+    value_format_name: usd
     sql: ${TABLE}.START_QTR_AWP_PRICE ;;
   }
 
@@ -366,6 +390,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: end_qtr_awp_price {
     type: number
     label: "AWP Price (end of quarter)"
+    value_format_name: usd
     sql: ${TABLE}.END_QTR_AWP_PRICE ;;
   }
 
@@ -432,61 +457,72 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: disputed_amount {
     type: number
     sql: ${TABLE}.DISPUTED_AMOUNT ;;
+    value_format_name: usd
   }
 
   dimension: dismissed_amount {
     type: number
     sql: ${TABLE}.DISMISSED_AMOUNT ;;
+    value_format_name: usd
   }
 
   dimension: resolved_amount {
     type: number
     sql: ${TABLE}.RESOLVED_AMOUNT ;;
+    value_format_name: usd
   }
 
   dimension: inf_corr_req_rebate_amt {
     type: number
     label: "Info Corrected Required Rebate Amount"
+    value_format_name: usd
     sql: ${TABLE}.INF_CORR_REQ_REBATE_AMT ;;
   }
 
   dimension: inf_corr_units {
     type: number
     label: "Info Corrected Units"
+    value_format_name: decimal_0
     sql: ${TABLE}.INF_CORR_UNITS ;;
   }
 
   dimension: total_paid_amt {
     type: number
     label: "Total Paid Amount"
+    value_format_name: usd
     sql: ${TABLE}.TOTAL_PAID_AMT ;;
   }
 
   dimension: original_corrected_amt {
     type: number
     label: "Original Corrected Amount"
+    value_format_name: usd
     sql: ${TABLE}.ORIGINAL_CORRECTED_AMT ;;
   }
 
   dimension: open_dispute_units {
     type: number
     sql: ${TABLE}.OPEN_DISPUTE_UNITS ;;
+    value_format_name: decimal_0
   }
 
   dimension: open_dispute_amt {
     type: number
     label: "Open Dispute Amount"
+    value_format_name: usd
     sql: ${TABLE}.OPEN_DISPUTE_AMT ;;
   }
 
   dimension: pending_units {
     type: number
     sql: ${TABLE}.PENDING_UNITS ;;
+    value_format_name: decimal_0
   }
 
   dimension: pending_amount {
     type: number
     sql: ${TABLE}.PENDING_AMOUNT ;;
+    value_format_name: usd
   }
 
   dimension: program_prod_formula_name {
@@ -498,6 +534,7 @@ view: mn_mcd_claim_line_fact_dt {
   dimension: prev_ura {
     type: number
     label: "Previous URA"
+    value_format_name: usd
     sql: ${TABLE}.PREV_URA ;;
   }
 

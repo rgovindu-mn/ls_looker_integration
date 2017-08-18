@@ -9,7 +9,7 @@ view: mn_mcd_claim_dim {
       raw,
       time,
       date,
-      week,
+      week_of_year,
       month,
       quarter,
       year
@@ -244,6 +244,14 @@ view: mn_mcd_claim_dim {
   dimension: state {
     type: string
     sql: ${TABLE}.STATE ;;
+  }
+
+  dimension: mcd_claim_payment_key {
+    type: string
+    label: "Week Number"
+    sql: concat('W', ${claim_created_week_of_year}) ;;
+#     sql: case when ${claim_created_week_of_year} is null then 1 else concat('W', ${claim_created_week_of_year}) ;;
+    group_label: "Claim Created Date"
   }
 
 #   dimension: state_short_desc {

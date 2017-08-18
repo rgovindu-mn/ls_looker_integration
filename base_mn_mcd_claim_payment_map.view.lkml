@@ -3,6 +3,7 @@ view: mn_mcd_claim_payment_map {
 
   dimension: carry_forward_amount {
     type: number
+    value_format_name: usd
     sql: ${TABLE}.CARRY_FORWARD_AMOUNT ;;
   }
 
