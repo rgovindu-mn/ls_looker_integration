@@ -14,13 +14,13 @@ explore: mn_payer_contract {
 
   hidden: no
 
-# Data security
-  #access_filter: {
-  #  field: mn_user_access_ctrt_map.user_wid
-  #  user_attribute: access_user_name
-  #}
-
   sql_always_where: ${mn_rbt_ctrt_header_dim.latest_flag} = 'Y' and ${mn_rbt_ctrt_type_dim.ctrt_type_name} IN ('Managed Care','Medicare Part D','Tricare') ;;
+
+# Data security
+  access_filter: {
+    field: mn_user_access_ctrt_map.user_wid
+    user_attribute: access_user_name
+  }
 
   join: mn_ctrt_attr_fact {
     type: left_outer
@@ -312,6 +312,25 @@ explore: payer_utilization {
   view_name: mn_mco_util_fact
   view_label: "Utilization Lines"
   # hidden: no
+
+#****************************** Data security
+
+  access_filter: {
+    field: mn_user_access_util_map.user_wid
+    user_attribute: access_user_name
+  }
+
+  # User Org join
+  join: mn_user_access_util_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_org_map_dt
+    view_label: "User Access"
+    fields: [user_wid,access_user_wid,user_name]
+    sql_on: ${mn_mco_util_fact.org_wid} = ${mn_user_access_util_map.org_wid};;
+  }
+
+  #******************************* Data Security End
 
   join: mn_util_customer_dim_bob {
     type:  left_outer

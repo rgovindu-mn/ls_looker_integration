@@ -1,4 +1,4 @@
-view: mn_user_org_map {
+view: mn_user_org_map_dt {
 
   derived_table: {
       sql:SELECT DISTINCT us.member_name AS USER_NAME,
@@ -89,12 +89,19 @@ view: mn_user_org_map {
   dimension: user_name {
     type: string
     sql: ${TABLE}.USER_NAME ;;
+    label: "Access User Name"
   }
 
   dimension: user_wid {
     hidden:  yes
     type: number
     sql: ${TABLE}.USER_WID ;;
+  }
+
+  dimension: access_user_wid {
+    type: number
+    sql: ${user_wid} ;;
+    label: "Access User ID"
   }
 
   measure: count {
