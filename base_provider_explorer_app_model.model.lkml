@@ -19,6 +19,11 @@ explore: mn_contract_header_dim {
 
   sql_always_where:  ${mn_contract_header_dim.latest_flag} = 'Y' and ${mn_ctrt_type_dim.ctrt_type_name} IN ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')   ;;
 
+# Data security
+  access_filter: {
+    field: mn_user_access_ctrt_map.user_wid
+    user_attribute: access_user_name
+  }
 
   join: mn_combined_product_group_dim {
     type: left_outer
@@ -969,7 +974,7 @@ explore: mn_combined_sale_fact {
   join: mn_user_access_sale_map {
     type: inner
     relationship: many_to_one
-    from: mn_user_org_map
+    from: mn_user_org_map_dt
     view_label: "User Access"
     fields: []
     sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
