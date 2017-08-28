@@ -236,7 +236,7 @@ explore: mn_contract_header_dim_adhoc_base {
 
 explore: mn_contract_header_dim_secure_base {
   extends: [mn_contract_header_dim_base]
-  from:  mn_contract_header_dim_secure
+  from:  mn_contract_header_dim
   view_name: mn_contract_header_dim
   hidden: yes
 
@@ -251,7 +251,7 @@ explore: mn_contract_header_dim_secure_base {
     relationship: many_to_one
     from: mn_user_org_map_dt
     view_label: "User Access"
-    fields: [user_wid]
+    fields: [access_user_id,access_user_wid,user_name]
     sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
   }
 }
@@ -274,7 +274,7 @@ explore: mn_rbt_ctrt_header_dim_secure_base {
     relationship: many_to_one
     from: mn_user_org_map_dt
     view_label: "User Access"
-    fields: [user_wid,access_user_wid,user_name]
+    fields: [access_user_id,access_user_wid,user_name]
     sql_on: ${mn_rbt_ctrt_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
   }
 }

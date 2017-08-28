@@ -13,7 +13,7 @@ explore: mn_contract_header_dim {
             mn_contract_header_dim_adhoc_base,
             mn_combined_product_group_dim_base]
 
-  from:  mn_contract_header_dim_secure
+  from:  mn_contract_header_dim
   view_name: mn_contract_header_dim
   hidden: no
 
@@ -21,7 +21,7 @@ explore: mn_contract_header_dim {
 
 # Data security
   access_filter: {
-    field: mn_user_access_ctrt_map.user_wid
+    field: mn_user_access_ctrt_map.access_user_id
     user_attribute: access_user_name
   }
 
@@ -837,10 +837,30 @@ explore: mn_combined_sale_fact {
   extends: [mn_contract_header_dim_base, mn_combined_product_group_dim_base]
   from:  mn_combined_sale_fact
   view_name: mn_combined_sale_fact
-  fields: [ALL_FIELDS*,-mn_combined_sale_fact.custom_measure_set1*]
+  fields: [ALL_FIELDS*,-mn_combined_sale_fact.custom_measure_set1*,-mn_combined_sale_fact.access_user_wid,-mn_combined_sale_fact.access_user_name]
   hidden: no
 
   view_label: "Sales Data"
+
+#****************************** Data security
+
+  access_filter: {
+    field: mn_user_access_sale_map.access_user_id
+    user_attribute: access_user_name
+  }
+
+  # User Org join
+  join: mn_user_access_sale_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_org_map_dt
+    view_label: "User Access"
+    fields: [access_user_id,access_user_wid,user_name]
+    sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
+  }
+
+  #******************************* Data Security End
+
 
   join: sl_contracted_customer {
     type: left_outer
@@ -971,14 +991,15 @@ explore: mn_combined_sale_fact {
       AND (${mn_combined_sale_fact.invoice_raw} BETWEEN ${sl_product_eff_attr_fact.eff_start_raw} AND ${sl_product_eff_attr_fact.eff_end_raw});;
   }
 
-  join: mn_user_access_sale_map {
-    type: inner
-    relationship: many_to_one
-    from: mn_user_org_map_dt
-    view_label: "User Access"
-    fields: []
-    sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
-  }
+# Below code commented and moved to Data Secutity section in sales explore -Chandra 28/08/2017
+#   join: mn_user_access_sale_map {
+#     type: inner
+#     relationship: many_to_one
+#     from: mn_user_org_map_dt
+#     view_label: "User Access"
+#     fields: []
+#     sql_on: ${mn_combined_sale_fact.org_wid} = ${mn_user_access_sale_map.org_wid};;
+#   }
 
   ### This Part is to modify views retrieved through extending
 #   join: mn_contract_author_dim {
@@ -1035,6 +1056,26 @@ explore: commercial_compliance {
                       ('FSS','IDN','Independent','Institutional','Master','PHS','Purchase Based')
                       and ${mn_contract_header_dim.latest_flag} = 'Y'
                     ;;
+
+#****************************** Data security
+
+
+  access_filter: {
+    field: mn_user_access_ctrt_map.access_user_id
+    user_attribute: access_user_name
+  }
+
+  # User Org join
+  join: mn_user_access_ctrt_map {
+    type: inner
+    relationship: many_to_one
+    from: mn_user_org_map_dt
+    view_label: "User Access"
+    fields: [access_user_id,access_user_wid,user_name]
+    sql_on: ${mn_contract_header_dim.org_wid} = ${mn_user_access_ctrt_map.org_wid};;
+  }
+
+  #******************************* Data Security End
 
   join: mn_product_group_dim {
     type: inner

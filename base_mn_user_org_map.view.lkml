@@ -99,9 +99,16 @@ view: mn_user_org_map_dt {
   }
 
   dimension: access_user_wid {
+    hidden: yes
     type: number
     sql: ${user_wid} ;;
     label: "Access User ID"
+  }
+
+  dimension: access_user_id {
+    hidden: yes
+    type: number
+    sql: ${user_wid} ;;
   }
 
   measure: count {

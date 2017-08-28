@@ -18,7 +18,7 @@ explore: mn_payer_contract {
 
 # Data security
   access_filter: {
-    field: mn_user_access_ctrt_map.user_wid
+    field: mn_user_access_ctrt_map.access_user_id
     user_attribute: access_user_name
   }
 
@@ -316,7 +316,7 @@ explore: payer_utilization {
 #****************************** Data security
 
   access_filter: {
-    field: mn_user_access_util_map.user_wid
+    field: mn_user_access_util_map.access_user_id
     user_attribute: access_user_name
   }
 
@@ -326,7 +326,7 @@ explore: payer_utilization {
     relationship: many_to_one
     from: mn_user_org_map_dt
     view_label: "User Access"
-    fields: [user_wid,access_user_wid,user_name]
+    fields: [access_user_id,access_user_wid,user_name]
     sql_on: ${mn_mco_util_fact.org_wid} = ${mn_user_access_util_map.org_wid};;
   }
 
