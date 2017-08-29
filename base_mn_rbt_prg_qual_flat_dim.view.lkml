@@ -180,6 +180,7 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: alt_uom {
     group_label: "Qualification"
+    label: "Alternative UOM"
     type: string
     sql: ${TABLE}.ALT_UOM ;;
   }
@@ -192,18 +193,21 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: calc_price_basis {
     group_label: "Qualification"
+    label: "Calculation Price Basis"
     type: string
     sql: ${TABLE}.CALC_PRICE_BASIS ;;
   }
 
   dimension: price_ref_date {
     group_label: "Qualification"
+    label: "Price Reference Date"
     type: string
     sql: ${TABLE}.PRICE_REF_DATE ;;
   }
 
   dimension: qty_basis {
     group_label: "Qualification"
+    label: "Quantity Basis"
     type: string
     sql: ${TABLE}.QTY_BASIS ;;
   }
@@ -260,6 +264,7 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: ms_basis {
     group_label: "Qualification"
+    label: "Market Share Basis"
     type: string
     sql: ${TABLE}.MS_BASIS ;;
   }
@@ -278,6 +283,7 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: mco_vol_basis {
     group_label: "Qualification"
+    label: "MCO Volume Basis"
     type: string
     sql: ${TABLE}.MCO_VOL_BASIS ;;
   }
@@ -308,12 +314,14 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: price_res_method {
     group_label: "Qualification"
+    label: "Price Resolution Basis"
     type: string
     sql: ${TABLE}.PRICE_RES_METHOD ;;
   }
 
   dimension: base_price_ref_date {
     group_label: "Qualification"
+    label: "Base Price Reference Date"
     type: date
     sql: ${TABLE}.BASE_PRICE_REF_DATE ;;
   }
@@ -347,6 +355,7 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: manual_baseline_val {
     group_label: "Qualification"
+    label: "Manual Baseline Value"
     type: string
     sql: ${TABLE}.MANUAL_BASELINE_VAL ;;
   }
@@ -400,12 +409,14 @@ view: mn_rbt_prg_qual_flat_dim {
 
   dimension: eff_start_date {
     group_label: "Qualification"
+    label: "Effective Start Date"
     type: date
     sql: ${TABLE}.EFF_START_DATE ;;
   }
 
   dimension: eff_end_date {
     group_label: "Qualification"
+    label: "Effective End Date"
     type: date
     sql: ${TABLE}.EFF_END_DATE ;;
   }

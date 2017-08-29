@@ -3,16 +3,19 @@ view: mn_product_eff_attr_fact {
 
   dimension: attr_format {
     type: string
+    label: "Attribute Format"
     sql: ${TABLE}.ATTR_FORMAT ;;
   }
 
   dimension: attr_name {
     type: string
+    label: "Attribute Name"
     sql: ${TABLE}.ATTR_NAME ;;
   }
 
   dimension: attr_value {
     type: string
+    label: "Attribute Value"
     sql: ${TABLE}.ATTR_VALUE ;;
   }
 
@@ -48,6 +51,7 @@ view: mn_product_eff_attr_fact {
 
   dimension_group: eff_end {
     type: time
+    label: "Effective End"
     timeframes: [
       raw,
       time,
@@ -62,6 +66,7 @@ view: mn_product_eff_attr_fact {
 
   dimension_group: eff_start {
     type: time
+    label: "Effective Start"
     timeframes: [
       raw,
       time,

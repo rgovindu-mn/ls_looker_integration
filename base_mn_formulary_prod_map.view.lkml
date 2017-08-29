@@ -33,6 +33,7 @@ view: mn_formulary_prod_map {
 
   dimension_group: eff_end {
     type: time
+    label: "Effective End"
     timeframes: [
       raw,
       time,
@@ -47,6 +48,7 @@ view: mn_formulary_prod_map {
 
   dimension_group: eff_start {
     type: time
+    label: "Effective Start"
     timeframes: [
       raw,
       time,

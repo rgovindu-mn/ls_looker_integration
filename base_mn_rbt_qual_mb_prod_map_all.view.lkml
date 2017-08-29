@@ -51,6 +51,7 @@ view: mn_rbt_qual_mb_prod_map_all {
 
   dimension_group: eff_end {
     type: time
+    label: "Effective End"
     timeframes: [
       raw,
       time,
@@ -71,6 +72,7 @@ view: mn_rbt_qual_mb_prod_map_all {
 
   dimension_group: eff_start {
     type: time
+    label: "Effective Start"
     timeframes: [
       raw,
       time,

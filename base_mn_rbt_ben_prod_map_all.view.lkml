@@ -59,6 +59,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension_group: eff_end {
     type: time
+    label: "Effective End"
     timeframes: [
       raw,
       time,
@@ -80,6 +81,7 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension_group: eff_start {
     type: time
+    label: "Effective Start"
     timeframes: [
       raw,
       time,
@@ -139,16 +141,19 @@ view: mn_rbt_ben_prod_map_all {
 
   dimension: mco_pp_cap_perc {
     type: string
+    label: "MCO Price Protection CAP Percentage"
     sql: ${TABLE}.MCO_PP_CAP_PERC*100 ;;
   }
 
   dimension: mco_pp_threshold_perc {
     type: string
+    label: "MCO Price Protection Threshold Percentage"
     sql: ${TABLE}.MCO_PP_THRESHOLD_PERC*100 ;;
   }
 
   dimension: mco_pp_total_disc_cap_perc {
     type: string
+    label: "MCO Price Protection Total Discount Percentage"
     sql: ${TABLE}.MCO_PP_TOTAL_DISC_CAP_PERC*100 ;;
   }
 

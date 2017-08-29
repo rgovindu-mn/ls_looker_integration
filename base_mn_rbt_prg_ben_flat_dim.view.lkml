@@ -172,12 +172,14 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: eff_start_date {
     group_label: "Benefit"
     type: date
+    label: "Effective Start Date"
     sql: ${TABLE}.EFF_START_DATE ;;
   }
 
   dimension: eff_end_date {
     group_label: "Benefit"
     type: date
+    label: "Effective End Date"
     sql: ${TABLE}.EFF_END_DATE ;;
   }
 
@@ -264,6 +266,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: alt_uom {
     group_label: "Benefit"
+    label: "Alternative UOM"
     type: string
     sql: ${TABLE}.ALT_UOM ;;
   }
@@ -277,12 +280,14 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
   dimension: calc_price_basis {
     group_label: "Benefit"
     type: string
+    label: "Calculation Price Basis"
     sql: ${TABLE}.CALC_PRICE_BASIS ;;
   }
 
   dimension: price_ref_date {
     group_label: "Benefit"
     type: string
+    label: "Price Reference Date"
     sql: ${TABLE}.PRICE_REF_DATE ;;
   }
 
@@ -323,6 +328,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: qty_basis {
     group_label: "Benefit"
+    label: "Quantity Basis"
     type: string
     sql: ${TABLE}.QTY_BASIS ;;
   }
@@ -393,6 +399,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: ms_basis {
     group_label: "Benefit"
+    label: "Market Share"
     type: string
     sql: ${TABLE}.MS_BASIS ;;
   }
@@ -441,12 +448,14 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: price_res_method {
     group_label: "Benefit"
+    label: "Price Resolution Method"
     type: string
     sql: ${TABLE}.PRICE_RES_METHOD ;;
   }
 
   dimension: base_price_ref_date {
     group_label: "Benefit"
+    label: "Base Price Reference Date"
     type: string
     sql: ${TABLE}.BASE_PRICE_REF_DATE ;;
   }
@@ -480,6 +489,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: manual_baseline_val {
     group_label: "Benefit"
+    label: "Manual Baseline Value"
     type: string
     sql: ${TABLE}.MANUAL_BASELINE_VAL ;;
   }
@@ -527,6 +537,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: pp_threshold {
     group_label: "Benefit"
+    label: "Price Protection Threshold (%)"
     type: string
     sql: ${TABLE}.PP_THRESHOLD*100 ;;
   }
@@ -539,24 +550,28 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: sch_basis_custom_date {
     group_label: "Benefit"
+    label: "Schedule Basis Custom Date"
     type: date
     sql: ${TABLE}.SCH_BASIS_CUSTOM_DATE ;;
   }
 
   dimension: pp_type {
     group_label: "Benefit"
+    label: "Price Protection Type"
     type: string
     sql: ${TABLE}.PP_TYPE ;;
   }
 
   dimension: pp_schedule_basis {
     group_label: "Benefit"
+    label: "Price Protection Schedule Basis"
     type: string
     sql: ${TABLE}.PP_SCHEDULE_BASIS ;;
   }
 
   dimension: cumulation_freq {
     group_label: "Benefit"
+    label: "Cumulation Frequency"
     type: string
     sql: ${TABLE}.CUMULATION_FREQ ;;
   }
@@ -569,6 +584,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: cap_percent {
     group_label: "Benefit"
+    label: "Price Protection CAP Percentage"
     type: string
     sql: ${TABLE}.CAP_PERCENT*100 ;;
   }
@@ -593,6 +609,7 @@ WHERE RQB.IS_QUAL_COMPONENT = 'N' AND RPT.TIER_FLAG ='N' AND SPREADSHEET_NAME IS
 
   dimension: total_disc_cap_percent {
     group_label: "Benefit"
+    label: "Total Discount CAP Percentage"
     type: string
     sql: ${TABLE}.TOTAL_DISC_CAP_PERCENT*100 ;;
   }

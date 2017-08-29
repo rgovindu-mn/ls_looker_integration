@@ -193,6 +193,7 @@ view: mn_combined_rebate_program_dim {
 
   dimension: benefit_calc_rule {
     type: string
+    label: "Benefit Calculation Rule"
     sql: ${TABLE}.BENEFIT_CALC_RULE ;;
   }
 
