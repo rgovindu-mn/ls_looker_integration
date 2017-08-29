@@ -107,7 +107,7 @@ view: mn_user_org_map_dt {
 
   dimension: access_user_id {
     hidden: yes
-    type: number
+    type: string
     sql: ${user_wid} ;;
   }
 

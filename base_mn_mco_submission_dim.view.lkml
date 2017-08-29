@@ -19,7 +19,7 @@ view: mn_mco_submission_dim {
       quarter,
       year
     ]
-    sql:  to_date(${TABLE}.ADJUSTED_DATE,'yyyymmdd') ;;
+    sql: ${TABLE}.ADJUSTED_DATE ;;
   }
 
   dimension: adjustment_status_name {
@@ -55,7 +55,7 @@ view: mn_mco_submission_dim {
       quarter,
       year
     ]
-    sql:  to_date(${TABLE}.DATE_CREATED,'yyyymmdd') ;;
+    sql: ${TABLE}.DATE_CREATED ;;
   }
 
   dimension_group: date_updated {
@@ -70,7 +70,7 @@ view: mn_mco_submission_dim {
       quarter,
       year
     ]
-    sql:  to_date(${TABLE}.DATE_UPDATED,'yyyymmdd') ;;
+    sql: ${TABLE}.DATE_UPDATED ;;
   }
 
   dimension_group: due {
@@ -175,7 +175,7 @@ view: mn_mco_submission_dim {
       quarter,
       year
     ]
-    sql:  to_date(${TABLE}.RECEIVED_DATE,'yyyymmdd') ;;
+    sql: ${TABLE}.RECEIVED_DATE ;;
   }
 
   dimension: run_id {
@@ -208,7 +208,7 @@ view: mn_mco_submission_dim {
       quarter,
       year
     ]
-    sql:  to_date(${TABLE}.SRC_SYS_DATE_UPDATED,'yyyymmdd') ;;
+    sql: ${TABLE}.SRC_SYS_DATE_UPDATED ;;
   }
 
   dimension: src_sys_submission_id {
@@ -255,7 +255,7 @@ view: mn_mco_submission_dim {
       quarter,
       year
     ]
-    sql:  to_date(${TABLE}.UPLOADED_DATE,'yyyymmdd') ;;
+    sql: ${TABLE}.UPLOADED_DATE ;;
   }
 
   dimension: util_type_name {

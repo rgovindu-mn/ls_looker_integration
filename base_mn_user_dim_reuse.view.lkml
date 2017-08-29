@@ -85,7 +85,7 @@ view: mn_user_dim_reuse {
   dimension: full_name {
     type: string
     label: "Name"
-    sql: ${TABLE}.FNAME ||' '||${TABLE}.LNAME;;
+    sql: ${TABLE}.FNAME||CASE WHEN ${TABLE}.FNAME IS NOT NULL AND ${TABLE}.LNAME IS NOT NULL THEN ' ' ELSE NULL END||${TABLE}.LNAME ;;
   }
 
   dimension: last_name {

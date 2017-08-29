@@ -40,7 +40,7 @@ view: mn_mco_util_fact {
 
   dimension: calculate_rebate_yes_no {
     type: string
-    label: "Is Rebate Calculated ?"
+    label: "Calculate Rebate ?"
     sql: CASE WHEN ${calculate_rebate_flag} = 1 THEN 'Yes'
               WHEN ${calculate_rebate_flag} = 0 THEN 'No' ELSE NULL END ;;
   }
@@ -99,7 +99,7 @@ view: mn_mco_util_fact {
       quarter,
       year
     ]
-    sql: to_date(${TABLE}.DATE_CREATED,'yyyymmdd') ;;
+    sql: ${TABLE}.DATE_CREATED ;;
   }
 
   dimension_group: date_updated {
@@ -114,7 +114,7 @@ view: mn_mco_util_fact {
       quarter,
       year
     ]
-    sql: to_date(${TABLE}.DATE_UPDATED,'yyyymmdd') ;;
+    sql: ${TABLE}.DATE_UPDATED ;;
   }
 
   dimension: exchange_rate {
